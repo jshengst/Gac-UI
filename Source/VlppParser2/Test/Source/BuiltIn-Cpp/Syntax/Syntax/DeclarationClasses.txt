@@ -1,0 +1,52 @@
+//////////////////////////////////////////////////////////////////
+// Class Body
+//////////////////////////////////////////////////////////////////
+
+_ClassInheritanceFirst
+  ::= ":"             _Type:type ["...":variadic] as ClassInheritance {accessor = Default}
+  ::= ":" "private"   _Type:type ["...":variadic] as ClassInheritance {accessor = Private}
+  ::= ":" "protected" _Type:type ["...":variadic] as ClassInheritance {accessor = Protected}
+  ::= ":" "public"    _Type:type ["...":variadic] as ClassInheritance {accessor = Public}
+  ;
+
+_ClassInheritanceSecond
+  ::= ","             _Type:type ["...":variadic] as ClassInheritance {accessor = Default}
+  ::= "," "private"   _Type:type ["...":variadic] as ClassInheritance {accessor = Private}
+  ::= "," "protected" _Type:type ["...":variadic] as ClassInheritance {accessor = Protected}
+  ::= "," "public"    _Type:type ["...":variadic] as ClassInheritance {accessor = Public}
+  ;
+
+_ClassMemberPartFirst
+  ::= _DeclRejectSemicolon:decls {_DeclRejectSemicolon:decls} as ClassMemberPart {accessor = Default}
+  ;
+
+_ClassMemberPartSecond
+  ::= "private"   ":"            {_DeclRejectSemicolon:decls} as ClassMemberPart {accessor = Private}
+  ::= "protected" ":"            {_DeclRejectSemicolon:decls} as ClassMemberPart {accessor = Protected}
+  ::= "public"    ":"            {_DeclRejectSemicolon:decls} as ClassMemberPart {accessor = Public}
+  ;
+
+_ClassBody
+  ::= [_ClassInheritanceFirst:inheritances] {_ClassInheritanceSecond:inheritances}
+      "{" [_ClassMemberPartFirst:memberParts] {_ClassMemberPartSecond:memberParts} "}"
+      [_MultiVarsDeclVariablePartSecond:firstVarPart]
+      as ClassBody
+  ;
+
+//////////////////////////////////////////////////////////////////
+// Class Declarations
+//////////////////////////////////////////////////////////////////
+
+_ClassDeclPrefix
+  ::= "class"  as partial ClassDeclaration {kind = Class}
+  ::= "struct" as partial ClassDeclaration {kind = Struct}
+  ::= "union"  as partial ClassDeclaration {kind = Union}
+  ;
+
+@public _ClassDecl
+  ::= _ClassDeclPrefix [ID:name [_GenericArguments:arguments]] _ClassBody:body as ClassDeclaration
+  ;
+
+@public _ClassForwardDecl
+  ::= _ClassDeclPrefix ID:name [_GenericArguments:arguments] as ClassDeclaration
+  ;

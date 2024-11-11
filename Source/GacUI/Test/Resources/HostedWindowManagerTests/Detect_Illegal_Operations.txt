@@ -1,0 +1,9 @@
+﻿<Initial>
+[XXXXXXX]
+[XAAAAXX]
+[XABBBBX]
+[XABBBBX]
+[XXBBBBX]
+[XXXXXXX]
+
+END

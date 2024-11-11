@@ -1,0 +1,164 @@
+<Resource>
+  <Folder name="GacGenConfig">
+    <Folder name="Cpp">
+      <Text name="SourceFolder">Source</Text>
+      <Text name="NormalInclude">../../../GacUI.h</Text>
+      <Text name="ReflectionInclude">../../../Reflection/TypeDescriptors/GuiReflectionPlugin.h</Text>
+      <Text name="Name">GuiUnitTestSnapshotViewer</Text>
+      <Text name="CppCompressed">GuiUnitTestSnapshotViewer.cpp</Text>
+    </Folder>
+  </Folder>
+
+  <LocalizedStrings name="UnitTestSnapshotViewerStrings">
+    <LocalizedStrings ref.Class="gaclib_controls::UnitTestSnapshotViewerStrings" DefaultLocale="en-US">
+      <Strings Locales="en-US">
+        <String Name="WindowTitle" Text="Unit Test Snapshot Viewer"/>
+      </Strings>
+    </LocalizedStrings>
+  </LocalizedStrings>
+
+  <Script name="UnitTestSnapshotViewerViewModel">
+    <Workflow><![CDATA[
+    module viewmodel;
+
+    using system::*;
+    using presentation::*;
+
+    namespace gaclib_controls
+    {
+      enum UnitTestSnapshotFileNodeType
+      {
+        Folder = 0,
+        File = 1,
+      }
+
+      interface IUnitTestSnapshotFrame
+      {
+        prop Name: string {const, not observe}
+        prop ElementsAsJsonText: string {const, not observe}
+        prop CommandsAsJsonText: string {const, not observe}
+        prop DomAsJsonText: string {const, not observe}
+      }
+
+      interface IUnitTestSnapshotFileNode
+      {
+        prop NodeType: UnitTestSnapshotFileNodeType {const, not observe}
+        prop Name: string {const, not observe}
+        prop Children: IUnitTestSnapshotFileNode^{} {const, not observe}
+        prop Frames: IUnitTestSnapshotFrame^{} {const, not observe}
+
+        func Refresh(): void;
+      }
+
+      interface IUnitTestSnapshotViewerViewModel
+      {
+        prop RootNode: IUnitTestSnapshotFileNode^ {const, not observe}
+      }
+    }
+    ]]></Workflow>
+  </Script>
+
+  <Instance name="UnitTestSnapshotViewerWindowResource">
+    <Instance ref.CodeBehind="false" ref.Class="gaclib_controls::UnitTestSnapshotViewerWindow" xmlns:g="gaclib_controls::*">
+      <ref.LocalizedStrings Name="Strings" Class="gaclib_controls::UnitTestSnapshotViewerStrings" Default="true"/>
+      <ref.Parameter Name="ViewModel" Class="gaclib_controls::IUnitTestSnapshotViewerViewModel"/>
+      <ref.Members><![CDATA[
+        @cpp:Private var imageFolder: ImageData^ = null;
+        @cpp:Private var imageFile: ImageData^ = null;
+
+        @cpp:Private func GetImageFromType(nodeType: UnitTestSnapshotFileNodeType): ImageData^
+        {
+          if (imageFolder is null)
+          {
+            imageFolder = cast (ImageData^) ResolveResource("import-res", "GuiFakeDialogServiceUI/Images/Folder", true);
+          }
+          if (imageFile is null)
+          {
+            imageFile = cast (ImageData^) ResolveResource("import-res", "GuiFakeDialogServiceUI/Images/File", true);
+          }
+          switch (nodeType)
+          {
+          case File: { return imageFile; }
+          case Folder: { return imageFolder; }
+          default: { raise "Unknown value of UnitTestSnapshotFileNodeType"; }
+          }
+        }
+      ]]></ref.Members>
+      <Window
+          ref.Name = "self"
+          Text-str="WindowTitle()"
+          ClientSize="x:1920 y:1080"
+          >
+          <Table AlignmentToParent="left:0 top:0 right:0 bottom:0" CellPadding="5" MinSizeLimitation="LimitToElementAndChildren">
+            <att.Rows>
+              <_>composeType:Percentage percentage:1.0</_>
+            </att.Rows>
+            <att.Columns>
+              <_>composeType:Absolute absolute:200</_>
+              <_>composeType:Absolute absolute:100</_>
+              <_>composeType:Absolute absolute:200</_>
+              <_>composeType:Percentage percentage:1.0</_>
+            </att.Columns>
+            <ColumnSplitter ColumnsToTheLeft="2"/>
+            <ColumnSplitter ColumnsToTheLeft="3"/>
+
+            <Cell Site="row:0 column:0 columnSpan:2">
+              <BindableTreeView ref.Name="treeViewFileNodes" env.ItemType="IUnitTestSnapshotFileNode^" VerticalAlwaysVisible="false" HorizontalAlwaysVisible="false">
+                <att.BoundsComposition-set AlignmentToParent="left:0 top:0 right:0 bottom:0"/>
+                <att.TextProperty>Name</att.TextProperty>
+                <att.ChildrenProperty>Children</att.ChildrenProperty>
+                <att.ItemSource-eval>ViewModel.RootNode</att.ItemSource-eval>
+                <att.ImageProperty-eval>[self.GetImageFromType((cast (IUnitTestSnapshotFileNode^) $1).NodeType)]</att.ImageProperty-eval>
+              </BindableTreeView>
+            </Cell>
+
+            <Cell Site="row:0 column:2">
+              <Tab>
+                <att.BoundsComposition-set AlignmentToParent="left:0 top:0 right:0 bottom:0"/>
+                <att.Pages>
+                  <TabPage Text="Frames">
+                    <BindableTextList ref.Name="textListFrames" env.ItemType="IUnitTestSnapshotFrame^" VerticalAlwaysVisible="false" HorizontalAlwaysVisible="false">
+                      <att.BoundsComposition-set AlignmentToParent="left:0 top:0 right:0 bottom:0"/>
+                      <att.TextProperty>Name</att.TextProperty>
+                      <att.ItemSource-bind>(cast (IUnitTestSnapshotFileNode^) treeViewFileNodes.SelectedItem).Frames ?? null</att.ItemSource-bind>
+                    </BindableTextList>
+                  </TabPage>
+                </att.Pages>
+              </Tab>
+            </Cell>
+
+            <Cell Site="row:0 column:3">
+              <Tab>
+                <att.BoundsComposition-set AlignmentToParent="left:0 top:0 right:0 bottom:0"/>
+                <att.Pages>
+                  <TabPage Text="Rendering">
+                    <ScrollContainer ref.Name="scRendering" VerticalAlwaysVisible="false" HorizontalAlwaysVisible="false">
+                      <att.BoundsComposition-set AlignmentToParent="left:5 top:5 right:5 bottom:5"/>
+                    </ScrollContainer>
+                  </TabPage>
+                  <TabPage Text="DOM">
+                    <MultilineTextBox VerticalAlwaysVisible="false" HorizontalAlwaysVisible="false">
+                      <att.BoundsComposition-set AlignmentToParent="left:5 top:5 right:5 bottom:5"/>
+                      <att.Text-bind>(cast (IUnitTestSnapshotFrame^) textListFrames.SelectedItem).DomAsJsonText ?? ''</att.Text-bind>
+                    </MultilineTextBox>
+                  </TabPage>
+                  <TabPage Text="Commands">
+                    <MultilineTextBox VerticalAlwaysVisible="false" HorizontalAlwaysVisible="false">
+                      <att.BoundsComposition-set AlignmentToParent="left:5 top:5 right:5 bottom:5"/>
+                      <att.Text-bind>(cast (IUnitTestSnapshotFrame^) textListFrames.SelectedItem).CommandsAsJsonText ?? ''</att.Text-bind>
+                    </MultilineTextBox>
+                  </TabPage>
+                  <TabPage Text="Elements">
+                    <MultilineTextBox VerticalAlwaysVisible="false" HorizontalAlwaysVisible="false">
+                      <att.BoundsComposition-set AlignmentToParent="left:5 top:5 right:5 bottom:5"/>
+                      <att.Text-bind>(cast (IUnitTestSnapshotFrame^) textListFrames.SelectedItem).ElementsAsJsonText ?? ''</att.Text-bind>
+                    </MultilineTextBox>
+                  </TabPage>
+                </att.Pages>
+              </Tab>
+            </Cell>
+          </Table>
+      </Window>
+    </Instance>
+  </Instance>
+</Resource>

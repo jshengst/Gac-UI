@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Resource>
+  <Folder name="GacGenConfig">
+    <Folder name="Cpp">
+      <Text name="SourceFolder">Source</Text>
+      <Text name="Resource">..\..\UIRes\Member_Property.bin</Text>
+      <Text name="NormalInclude">GacUI.h</Text>
+      <Text name="Name">Demo</Text>
+    </Folder>
+  </Folder>
+  <Folder name="MainWindow">
+    <Instance name="MainWindowResource">
+      <Instance ref.CodeBehind="false" ref.Class="demo::MainWindow" xmlns:x="demo::*">
+        <Window Text="Member_Property" ClientSize="x:480 y:320">
+          <att.ContainerComposition-set PreferredMinSize="x:480 y:320"/>
+          <x:MyControl ref.Name="myControl" Text-format="Selected: $(myControl.SelectedOption)">
+            <att.BoundsComposition-set AlignmentToParent="left:10 top:10 right:-1 bottom:-1"/>
+          </x:MyControl>
+        </Window>
+      </Instance>
+    </Instance>
+
+    <Instance name="MyControlResource">
+      <Instance ref.CodeBehind="false" ref.Class="demo::MyControl" xmlns:x="presentation::controls::GuiSelectableButton::*">
+        <ref.Members>
+          <![CDATA[
+            prop SelectedOption : string = "A" {}
+          ]]>
+        </ref.Members>
+        <CustomControl ref.Name="self">
+          <x:MutexGroupController ref.Name="optionGroup"/>
+          <att.ContainerComposition-set MinSizeLimitation="LimitToElementAndChildren"/>
+          <GroupBox Text-bind="self.Text">
+            <att.ContainerComposition-set MinSizeLimitation="LimitToElementAndChildren" InternalMargin="left:5 top:5 right:5 bottom:5"/>
+            <Stack Direction="Vertical" Padding="10" MinSizeLimitation="LimitToElementAndChildren">
+              <StackItem>
+                <RadioButton Text="Option A" GroupController-ref="optionGroup" Selected="true">
+                  <ev.SelectedChanged-eval>
+                    <![CDATA[
+                      {
+                        self.SelectedOption = "A";
+                      }
+                    ]]>
+                  </ev.SelectedChanged-eval>
+                </RadioButton>
+              </StackItem>
+              <StackItem>
+                <RadioButton Text="Option B" GroupController-ref="optionGroup">
+                  <ev.SelectedChanged-eval>
+                    <![CDATA[
+                      {
+                        self.SelectedOption = "B";
+                      }
+                    ]]>
+                  </ev.SelectedChanged-eval>
+                </RadioButton>
+              </StackItem>
+            </Stack>
+          </GroupBox>
+        </CustomControl>
+      </Instance>
+    </Instance>
+  </Folder>
+</Resource>

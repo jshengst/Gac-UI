@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{965b7b79-ea25-44f2-9d81-f348ce82da0a}</ItemsProjectGuid>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ParserGen_Generated\ParserGenRuleAst.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ParserGen_Generated\ParserGenRuleAst_Builder.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ParserGen_Generated\ParserGenRuleAst_Copy.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ParserGen_Generated\ParserGenRuleAst_Empty.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ParserGen_Generated\ParserGenRuleAst_Json.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ParserGen_Generated\ParserGenRuleAst_Traverse.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ParserGen_Generated\ParserGenRuleParser.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ParserGen_Generated\ParserGenTypeAst.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ParserGen_Generated\ParserGenTypeAst_Builder.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ParserGen_Generated\ParserGenTypeAst_Copy.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ParserGen_Generated\ParserGenTypeAst_Empty.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ParserGen_Generated\ParserGenTypeAst_Json.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ParserGen_Generated\ParserGenTypeAst_Traverse.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ParserGen_Generated\ParserGenTypeParser.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ParserGen_Generated\ParserGen_Assembler.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\ParserGen_Generated\ParserGen_Lexer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ParserGen_Generated\ParserGenRuleAst.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ParserGen_Generated\ParserGenRuleAst_Builder.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ParserGen_Generated\ParserGenRuleAst_Copy.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ParserGen_Generated\ParserGenRuleAst_Empty.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ParserGen_Generated\ParserGenRuleAst_Json.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ParserGen_Generated\ParserGenRuleAst_Traverse.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ParserGen_Generated\ParserGenRuleParser.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ParserGen_Generated\ParserGenTypeAst.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ParserGen_Generated\ParserGenTypeAst_Builder.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ParserGen_Generated\ParserGenTypeAst_Copy.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ParserGen_Generated\ParserGenTypeAst_Empty.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ParserGen_Generated\ParserGenTypeAst_Json.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ParserGen_Generated\ParserGenTypeAst_Traverse.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ParserGen_Generated\ParserGenTypeParser.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ParserGen_Generated\ParserGen_Assembler.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\ParserGen_Generated\ParserGen_Lexer.h" />
+  </ItemGroup>
+</Project>

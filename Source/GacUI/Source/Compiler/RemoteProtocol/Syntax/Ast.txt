@@ -1,0 +1,129 @@
+class Type
+{
+}
+
+enum PrimitiveTypes
+{
+	Boolean,
+	Integer,
+	Float,
+	Double,
+	String,
+	Char,
+	Key,
+	Color,
+	Binary,
+}
+
+class PrimitiveType : Type
+{
+	var type : PrimitiveTypes;
+}
+
+class ReferenceType : Type
+{
+	var name : token;
+}
+
+class OptionalType : Type
+{
+	var element : Type;
+}
+
+class ArrayType : Type
+{
+	var element : Type;
+}
+
+class ArrayMapType : Type
+{
+	var element : token;
+	var keyField : token;
+}
+
+class MapType : Type
+{
+	var element : Type;
+	var keyType : Type;
+}
+
+class Attribute
+{
+	var name : token;
+	var cppType : token;
+}
+
+class Declaration
+{
+	var attributes : Attribute[];
+	var name : token;
+}
+
+class EnumMember
+{
+	var name : token;
+}
+
+class EnumDecl : Declaration
+{
+	var members : EnumMember[];
+}
+
+class UnionMember
+{
+	var name : token;
+}
+
+class UnionDecl : Declaration
+{
+	var members : UnionMember[];
+}
+
+class StructMember
+{
+	var name : token;
+	var type : Type;
+}
+
+enum StructType
+{
+	Struct,
+	Class,
+}
+
+class StructDecl : Declaration
+{
+	var type : StructType;
+	var members : StructMember[];
+}
+
+class MessageRequest
+{
+	var type : Type;
+}
+
+class MessageResponse
+{
+	var type : Type;
+}
+
+class MessageDecl : Declaration
+{
+	var request : MessageRequest;
+	var response : MessageResponse;
+}
+
+class EventRequest
+{
+	var type : Type;
+}
+
+class EventDecl : Declaration
+{
+	var request : EventRequest;
+}
+
+class Schema
+{
+	var declarations : Declaration[];
+}

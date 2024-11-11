@@ -1,0 +1,98 @@
+include:"../Parsing.h"
+include:"../ParsingDefinitions.h"
+include:"../ParsingAutomaton.h"
+namespace:vl.parsing.xml
+reflection:system
+classPrefix:Xml
+classRoot:Document
+guard:VCZH_PARSING_XML_PARSINGXML_PARSER
+parser:ParseDocument(XDocument,Parse an XML document.)
+parser:ParseElement(XElement,Parse an XML element.)
+filePrefix:ParsingXml
+file:Ast(_Ast)
+file:Parser(_Parser)
+ambiguity:disabled
+serialization:enabled
+grammar:
+
+//////////////////////////////////////////////////////////////////
+// AST
+//////////////////////////////////////////////////////////////////
+
+class Node										@Document("Base class of XML nodes.")
+{
+}
+
+class Text : Node								@Document("Text node.")
+{
+	token content								@Document("Content of the text node.");
+}
+
+class CData : Node								@Document("CData node.")
+{
+	token content (XmlUnescapeCData)			@Document("Content of the cdata node");
+}
+
+class Attribute : Node							@Document("Attribute node.")
+{
+	token name									@Document("Attribute name."), @Color("AttName");
+	token value (XmlUnescapeAttributeValue)		@Document("Attribute value."), @Color("AttValue");
+}
+
+class Comment : Node							@Document("Comment node.")
+{
+	token content (XmlUnescapeComment)			@Document("Content of the comment node.");
+}
+
+class Element : Node							@Document("Element node.")
+{
+	token name									@Document("Element name of the open element node."), @Color("TagName");
+	token closingName							@Document("(Optional): Element name of the closing element node. The name is ignored when serializing XML to text."), @Color("TagName");
+	Attribute[] attributes						@Document("Attributes of the element.");
+	Node[] subNodes (XmlMergeTextFragment)		@Document("Sub nodes for element nodes, text nodes, cdata nodes and comment nodes.");
+}
+
+class Instruction : Node						@Document("Instruction node.")
+{
+	token name									@Document("Name of the instruction."), @Color("TagName");
+	Attribute[] attributes						@Document("Attributes of the instruction.");
+}
+
+class Document : Node							@Document("XML document node.")
+{
+	Node[] prologs								@Document("Prologue nodes, for instructions and comments.");
+	Element rootElement							@Document("Root element of the XML document.");
+}
+
+//////////////////////////////////////////////////////////////////
+// Lexer
+//////////////////////////////////////////////////////////////////
+
+token INSTRUCTION_OPEN = "/</?"			@Color("Boundary");
+token INSTRUCTION_CLOSE = "/?/>"		@Color("Boundary");
+token COMPLEX_ELEMENT_OPEN = "/<//"		@Color("Boundary");
+token SINGLE_ELEMENT_CLOSE = "///>"		@Color("Boundary");
+token ELEMENT_OPEN = "/<"				@Color("Boundary");
+token ELEMENT_CLOSE = "/>"				@Color("Boundary");
+token EQUAL = "/=";
+
+token NAME = "[a-zA-Z0-9:._/-]+"								@ContextColor();
+token ATTVALUE = """[^<>""]*""|'[^<>']*'"						@ContextColor();
+token COMMENT = "/</!--([^/->]|-[^/->]|--[^>])*--/>"			@Color("Comment");
+token CDATA = "/</!/[CDATA/[([^/]]|/][^/]]|/]/][^>])*/]/]/>";
+token TEXT = "([^<>=""' /r/n/ta-zA-Z0-9:._/-])+|""|'";
+
+discardtoken SPACE = "/s+";
+
+//////////////////////////////////////////////////////////////////
+// Rules
+//////////////////////////////////////////////////////////////////
+
+rule Attribute XAttribute = NAME:name "=" ATTVALUE:value as Attribute;
+rule Text XText = (NAME:content | EQUAL:content | ATTVALUE:content | TEXT:content) as Text;
+rule CData XCData = CDATA:content as CData;
+rule Comment XComment = COMMENT:content as Comment;
+rule Element XElement = "<" NAME:name {XAttribute:attributes} ("/>" | ">" {XSubNode:subNodes} "</" NAME:closingName ">") as Element;
+rule Node XSubNode = !XText | !XCData | !XComment | !XElement;
+rule Instruction XInstruction = "<?" NAME:name {XAttribute:attributes} "?>" as Instruction;
+rule Document XDocument = {XInstruction:prologs | XComment:prologs} XElement:rootElement as Document;

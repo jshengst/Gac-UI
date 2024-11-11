@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{456FDC57-9687-4607-86A6-D43B7E72E740}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>UnitTest</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+    <Import Project="..\Source_GacUI_ProtocolCompiler\Source_GacUI_ProtocolCompiler.vcxitems" Label="Shared" />
+    <Import Project="..\Source_GacUI_UnitTest\Source_GacUI_UnitTest.vcxitems" Label="Shared" />
+    <Import Project="..\Source_GacUI_Compiler\Source_GacUI_Compiler.vcxitems" Label="Shared" />
+    <Import Project="..\Source_GacUI_Utilities_Controls\Source_GacUI_Utilities_Controls.vcxitems" Label="Shared" />
+    <Import Project="..\Source_GacUI_Utilities_Reflection\Source_GacUI_Utilities_Reflection.vcxitems" Label="Shared" />
+    <Import Project="..\Generated_DarkSkin\Generated_DarkSkin.vcxitems" Label="Shared" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(ProjectDir)..\..\..\Import;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(ProjectDir)..\..\..\Import;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(ProjectDir)..\..\..\Import;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(ProjectDir)..\..\..\Import;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;VCZH_CHECK_MEMORY_LEAKS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <ProjectReference>
+      <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;VCZH_CHECK_MEMORY_LEAKS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <ProjectReference>
+      <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <ProjectReference>
+      <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <ProjectReference>
+      <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="TestCompositions_AllNested.cpp" />
+    <ClCompile Include="TestCompositions_Bounds.cpp" />
+    <ClCompile Include="TestCompositions_Flow.cpp" />
+    <ClCompile Include="TestCompositions_Responsive.cpp" />
+    <ClCompile Include="TestCompositions_SharedSize.cpp" />
+    <ClCompile Include="TestCompositions_Specialized.cpp" />
+    <ClCompile Include="TestCompositions_Stack.cpp" />
+    <ClCompile Include="TestCompositions_Table.cpp" />
+    <ClCompile Include="TestCompositions_VirtualRepeat.cpp" />
+    <ClCompile Include="TestControls_Basic_GuiButton.cpp" />
+    <ClCompile Include="TestControls_Basic_GuiScrollContainer.cpp" />
+    <ClCompile Include="TestControls_Basic_GuiScroll_ProgressBar.cpp" />
+    <ClCompile Include="TestControls_Basic_GuiScroll_Scroll.cpp" />
+    <ClCompile Include="TestControls_Basic_GuiScroll_Tracker.cpp" />
+    <ClCompile Include="TestControls_Basic_GuiTab.cpp" />
+    <ClCompile Include="TestControls_CoreApplication_GuiControl.cpp" />
+    <ClCompile Include="TestControls_CoreApplication_GuiLabel.cpp" />
+    <ClCompile Include="TestControls_CoreApplication_GuiWindow.cpp" />
+    <ClCompile Include="TestControls_List_DataGrid_Binding.cpp" />
+    <ClCompile Include="TestControls_List_DataGrid_CellEditor.cpp" />
+    <ClCompile Include="TestControls_List_DataGrid_CellVisualizer.cpp" />
+    <ClCompile Include="TestControls_List_DataGrid_ColumnApi.cpp" />
+    <ClCompile Include="TestControls_List_DataGrid_ColumnUI.cpp" />
+    <ClCompile Include="TestControls_List_DataGrid_Properties.cpp" />
+    <ClCompile Include="TestControls_List_GuiListControl.cpp" />
+    <ClCompile Include="TestControls_List_GuiListControl_Template.cpp" />
+    <ClCompile Include="TestControls_List_GuiListItemTemplate.cpp" />
+    <ClCompile Include="TestControls_List_GuiListItemTemplate_Template.cpp" />
+    <ClCompile Include="TestControls_List_GuiSelectableListControl.cpp" />
+    <ClCompile Include="TestControls_List_GuiSelectableListControl_Template.cpp" />
+    <ClCompile Include="TestControls_List_GuiVirtualListView.cpp" />
+    <ClCompile Include="TestControls_List_GuiVirtualListView_Template.cpp" />
+    <ClCompile Include="TestControls_List_GuiVirtualTextList.cpp" />
+    <ClCompile Include="TestControls_List_GuiVirtualTextList_Template.cpp" />
+    <ClCompile Include="TestControls_List_GuiVirtualTreeListControl.cpp" />
+    <ClCompile Include="TestControls_List_GuiVirtualTreeListControl_Template.cpp" />
+    <ClCompile Include="TestControls_List_GuiVirtualTreeView.cpp" />
+    <ClCompile Include="TestControls_List_GuiVirtualTreeView_Template.cpp" />
+    <ClCompile Include="TestControls_Toolstrip_Combo_GuiComboBoxListControl.cpp" />
+    <ClCompile Include="TestControls_Toolstrip_Combo_GuiComboBoxListControl_Template.cpp" />
+    <ClCompile Include="TestControls_Toolstrip_Combo_GuiDatePicker.cpp" />
+    <ClCompile Include="TestControls_Toolstrip_Combo_GuiDateComboBox.cpp" />
+    <ClCompile Include="TestControls_Toolstrip_GuiToolstripMenu.cpp" />
+    <ClCompile Include="TestControls_Toolstrip_GuiToolstripMenuBar.cpp" />
+    <ClCompile Include="TestControls_Toolstrip_GuiToolstripMenuBar_Cascade.cpp" />
+    <ClCompile Include="TestControls_Toolstrip_GuiToolstripToolBar.cpp" />
+    <ClCompile Include="TestHostedWindowManager.cpp" />
+    <ClCompile Include="TestPtrDescriptableObject.cpp" />
+    <ClCompile Include="TestQueryParser.cpp" />
+    <ClCompile Include="TestReflectionTypeList.cpp" />
+    <ClCompile Include="TestRemote_GraphicsHost_BasicElements.cpp" />
+    <ClCompile Include="TestRemote_GraphicsHost_HitTest.cpp" />
+    <ClCompile Include="TestRemote_GraphicsHost_ImageFrame.cpp" />
+    <ClCompile Include="TestRemote_GraphicsHost_Key.cpp" />
+    <ClCompile Include="TestRemote_GraphicsHost_KeyAlt.cpp" />
+    <ClCompile Include="TestRemote_GraphicsHost_KeyShortcut.cpp" />
+    <ClCompile Include="TestRemote_GraphicsHost_KeyTab.cpp" />
+    <ClCompile Include="TestRemote_GraphicsHost_Mouse.cpp" />
+    <ClCompile Include="TestRemote_GraphicsHost_Shared.cpp" />
+    <ClCompile Include="TestRemote_GraphicsHost_SolidLabel.cpp" />
+    <ClCompile Include="TestRemote_GraphicsHost_Startup.cpp" />
+    <ClCompile Include="TestRemote_EmptyWindow.cpp" />
+    <ClCompile Include="TestRemote_Startup.cpp" />
+    <ClCompile Include="TestRemote_UnitTestFramework.cpp" />
+    <ClCompile Include="TestResource.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lib_GacUI_Reflection\Lib_GacUI_Reflection.vcxproj">
+      <Project>{543b32d9-e229-472a-9d11-9bf12c7982bd}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TestCompositions.h" />
+    <ClInclude Include="TestControls.h" />
+    <ClInclude Include="TestControls_List.h" />
+    <ClInclude Include="TestRemote.h" />
+    <ClInclude Include="TestRemote_GraphicsHost_Shared.h" />
+    <ClInclude Include="TestRemote_Shared_JsonProtocol.h" />
+    <ClInclude Include="TestRemote_Shared_LoggingWindowListener.h" />
+    <ClInclude Include="TestRemote_Shared_NoRenderingProtocol.h" />
+    <ClInclude Include="TestRemote_Shared_RenderingProtocol.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\Resources\UnitTestResources\cake.jpeg" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

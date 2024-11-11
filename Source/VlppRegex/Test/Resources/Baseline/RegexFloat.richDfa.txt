@@ -1,0 +1,29 @@
+﻿[START]State<0>
+    To State<1> : <Char : 43[+] - 43[+]>
+    To State<2> : <Char : 45[-] - 45[-]>
+    To State<3> : <Nop>
+State<1>
+    To State<4> : <Char : 48[0] - 57[9]>
+State<2>
+    To State<4> : <Char : 48[0] - 57[9]>
+State<3>
+    To State<4> : <Char : 48[0] - 57[9]>
+State<4>
+    To State<5> : <Char : 48[0] - 57[9]>
+    To State<6> : <Nop>
+State<5>
+    To State<5> : <Char : 48[0] - 57[9]>
+    To State<6> : <Nop>
+State<6>
+    To State<7> : <Char : 46[.] - 46[.]>
+    To State<8> : <Nop>
+State<7>
+    To State<9> : <Char : 48[0] - 57[9]>
+[FINISH]State<8>
+State<9>
+    To State<10> : <Char : 48[0] - 57[9]>
+    To State<11> : <Nop>
+State<10>
+    To State<10> : <Char : 48[0] - 57[9]>
+    To State<11> : <Nop>
+[FINISH]State<11>

@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{d9c9e3d9-e161-4e91-9f04-6c1fb4513756}</ProjectGuid>
+    <RootNamespace>ParserTestParserGenGenerated</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(ProjectDir)..\..\..\Import;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(ProjectDir)..\..\..\Import;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(ProjectDir)..\..\..\Import;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(ProjectDir)..\..\..\Import;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>VCZH_CHECK_MEMORY_LEAKS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>VCZH_CHECK_MEMORY_LEAKS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lib_AstBase\Lib_AstBase.vcxproj">
+      <Project>{8ef64899-bcb8-4000-aaf7-07a75398a74f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Lib_Import\Lib_Import.vcxproj">
+      <Project>{c6a6a876-1f48-402a-b8dc-c94cfef8b621}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Lib_SyntaxBase\Lib_SyntaxBase.vcxproj">
+      <Project>{39971aeb-1970-4856-b3a4-f6e9aec2909c}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\BinaryOp\Generated\BinaryOpExprAst.cpp" />
+    <ClCompile Include="..\..\Source\BinaryOp\Generated\BinaryOpExprAst_Builder.cpp" />
+    <ClCompile Include="..\..\Source\BinaryOp\Generated\BinaryOpExprAst_Copy.cpp" />
+    <ClCompile Include="..\..\Source\BinaryOp\Generated\BinaryOpExprAst_Empty.cpp" />
+    <ClCompile Include="..\..\Source\BinaryOp\Generated\BinaryOpExprAst_Json.cpp" />
+    <ClCompile Include="..\..\Source\BinaryOp\Generated\BinaryOpExprAst_Traverse.cpp" />
+    <ClCompile Include="..\..\Source\BinaryOp\Generated\BinaryOpModuleParser.cpp" />
+    <ClCompile Include="..\..\Source\BinaryOp\Generated\BinaryOp_Assembler.cpp" />
+    <ClCompile Include="..\..\Source\BinaryOp\Generated\BinaryOp_Lexer.cpp" />
+    <ClCompile Include="..\..\Source\Calculator\Generated\CalculatorExprAst.cpp" />
+    <ClCompile Include="..\..\Source\Calculator\Generated\CalculatorExprAst_Builder.cpp" />
+    <ClCompile Include="..\..\Source\Calculator\Generated\CalculatorExprAst_Copy.cpp" />
+    <ClCompile Include="..\..\Source\Calculator\Generated\CalculatorExprAst_Empty.cpp" />
+    <ClCompile Include="..\..\Source\Calculator\Generated\CalculatorExprAst_Json.cpp" />
+    <ClCompile Include="..\..\Source\Calculator\Generated\CalculatorExprAst_Traverse.cpp" />
+    <ClCompile Include="..\..\Source\Calculator\Generated\CalculatorModuleParser.cpp" />
+    <ClCompile Include="..\..\Source\Calculator\Generated\Calculator_Assembler.cpp" />
+    <ClCompile Include="..\..\Source\Calculator\Generated\Calculator_Lexer.cpp" />
+    <ClCompile Include="..\..\Source\FeatureTest\Generated\FeatureTestFeatureAst.cpp" />
+    <ClCompile Include="..\..\Source\FeatureTest\Generated\FeatureTestFeatureAst_Builder.cpp" />
+    <ClCompile Include="..\..\Source\FeatureTest\Generated\FeatureTestFeatureAst_Copy.cpp" />
+    <ClCompile Include="..\..\Source\FeatureTest\Generated\FeatureTestFeatureAst_Empty.cpp" />
+    <ClCompile Include="..\..\Source\FeatureTest\Generated\FeatureTestFeatureAst_Json.cpp" />
+    <ClCompile Include="..\..\Source\FeatureTest\Generated\FeatureTestFeatureAst_Traverse.cpp" />
+    <ClCompile Include="..\..\Source\FeatureTest\Generated\FeatureTestModuleParser.cpp" />
+    <ClCompile Include="..\..\Source\FeatureTest\Generated\FeatureTest_Assembler.cpp" />
+    <ClCompile Include="..\..\Source\FeatureTest\Generated\FeatureTest_Lexer.cpp" />
+    <ClCompile Include="..\..\Source\GenericAmbiguity\Generated\GenericAmbiguityExprAst.cpp" />
+    <ClCompile Include="..\..\Source\GenericAmbiguity\Generated\GenericAmbiguityExprAst_Builder.cpp" />
+    <ClCompile Include="..\..\Source\GenericAmbiguity\Generated\GenericAmbiguityExprAst_Copy.cpp" />
+    <ClCompile Include="..\..\Source\GenericAmbiguity\Generated\GenericAmbiguityExprAst_Empty.cpp" />
+    <ClCompile Include="..\..\Source\GenericAmbiguity\Generated\GenericAmbiguityExprAst_Json.cpp" />
+    <ClCompile Include="..\..\Source\GenericAmbiguity\Generated\GenericAmbiguityExprAst_Traverse.cpp" />
+    <ClCompile Include="..\..\Source\GenericAmbiguity\Generated\GenericAmbiguityModuleParser.cpp" />
+    <ClCompile Include="..\..\Source\GenericAmbiguity\Generated\GenericAmbiguity_Assembler.cpp" />
+    <ClCompile Include="..\..\Source\GenericAmbiguity\Generated\GenericAmbiguity_Lexer.cpp" />
+    <ClCompile Include="..\..\Source\IfElseAmbiguity2\Generated\IfElseAmbiguity2ModuleParser.cpp" />
+    <ClCompile Include="..\..\Source\IfElseAmbiguity2\Generated\IfElseAmbiguity2StatAst.cpp" />
+    <ClCompile Include="..\..\Source\IfElseAmbiguity2\Generated\IfElseAmbiguity2StatAst_Builder.cpp" />
+    <ClCompile Include="..\..\Source\IfElseAmbiguity2\Generated\IfElseAmbiguity2StatAst_Copy.cpp" />
+    <ClCompile Include="..\..\Source\IfElseAmbiguity2\Generated\IfElseAmbiguity2StatAst_Empty.cpp" />
+    <ClCompile Include="..\..\Source\IfElseAmbiguity2\Generated\IfElseAmbiguity2StatAst_Json.cpp" />
+    <ClCompile Include="..\..\Source\IfElseAmbiguity2\Generated\IfElseAmbiguity2StatAst_Traverse.cpp" />
+    <ClCompile Include="..\..\Source\IfElseAmbiguity2\Generated\IfElseAmbiguity2_Assembler.cpp" />
+    <ClCompile Include="..\..\Source\IfElseAmbiguity2\Generated\IfElseAmbiguity2_Lexer.cpp" />
+    <ClCompile Include="..\..\Source\IfElseAmbiguityOnStat2\Generated\IfElseAmbiguityOnStat2ModuleParser.cpp" />
+    <ClCompile Include="..\..\Source\IfElseAmbiguityOnStat2\Generated\IfElseAmbiguityOnStat2StatAst.cpp" />
+    <ClCompile Include="..\..\Source\IfElseAmbiguityOnStat2\Generated\IfElseAmbiguityOnStat2StatAst_Builder.cpp" />
+    <ClCompile Include="..\..\Source\IfElseAmbiguityOnStat2\Generated\IfElseAmbiguityOnStat2StatAst_Copy.cpp" />
+    <ClCompile Include="..\..\Source\IfElseAmbiguityOnStat2\Generated\IfElseAmbiguityOnStat2StatAst_Empty.cpp" />
+    <ClCompile Include="..\..\Source\IfElseAmbiguityOnStat2\Generated\IfElseAmbiguityOnStat2StatAst_Json.cpp" />
+    <ClCompile Include="..\..\Source\IfElseAmbiguityOnStat2\Generated\IfElseAmbiguityOnStat2StatAst_Traverse.cpp" />
+    <ClCompile Include="..\..\Source\IfElseAmbiguityOnStat2\Generated\IfElseAmbiguityOnStat2_Assembler.cpp" />
+    <ClCompile Include="..\..\Source\IfElseAmbiguityOnStat2\Generated\IfElseAmbiguityOnStat2_Lexer.cpp" />
+    <ClCompile Include="..\..\Source\IfElseAmbiguityOnStat\Generated\IfElseAmbiguityOnStatModuleParser.cpp" />
+    <ClCompile Include="..\..\Source\IfElseAmbiguityOnStat\Generated\IfElseAmbiguityOnStatStatAst.cpp" />
+    <ClCompile Include="..\..\Source\IfElseAmbiguityOnStat\Generated\IfElseAmbiguityOnStatStatAst_Builder.cpp" />
+    <ClCompile Include="..\..\Source\IfElseAmbiguityOnStat\Generated\IfElseAmbiguityOnStatStatAst_Copy.cpp" />
+    <ClCompile Include="..\..\Source\IfElseAmbiguityOnStat\Generated\IfElseAmbiguityOnStatStatAst_Empty.cpp" />
+    <ClCompile Include="..\..\Source\IfElseAmbiguityOnStat\Generated\IfElseAmbiguityOnStatStatAst_Json.cpp" />
+    <ClCompile Include="..\..\Source\IfElseAmbiguityOnStat\Generated\IfElseAmbiguityOnStatStatAst_Traverse.cpp" />
+    <ClCompile Include="..\..\Source\IfElseAmbiguityOnStat\Generated\IfElseAmbiguityOnStat_Assembler.cpp" />
+    <ClCompile Include="..\..\Source\IfElseAmbiguityOnStat\Generated\IfElseAmbiguityOnStat_Lexer.cpp" />
+    <ClCompile Include="..\..\Source\IfElseAmbiguity\Generated\IfElseAmbiguityModuleParser.cpp" />
+    <ClCompile Include="..\..\Source\IfElseAmbiguity\Generated\IfElseAmbiguityStatAst.cpp" />
+    <ClCompile Include="..\..\Source\IfElseAmbiguity\Generated\IfElseAmbiguityStatAst_Builder.cpp" />
+    <ClCompile Include="..\..\Source\IfElseAmbiguity\Generated\IfElseAmbiguityStatAst_Copy.cpp" />
+    <ClCompile Include="..\..\Source\IfElseAmbiguity\Generated\IfElseAmbiguityStatAst_Empty.cpp" />
+    <ClCompile Include="..\..\Source\IfElseAmbiguity\Generated\IfElseAmbiguityStatAst_Json.cpp" />
+    <ClCompile Include="..\..\Source\IfElseAmbiguity\Generated\IfElseAmbiguityStatAst_Traverse.cpp" />
+    <ClCompile Include="..\..\Source\IfElseAmbiguity\Generated\IfElseAmbiguity_Assembler.cpp" />
+    <ClCompile Include="..\..\Source\IfElseAmbiguity\Generated\IfElseAmbiguity_Lexer.cpp" />
+    <ClCompile Include="..\..\Source\IfElseManual\Generated\IfElseManualModuleParser.cpp" />
+    <ClCompile Include="..\..\Source\IfElseManual\Generated\IfElseManualStatAst.cpp" />
+    <ClCompile Include="..\..\Source\IfElseManual\Generated\IfElseManualStatAst_Builder.cpp" />
+    <ClCompile Include="..\..\Source\IfElseManual\Generated\IfElseManualStatAst_Copy.cpp" />
+    <ClCompile Include="..\..\Source\IfElseManual\Generated\IfElseManualStatAst_Empty.cpp" />
+    <ClCompile Include="..\..\Source\IfElseManual\Generated\IfElseManualStatAst_Json.cpp" />
+    <ClCompile Include="..\..\Source\IfElseManual\Generated\IfElseManualStatAst_Traverse.cpp" />
+    <ClCompile Include="..\..\Source\IfElseManual\Generated\IfElseManual_Assembler.cpp" />
+    <ClCompile Include="..\..\Source\IfElseManual\Generated\IfElseManual_Lexer.cpp" />
+    <ClCompile Include="..\..\Source\IfElsePriority\Generated\IfElsePriorityModuleParser.cpp" />
+    <ClCompile Include="..\..\Source\IfElsePriority\Generated\IfElsePriorityStatAst.cpp" />
+    <ClCompile Include="..\..\Source\IfElsePriority\Generated\IfElsePriorityStatAst_Builder.cpp" />
+    <ClCompile Include="..\..\Source\IfElsePriority\Generated\IfElsePriorityStatAst_Copy.cpp" />
+    <ClCompile Include="..\..\Source\IfElsePriority\Generated\IfElsePriorityStatAst_Empty.cpp" />
+    <ClCompile Include="..\..\Source\IfElsePriority\Generated\IfElsePriorityStatAst_Json.cpp" />
+    <ClCompile Include="..\..\Source\IfElsePriority\Generated\IfElsePriorityStatAst_Traverse.cpp" />
+    <ClCompile Include="..\..\Source\IfElsePriority\Generated\IfElsePriority_Assembler.cpp" />
+    <ClCompile Include="..\..\Source\IfElsePriority\Generated\IfElsePriority_Lexer.cpp" />
+    <ClCompile Include="..\..\Source\IfElseSwitch\Generated\IfElseSwitchModuleParser.cpp" />
+    <ClCompile Include="..\..\Source\IfElseSwitch\Generated\IfElseSwitchStatAst.cpp" />
+    <ClCompile Include="..\..\Source\IfElseSwitch\Generated\IfElseSwitchStatAst_Builder.cpp" />
+    <ClCompile Include="..\..\Source\IfElseSwitch\Generated\IfElseSwitchStatAst_Copy.cpp" />
+    <ClCompile Include="..\..\Source\IfElseSwitch\Generated\IfElseSwitchStatAst_Empty.cpp" />
+    <ClCompile Include="..\..\Source\IfElseSwitch\Generated\IfElseSwitchStatAst_Json.cpp" />
+    <ClCompile Include="..\..\Source\IfElseSwitch\Generated\IfElseSwitchStatAst_Traverse.cpp" />
+    <ClCompile Include="..\..\Source\IfElseSwitch\Generated\IfElseSwitch_Assembler.cpp" />
+    <ClCompile Include="..\..\Source\IfElseSwitch\Generated\IfElseSwitch_Lexer.cpp" />
+    <ClCompile Include="..\..\Source\LogTrace.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge1_Lri\Generated\PrefixMerge1_LriModuleParser.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge1_Lri\Generated\PrefixMerge1_LriTypeOrExpr.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge1_Lri\Generated\PrefixMerge1_LriTypeOrExpr_Builder.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge1_Lri\Generated\PrefixMerge1_LriTypeOrExpr_Copy.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge1_Lri\Generated\PrefixMerge1_LriTypeOrExpr_Empty.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge1_Lri\Generated\PrefixMerge1_LriTypeOrExpr_Json.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge1_Lri\Generated\PrefixMerge1_LriTypeOrExpr_Traverse.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge1_Lri\Generated\PrefixMerge1_Lri_Assembler.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge1_Lri\Generated\PrefixMerge1_Lri_Lexer.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge2_LriRequired\Generated\PrefixMerge2_LriRequiredModuleParser.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge2_LriRequired\Generated\PrefixMerge2_LriRequiredTypeOrExpr.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge2_LriRequired\Generated\PrefixMerge2_LriRequiredTypeOrExpr_Builder.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge2_LriRequired\Generated\PrefixMerge2_LriRequiredTypeOrExpr_Copy.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge2_LriRequired\Generated\PrefixMerge2_LriRequiredTypeOrExpr_Empty.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge2_LriRequired\Generated\PrefixMerge2_LriRequiredTypeOrExpr_Json.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge2_LriRequired\Generated\PrefixMerge2_LriRequiredTypeOrExpr_Traverse.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge2_LriRequired\Generated\PrefixMerge2_LriRequired_Assembler.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge2_LriRequired\Generated\PrefixMerge2_LriRequired_Lexer.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge3_LriNested\Generated\PrefixMerge3_LriNestedModuleParser.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge3_LriNested\Generated\PrefixMerge3_LriNestedTypeOrExpr.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge3_LriNested\Generated\PrefixMerge3_LriNestedTypeOrExpr_Builder.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge3_LriNested\Generated\PrefixMerge3_LriNestedTypeOrExpr_Copy.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge3_LriNested\Generated\PrefixMerge3_LriNestedTypeOrExpr_Empty.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge3_LriNested\Generated\PrefixMerge3_LriNestedTypeOrExpr_Json.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge3_LriNested\Generated\PrefixMerge3_LriNestedTypeOrExpr_Traverse.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge3_LriNested\Generated\PrefixMerge3_LriNested_Assembler.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge3_LriNested\Generated\PrefixMerge3_LriNested_Lexer.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge4_LriMultiple\Generated\PrefixMerge4_LriMultipleModuleParser.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge4_LriMultiple\Generated\PrefixMerge4_LriMultipleTypeOrExpr.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge4_LriMultiple\Generated\PrefixMerge4_LriMultipleTypeOrExpr_Builder.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge4_LriMultiple\Generated\PrefixMerge4_LriMultipleTypeOrExpr_Copy.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge4_LriMultiple\Generated\PrefixMerge4_LriMultipleTypeOrExpr_Empty.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge4_LriMultiple\Generated\PrefixMerge4_LriMultipleTypeOrExpr_Json.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge4_LriMultiple\Generated\PrefixMerge4_LriMultipleTypeOrExpr_Traverse.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge4_LriMultiple\Generated\PrefixMerge4_LriMultiple_Assembler.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge4_LriMultiple\Generated\PrefixMerge4_LriMultiple_Lexer.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge5_Pm\Generated\PrefixMerge5_PmModuleParser.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge5_Pm\Generated\PrefixMerge5_PmTypeOrExpr.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge5_Pm\Generated\PrefixMerge5_PmTypeOrExpr_Builder.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge5_Pm\Generated\PrefixMerge5_PmTypeOrExpr_Copy.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge5_Pm\Generated\PrefixMerge5_PmTypeOrExpr_Empty.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge5_Pm\Generated\PrefixMerge5_PmTypeOrExpr_Json.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge5_Pm\Generated\PrefixMerge5_PmTypeOrExpr_Traverse.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge5_Pm\Generated\PrefixMerge5_Pm_Assembler.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge5_Pm\Generated\PrefixMerge5_Pm_Lexer.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge6_Pm2\Generated\PrefixMerge6_Pm2ModuleParser.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge6_Pm2\Generated\PrefixMerge6_Pm2TypeOrExpr.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge6_Pm2\Generated\PrefixMerge6_Pm2TypeOrExpr_Builder.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge6_Pm2\Generated\PrefixMerge6_Pm2TypeOrExpr_Copy.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge6_Pm2\Generated\PrefixMerge6_Pm2TypeOrExpr_Empty.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge6_Pm2\Generated\PrefixMerge6_Pm2TypeOrExpr_Json.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge6_Pm2\Generated\PrefixMerge6_Pm2TypeOrExpr_Traverse.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge6_Pm2\Generated\PrefixMerge6_Pm2_Assembler.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge6_Pm2\Generated\PrefixMerge6_Pm2_Lexer.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge7_PmSwitch\Generated\PrefixMerge7_PmSwitchModuleParser.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge7_PmSwitch\Generated\PrefixMerge7_PmSwitchTypeOrExpr.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge7_PmSwitch\Generated\PrefixMerge7_PmSwitchTypeOrExpr_Builder.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge7_PmSwitch\Generated\PrefixMerge7_PmSwitchTypeOrExpr_Copy.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge7_PmSwitch\Generated\PrefixMerge7_PmSwitchTypeOrExpr_Empty.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge7_PmSwitch\Generated\PrefixMerge7_PmSwitchTypeOrExpr_Json.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge7_PmSwitch\Generated\PrefixMerge7_PmSwitchTypeOrExpr_Traverse.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge7_PmSwitch\Generated\PrefixMerge7_PmSwitch_Assembler.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge7_PmSwitch\Generated\PrefixMerge7_PmSwitch_Lexer.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge8_PmVariadic\Generated\PrefixMerge8_PmVariadicModuleParser.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge8_PmVariadic\Generated\PrefixMerge8_PmVariadicTypeOrExpr.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge8_PmVariadic\Generated\PrefixMerge8_PmVariadicTypeOrExpr_Builder.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge8_PmVariadic\Generated\PrefixMerge8_PmVariadicTypeOrExpr_Copy.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge8_PmVariadic\Generated\PrefixMerge8_PmVariadicTypeOrExpr_Empty.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge8_PmVariadic\Generated\PrefixMerge8_PmVariadicTypeOrExpr_Json.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge8_PmVariadic\Generated\PrefixMerge8_PmVariadicTypeOrExpr_Traverse.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge8_PmVariadic\Generated\PrefixMerge8_PmVariadic_Assembler.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge8_PmVariadic\Generated\PrefixMerge8_PmVariadic_Lexer.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge9_PmLoop\Generated\PrefixMerge9_PmLoopFile.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge9_PmLoop\Generated\PrefixMerge9_PmLoopFile_Builder.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge9_PmLoop\Generated\PrefixMerge9_PmLoopFile_Copy.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge9_PmLoop\Generated\PrefixMerge9_PmLoopFile_Empty.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge9_PmLoop\Generated\PrefixMerge9_PmLoopFile_Json.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge9_PmLoop\Generated\PrefixMerge9_PmLoopFile_Traverse.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge9_PmLoop\Generated\PrefixMerge9_PmLoopModuleParser.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge9_PmLoop\Generated\PrefixMerge9_PmLoop_Assembler.cpp" />
+    <ClCompile Include="..\..\Source\PrefixMerge9_PmLoop\Generated\PrefixMerge9_PmLoop_Lexer.cpp" />
+    <ClCompile Include="..\CommonMain.cpp" />
+    <ClCompile Include="TestParser_Generated.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\BinaryOp\Generated\BinaryOpExprAst.h" />
+    <ClInclude Include="..\..\Source\BinaryOp\Generated\BinaryOpExprAst_Builder.h" />
+    <ClInclude Include="..\..\Source\BinaryOp\Generated\BinaryOpExprAst_Copy.h" />
+    <ClInclude Include="..\..\Source\BinaryOp\Generated\BinaryOpExprAst_Empty.h" />
+    <ClInclude Include="..\..\Source\BinaryOp\Generated\BinaryOpExprAst_Json.h" />
+    <ClInclude Include="..\..\Source\BinaryOp\Generated\BinaryOpExprAst_Traverse.h" />
+    <ClInclude Include="..\..\Source\BinaryOp\Generated\BinaryOpModuleParser.h" />
+    <ClInclude Include="..\..\Source\BinaryOp\Generated\BinaryOp_Assembler.h" />
+    <ClInclude Include="..\..\Source\BinaryOp\Generated\BinaryOp_Lexer.h" />
+    <ClInclude Include="..\..\Source\Calculator\Generated\CalculatorExprAst.h" />
+    <ClInclude Include="..\..\Source\Calculator\Generated\CalculatorExprAst_Builder.h" />
+    <ClInclude Include="..\..\Source\Calculator\Generated\CalculatorExprAst_Copy.h" />
+    <ClInclude Include="..\..\Source\Calculator\Generated\CalculatorExprAst_Empty.h" />
+    <ClInclude Include="..\..\Source\Calculator\Generated\CalculatorExprAst_Json.h" />
+    <ClInclude Include="..\..\Source\Calculator\Generated\CalculatorExprAst_Traverse.h" />
+    <ClInclude Include="..\..\Source\Calculator\Generated\CalculatorModuleParser.h" />
+    <ClInclude Include="..\..\Source\Calculator\Generated\Calculator_Assembler.h" />
+    <ClInclude Include="..\..\Source\Calculator\Generated\Calculator_Lexer.h" />
+    <ClInclude Include="..\..\Source\FeatureTest\Generated\FeatureTestFeatureAst.h" />
+    <ClInclude Include="..\..\Source\FeatureTest\Generated\FeatureTestFeatureAst_Builder.h" />
+    <ClInclude Include="..\..\Source\FeatureTest\Generated\FeatureTestFeatureAst_Copy.h" />
+    <ClInclude Include="..\..\Source\FeatureTest\Generated\FeatureTestFeatureAst_Empty.h" />
+    <ClInclude Include="..\..\Source\FeatureTest\Generated\FeatureTestFeatureAst_Json.h" />
+    <ClInclude Include="..\..\Source\FeatureTest\Generated\FeatureTestFeatureAst_Traverse.h" />
+    <ClInclude Include="..\..\Source\FeatureTest\Generated\FeatureTestModuleParser.h" />
+    <ClInclude Include="..\..\Source\FeatureTest\Generated\FeatureTest_Assembler.h" />
+    <ClInclude Include="..\..\Source\FeatureTest\Generated\FeatureTest_Lexer.h" />
+    <ClInclude Include="..\..\Source\GenericAmbiguity\Generated\GenericAmbiguityExprAst.h" />
+    <ClInclude Include="..\..\Source\GenericAmbiguity\Generated\GenericAmbiguityExprAst_Builder.h" />
+    <ClInclude Include="..\..\Source\GenericAmbiguity\Generated\GenericAmbiguityExprAst_Copy.h" />
+    <ClInclude Include="..\..\Source\GenericAmbiguity\Generated\GenericAmbiguityExprAst_Empty.h" />
+    <ClInclude Include="..\..\Source\GenericAmbiguity\Generated\GenericAmbiguityExprAst_Json.h" />
+    <ClInclude Include="..\..\Source\GenericAmbiguity\Generated\GenericAmbiguityExprAst_Traverse.h" />
+    <ClInclude Include="..\..\Source\GenericAmbiguity\Generated\GenericAmbiguityModuleParser.h" />
+    <ClInclude Include="..\..\Source\GenericAmbiguity\Generated\GenericAmbiguity_Assembler.h" />
+    <ClInclude Include="..\..\Source\GenericAmbiguity\Generated\GenericAmbiguity_Lexer.h" />
+    <ClInclude Include="..\..\Source\IfElseAmbiguity2\Generated\IfElseAmbiguity2ModuleParser.h" />
+    <ClInclude Include="..\..\Source\IfElseAmbiguity2\Generated\IfElseAmbiguity2StatAst.h" />
+    <ClInclude Include="..\..\Source\IfElseAmbiguity2\Generated\IfElseAmbiguity2StatAst_Builder.h" />
+    <ClInclude Include="..\..\Source\IfElseAmbiguity2\Generated\IfElseAmbiguity2StatAst_Copy.h" />
+    <ClInclude Include="..\..\Source\IfElseAmbiguity2\Generated\IfElseAmbiguity2StatAst_Empty.h" />
+    <ClInclude Include="..\..\Source\IfElseAmbiguity2\Generated\IfElseAmbiguity2StatAst_Json.h" />
+    <ClInclude Include="..\..\Source\IfElseAmbiguity2\Generated\IfElseAmbiguity2StatAst_Traverse.h" />
+    <ClInclude Include="..\..\Source\IfElseAmbiguity2\Generated\IfElseAmbiguity2_Assembler.h" />
+    <ClInclude Include="..\..\Source\IfElseAmbiguity2\Generated\IfElseAmbiguity2_Lexer.h" />
+    <ClInclude Include="..\..\Source\IfElseAmbiguityOnStat2\Generated\IfElseAmbiguityOnStat2ModuleParser.h" />
+    <ClInclude Include="..\..\Source\IfElseAmbiguityOnStat2\Generated\IfElseAmbiguityOnStat2StatAst.h" />
+    <ClInclude Include="..\..\Source\IfElseAmbiguityOnStat2\Generated\IfElseAmbiguityOnStat2StatAst_Builder.h" />
+    <ClInclude Include="..\..\Source\IfElseAmbiguityOnStat2\Generated\IfElseAmbiguityOnStat2StatAst_Copy.h" />
+    <ClInclude Include="..\..\Source\IfElseAmbiguityOnStat2\Generated\IfElseAmbiguityOnStat2StatAst_Empty.h" />
+    <ClInclude Include="..\..\Source\IfElseAmbiguityOnStat2\Generated\IfElseAmbiguityOnStat2StatAst_Json.h" />
+    <ClInclude Include="..\..\Source\IfElseAmbiguityOnStat2\Generated\IfElseAmbiguityOnStat2StatAst_Traverse.h" />
+    <ClInclude Include="..\..\Source\IfElseAmbiguityOnStat2\Generated\IfElseAmbiguityOnStat2_Assembler.h" />
+    <ClInclude Include="..\..\Source\IfElseAmbiguityOnStat2\Generated\IfElseAmbiguityOnStat2_Lexer.h" />
+    <ClInclude Include="..\..\Source\IfElseAmbiguityOnStat\Generated\IfElseAmbiguityOnStatModuleParser.h" />
+    <ClInclude Include="..\..\Source\IfElseAmbiguityOnStat\Generated\IfElseAmbiguityOnStatStatAst.h" />
+    <ClInclude Include="..\..\Source\IfElseAmbiguityOnStat\Generated\IfElseAmbiguityOnStatStatAst_Builder.h" />
+    <ClInclude Include="..\..\Source\IfElseAmbiguityOnStat\Generated\IfElseAmbiguityOnStatStatAst_Copy.h" />
+    <ClInclude Include="..\..\Source\IfElseAmbiguityOnStat\Generated\IfElseAmbiguityOnStatStatAst_Empty.h" />
+    <ClInclude Include="..\..\Source\IfElseAmbiguityOnStat\Generated\IfElseAmbiguityOnStatStatAst_Json.h" />
+    <ClInclude Include="..\..\Source\IfElseAmbiguityOnStat\Generated\IfElseAmbiguityOnStatStatAst_Traverse.h" />
+    <ClInclude Include="..\..\Source\IfElseAmbiguityOnStat\Generated\IfElseAmbiguityOnStat_Assembler.h" />
+    <ClInclude Include="..\..\Source\IfElseAmbiguityOnStat\Generated\IfElseAmbiguityOnStat_Lexer.h" />
+    <ClInclude Include="..\..\Source\IfElseAmbiguity\Generated\IfElseAmbiguityModuleParser.h" />
+    <ClInclude Include="..\..\Source\IfElseAmbiguity\Generated\IfElseAmbiguityStatAst.h" />
+    <ClInclude Include="..\..\Source\IfElseAmbiguity\Generated\IfElseAmbiguityStatAst_Builder.h" />
+    <ClInclude Include="..\..\Source\IfElseAmbiguity\Generated\IfElseAmbiguityStatAst_Copy.h" />
+    <ClInclude Include="..\..\Source\IfElseAmbiguity\Generated\IfElseAmbiguityStatAst_Empty.h" />
+    <ClInclude Include="..\..\Source\IfElseAmbiguity\Generated\IfElseAmbiguityStatAst_Json.h" />
+    <ClInclude Include="..\..\Source\IfElseAmbiguity\Generated\IfElseAmbiguityStatAst_Traverse.h" />
+    <ClInclude Include="..\..\Source\IfElseAmbiguity\Generated\IfElseAmbiguity_Assembler.h" />
+    <ClInclude Include="..\..\Source\IfElseAmbiguity\Generated\IfElseAmbiguity_Lexer.h" />
+    <ClInclude Include="..\..\Source\IfElseManual\Generated\IfElseManualModuleParser.h" />
+    <ClInclude Include="..\..\Source\IfElseManual\Generated\IfElseManualStatAst.h" />
+    <ClInclude Include="..\..\Source\IfElseManual\Generated\IfElseManualStatAst_Builder.h" />
+    <ClInclude Include="..\..\Source\IfElseManual\Generated\IfElseManualStatAst_Copy.h" />
+    <ClInclude Include="..\..\Source\IfElseManual\Generated\IfElseManualStatAst_Empty.h" />
+    <ClInclude Include="..\..\Source\IfElseManual\Generated\IfElseManualStatAst_Json.h" />
+    <ClInclude Include="..\..\Source\IfElseManual\Generated\IfElseManualStatAst_Traverse.h" />
+    <ClInclude Include="..\..\Source\IfElseManual\Generated\IfElseManual_Assembler.h" />
+    <ClInclude Include="..\..\Source\IfElseManual\Generated\IfElseManual_Lexer.h" />
+    <ClInclude Include="..\..\Source\IfElsePriority\Generated\IfElsePriorityModuleParser.h" />
+    <ClInclude Include="..\..\Source\IfElsePriority\Generated\IfElsePriorityStatAst.h" />
+    <ClInclude Include="..\..\Source\IfElsePriority\Generated\IfElsePriorityStatAst_Builder.h" />
+    <ClInclude Include="..\..\Source\IfElsePriority\Generated\IfElsePriorityStatAst_Copy.h" />
+    <ClInclude Include="..\..\Source\IfElsePriority\Generated\IfElsePriorityStatAst_Empty.h" />
+    <ClInclude Include="..\..\Source\IfElsePriority\Generated\IfElsePriorityStatAst_Json.h" />
+    <ClInclude Include="..\..\Source\IfElsePriority\Generated\IfElsePriorityStatAst_Traverse.h" />
+    <ClInclude Include="..\..\Source\IfElsePriority\Generated\IfElsePriority_Assembler.h" />
+    <ClInclude Include="..\..\Source\IfElsePriority\Generated\IfElsePriority_Lexer.h" />
+    <ClInclude Include="..\..\Source\IfElseSwitch\Generated\IfElseSwitchModuleParser.h" />
+    <ClInclude Include="..\..\Source\IfElseSwitch\Generated\IfElseSwitchStatAst.h" />
+    <ClInclude Include="..\..\Source\IfElseSwitch\Generated\IfElseSwitchStatAst_Builder.h" />
+    <ClInclude Include="..\..\Source\IfElseSwitch\Generated\IfElseSwitchStatAst_Copy.h" />
+    <ClInclude Include="..\..\Source\IfElseSwitch\Generated\IfElseSwitchStatAst_Empty.h" />
+    <ClInclude Include="..\..\Source\IfElseSwitch\Generated\IfElseSwitchStatAst_Json.h" />
+    <ClInclude Include="..\..\Source\IfElseSwitch\Generated\IfElseSwitchStatAst_Traverse.h" />
+    <ClInclude Include="..\..\Source\IfElseSwitch\Generated\IfElseSwitch_Assembler.h" />
+    <ClInclude Include="..\..\Source\IfElseSwitch\Generated\IfElseSwitch_Lexer.h" />
+    <ClInclude Include="..\..\Source\LogTrace.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge1_Lri\Generated\PrefixMerge1_LriModuleParser.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge1_Lri\Generated\PrefixMerge1_LriTypeOrExpr.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge1_Lri\Generated\PrefixMerge1_LriTypeOrExpr_Builder.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge1_Lri\Generated\PrefixMerge1_LriTypeOrExpr_Copy.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge1_Lri\Generated\PrefixMerge1_LriTypeOrExpr_Empty.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge1_Lri\Generated\PrefixMerge1_LriTypeOrExpr_Json.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge1_Lri\Generated\PrefixMerge1_LriTypeOrExpr_Traverse.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge1_Lri\Generated\PrefixMerge1_Lri_Assembler.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge1_Lri\Generated\PrefixMerge1_Lri_Lexer.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge2_LriRequired\Generated\PrefixMerge2_LriRequiredModuleParser.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge2_LriRequired\Generated\PrefixMerge2_LriRequiredTypeOrExpr.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge2_LriRequired\Generated\PrefixMerge2_LriRequiredTypeOrExpr_Builder.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge2_LriRequired\Generated\PrefixMerge2_LriRequiredTypeOrExpr_Copy.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge2_LriRequired\Generated\PrefixMerge2_LriRequiredTypeOrExpr_Empty.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge2_LriRequired\Generated\PrefixMerge2_LriRequiredTypeOrExpr_Json.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge2_LriRequired\Generated\PrefixMerge2_LriRequiredTypeOrExpr_Traverse.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge2_LriRequired\Generated\PrefixMerge2_LriRequired_Assembler.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge2_LriRequired\Generated\PrefixMerge2_LriRequired_Lexer.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge3_LriNested\Generated\PrefixMerge3_LriNestedModuleParser.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge3_LriNested\Generated\PrefixMerge3_LriNestedTypeOrExpr.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge3_LriNested\Generated\PrefixMerge3_LriNestedTypeOrExpr_Builder.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge3_LriNested\Generated\PrefixMerge3_LriNestedTypeOrExpr_Copy.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge3_LriNested\Generated\PrefixMerge3_LriNestedTypeOrExpr_Empty.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge3_LriNested\Generated\PrefixMerge3_LriNestedTypeOrExpr_Json.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge3_LriNested\Generated\PrefixMerge3_LriNestedTypeOrExpr_Traverse.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge3_LriNested\Generated\PrefixMerge3_LriNested_Assembler.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge3_LriNested\Generated\PrefixMerge3_LriNested_Lexer.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge4_LriMultiple\Generated\PrefixMerge4_LriMultipleModuleParser.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge4_LriMultiple\Generated\PrefixMerge4_LriMultipleTypeOrExpr.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge4_LriMultiple\Generated\PrefixMerge4_LriMultipleTypeOrExpr_Builder.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge4_LriMultiple\Generated\PrefixMerge4_LriMultipleTypeOrExpr_Copy.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge4_LriMultiple\Generated\PrefixMerge4_LriMultipleTypeOrExpr_Empty.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge4_LriMultiple\Generated\PrefixMerge4_LriMultipleTypeOrExpr_Json.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge4_LriMultiple\Generated\PrefixMerge4_LriMultipleTypeOrExpr_Traverse.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge4_LriMultiple\Generated\PrefixMerge4_LriMultiple_Assembler.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge4_LriMultiple\Generated\PrefixMerge4_LriMultiple_Lexer.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge5_Pm\Generated\PrefixMerge5_PmModuleParser.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge5_Pm\Generated\PrefixMerge5_PmTypeOrExpr.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge5_Pm\Generated\PrefixMerge5_PmTypeOrExpr_Builder.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge5_Pm\Generated\PrefixMerge5_PmTypeOrExpr_Copy.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge5_Pm\Generated\PrefixMerge5_PmTypeOrExpr_Empty.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge5_Pm\Generated\PrefixMerge5_PmTypeOrExpr_Json.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge5_Pm\Generated\PrefixMerge5_PmTypeOrExpr_Traverse.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge5_Pm\Generated\PrefixMerge5_Pm_Assembler.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge5_Pm\Generated\PrefixMerge5_Pm_Lexer.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge6_Pm2\Generated\PrefixMerge6_Pm2ModuleParser.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge6_Pm2\Generated\PrefixMerge6_Pm2TypeOrExpr.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge6_Pm2\Generated\PrefixMerge6_Pm2TypeOrExpr_Builder.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge6_Pm2\Generated\PrefixMerge6_Pm2TypeOrExpr_Copy.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge6_Pm2\Generated\PrefixMerge6_Pm2TypeOrExpr_Empty.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge6_Pm2\Generated\PrefixMerge6_Pm2TypeOrExpr_Json.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge6_Pm2\Generated\PrefixMerge6_Pm2TypeOrExpr_Traverse.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge6_Pm2\Generated\PrefixMerge6_Pm2_Assembler.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge6_Pm2\Generated\PrefixMerge6_Pm2_Lexer.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge7_PmSwitch\Generated\PrefixMerge7_PmSwitchModuleParser.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge7_PmSwitch\Generated\PrefixMerge7_PmSwitchTypeOrExpr.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge7_PmSwitch\Generated\PrefixMerge7_PmSwitchTypeOrExpr_Builder.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge7_PmSwitch\Generated\PrefixMerge7_PmSwitchTypeOrExpr_Copy.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge7_PmSwitch\Generated\PrefixMerge7_PmSwitchTypeOrExpr_Empty.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge7_PmSwitch\Generated\PrefixMerge7_PmSwitchTypeOrExpr_Json.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge7_PmSwitch\Generated\PrefixMerge7_PmSwitchTypeOrExpr_Traverse.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge7_PmSwitch\Generated\PrefixMerge7_PmSwitch_Assembler.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge7_PmSwitch\Generated\PrefixMerge7_PmSwitch_Lexer.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge8_PmVariadic\Generated\PrefixMerge8_PmVariadicModuleParser.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge8_PmVariadic\Generated\PrefixMerge8_PmVariadicTypeOrExpr.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge8_PmVariadic\Generated\PrefixMerge8_PmVariadicTypeOrExpr_Builder.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge8_PmVariadic\Generated\PrefixMerge8_PmVariadicTypeOrExpr_Copy.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge8_PmVariadic\Generated\PrefixMerge8_PmVariadicTypeOrExpr_Empty.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge8_PmVariadic\Generated\PrefixMerge8_PmVariadicTypeOrExpr_Json.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge8_PmVariadic\Generated\PrefixMerge8_PmVariadicTypeOrExpr_Traverse.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge8_PmVariadic\Generated\PrefixMerge8_PmVariadic_Assembler.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge8_PmVariadic\Generated\PrefixMerge8_PmVariadic_Lexer.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge9_PmLoop\Generated\PrefixMerge9_PmLoopFile.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge9_PmLoop\Generated\PrefixMerge9_PmLoopFile_Builder.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge9_PmLoop\Generated\PrefixMerge9_PmLoopFile_Copy.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge9_PmLoop\Generated\PrefixMerge9_PmLoopFile_Empty.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge9_PmLoop\Generated\PrefixMerge9_PmLoopFile_Json.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge9_PmLoop\Generated\PrefixMerge9_PmLoopFile_Traverse.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge9_PmLoop\Generated\PrefixMerge9_PmLoopModuleParser.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge9_PmLoop\Generated\PrefixMerge9_PmLoop_Assembler.h" />
+    <ClInclude Include="..\..\Source\PrefixMerge9_PmLoop\Generated\PrefixMerge9_PmLoop_Lexer.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

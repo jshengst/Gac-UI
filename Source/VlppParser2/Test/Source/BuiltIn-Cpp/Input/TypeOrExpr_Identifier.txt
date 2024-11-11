@@ -1,0 +1,56 @@
+Name
+enum Name
+enum class Name
+class Name
+struct Name
+union Name
+
+operator new
+operator new[]
+operator delete
+operator delete[]
+operator "" Name
+
+operator,
+operator()
+operator[]
+operator->
+
+operator!=
+operator!
+operator==
+operator=
+operator~=
+operator~
+operator^=
+operator^
+
+operator&&
+operator&=
+operator&
+operator||
+operator|=
+operator|
+
+operator*=
+operator*
+operator/=
+operator/
+operator%=
+operator%
+
+operator+=
+operator++
+operator+
+operator-=
+operator--
+operator-
+
+operator<<=
+operator<<
+operator<=
+operator<
+operator>>=
+operator>>
+operator>=
+operator>

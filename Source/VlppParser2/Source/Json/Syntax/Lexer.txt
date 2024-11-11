@@ -1,0 +1,14 @@
+TRUE_VALUE:true
+FALSE_VALUE:false
+NULL_VALUE:null
+OBJOPEN:\{
+OBJCLOSE:\}
+ARROPEN:\[
+ARRCLOSE:\]
+COMMA:,
+COLON::
+
+NUMBER:[\-]?\d+(.\d+)?([eE][+\-]?\d+)?
+STRING:"([^\\"]|\\[^u]|\\u\d{4})*"
+
+discard SPACE:\s+

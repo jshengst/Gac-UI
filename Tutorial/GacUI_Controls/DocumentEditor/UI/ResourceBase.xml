@@ -1,0 +1,18 @@
+<Resource>
+  <Folder name="GacGenConfig">
+    <Xml name="Metadata">
+      <ResourceMetadata Name="EditorBase" Version="1.0"/>
+    </Xml>
+    <Folder name="Cpp">
+      <Text name="SourceFolder">Source</Text>
+      <Text name="Resource">..\..\UIRes\DocumentEditor.bin</Text>
+      <Text name="NormalInclude">GacUI.h</Text>
+      <Text name="ReflectionInclude">GacUIReflection.h</Text>
+      <Text name="Name">EditorBase</Text>
+    </Folder>
+  </Folder>
+
+  <Folder name="ToolbarImages" content="Link">../../../GacUI_ControlTemplate/BlackSkin/UI/FullControlTest/ToolbarImages/Images.xml</Folder>
+  <Folder name="DocumentComponents" content="Link">../../../GacUI_ControlTemplate/BlackSkin/UI/FullControlTest/DocumentComponents.xml</Folder>
+  <Folder name="DocumentEditorBase" content="Link">../../../GacUI_ControlTemplate/BlackSkin/UI/FullControlTest/DocumentEditorBase.xml</Folder>
+</Resource>

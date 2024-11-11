@@ -1,0 +1,66 @@
+﻿[START]State<0>
+    To State<1> : <Char : 48[0] - 57[9]>
+State<1>
+    To State<2> : <Epsilon>
+    To State<4> : <Nop>
+State<2>
+    To State<3> : <Char : 48[0] - 57[9]>
+State<3>
+    To State<1> : <Epsilon>
+State<4>
+    To State<5> : <Epsilon>
+State<5>
+    To State<7> : <Positive>
+State<6>
+    To State<12> : <Epsilon>
+State<7>
+    To State<8> : <Char : 48[0] - 57[9]>
+    To State<8> : <Char : 65[A] - 90[Z]>
+    To State<8> : <Char : 95[_] - 95[_]>
+    To State<8> : <Char : 97[a] - 98[b]>
+    To State<8> : <Char : 99[c] - 99[c]>
+    To State<8> : <Char : 100[d] - 103[g]>
+    To State<8> : <Char : 104[h] - 104[h]>
+    To State<8> : <Char : 105[i] - 117[u]>
+    To State<8> : <Char : 118[v] - 118[v]>
+    To State<8> : <Char : 119[w] - 121[y]>
+    To State<8> : <Char : 122[z] - 122[z]>
+State<8>
+    To State<9> : <Epsilon>
+    To State<11> : <Nop>
+State<9>
+    To State<10> : <Char : 48[0] - 57[9]>
+    To State<10> : <Char : 65[A] - 90[Z]>
+    To State<10> : <Char : 95[_] - 95[_]>
+    To State<10> : <Char : 97[a] - 98[b]>
+    To State<10> : <Char : 99[c] - 99[c]>
+    To State<10> : <Char : 100[d] - 103[g]>
+    To State<10> : <Char : 104[h] - 104[h]>
+    To State<10> : <Char : 105[i] - 117[u]>
+    To State<10> : <Char : 118[v] - 118[v]>
+    To State<10> : <Char : 119[w] - 121[y]>
+    To State<10> : <Char : 122[z] - 122[z]>
+State<10>
+    To State<8> : <Epsilon>
+State<11>
+    To State<6> : <End>
+State<12>
+    To State<14> : <Negative>
+    To State<13> : <NegativeFail>
+[FINISH]State<13>
+State<14>
+    To State<15> : <Char : 118[v] - 118[v]>
+State<15>
+    To State<16> : <Epsilon>
+State<16>
+    To State<17> : <Char : 99[c] - 99[c]>
+State<17>
+    To State<18> : <Epsilon>
+State<18>
+    To State<19> : <Char : 122[z] - 122[z]>
+State<19>
+    To State<20> : <Epsilon>
+State<20>
+    To State<21> : <Char : 104[h] - 104[h]>
+State<21>
+    To State<13> : <End>

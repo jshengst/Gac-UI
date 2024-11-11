@@ -1,0 +1,7 @@
+CLASS:class
+INT:int
+COMMA:,
+DOT:.
+QUESTION:/?
+
+discard SPACE:/s+

@@ -1,0 +1,49 @@
+//////////////////////////////////////////////////////////////////
+// Generic Header
+//////////////////////////////////////////////////////////////////
+
+_GenericParameterKeyword
+  ::= "typename":typenameToken as partial OrdinaryGenericParameter
+  ::= "class":typenameToken as partial OrdinaryGenericParameter
+  ::= "template" _GenericHeader:genericHeader "class":typenameToken as partial OrdinaryGenericParameter
+  ;
+
+_OrdinaryGenericParameter
+  ::= _GenericParameterKeyword ["...":variadic] [_DeclaratorId:id] ["=" _TypeOrExpr_NoComma_NoGT:init] as OrdinaryGenericParameter
+  ;
+
+_TypedGenericParameterInit
+  ::= "=" _TypeOrExpr_NoComma_NoGT:expr as VarValueInit
+  ;
+
+_TypedGenericParameterVariablePart
+  ::= _TypedGenericParameterInit:init as DeclaratorVariablePart
+  ::= _DeclaratorOptionalName:declarator [_TypedGenericParameterInit:init] as DeclaratorVariablePart
+  ;
+
+_TypedGenericParameter
+  ::= !_TypeBeforeDeclarator
+  ::= _TypeBeforeDeclarator:type _TypedGenericParameterVariablePart:firstVarPart as VariablesDeclaration
+  ;
+
+_GenericParameter
+  ::= !_OrdinaryGenericParameter
+  ::= !_TypedGenericParameter
+  ;
+
+@public _GenericHeader
+  ::= "<" {_GenericParameter:parameters ; ","} ">" as GenericHeader
+  ;
+
+//////////////////////////////////////////////////////////////////
+// Generic Argument
+//////////////////////////////////////////////////////////////////
+
+_GenericArgument
+  ::= !_TypeOrExpr_NoComma_NoGT
+  ::= _TypeOrExpr_NoComma_NoGT:argument "...":variadic as GenericArgument
+  ;
+
+@public _GenericArguments
+  ::= "<" {_GenericArgument:arguments ; ","} ">" as GenericArguments
+  ;

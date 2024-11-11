@@ -1,0 +1,1179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Shared">
+      <UniqueIdentifier>{8fc36f38-5216-4ee5-8ae1-00630c951ec9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Generated">
+      <UniqueIdentifier>{ffaf2fbc-2c38-4274-b24e-763cdc5d2a8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Generated\Calculator">
+      <UniqueIdentifier>{627c9b43-78fa-43c7-be8d-bf8073d1d16c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Generated\IfElseAmbiguity">
+      <UniqueIdentifier>{362f64ae-cb22-4102-bf8c-77694cc9b153}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Generated\IfElsePriority">
+      <UniqueIdentifier>{2e582282-0fa6-4aa6-80fd-d573fbc0ecdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Generated\GenericAmbiguity">
+      <UniqueIdentifier>{d4433a0f-d75e-4bd2-886c-63af429453c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Generated\FeatureTest">
+      <UniqueIdentifier>{8650cc4c-eff2-4aaa-b823-14539ab3ec69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Generated\BinaryOp">
+      <UniqueIdentifier>{4438e956-1d62-4909-8773-2bebf105a675}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Generated\IfElseSwitch">
+      <UniqueIdentifier>{8387238f-7382-488d-b905-e40333a57b54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Generated\IfElseManual">
+      <UniqueIdentifier>{400ca0c5-b246-42c5-ad37-6d27c5492bf1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Generated\IfElseAmbiguity2">
+      <UniqueIdentifier>{419817f7-c7c1-481d-b5de-52823f8de664}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Generated\PrefixMerge1_Lri">
+      <UniqueIdentifier>{cc11aecf-775b-446a-8265-d7e2a7268378}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Generated\PrefixMerge2_LriRequired">
+      <UniqueIdentifier>{8321e23d-91f2-4a48-bbd9-7fb8a8bab84d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Generated\PrefixMerge3_LriNested">
+      <UniqueIdentifier>{e6be4eb9-05f0-4454-bb99-182074680227}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Generated\PrefixMerge4_LriMultiple">
+      <UniqueIdentifier>{8829fbae-4800-437c-a4d4-45bae6ef1404}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Generated\PrefixMerge5_Pm">
+      <UniqueIdentifier>{d5e2f0ec-dde2-49e6-a0b8-64eeef219fdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Generated\PrefixMerge6_Pm2">
+      <UniqueIdentifier>{c9a0ea78-64a9-4312-889c-03fb3d07570c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Generated\PrefixMerge7_PmSwitch">
+      <UniqueIdentifier>{7e4d28cb-c6b4-43b5-ae55-857d91f841a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Generated\IfElseAmbiguityOnStat">
+      <UniqueIdentifier>{7a814646-33d2-4085-ad58-3fff3876f84b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Generated\IfElseAmbiguityOnStat2">
+      <UniqueIdentifier>{4339b5b4-d6e4-41b9-89d2-8ae51e05b571}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Generated\PrefixMerge8_PmVariadic">
+      <UniqueIdentifier>{61db5b56-1b11-499a-9417-4df419c3a9f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Generated\PrefixMerge9_PmLoop">
+      <UniqueIdentifier>{c40f8bcf-1a92-4227-9513-96de379a9d0e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\Calculator\Generated\CalculatorExprAst_Json.cpp">
+      <Filter>Source Files\Generated\Calculator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Calculator\Generated\CalculatorExprAst_Traverse.cpp">
+      <Filter>Source Files\Generated\Calculator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Calculator\Generated\CalculatorModuleParser.cpp">
+      <Filter>Source Files\Generated\Calculator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Calculator\Generated\Calculator_Assembler.cpp">
+      <Filter>Source Files\Generated\Calculator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Calculator\Generated\Calculator_Lexer.cpp">
+      <Filter>Source Files\Generated\Calculator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Calculator\Generated\CalculatorExprAst.cpp">
+      <Filter>Source Files\Generated\Calculator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Calculator\Generated\CalculatorExprAst_Builder.cpp">
+      <Filter>Source Files\Generated\Calculator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Calculator\Generated\CalculatorExprAst_Copy.cpp">
+      <Filter>Source Files\Generated\Calculator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Calculator\Generated\CalculatorExprAst_Empty.cpp">
+      <Filter>Source Files\Generated\Calculator</Filter>
+    </ClCompile>
+    <ClCompile Include="TestParser_Generated.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseAmbiguity\Generated\IfElseAmbiguity_Assembler.cpp">
+      <Filter>Source Files\Generated\IfElseAmbiguity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseAmbiguity\Generated\IfElseAmbiguity_Lexer.cpp">
+      <Filter>Source Files\Generated\IfElseAmbiguity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseAmbiguity\Generated\IfElseAmbiguityModuleParser.cpp">
+      <Filter>Source Files\Generated\IfElseAmbiguity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseAmbiguity\Generated\IfElseAmbiguityStatAst.cpp">
+      <Filter>Source Files\Generated\IfElseAmbiguity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseAmbiguity\Generated\IfElseAmbiguityStatAst_Builder.cpp">
+      <Filter>Source Files\Generated\IfElseAmbiguity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseAmbiguity\Generated\IfElseAmbiguityStatAst_Copy.cpp">
+      <Filter>Source Files\Generated\IfElseAmbiguity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseAmbiguity\Generated\IfElseAmbiguityStatAst_Empty.cpp">
+      <Filter>Source Files\Generated\IfElseAmbiguity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseAmbiguity\Generated\IfElseAmbiguityStatAst_Json.cpp">
+      <Filter>Source Files\Generated\IfElseAmbiguity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseAmbiguity\Generated\IfElseAmbiguityStatAst_Traverse.cpp">
+      <Filter>Source Files\Generated\IfElseAmbiguity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElsePriority\Generated\IfElsePriorityStatAst_Json.cpp">
+      <Filter>Source Files\Generated\IfElsePriority</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElsePriority\Generated\IfElsePriorityStatAst_Traverse.cpp">
+      <Filter>Source Files\Generated\IfElsePriority</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElsePriority\Generated\IfElsePriority_Assembler.cpp">
+      <Filter>Source Files\Generated\IfElsePriority</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElsePriority\Generated\IfElsePriority_Lexer.cpp">
+      <Filter>Source Files\Generated\IfElsePriority</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElsePriority\Generated\IfElsePriorityModuleParser.cpp">
+      <Filter>Source Files\Generated\IfElsePriority</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElsePriority\Generated\IfElsePriorityStatAst.cpp">
+      <Filter>Source Files\Generated\IfElsePriority</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElsePriority\Generated\IfElsePriorityStatAst_Builder.cpp">
+      <Filter>Source Files\Generated\IfElsePriority</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElsePriority\Generated\IfElsePriorityStatAst_Copy.cpp">
+      <Filter>Source Files\Generated\IfElsePriority</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElsePriority\Generated\IfElsePriorityStatAst_Empty.cpp">
+      <Filter>Source Files\Generated\IfElsePriority</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\GenericAmbiguity\Generated\GenericAmbiguityExprAst_Traverse.cpp">
+      <Filter>Source Files\Generated\GenericAmbiguity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\GenericAmbiguity\Generated\GenericAmbiguityModuleParser.cpp">
+      <Filter>Source Files\Generated\GenericAmbiguity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\GenericAmbiguity\Generated\GenericAmbiguity_Assembler.cpp">
+      <Filter>Source Files\Generated\GenericAmbiguity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\GenericAmbiguity\Generated\GenericAmbiguity_Lexer.cpp">
+      <Filter>Source Files\Generated\GenericAmbiguity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\GenericAmbiguity\Generated\GenericAmbiguityExprAst.cpp">
+      <Filter>Source Files\Generated\GenericAmbiguity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\GenericAmbiguity\Generated\GenericAmbiguityExprAst_Builder.cpp">
+      <Filter>Source Files\Generated\GenericAmbiguity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\GenericAmbiguity\Generated\GenericAmbiguityExprAst_Copy.cpp">
+      <Filter>Source Files\Generated\GenericAmbiguity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\GenericAmbiguity\Generated\GenericAmbiguityExprAst_Empty.cpp">
+      <Filter>Source Files\Generated\GenericAmbiguity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\GenericAmbiguity\Generated\GenericAmbiguityExprAst_Json.cpp">
+      <Filter>Source Files\Generated\GenericAmbiguity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FeatureTest\Generated\FeatureTest_Assembler.cpp">
+      <Filter>Source Files\Generated\FeatureTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FeatureTest\Generated\FeatureTest_Lexer.cpp">
+      <Filter>Source Files\Generated\FeatureTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FeatureTest\Generated\FeatureTestFeatureAst.cpp">
+      <Filter>Source Files\Generated\FeatureTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FeatureTest\Generated\FeatureTestFeatureAst_Builder.cpp">
+      <Filter>Source Files\Generated\FeatureTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FeatureTest\Generated\FeatureTestFeatureAst_Copy.cpp">
+      <Filter>Source Files\Generated\FeatureTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FeatureTest\Generated\FeatureTestFeatureAst_Empty.cpp">
+      <Filter>Source Files\Generated\FeatureTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FeatureTest\Generated\FeatureTestFeatureAst_Json.cpp">
+      <Filter>Source Files\Generated\FeatureTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FeatureTest\Generated\FeatureTestFeatureAst_Traverse.cpp">
+      <Filter>Source Files\Generated\FeatureTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FeatureTest\Generated\FeatureTestModuleParser.cpp">
+      <Filter>Source Files\Generated\FeatureTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CommonMain.cpp">
+      <Filter>Source Files\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\LogTrace.cpp">
+      <Filter>Source Files\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\BinaryOp\Generated\BinaryOp_Assembler.cpp">
+      <Filter>Source Files\Generated\BinaryOp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\BinaryOp\Generated\BinaryOp_Lexer.cpp">
+      <Filter>Source Files\Generated\BinaryOp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\BinaryOp\Generated\BinaryOpExprAst.cpp">
+      <Filter>Source Files\Generated\BinaryOp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\BinaryOp\Generated\BinaryOpExprAst_Builder.cpp">
+      <Filter>Source Files\Generated\BinaryOp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\BinaryOp\Generated\BinaryOpExprAst_Copy.cpp">
+      <Filter>Source Files\Generated\BinaryOp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\BinaryOp\Generated\BinaryOpExprAst_Empty.cpp">
+      <Filter>Source Files\Generated\BinaryOp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\BinaryOp\Generated\BinaryOpExprAst_Json.cpp">
+      <Filter>Source Files\Generated\BinaryOp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\BinaryOp\Generated\BinaryOpExprAst_Traverse.cpp">
+      <Filter>Source Files\Generated\BinaryOp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\BinaryOp\Generated\BinaryOpModuleParser.cpp">
+      <Filter>Source Files\Generated\BinaryOp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseSwitch\Generated\IfElseSwitchStatAst_Empty.cpp">
+      <Filter>Source Files\Generated\IfElseSwitch</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseSwitch\Generated\IfElseSwitchStatAst_Json.cpp">
+      <Filter>Source Files\Generated\IfElseSwitch</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseSwitch\Generated\IfElseSwitchStatAst_Traverse.cpp">
+      <Filter>Source Files\Generated\IfElseSwitch</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseSwitch\Generated\IfElseSwitch_Assembler.cpp">
+      <Filter>Source Files\Generated\IfElseSwitch</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseSwitch\Generated\IfElseSwitch_Lexer.cpp">
+      <Filter>Source Files\Generated\IfElseSwitch</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseSwitch\Generated\IfElseSwitchModuleParser.cpp">
+      <Filter>Source Files\Generated\IfElseSwitch</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseSwitch\Generated\IfElseSwitchStatAst.cpp">
+      <Filter>Source Files\Generated\IfElseSwitch</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseSwitch\Generated\IfElseSwitchStatAst_Builder.cpp">
+      <Filter>Source Files\Generated\IfElseSwitch</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseSwitch\Generated\IfElseSwitchStatAst_Copy.cpp">
+      <Filter>Source Files\Generated\IfElseSwitch</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseManual\Generated\IfElseManualStatAst_Empty.cpp">
+      <Filter>Source Files\Generated\IfElseManual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseManual\Generated\IfElseManualStatAst_Json.cpp">
+      <Filter>Source Files\Generated\IfElseManual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseManual\Generated\IfElseManualStatAst_Traverse.cpp">
+      <Filter>Source Files\Generated\IfElseManual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseManual\Generated\IfElseManual_Assembler.cpp">
+      <Filter>Source Files\Generated\IfElseManual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseManual\Generated\IfElseManual_Lexer.cpp">
+      <Filter>Source Files\Generated\IfElseManual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseManual\Generated\IfElseManualModuleParser.cpp">
+      <Filter>Source Files\Generated\IfElseManual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseManual\Generated\IfElseManualStatAst.cpp">
+      <Filter>Source Files\Generated\IfElseManual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseManual\Generated\IfElseManualStatAst_Builder.cpp">
+      <Filter>Source Files\Generated\IfElseManual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseManual\Generated\IfElseManualStatAst_Copy.cpp">
+      <Filter>Source Files\Generated\IfElseManual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseAmbiguity2\Generated\IfElseAmbiguity2StatAst_Traverse.cpp">
+      <Filter>Source Files\Generated\IfElseAmbiguity2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseAmbiguity2\Generated\IfElseAmbiguity2_Assembler.cpp">
+      <Filter>Source Files\Generated\IfElseAmbiguity2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseAmbiguity2\Generated\IfElseAmbiguity2_Lexer.cpp">
+      <Filter>Source Files\Generated\IfElseAmbiguity2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseAmbiguity2\Generated\IfElseAmbiguity2ModuleParser.cpp">
+      <Filter>Source Files\Generated\IfElseAmbiguity2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseAmbiguity2\Generated\IfElseAmbiguity2StatAst.cpp">
+      <Filter>Source Files\Generated\IfElseAmbiguity2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseAmbiguity2\Generated\IfElseAmbiguity2StatAst_Builder.cpp">
+      <Filter>Source Files\Generated\IfElseAmbiguity2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseAmbiguity2\Generated\IfElseAmbiguity2StatAst_Copy.cpp">
+      <Filter>Source Files\Generated\IfElseAmbiguity2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseAmbiguity2\Generated\IfElseAmbiguity2StatAst_Empty.cpp">
+      <Filter>Source Files\Generated\IfElseAmbiguity2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseAmbiguity2\Generated\IfElseAmbiguity2StatAst_Json.cpp">
+      <Filter>Source Files\Generated\IfElseAmbiguity2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge1_Lri\Generated\PrefixMerge1_Lri_Assembler.cpp">
+      <Filter>Source Files\Generated\PrefixMerge1_Lri</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge1_Lri\Generated\PrefixMerge1_Lri_Lexer.cpp">
+      <Filter>Source Files\Generated\PrefixMerge1_Lri</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge1_Lri\Generated\PrefixMerge1_LriModuleParser.cpp">
+      <Filter>Source Files\Generated\PrefixMerge1_Lri</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge1_Lri\Generated\PrefixMerge1_LriTypeOrExpr.cpp">
+      <Filter>Source Files\Generated\PrefixMerge1_Lri</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge1_Lri\Generated\PrefixMerge1_LriTypeOrExpr_Builder.cpp">
+      <Filter>Source Files\Generated\PrefixMerge1_Lri</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge1_Lri\Generated\PrefixMerge1_LriTypeOrExpr_Copy.cpp">
+      <Filter>Source Files\Generated\PrefixMerge1_Lri</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge1_Lri\Generated\PrefixMerge1_LriTypeOrExpr_Empty.cpp">
+      <Filter>Source Files\Generated\PrefixMerge1_Lri</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge1_Lri\Generated\PrefixMerge1_LriTypeOrExpr_Json.cpp">
+      <Filter>Source Files\Generated\PrefixMerge1_Lri</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge1_Lri\Generated\PrefixMerge1_LriTypeOrExpr_Traverse.cpp">
+      <Filter>Source Files\Generated\PrefixMerge1_Lri</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge2_LriRequired\Generated\PrefixMerge2_LriRequired_Assembler.cpp">
+      <Filter>Source Files\Generated\PrefixMerge2_LriRequired</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge2_LriRequired\Generated\PrefixMerge2_LriRequired_Lexer.cpp">
+      <Filter>Source Files\Generated\PrefixMerge2_LriRequired</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge2_LriRequired\Generated\PrefixMerge2_LriRequiredModuleParser.cpp">
+      <Filter>Source Files\Generated\PrefixMerge2_LriRequired</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge2_LriRequired\Generated\PrefixMerge2_LriRequiredTypeOrExpr.cpp">
+      <Filter>Source Files\Generated\PrefixMerge2_LriRequired</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge2_LriRequired\Generated\PrefixMerge2_LriRequiredTypeOrExpr_Builder.cpp">
+      <Filter>Source Files\Generated\PrefixMerge2_LriRequired</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge2_LriRequired\Generated\PrefixMerge2_LriRequiredTypeOrExpr_Copy.cpp">
+      <Filter>Source Files\Generated\PrefixMerge2_LriRequired</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge2_LriRequired\Generated\PrefixMerge2_LriRequiredTypeOrExpr_Empty.cpp">
+      <Filter>Source Files\Generated\PrefixMerge2_LriRequired</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge2_LriRequired\Generated\PrefixMerge2_LriRequiredTypeOrExpr_Json.cpp">
+      <Filter>Source Files\Generated\PrefixMerge2_LriRequired</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge2_LriRequired\Generated\PrefixMerge2_LriRequiredTypeOrExpr_Traverse.cpp">
+      <Filter>Source Files\Generated\PrefixMerge2_LriRequired</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge3_LriNested\Generated\PrefixMerge3_LriNested_Assembler.cpp">
+      <Filter>Source Files\Generated\PrefixMerge3_LriNested</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge3_LriNested\Generated\PrefixMerge3_LriNested_Lexer.cpp">
+      <Filter>Source Files\Generated\PrefixMerge3_LriNested</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge3_LriNested\Generated\PrefixMerge3_LriNestedModuleParser.cpp">
+      <Filter>Source Files\Generated\PrefixMerge3_LriNested</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge3_LriNested\Generated\PrefixMerge3_LriNestedTypeOrExpr.cpp">
+      <Filter>Source Files\Generated\PrefixMerge3_LriNested</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge3_LriNested\Generated\PrefixMerge3_LriNestedTypeOrExpr_Builder.cpp">
+      <Filter>Source Files\Generated\PrefixMerge3_LriNested</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge3_LriNested\Generated\PrefixMerge3_LriNestedTypeOrExpr_Copy.cpp">
+      <Filter>Source Files\Generated\PrefixMerge3_LriNested</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge3_LriNested\Generated\PrefixMerge3_LriNestedTypeOrExpr_Empty.cpp">
+      <Filter>Source Files\Generated\PrefixMerge3_LriNested</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge3_LriNested\Generated\PrefixMerge3_LriNestedTypeOrExpr_Json.cpp">
+      <Filter>Source Files\Generated\PrefixMerge3_LriNested</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge3_LriNested\Generated\PrefixMerge3_LriNestedTypeOrExpr_Traverse.cpp">
+      <Filter>Source Files\Generated\PrefixMerge3_LriNested</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge4_LriMultiple\Generated\PrefixMerge4_LriMultiple_Assembler.cpp">
+      <Filter>Source Files\Generated\PrefixMerge4_LriMultiple</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge4_LriMultiple\Generated\PrefixMerge4_LriMultiple_Lexer.cpp">
+      <Filter>Source Files\Generated\PrefixMerge4_LriMultiple</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge4_LriMultiple\Generated\PrefixMerge4_LriMultipleModuleParser.cpp">
+      <Filter>Source Files\Generated\PrefixMerge4_LriMultiple</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge4_LriMultiple\Generated\PrefixMerge4_LriMultipleTypeOrExpr.cpp">
+      <Filter>Source Files\Generated\PrefixMerge4_LriMultiple</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge4_LriMultiple\Generated\PrefixMerge4_LriMultipleTypeOrExpr_Builder.cpp">
+      <Filter>Source Files\Generated\PrefixMerge4_LriMultiple</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge4_LriMultiple\Generated\PrefixMerge4_LriMultipleTypeOrExpr_Copy.cpp">
+      <Filter>Source Files\Generated\PrefixMerge4_LriMultiple</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge4_LriMultiple\Generated\PrefixMerge4_LriMultipleTypeOrExpr_Empty.cpp">
+      <Filter>Source Files\Generated\PrefixMerge4_LriMultiple</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge4_LriMultiple\Generated\PrefixMerge4_LriMultipleTypeOrExpr_Json.cpp">
+      <Filter>Source Files\Generated\PrefixMerge4_LriMultiple</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge4_LriMultiple\Generated\PrefixMerge4_LriMultipleTypeOrExpr_Traverse.cpp">
+      <Filter>Source Files\Generated\PrefixMerge4_LriMultiple</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge5_Pm\Generated\PrefixMerge5_Pm_Assembler.cpp">
+      <Filter>Source Files\Generated\PrefixMerge5_Pm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge5_Pm\Generated\PrefixMerge5_Pm_Lexer.cpp">
+      <Filter>Source Files\Generated\PrefixMerge5_Pm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge5_Pm\Generated\PrefixMerge5_PmModuleParser.cpp">
+      <Filter>Source Files\Generated\PrefixMerge5_Pm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge5_Pm\Generated\PrefixMerge5_PmTypeOrExpr.cpp">
+      <Filter>Source Files\Generated\PrefixMerge5_Pm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge5_Pm\Generated\PrefixMerge5_PmTypeOrExpr_Builder.cpp">
+      <Filter>Source Files\Generated\PrefixMerge5_Pm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge5_Pm\Generated\PrefixMerge5_PmTypeOrExpr_Copy.cpp">
+      <Filter>Source Files\Generated\PrefixMerge5_Pm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge5_Pm\Generated\PrefixMerge5_PmTypeOrExpr_Empty.cpp">
+      <Filter>Source Files\Generated\PrefixMerge5_Pm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge5_Pm\Generated\PrefixMerge5_PmTypeOrExpr_Json.cpp">
+      <Filter>Source Files\Generated\PrefixMerge5_Pm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge5_Pm\Generated\PrefixMerge5_PmTypeOrExpr_Traverse.cpp">
+      <Filter>Source Files\Generated\PrefixMerge5_Pm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge6_Pm2\Generated\PrefixMerge6_Pm2_Assembler.cpp">
+      <Filter>Source Files\Generated\PrefixMerge6_Pm2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge6_Pm2\Generated\PrefixMerge6_Pm2_Lexer.cpp">
+      <Filter>Source Files\Generated\PrefixMerge6_Pm2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge6_Pm2\Generated\PrefixMerge6_Pm2ModuleParser.cpp">
+      <Filter>Source Files\Generated\PrefixMerge6_Pm2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge6_Pm2\Generated\PrefixMerge6_Pm2TypeOrExpr.cpp">
+      <Filter>Source Files\Generated\PrefixMerge6_Pm2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge6_Pm2\Generated\PrefixMerge6_Pm2TypeOrExpr_Builder.cpp">
+      <Filter>Source Files\Generated\PrefixMerge6_Pm2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge6_Pm2\Generated\PrefixMerge6_Pm2TypeOrExpr_Copy.cpp">
+      <Filter>Source Files\Generated\PrefixMerge6_Pm2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge6_Pm2\Generated\PrefixMerge6_Pm2TypeOrExpr_Empty.cpp">
+      <Filter>Source Files\Generated\PrefixMerge6_Pm2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge6_Pm2\Generated\PrefixMerge6_Pm2TypeOrExpr_Json.cpp">
+      <Filter>Source Files\Generated\PrefixMerge6_Pm2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge6_Pm2\Generated\PrefixMerge6_Pm2TypeOrExpr_Traverse.cpp">
+      <Filter>Source Files\Generated\PrefixMerge6_Pm2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge7_PmSwitch\Generated\PrefixMerge7_PmSwitch_Assembler.cpp">
+      <Filter>Source Files\Generated\PrefixMerge7_PmSwitch</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge7_PmSwitch\Generated\PrefixMerge7_PmSwitch_Lexer.cpp">
+      <Filter>Source Files\Generated\PrefixMerge7_PmSwitch</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge7_PmSwitch\Generated\PrefixMerge7_PmSwitchTypeOrExpr.cpp">
+      <Filter>Source Files\Generated\PrefixMerge7_PmSwitch</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge7_PmSwitch\Generated\PrefixMerge7_PmSwitchTypeOrExpr_Builder.cpp">
+      <Filter>Source Files\Generated\PrefixMerge7_PmSwitch</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge7_PmSwitch\Generated\PrefixMerge7_PmSwitchTypeOrExpr_Copy.cpp">
+      <Filter>Source Files\Generated\PrefixMerge7_PmSwitch</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge7_PmSwitch\Generated\PrefixMerge7_PmSwitchTypeOrExpr_Empty.cpp">
+      <Filter>Source Files\Generated\PrefixMerge7_PmSwitch</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge7_PmSwitch\Generated\PrefixMerge7_PmSwitchTypeOrExpr_Json.cpp">
+      <Filter>Source Files\Generated\PrefixMerge7_PmSwitch</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge7_PmSwitch\Generated\PrefixMerge7_PmSwitchTypeOrExpr_Traverse.cpp">
+      <Filter>Source Files\Generated\PrefixMerge7_PmSwitch</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge7_PmSwitch\Generated\PrefixMerge7_PmSwitchModuleParser.cpp">
+      <Filter>Source Files\Generated\PrefixMerge7_PmSwitch</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseAmbiguityOnStat\Generated\IfElseAmbiguityOnStat_Assembler.cpp">
+      <Filter>Source Files\Generated\IfElseAmbiguityOnStat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseAmbiguityOnStat\Generated\IfElseAmbiguityOnStat_Lexer.cpp">
+      <Filter>Source Files\Generated\IfElseAmbiguityOnStat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseAmbiguityOnStat\Generated\IfElseAmbiguityOnStatModuleParser.cpp">
+      <Filter>Source Files\Generated\IfElseAmbiguityOnStat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseAmbiguityOnStat\Generated\IfElseAmbiguityOnStatStatAst.cpp">
+      <Filter>Source Files\Generated\IfElseAmbiguityOnStat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseAmbiguityOnStat\Generated\IfElseAmbiguityOnStatStatAst_Builder.cpp">
+      <Filter>Source Files\Generated\IfElseAmbiguityOnStat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseAmbiguityOnStat\Generated\IfElseAmbiguityOnStatStatAst_Copy.cpp">
+      <Filter>Source Files\Generated\IfElseAmbiguityOnStat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseAmbiguityOnStat\Generated\IfElseAmbiguityOnStatStatAst_Empty.cpp">
+      <Filter>Source Files\Generated\IfElseAmbiguityOnStat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseAmbiguityOnStat\Generated\IfElseAmbiguityOnStatStatAst_Json.cpp">
+      <Filter>Source Files\Generated\IfElseAmbiguityOnStat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseAmbiguityOnStat\Generated\IfElseAmbiguityOnStatStatAst_Traverse.cpp">
+      <Filter>Source Files\Generated\IfElseAmbiguityOnStat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseAmbiguityOnStat2\Generated\IfElseAmbiguityOnStat2StatAst_Copy.cpp">
+      <Filter>Source Files\Generated\IfElseAmbiguityOnStat2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseAmbiguityOnStat2\Generated\IfElseAmbiguityOnStat2StatAst_Empty.cpp">
+      <Filter>Source Files\Generated\IfElseAmbiguityOnStat2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseAmbiguityOnStat2\Generated\IfElseAmbiguityOnStat2StatAst_Json.cpp">
+      <Filter>Source Files\Generated\IfElseAmbiguityOnStat2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseAmbiguityOnStat2\Generated\IfElseAmbiguityOnStat2StatAst_Traverse.cpp">
+      <Filter>Source Files\Generated\IfElseAmbiguityOnStat2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseAmbiguityOnStat2\Generated\IfElseAmbiguityOnStat2_Assembler.cpp">
+      <Filter>Source Files\Generated\IfElseAmbiguityOnStat2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseAmbiguityOnStat2\Generated\IfElseAmbiguityOnStat2_Lexer.cpp">
+      <Filter>Source Files\Generated\IfElseAmbiguityOnStat2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseAmbiguityOnStat2\Generated\IfElseAmbiguityOnStat2ModuleParser.cpp">
+      <Filter>Source Files\Generated\IfElseAmbiguityOnStat2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseAmbiguityOnStat2\Generated\IfElseAmbiguityOnStat2StatAst.cpp">
+      <Filter>Source Files\Generated\IfElseAmbiguityOnStat2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\IfElseAmbiguityOnStat2\Generated\IfElseAmbiguityOnStat2StatAst_Builder.cpp">
+      <Filter>Source Files\Generated\IfElseAmbiguityOnStat2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge8_PmVariadic\Generated\PrefixMerge8_PmVariadic_Assembler.cpp">
+      <Filter>Source Files\Generated\PrefixMerge8_PmVariadic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge8_PmVariadic\Generated\PrefixMerge8_PmVariadic_Lexer.cpp">
+      <Filter>Source Files\Generated\PrefixMerge8_PmVariadic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge8_PmVariadic\Generated\PrefixMerge8_PmVariadicModuleParser.cpp">
+      <Filter>Source Files\Generated\PrefixMerge8_PmVariadic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge8_PmVariadic\Generated\PrefixMerge8_PmVariadicTypeOrExpr.cpp">
+      <Filter>Source Files\Generated\PrefixMerge8_PmVariadic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge8_PmVariadic\Generated\PrefixMerge8_PmVariadicTypeOrExpr_Builder.cpp">
+      <Filter>Source Files\Generated\PrefixMerge8_PmVariadic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge8_PmVariadic\Generated\PrefixMerge8_PmVariadicTypeOrExpr_Copy.cpp">
+      <Filter>Source Files\Generated\PrefixMerge8_PmVariadic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge8_PmVariadic\Generated\PrefixMerge8_PmVariadicTypeOrExpr_Empty.cpp">
+      <Filter>Source Files\Generated\PrefixMerge8_PmVariadic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge8_PmVariadic\Generated\PrefixMerge8_PmVariadicTypeOrExpr_Json.cpp">
+      <Filter>Source Files\Generated\PrefixMerge8_PmVariadic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge8_PmVariadic\Generated\PrefixMerge8_PmVariadicTypeOrExpr_Traverse.cpp">
+      <Filter>Source Files\Generated\PrefixMerge8_PmVariadic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge9_PmLoop\Generated\PrefixMerge9_PmLoopFile_Json.cpp">
+      <Filter>Source Files\Generated\PrefixMerge9_PmLoop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge9_PmLoop\Generated\PrefixMerge9_PmLoopFile_Traverse.cpp">
+      <Filter>Source Files\Generated\PrefixMerge9_PmLoop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge9_PmLoop\Generated\PrefixMerge9_PmLoopModuleParser.cpp">
+      <Filter>Source Files\Generated\PrefixMerge9_PmLoop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge9_PmLoop\Generated\PrefixMerge9_PmLoop_Assembler.cpp">
+      <Filter>Source Files\Generated\PrefixMerge9_PmLoop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge9_PmLoop\Generated\PrefixMerge9_PmLoop_Lexer.cpp">
+      <Filter>Source Files\Generated\PrefixMerge9_PmLoop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge9_PmLoop\Generated\PrefixMerge9_PmLoopFile.cpp">
+      <Filter>Source Files\Generated\PrefixMerge9_PmLoop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge9_PmLoop\Generated\PrefixMerge9_PmLoopFile_Builder.cpp">
+      <Filter>Source Files\Generated\PrefixMerge9_PmLoop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge9_PmLoop\Generated\PrefixMerge9_PmLoopFile_Copy.cpp">
+      <Filter>Source Files\Generated\PrefixMerge9_PmLoop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PrefixMerge9_PmLoop\Generated\PrefixMerge9_PmLoopFile_Empty.cpp">
+      <Filter>Source Files\Generated\PrefixMerge9_PmLoop</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\Calculator\Generated\CalculatorExprAst_Empty.h">
+      <Filter>Source Files\Generated\Calculator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Calculator\Generated\CalculatorExprAst_Json.h">
+      <Filter>Source Files\Generated\Calculator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Calculator\Generated\CalculatorExprAst_Traverse.h">
+      <Filter>Source Files\Generated\Calculator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Calculator\Generated\CalculatorModuleParser.h">
+      <Filter>Source Files\Generated\Calculator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Calculator\Generated\Calculator_Assembler.h">
+      <Filter>Source Files\Generated\Calculator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Calculator\Generated\Calculator_Lexer.h">
+      <Filter>Source Files\Generated\Calculator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Calculator\Generated\CalculatorExprAst.h">
+      <Filter>Source Files\Generated\Calculator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Calculator\Generated\CalculatorExprAst_Builder.h">
+      <Filter>Source Files\Generated\Calculator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Calculator\Generated\CalculatorExprAst_Copy.h">
+      <Filter>Source Files\Generated\Calculator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseAmbiguity\Generated\IfElseAmbiguity_Assembler.h">
+      <Filter>Source Files\Generated\IfElseAmbiguity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseAmbiguity\Generated\IfElseAmbiguity_Lexer.h">
+      <Filter>Source Files\Generated\IfElseAmbiguity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseAmbiguity\Generated\IfElseAmbiguityModuleParser.h">
+      <Filter>Source Files\Generated\IfElseAmbiguity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseAmbiguity\Generated\IfElseAmbiguityStatAst.h">
+      <Filter>Source Files\Generated\IfElseAmbiguity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseAmbiguity\Generated\IfElseAmbiguityStatAst_Builder.h">
+      <Filter>Source Files\Generated\IfElseAmbiguity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseAmbiguity\Generated\IfElseAmbiguityStatAst_Copy.h">
+      <Filter>Source Files\Generated\IfElseAmbiguity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseAmbiguity\Generated\IfElseAmbiguityStatAst_Empty.h">
+      <Filter>Source Files\Generated\IfElseAmbiguity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseAmbiguity\Generated\IfElseAmbiguityStatAst_Json.h">
+      <Filter>Source Files\Generated\IfElseAmbiguity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseAmbiguity\Generated\IfElseAmbiguityStatAst_Traverse.h">
+      <Filter>Source Files\Generated\IfElseAmbiguity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElsePriority\Generated\IfElsePriorityStatAst_Json.h">
+      <Filter>Source Files\Generated\IfElsePriority</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElsePriority\Generated\IfElsePriorityStatAst_Traverse.h">
+      <Filter>Source Files\Generated\IfElsePriority</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElsePriority\Generated\IfElsePriority_Assembler.h">
+      <Filter>Source Files\Generated\IfElsePriority</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElsePriority\Generated\IfElsePriority_Lexer.h">
+      <Filter>Source Files\Generated\IfElsePriority</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElsePriority\Generated\IfElsePriorityModuleParser.h">
+      <Filter>Source Files\Generated\IfElsePriority</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElsePriority\Generated\IfElsePriorityStatAst.h">
+      <Filter>Source Files\Generated\IfElsePriority</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElsePriority\Generated\IfElsePriorityStatAst_Builder.h">
+      <Filter>Source Files\Generated\IfElsePriority</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElsePriority\Generated\IfElsePriorityStatAst_Copy.h">
+      <Filter>Source Files\Generated\IfElsePriority</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElsePriority\Generated\IfElsePriorityStatAst_Empty.h">
+      <Filter>Source Files\Generated\IfElsePriority</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\GenericAmbiguity\Generated\GenericAmbiguityExprAst_Json.h">
+      <Filter>Source Files\Generated\GenericAmbiguity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\GenericAmbiguity\Generated\GenericAmbiguityExprAst_Traverse.h">
+      <Filter>Source Files\Generated\GenericAmbiguity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\GenericAmbiguity\Generated\GenericAmbiguityModuleParser.h">
+      <Filter>Source Files\Generated\GenericAmbiguity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\GenericAmbiguity\Generated\GenericAmbiguity_Assembler.h">
+      <Filter>Source Files\Generated\GenericAmbiguity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\GenericAmbiguity\Generated\GenericAmbiguity_Lexer.h">
+      <Filter>Source Files\Generated\GenericAmbiguity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\GenericAmbiguity\Generated\GenericAmbiguityExprAst.h">
+      <Filter>Source Files\Generated\GenericAmbiguity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\GenericAmbiguity\Generated\GenericAmbiguityExprAst_Builder.h">
+      <Filter>Source Files\Generated\GenericAmbiguity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\GenericAmbiguity\Generated\GenericAmbiguityExprAst_Copy.h">
+      <Filter>Source Files\Generated\GenericAmbiguity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\GenericAmbiguity\Generated\GenericAmbiguityExprAst_Empty.h">
+      <Filter>Source Files\Generated\GenericAmbiguity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FeatureTest\Generated\FeatureTestModuleParser.h">
+      <Filter>Source Files\Generated\FeatureTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FeatureTest\Generated\FeatureTest_Assembler.h">
+      <Filter>Source Files\Generated\FeatureTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FeatureTest\Generated\FeatureTest_Lexer.h">
+      <Filter>Source Files\Generated\FeatureTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FeatureTest\Generated\FeatureTestFeatureAst.h">
+      <Filter>Source Files\Generated\FeatureTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FeatureTest\Generated\FeatureTestFeatureAst_Builder.h">
+      <Filter>Source Files\Generated\FeatureTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FeatureTest\Generated\FeatureTestFeatureAst_Copy.h">
+      <Filter>Source Files\Generated\FeatureTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FeatureTest\Generated\FeatureTestFeatureAst_Empty.h">
+      <Filter>Source Files\Generated\FeatureTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FeatureTest\Generated\FeatureTestFeatureAst_Json.h">
+      <Filter>Source Files\Generated\FeatureTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FeatureTest\Generated\FeatureTestFeatureAst_Traverse.h">
+      <Filter>Source Files\Generated\FeatureTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\LogTrace.h">
+      <Filter>Source Files\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\BinaryOp\Generated\BinaryOpExprAst_Traverse.h">
+      <Filter>Source Files\Generated\BinaryOp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\BinaryOp\Generated\BinaryOp_Assembler.h">
+      <Filter>Source Files\Generated\BinaryOp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\BinaryOp\Generated\BinaryOp_Lexer.h">
+      <Filter>Source Files\Generated\BinaryOp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\BinaryOp\Generated\BinaryOpExprAst.h">
+      <Filter>Source Files\Generated\BinaryOp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\BinaryOp\Generated\BinaryOpExprAst_Builder.h">
+      <Filter>Source Files\Generated\BinaryOp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\BinaryOp\Generated\BinaryOpExprAst_Copy.h">
+      <Filter>Source Files\Generated\BinaryOp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\BinaryOp\Generated\BinaryOpExprAst_Empty.h">
+      <Filter>Source Files\Generated\BinaryOp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\BinaryOp\Generated\BinaryOpExprAst_Json.h">
+      <Filter>Source Files\Generated\BinaryOp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\BinaryOp\Generated\BinaryOpModuleParser.h">
+      <Filter>Source Files\Generated\BinaryOp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseSwitch\Generated\IfElseSwitchStatAst_Copy.h">
+      <Filter>Source Files\Generated\IfElseSwitch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseSwitch\Generated\IfElseSwitchStatAst_Empty.h">
+      <Filter>Source Files\Generated\IfElseSwitch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseSwitch\Generated\IfElseSwitchStatAst_Json.h">
+      <Filter>Source Files\Generated\IfElseSwitch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseSwitch\Generated\IfElseSwitchStatAst_Traverse.h">
+      <Filter>Source Files\Generated\IfElseSwitch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseSwitch\Generated\IfElseSwitch_Assembler.h">
+      <Filter>Source Files\Generated\IfElseSwitch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseSwitch\Generated\IfElseSwitch_Lexer.h">
+      <Filter>Source Files\Generated\IfElseSwitch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseSwitch\Generated\IfElseSwitchModuleParser.h">
+      <Filter>Source Files\Generated\IfElseSwitch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseSwitch\Generated\IfElseSwitchStatAst.h">
+      <Filter>Source Files\Generated\IfElseSwitch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseSwitch\Generated\IfElseSwitchStatAst_Builder.h">
+      <Filter>Source Files\Generated\IfElseSwitch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseManual\Generated\IfElseManualStatAst_Copy.h">
+      <Filter>Source Files\Generated\IfElseManual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseManual\Generated\IfElseManualStatAst_Empty.h">
+      <Filter>Source Files\Generated\IfElseManual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseManual\Generated\IfElseManualStatAst_Json.h">
+      <Filter>Source Files\Generated\IfElseManual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseManual\Generated\IfElseManualStatAst_Traverse.h">
+      <Filter>Source Files\Generated\IfElseManual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseManual\Generated\IfElseManual_Assembler.h">
+      <Filter>Source Files\Generated\IfElseManual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseManual\Generated\IfElseManual_Lexer.h">
+      <Filter>Source Files\Generated\IfElseManual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseManual\Generated\IfElseManualModuleParser.h">
+      <Filter>Source Files\Generated\IfElseManual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseManual\Generated\IfElseManualStatAst.h">
+      <Filter>Source Files\Generated\IfElseManual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseManual\Generated\IfElseManualStatAst_Builder.h">
+      <Filter>Source Files\Generated\IfElseManual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseAmbiguity2\Generated\IfElseAmbiguity2StatAst_Json.h">
+      <Filter>Source Files\Generated\IfElseAmbiguity2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseAmbiguity2\Generated\IfElseAmbiguity2StatAst_Traverse.h">
+      <Filter>Source Files\Generated\IfElseAmbiguity2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseAmbiguity2\Generated\IfElseAmbiguity2_Assembler.h">
+      <Filter>Source Files\Generated\IfElseAmbiguity2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseAmbiguity2\Generated\IfElseAmbiguity2_Lexer.h">
+      <Filter>Source Files\Generated\IfElseAmbiguity2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseAmbiguity2\Generated\IfElseAmbiguity2ModuleParser.h">
+      <Filter>Source Files\Generated\IfElseAmbiguity2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseAmbiguity2\Generated\IfElseAmbiguity2StatAst.h">
+      <Filter>Source Files\Generated\IfElseAmbiguity2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseAmbiguity2\Generated\IfElseAmbiguity2StatAst_Builder.h">
+      <Filter>Source Files\Generated\IfElseAmbiguity2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseAmbiguity2\Generated\IfElseAmbiguity2StatAst_Copy.h">
+      <Filter>Source Files\Generated\IfElseAmbiguity2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseAmbiguity2\Generated\IfElseAmbiguity2StatAst_Empty.h">
+      <Filter>Source Files\Generated\IfElseAmbiguity2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge1_Lri\Generated\PrefixMerge1_LriTypeOrExpr_Traverse.h">
+      <Filter>Source Files\Generated\PrefixMerge1_Lri</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge1_Lri\Generated\PrefixMerge1_Lri_Assembler.h">
+      <Filter>Source Files\Generated\PrefixMerge1_Lri</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge1_Lri\Generated\PrefixMerge1_Lri_Lexer.h">
+      <Filter>Source Files\Generated\PrefixMerge1_Lri</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge1_Lri\Generated\PrefixMerge1_LriModuleParser.h">
+      <Filter>Source Files\Generated\PrefixMerge1_Lri</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge1_Lri\Generated\PrefixMerge1_LriTypeOrExpr.h">
+      <Filter>Source Files\Generated\PrefixMerge1_Lri</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge1_Lri\Generated\PrefixMerge1_LriTypeOrExpr_Builder.h">
+      <Filter>Source Files\Generated\PrefixMerge1_Lri</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge1_Lri\Generated\PrefixMerge1_LriTypeOrExpr_Copy.h">
+      <Filter>Source Files\Generated\PrefixMerge1_Lri</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge1_Lri\Generated\PrefixMerge1_LriTypeOrExpr_Empty.h">
+      <Filter>Source Files\Generated\PrefixMerge1_Lri</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge1_Lri\Generated\PrefixMerge1_LriTypeOrExpr_Json.h">
+      <Filter>Source Files\Generated\PrefixMerge1_Lri</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge2_LriRequired\Generated\PrefixMerge2_LriRequiredTypeOrExpr_Traverse.h">
+      <Filter>Source Files\Generated\PrefixMerge2_LriRequired</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge2_LriRequired\Generated\PrefixMerge2_LriRequired_Assembler.h">
+      <Filter>Source Files\Generated\PrefixMerge2_LriRequired</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge2_LriRequired\Generated\PrefixMerge2_LriRequired_Lexer.h">
+      <Filter>Source Files\Generated\PrefixMerge2_LriRequired</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge2_LriRequired\Generated\PrefixMerge2_LriRequiredModuleParser.h">
+      <Filter>Source Files\Generated\PrefixMerge2_LriRequired</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge2_LriRequired\Generated\PrefixMerge2_LriRequiredTypeOrExpr.h">
+      <Filter>Source Files\Generated\PrefixMerge2_LriRequired</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge2_LriRequired\Generated\PrefixMerge2_LriRequiredTypeOrExpr_Builder.h">
+      <Filter>Source Files\Generated\PrefixMerge2_LriRequired</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge2_LriRequired\Generated\PrefixMerge2_LriRequiredTypeOrExpr_Copy.h">
+      <Filter>Source Files\Generated\PrefixMerge2_LriRequired</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge2_LriRequired\Generated\PrefixMerge2_LriRequiredTypeOrExpr_Empty.h">
+      <Filter>Source Files\Generated\PrefixMerge2_LriRequired</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge2_LriRequired\Generated\PrefixMerge2_LriRequiredTypeOrExpr_Json.h">
+      <Filter>Source Files\Generated\PrefixMerge2_LriRequired</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge3_LriNested\Generated\PrefixMerge3_LriNestedTypeOrExpr_Traverse.h">
+      <Filter>Source Files\Generated\PrefixMerge3_LriNested</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge3_LriNested\Generated\PrefixMerge3_LriNested_Assembler.h">
+      <Filter>Source Files\Generated\PrefixMerge3_LriNested</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge3_LriNested\Generated\PrefixMerge3_LriNested_Lexer.h">
+      <Filter>Source Files\Generated\PrefixMerge3_LriNested</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge3_LriNested\Generated\PrefixMerge3_LriNestedModuleParser.h">
+      <Filter>Source Files\Generated\PrefixMerge3_LriNested</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge3_LriNested\Generated\PrefixMerge3_LriNestedTypeOrExpr.h">
+      <Filter>Source Files\Generated\PrefixMerge3_LriNested</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge3_LriNested\Generated\PrefixMerge3_LriNestedTypeOrExpr_Builder.h">
+      <Filter>Source Files\Generated\PrefixMerge3_LriNested</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge3_LriNested\Generated\PrefixMerge3_LriNestedTypeOrExpr_Copy.h">
+      <Filter>Source Files\Generated\PrefixMerge3_LriNested</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge3_LriNested\Generated\PrefixMerge3_LriNestedTypeOrExpr_Empty.h">
+      <Filter>Source Files\Generated\PrefixMerge3_LriNested</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge3_LriNested\Generated\PrefixMerge3_LriNestedTypeOrExpr_Json.h">
+      <Filter>Source Files\Generated\PrefixMerge3_LriNested</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge4_LriMultiple\Generated\PrefixMerge4_LriMultipleTypeOrExpr_Traverse.h">
+      <Filter>Source Files\Generated\PrefixMerge4_LriMultiple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge4_LriMultiple\Generated\PrefixMerge4_LriMultiple_Assembler.h">
+      <Filter>Source Files\Generated\PrefixMerge4_LriMultiple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge4_LriMultiple\Generated\PrefixMerge4_LriMultiple_Lexer.h">
+      <Filter>Source Files\Generated\PrefixMerge4_LriMultiple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge4_LriMultiple\Generated\PrefixMerge4_LriMultipleModuleParser.h">
+      <Filter>Source Files\Generated\PrefixMerge4_LriMultiple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge4_LriMultiple\Generated\PrefixMerge4_LriMultipleTypeOrExpr.h">
+      <Filter>Source Files\Generated\PrefixMerge4_LriMultiple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge4_LriMultiple\Generated\PrefixMerge4_LriMultipleTypeOrExpr_Builder.h">
+      <Filter>Source Files\Generated\PrefixMerge4_LriMultiple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge4_LriMultiple\Generated\PrefixMerge4_LriMultipleTypeOrExpr_Copy.h">
+      <Filter>Source Files\Generated\PrefixMerge4_LriMultiple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge4_LriMultiple\Generated\PrefixMerge4_LriMultipleTypeOrExpr_Empty.h">
+      <Filter>Source Files\Generated\PrefixMerge4_LriMultiple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge4_LriMultiple\Generated\PrefixMerge4_LriMultipleTypeOrExpr_Json.h">
+      <Filter>Source Files\Generated\PrefixMerge4_LriMultiple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge5_Pm\Generated\PrefixMerge5_PmTypeOrExpr_Traverse.h">
+      <Filter>Source Files\Generated\PrefixMerge5_Pm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge5_Pm\Generated\PrefixMerge5_Pm_Assembler.h">
+      <Filter>Source Files\Generated\PrefixMerge5_Pm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge5_Pm\Generated\PrefixMerge5_Pm_Lexer.h">
+      <Filter>Source Files\Generated\PrefixMerge5_Pm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge5_Pm\Generated\PrefixMerge5_PmModuleParser.h">
+      <Filter>Source Files\Generated\PrefixMerge5_Pm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge5_Pm\Generated\PrefixMerge5_PmTypeOrExpr.h">
+      <Filter>Source Files\Generated\PrefixMerge5_Pm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge5_Pm\Generated\PrefixMerge5_PmTypeOrExpr_Builder.h">
+      <Filter>Source Files\Generated\PrefixMerge5_Pm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge5_Pm\Generated\PrefixMerge5_PmTypeOrExpr_Copy.h">
+      <Filter>Source Files\Generated\PrefixMerge5_Pm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge5_Pm\Generated\PrefixMerge5_PmTypeOrExpr_Empty.h">
+      <Filter>Source Files\Generated\PrefixMerge5_Pm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge5_Pm\Generated\PrefixMerge5_PmTypeOrExpr_Json.h">
+      <Filter>Source Files\Generated\PrefixMerge5_Pm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge6_Pm2\Generated\PrefixMerge6_Pm2TypeOrExpr_Traverse.h">
+      <Filter>Source Files\Generated\PrefixMerge6_Pm2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge6_Pm2\Generated\PrefixMerge6_Pm2_Assembler.h">
+      <Filter>Source Files\Generated\PrefixMerge6_Pm2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge6_Pm2\Generated\PrefixMerge6_Pm2_Lexer.h">
+      <Filter>Source Files\Generated\PrefixMerge6_Pm2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge6_Pm2\Generated\PrefixMerge6_Pm2ModuleParser.h">
+      <Filter>Source Files\Generated\PrefixMerge6_Pm2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge6_Pm2\Generated\PrefixMerge6_Pm2TypeOrExpr.h">
+      <Filter>Source Files\Generated\PrefixMerge6_Pm2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge6_Pm2\Generated\PrefixMerge6_Pm2TypeOrExpr_Builder.h">
+      <Filter>Source Files\Generated\PrefixMerge6_Pm2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge6_Pm2\Generated\PrefixMerge6_Pm2TypeOrExpr_Copy.h">
+      <Filter>Source Files\Generated\PrefixMerge6_Pm2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge6_Pm2\Generated\PrefixMerge6_Pm2TypeOrExpr_Empty.h">
+      <Filter>Source Files\Generated\PrefixMerge6_Pm2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge6_Pm2\Generated\PrefixMerge6_Pm2TypeOrExpr_Json.h">
+      <Filter>Source Files\Generated\PrefixMerge6_Pm2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge7_PmSwitch\Generated\PrefixMerge7_PmSwitchTypeOrExpr_Traverse.h">
+      <Filter>Source Files\Generated\PrefixMerge7_PmSwitch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge7_PmSwitch\Generated\PrefixMerge7_PmSwitch_Assembler.h">
+      <Filter>Source Files\Generated\PrefixMerge7_PmSwitch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge7_PmSwitch\Generated\PrefixMerge7_PmSwitch_Lexer.h">
+      <Filter>Source Files\Generated\PrefixMerge7_PmSwitch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge7_PmSwitch\Generated\PrefixMerge7_PmSwitchTypeOrExpr.h">
+      <Filter>Source Files\Generated\PrefixMerge7_PmSwitch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge7_PmSwitch\Generated\PrefixMerge7_PmSwitchTypeOrExpr_Builder.h">
+      <Filter>Source Files\Generated\PrefixMerge7_PmSwitch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge7_PmSwitch\Generated\PrefixMerge7_PmSwitchTypeOrExpr_Copy.h">
+      <Filter>Source Files\Generated\PrefixMerge7_PmSwitch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge7_PmSwitch\Generated\PrefixMerge7_PmSwitchTypeOrExpr_Empty.h">
+      <Filter>Source Files\Generated\PrefixMerge7_PmSwitch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge7_PmSwitch\Generated\PrefixMerge7_PmSwitchTypeOrExpr_Json.h">
+      <Filter>Source Files\Generated\PrefixMerge7_PmSwitch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge7_PmSwitch\Generated\PrefixMerge7_PmSwitchModuleParser.h">
+      <Filter>Source Files\Generated\PrefixMerge7_PmSwitch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseAmbiguityOnStat\Generated\IfElseAmbiguityOnStatStatAst_Traverse.h">
+      <Filter>Source Files\Generated\IfElseAmbiguityOnStat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseAmbiguityOnStat\Generated\IfElseAmbiguityOnStat_Assembler.h">
+      <Filter>Source Files\Generated\IfElseAmbiguityOnStat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseAmbiguityOnStat\Generated\IfElseAmbiguityOnStat_Lexer.h">
+      <Filter>Source Files\Generated\IfElseAmbiguityOnStat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseAmbiguityOnStat\Generated\IfElseAmbiguityOnStatModuleParser.h">
+      <Filter>Source Files\Generated\IfElseAmbiguityOnStat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseAmbiguityOnStat\Generated\IfElseAmbiguityOnStatStatAst.h">
+      <Filter>Source Files\Generated\IfElseAmbiguityOnStat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseAmbiguityOnStat\Generated\IfElseAmbiguityOnStatStatAst_Builder.h">
+      <Filter>Source Files\Generated\IfElseAmbiguityOnStat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseAmbiguityOnStat\Generated\IfElseAmbiguityOnStatStatAst_Copy.h">
+      <Filter>Source Files\Generated\IfElseAmbiguityOnStat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseAmbiguityOnStat\Generated\IfElseAmbiguityOnStatStatAst_Empty.h">
+      <Filter>Source Files\Generated\IfElseAmbiguityOnStat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseAmbiguityOnStat\Generated\IfElseAmbiguityOnStatStatAst_Json.h">
+      <Filter>Source Files\Generated\IfElseAmbiguityOnStat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseAmbiguityOnStat2\Generated\IfElseAmbiguityOnStat2StatAst_Copy.h">
+      <Filter>Source Files\Generated\IfElseAmbiguityOnStat2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseAmbiguityOnStat2\Generated\IfElseAmbiguityOnStat2StatAst_Empty.h">
+      <Filter>Source Files\Generated\IfElseAmbiguityOnStat2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseAmbiguityOnStat2\Generated\IfElseAmbiguityOnStat2StatAst_Json.h">
+      <Filter>Source Files\Generated\IfElseAmbiguityOnStat2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseAmbiguityOnStat2\Generated\IfElseAmbiguityOnStat2StatAst_Traverse.h">
+      <Filter>Source Files\Generated\IfElseAmbiguityOnStat2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseAmbiguityOnStat2\Generated\IfElseAmbiguityOnStat2_Assembler.h">
+      <Filter>Source Files\Generated\IfElseAmbiguityOnStat2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseAmbiguityOnStat2\Generated\IfElseAmbiguityOnStat2_Lexer.h">
+      <Filter>Source Files\Generated\IfElseAmbiguityOnStat2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseAmbiguityOnStat2\Generated\IfElseAmbiguityOnStat2ModuleParser.h">
+      <Filter>Source Files\Generated\IfElseAmbiguityOnStat2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseAmbiguityOnStat2\Generated\IfElseAmbiguityOnStat2StatAst.h">
+      <Filter>Source Files\Generated\IfElseAmbiguityOnStat2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\IfElseAmbiguityOnStat2\Generated\IfElseAmbiguityOnStat2StatAst_Builder.h">
+      <Filter>Source Files\Generated\IfElseAmbiguityOnStat2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge8_PmVariadic\Generated\PrefixMerge8_PmVariadicTypeOrExpr_Traverse.h">
+      <Filter>Source Files\Generated\PrefixMerge8_PmVariadic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge8_PmVariadic\Generated\PrefixMerge8_PmVariadic_Assembler.h">
+      <Filter>Source Files\Generated\PrefixMerge8_PmVariadic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge8_PmVariadic\Generated\PrefixMerge8_PmVariadic_Lexer.h">
+      <Filter>Source Files\Generated\PrefixMerge8_PmVariadic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge8_PmVariadic\Generated\PrefixMerge8_PmVariadicModuleParser.h">
+      <Filter>Source Files\Generated\PrefixMerge8_PmVariadic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge8_PmVariadic\Generated\PrefixMerge8_PmVariadicTypeOrExpr.h">
+      <Filter>Source Files\Generated\PrefixMerge8_PmVariadic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge8_PmVariadic\Generated\PrefixMerge8_PmVariadicTypeOrExpr_Builder.h">
+      <Filter>Source Files\Generated\PrefixMerge8_PmVariadic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge8_PmVariadic\Generated\PrefixMerge8_PmVariadicTypeOrExpr_Copy.h">
+      <Filter>Source Files\Generated\PrefixMerge8_PmVariadic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge8_PmVariadic\Generated\PrefixMerge8_PmVariadicTypeOrExpr_Empty.h">
+      <Filter>Source Files\Generated\PrefixMerge8_PmVariadic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge8_PmVariadic\Generated\PrefixMerge8_PmVariadicTypeOrExpr_Json.h">
+      <Filter>Source Files\Generated\PrefixMerge8_PmVariadic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge9_PmLoop\Generated\PrefixMerge9_PmLoopFile_Empty.h">
+      <Filter>Source Files\Generated\PrefixMerge9_PmLoop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge9_PmLoop\Generated\PrefixMerge9_PmLoopFile_Json.h">
+      <Filter>Source Files\Generated\PrefixMerge9_PmLoop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge9_PmLoop\Generated\PrefixMerge9_PmLoopFile_Traverse.h">
+      <Filter>Source Files\Generated\PrefixMerge9_PmLoop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge9_PmLoop\Generated\PrefixMerge9_PmLoopModuleParser.h">
+      <Filter>Source Files\Generated\PrefixMerge9_PmLoop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge9_PmLoop\Generated\PrefixMerge9_PmLoop_Assembler.h">
+      <Filter>Source Files\Generated\PrefixMerge9_PmLoop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge9_PmLoop\Generated\PrefixMerge9_PmLoop_Lexer.h">
+      <Filter>Source Files\Generated\PrefixMerge9_PmLoop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge9_PmLoop\Generated\PrefixMerge9_PmLoopFile.h">
+      <Filter>Source Files\Generated\PrefixMerge9_PmLoop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge9_PmLoop\Generated\PrefixMerge9_PmLoopFile_Builder.h">
+      <Filter>Source Files\Generated\PrefixMerge9_PmLoop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PrefixMerge9_PmLoop\Generated\PrefixMerge9_PmLoopFile_Copy.h">
+      <Filter>Source Files\Generated\PrefixMerge9_PmLoop</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

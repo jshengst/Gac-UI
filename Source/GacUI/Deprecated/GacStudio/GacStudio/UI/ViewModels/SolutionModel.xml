@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Workflow-ViewModel>
+  <![CDATA[
+    module SolutionModel;
+    
+    using system::*;
+    using presentation::Gui*;
+    
+    namespace vm
+    {
+      interface ISolutionItemModel
+      {
+        func GetParent() : ISolutionItemModel*;
+        prop Parent : ISolutionItemModel* {GetParent}
+        
+        func GetImage() : ImageData^;
+        event ImageChanged();
+        prop Image : ImageData^ {GetImage : ImageChanged}
+        
+        func GetName() : string;
+        event NameChanged();
+        prop Name : string {GetName : NameChanged}
+        
+        func GetChildren() : ObservableList^;
+        prop Children : ObservableList^ {GetChildren}
+        
+        func GetFilePath() : string;
+        event FilePathChanged();
+        prop FilePath : string {GetFilePath : FilePathChanged}
+        
+        func GetFileDirectory() : string;
+        event FileDirectoryChanged();
+        prop FileDirectory : string {GetFileDirectory : FileDirectoryChanged}
+        
+        func GetErrorCount() : int;
+        event ErrorCountChanged();
+        prop ErrorCount : int {GetErrorCount : ErrorCountChanged}
+        
+        func GetErrorText(index : int) : string;
+      }
+      
+      interface IFileModel : ISolutionItemModel
+      {
+        func GetFileFactory() : IFileFactoryModel^;
+        prop FileFactory : IFileFactoryModel^ {GetFileFactory}
+        
+        func InitializeFileAndSave() : void;
+      }
+      
+      interface IFolderModel : ISolutionItemModel
+      {
+      }
+      
+      interface IProjectModel : ISolutionItemModel
+      {
+        func GetProjectFactory() : IProjectFactoryModel^;
+        prop ProjectFactory : IProjectFactoryModel^ {GetProjectFactory}
+        
+        func OpenProject() : void;
+        func InitializeProjectAndSave() : void;
+      }
+      
+      interface ISolutionModel : ISolutionItemModel
+      {
+        func OpenSolution() : void;
+        func NewSolution() : void;
+        func AddProject(project : IProjectModel^) : void;
+        func RemoveProject(project : IProjectModel^) : void;
+      }
+    }
+  ]]>
+</Workflow-ViewModel>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Resource>
+  <Folder name="GacGenConfig">
+    <Folder name="Cpp">
+      <Text name="SourceFolder">Source</Text>
+      <Text name="Resource">..\..\UIRes\Instance_MultipleWindows.bin</Text>
+      <Text name="NormalInclude">GacUI.h</Text>
+      <Text name="Name">Demo</Text>
+    </Folder>
+  </Folder>
+  <Folder name="MainWindow">
+    <Instance name="MainWindowResource">
+      <Instance ref.CodeBehind="true" ref.Class="demo::MainWindow">
+        <Window Text="Instance_MultipleWindows" ClientSize="x:480 y:320">
+          <att.ContainerComposition-set PreferredMinSize="x:480 y:320"/>
+          <Button Text="Click me to show another window!" ev.Clicked="buttonShowWindow_Clicked">
+            <att.BoundsComposition-set AlignmentToParent="left:20 top:20 right:-1 bottom:-1"/>
+          </Button>
+        </Window>
+      </Instance>
+    </Instance>
+    
+    <Instance name="AnotherWindowResource">
+      <Instance ref.CodeBehind="false" ref.Class="demo::AnotherWindow">
+        <Window Text="Another Window" ClientSize="x:320 y:280">
+          <att.ContainerComposition-set PreferredMinSize="x:320 y:280"/>
+          <Label Text="This is another window!">
+            <att.Font>fontFamily:"Segoe UI" size:32 antialias:true</att.Font>
+          </Label>
+        </Window>
+      </Instance>
+    </Instance>
+  </Folder>
+</Resource>

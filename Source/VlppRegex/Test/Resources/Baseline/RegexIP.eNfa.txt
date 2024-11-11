@@ -1,0 +1,71 @@
+﻿[START]State<0>
+    To State<2> : <Capture : sec >
+State<1>
+    To State<7> : <Epsilon>
+State<2>
+    To State<3> : <Char : 48[0] - 57[9]>
+State<3>
+    To State<4> : <Epsilon>
+    To State<6> : <Nop>
+State<4>
+    To State<5> : <Char : 48[0] - 57[9]>
+State<5>
+    To State<3> : <Epsilon>
+State<6>
+    To State<1> : <End>
+State<7>
+    To State<8> : <Char : 46[.] - 46[.]>
+State<8>
+    To State<9> : <Epsilon>
+State<9>
+    To State<11> : <Capture : sec >
+State<10>
+    To State<16> : <Epsilon>
+State<11>
+    To State<12> : <Char : 48[0] - 57[9]>
+State<12>
+    To State<13> : <Epsilon>
+    To State<15> : <Nop>
+State<13>
+    To State<14> : <Char : 48[0] - 57[9]>
+State<14>
+    To State<12> : <Epsilon>
+State<15>
+    To State<10> : <End>
+State<16>
+    To State<17> : <Char : 46[.] - 46[.]>
+State<17>
+    To State<18> : <Epsilon>
+State<18>
+    To State<20> : <Capture : sec >
+State<19>
+    To State<25> : <Epsilon>
+State<20>
+    To State<21> : <Char : 48[0] - 57[9]>
+State<21>
+    To State<22> : <Epsilon>
+    To State<24> : <Nop>
+State<22>
+    To State<23> : <Char : 48[0] - 57[9]>
+State<23>
+    To State<21> : <Epsilon>
+State<24>
+    To State<19> : <End>
+State<25>
+    To State<26> : <Char : 46[.] - 46[.]>
+State<26>
+    To State<27> : <Epsilon>
+State<27>
+    To State<29> : <Capture : sec >
+[FINISH]State<28>
+State<29>
+    To State<30> : <Char : 48[0] - 57[9]>
+State<30>
+    To State<31> : <Epsilon>
+    To State<33> : <Nop>
+State<31>
+    To State<32> : <Char : 48[0] - 57[9]>
+State<32>
+    To State<30> : <Epsilon>
+State<33>
+    To State<28> : <End>

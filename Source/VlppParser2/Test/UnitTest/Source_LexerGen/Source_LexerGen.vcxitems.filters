@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Lexer">
+      <UniqueIdentifier>{21ef031d-1423-4e17-ad92-148b79a21552}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\Lexer\LexerSymbol.h">
+      <Filter>Lexer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\Source\Lexer\LexerCppGen.h">
+      <Filter>Lexer</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\Lexer\LexerSymbol.cpp">
+      <Filter>Lexer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\Lexer\LexerCppGen.cpp">
+      <Filter>Lexer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\Source\Lexer\LexerSymbol_CreateParserGenLexer.cpp">
+      <Filter>Lexer</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,89 @@
+RType
+	::= "bool" as PrimitiveType {type = Boolean}
+	::= "int" as PrimitiveType {type = Integer}
+	::= "float" as PrimitiveType {type = Float}
+	::= "double" as PrimitiveType {type = Double}
+	::= "string" as PrimitiveType {type = String}
+	::= "char" as PrimitiveType {type = Char}
+	::= "key" as PrimitiveType {type = Key}
+	::= "color" as PrimitiveType {type = Color}
+	::= "binary" as PrimitiveType {type = Binary}
+	::= NAME:name as ReferenceType
+	::= NAME:element "[" "." NAME:keyField "]" as ArrayMapType
+	::= RType:element "?" as OptionalType
+	::= RType:element "[" "]" as ArrayType
+	::= RType:element "[" RType:keyType "]" as MapType
+	;
+
+RAttributeParameter
+	::=	CPP_NAME:cppType as partial Attribute
+	;
+
+RAttribute
+	::= "[" ATT_NAME:name ["(" RAttributeParameter ")"] "]" as Attribute
+	;
+
+REnumMember
+	::= NAME:name "," as EnumMember
+	;
+
+REnum
+	::= "enum" NAME:name "{" {REnumMember : members} "}" as EnumDecl
+	;
+
+RUnionMember
+	::= NAME:name "," as UnionMember
+	;
+
+RUnion
+	::= "union" NAME:name "{" {RUnionMember : members} "}" as UnionDecl
+	;
+
+RStructMember
+	::= "var" NAME:name ":" RType:type ";" as StructMember
+	;
+
+RStructBody
+	::= NAME:name "{" {RStructMember : members} "}" as StructDecl
+	;
+
+RStruct
+	::= "struct" !RStructBody {type = Struct}
+	::= "class" !RStructBody {type = Class}
+	;
+
+RMessageRequest
+	::= "request" ":" RType:type ";" as MessageRequest
+	;
+
+RMessageResponse
+	::= "response" ":" RType:type ";" as MessageResponse
+	;
+
+RMessage
+	::= "message" NAME:name "{" [RMessageRequest:request] [RMessageResponse:response] "}" as MessageDecl
+	;
+
+REventRequest
+	::= "request" ":" RType:type ";" as EventRequest
+	;
+
+REvent
+	::= "event" NAME:name "{" [REventRequest:request] "}" as EventDecl
+	;
+
+RDeclDetail
+	::= !REnum
+	::= !RUnion
+	::= !RStruct
+	::= !RMessage
+	::= !REvent
+	;
+
+RDecl
+	::= {RAttribute : attributes} !RDeclDetail
+	;
+
+@parser Schema
+	::= RDecl : declarations {RDecl : declarations} as Schema
+	;

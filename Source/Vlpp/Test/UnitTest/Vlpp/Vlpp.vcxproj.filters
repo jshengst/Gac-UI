@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{389f9661-0f53-4d11-909c-1a4aabbfe6ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Collections">
+      <UniqueIdentifier>{b4e48f61-aab2-4611-9f64-316df34939a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\UnitTest">
+      <UniqueIdentifier>{cab459eb-ab4a-4989-b15d-b736bbcda070}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Strings">
+      <UniqueIdentifier>{6ed5930c-1a5c-479d-aba9-e2af1fd41c58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Primitives">
+      <UniqueIdentifier>{c5157319-3aa4-480a-9df7-8c1918f24f0d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Source\Basic.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Console.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Exception.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\GlobalStorage.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\UnitTest\UnitTest.h">
+      <Filter>Common\UnitTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Collections\OperationSelect.h">
+      <Filter>Common\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Collections\OperationSequence.h">
+      <Filter>Common\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Collections\OperationSet.h">
+      <Filter>Common\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Collections\OperationString.h">
+      <Filter>Common\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Collections\OperationWhere.h">
+      <Filter>Common\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Collections\Pair.h">
+      <Filter>Common\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Collections\PartialOrdering.h">
+      <Filter>Common\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Collections\Dictionary.h">
+      <Filter>Common\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Collections\Interfaces.h">
+      <Filter>Common\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Collections\List.h">
+      <Filter>Common\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Collections\Operation.h">
+      <Filter>Common\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Collections\OperationConcat.h">
+      <Filter>Common\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Collections\OperationCopyFrom.h">
+      <Filter>Common\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Collections\OperationEnumerable.h">
+      <Filter>Common\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Collections\OperationForEach.h">
+      <Filter>Common\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Collections\OperationPair.h">
+      <Filter>Common\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Strings\String.h">
+      <Filter>Common\Strings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Strings\LoremIpsum.h">
+      <Filter>Common\Strings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Strings\Conversion.h">
+      <Filter>Common\Strings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Primitives\DateTime.h">
+      <Filter>Common\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Primitives\Event.h">
+      <Filter>Common\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Primitives\Function.h">
+      <Filter>Common\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Primitives\Pointer.h">
+      <Filter>Common\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Primitives\Tuple.h">
+      <Filter>Common\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Primitives\Nullable.h">
+      <Filter>Common\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Primitives\Variant.h">
+      <Filter>Common\Primitives</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Source\Console.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Exception.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\GlobalStorage.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Basic.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\UnitTest\UnitTest.cpp">
+      <Filter>Common\UnitTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Collections\PartialOrdering.cpp">
+      <Filter>Common\Collections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Strings\String.cpp">
+      <Filter>Common\Strings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Strings\LoremIpsum.cpp">
+      <Filter>Common\Strings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Strings\Conversion.cpp">
+      <Filter>Common\Strings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Primitives\DateTime.Windows.cpp">
+      <Filter>Common\Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Console.Windows.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Console.Linux.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\UnitTest\UnitTest.Windows.cpp">
+      <Filter>Common\UnitTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\UnitTest\UnitTest.Linux.cpp">
+      <Filter>Common\UnitTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Primitives\DateTime.Linux.cpp">
+      <Filter>Common\Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Strings\Conversion.Linux.cpp">
+      <Filter>Common\Strings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Strings\Conversion.Windows.cpp">
+      <Filter>Common\Strings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Primitives\DateTime.cpp">
+      <Filter>Common\Primitives</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,33 @@
+﻿[START]State<0>
+    To State<1> : ^
+State<1>
+    To State<2> : <Epsilon>
+State<2>
+    To State<4> : <Capture : sec >
+State<3>
+    To State<9> : <Epsilon>
+State<4>
+    To State<5> : <Char : 1[] - 1114111[􏿿]>
+State<5>
+    To State<6> : <Epsilon>
+    To State<8> : <Nop>
+State<6>
+    To State<7> : <Char : 1[] - 1114111[􏿿]>
+State<7>
+    To State<5> : <Epsilon>
+State<8>
+    To State<3> : <End>
+State<9>
+    To State<10> : <Match : sec;-1 >
+State<10>
+    To State<11> : <Epsilon>
+    To State<13> : <Nop>
+State<11>
+    To State<12> : <Match : sec;-1 >
+State<12>
+    To State<10> : <Epsilon>
+State<13>
+    To State<14> : <Epsilon>
+State<14>
+    To State<15> : $
+[FINISH]State<15>

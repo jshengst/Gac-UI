@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Resource>
+  <Folder name="GacGenConfig">
+    <Folder name="ResX86">
+      <Text name="Resource">..\..\UIRes\32bits\control_basic_window.bin</Text>
+    </Folder>
+    <Folder name="ResX64">
+      <Text name="Resource">..\..\UIRes\64bits\control_basic_window.bin</Text>
+    </Folder>
+  </Folder>
+  <Folder name="MainWindow">
+    <Instance name="WindowTemplate" content="File">Window.xml</Instance>
+    <Instance name="TabHeaderButtonTemplate" content="File">TabHeaderButton.xml</Instance>
+    <Instance name="TabHeaderTemplate" content="File">TabHeader.xml</Instance>
+    <Instance name="TabTemplate" content="File">Tab.xml</Instance>
+
+    <Instance name="LoremIpsumTabPageResource">
+      <Instance ref.Class="sample::LoremIpsumTabPage">
+        <ref.Ctor><![CDATA[
+          {
+            var text : string = "";
+            for (i in range [0, 5))
+            {
+              text = text & Sys::LoremIpsumParagraph(800) & "\r\n\r\n";
+            }
+            documentViewer.Text = text;
+          }
+        ]]></ref.Ctor>
+        <TabPage Text-eval="Sys::LoremIpsumTitle(12)">
+          <DocumentViewer ref.Name="documentViewer" EditMode="Selectable" HorizontalAlwaysVisible="false" VerticalAlwaysVisible="false">
+            <att.BoundsComposition-set AlignmentToParent="left:5 top:5 right:5 bottom:5"/>
+          </DocumentViewer>
+        </TabPage>
+      </Instance>
+    </Instance>
+
+    <Instance name="MainWindowResource">
+      <Instance ref.Class="sample::MainWindow">
+        <ref.Ctor><![CDATA[
+          {
+            var wct = cast (TabWindowTemplate*) self.ControlTemplateObject;
+            var tct = cast (TabWindowTabTemplate*) tab.ControlTemplateObject;
+            tct.SetTabHeaderContainer(wct.TabHeaderContainer);
+
+            attach(tct.AddPageRequested, func():void
+            {
+              var tabPage = new LoremIpsumTabPage*();
+              tab.Pages.Insert(0, tabPage);
+              tab.SelectedPage = tabPage;
+            });
+
+            tab.Pages.Add(new LoremIpsumTabPage*());
+          }
+        ]]></ref.Ctor>
+        <Window ref.Name="self" Text="Lorem Ipsum Reader" ClientSize="x:640 y:480">
+          <att.ControlTemplate>sample::TabWindowTemplate</att.ControlTemplate>
+          <Tab ref.Name="tab">
+            <att.ControlTemplate>sample::TabWindowTabTemplate</att.ControlTemplate>
+            <att.BoundsComposition-set AlignmentToParent="left:0 top:0 right:0 bottom:0"/>
+          </Tab>
+        </Window>
+      </Instance>
+    </Instance>
+  </Folder>
+</Resource>

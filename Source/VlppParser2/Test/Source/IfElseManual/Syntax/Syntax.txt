@@ -1,0 +1,39 @@
+Do
+  ::= "do" ";" as DoStat
+  ;
+
+Block
+  ::= "{" { Stat:stats } "}" as BlockStat
+  ;
+
+HalfIf
+  ::= "if" "cond" "then" Stat:thenBranch as IfStat
+  ;
+
+CompleteIf
+  ::= "if" "cond" "then" CompleteStat:thenBranch "else" Stat:elseBranch as IfStat
+  ;
+
+IfTail
+  ::= (CompleteStat:thenBranch ["else" Stat:elseBranch] | HalfIf:thenBranch) as partial IfStat
+  ;
+
+If
+  ::= "if" "cond" "then" IfTail as IfStat
+  ;
+
+OtherStat
+  ::= (!Do | !Block)
+  ;
+
+CompleteStat
+  ::= (!OtherStat | !CompleteIf)
+  ;
+
+Stat
+  ::= (!OtherStat | !If)
+  ;
+
+@parser Module
+  ::= Stat:stat as Module
+  ;
