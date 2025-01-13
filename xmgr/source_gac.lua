@@ -82,8 +82,7 @@ rule("GacUI")
         end
 
         if is_plat("windows") then
-            target:add("links", "user32", "gdi32", "ole32", "oleaut32", "uuid", "comdlg32", "advapi32")
-            -- target:add("links", "user32", "gdi32", "kernel32", "ole32", "comdlg32", "advapi32")
+            target:add("links", "user32", "gdi32", "ole32", "advapi32", "comdlg32")
             target:add("cxflags", "/bigobj")
             target:remove("files",path.join(vl_src,"Vlpp.Linux.cpp"))
             target:remove("files",path.join(vo_src,"VlppOS.Linux.cpp"))

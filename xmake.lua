@@ -9,7 +9,7 @@ if is_mode("debug") then
     add_cxflags("/W3", "/sdl", "/permissive-")
     add_cxflags("/MTd", {public = true })
 else
-    add_defines("WIN32", "NDEBUG", "_LIB")
+    -- add_defines("WIN32", "NDEBUG", "_LIB")
     add_cxflags("/W3", "/sdl", "/permissive-", "/GL")
     add_ldflags("/LTCG")
     add_cxflags("/MTd", {public = true })
