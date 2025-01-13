@@ -86,15 +86,14 @@ rule("GacUI")
                 target:add("defines", "VCZH_DEBUG_METAONLY_REFLECTION", {public = true })
             end
 
-            for _, item in ipairs(remove_key_reflection) do
-                if not with_source then
-                    for _, item in ipairs(remove_key_reflection) do
-                        item.path = importPath
-
-                        target:remove("headerfiles", path.join(importPath, "Skins/DarkSkin/DarkSkinReflection.h"))
-                        target:remove("files", path.join(importPath, "Skins/DarkSkin/DarkSkinReflection.cpp"))
-                    end
+            if not with_source then
+                for _, item in ipairs(remove_key_reflection) do
+                    item.path = importPath
                 end
+                target:remove("headerfiles", path.join(importPath, "Skins/DarkSkin/DarkSkinReflection.h"))
+                target:remove("files", path.join(importPath, "Skins/DarkSkin/DarkSkinReflection.cpp"))
+            end
+            for _, item in ipairs(remove_key_reflection) do
                 target:remove("headerfiles", path.join(item.path, item.file .. ".h"))
                 target:remove("files", path.join(item.path, item.file .. ".cpp"))
             end
