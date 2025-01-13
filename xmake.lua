@@ -16,6 +16,7 @@ else
 end
 
 -- 定义配置选项
+--[[
 option("use_release_code")
     set_default(true)
     set_showmenu(true)
@@ -29,7 +30,8 @@ option("use_release_code")
         print("Building GacUI from Source version")
     end
 option_end()
-
+--]]
+includes("xmgr/source_gac.lua")
 
 target("HelloGacUI")
     set_languages("c++20")
@@ -38,6 +40,7 @@ target("HelloGacUI")
     add_deps("GacUICustom")
     add_rules("GacUI")
     set_values("GacUI.reflection_level", "none")
+    set_values("GacUI.with_source", true)
 
     add_files(path.join(os.projectdir(),"Tutorial","Lib","GacUI","WinMain.cpp"))
     add_files(path.join(os.projectdir(),"Tutorial","GacUI_HelloWorlds","Cpp","Main.cpp"))
