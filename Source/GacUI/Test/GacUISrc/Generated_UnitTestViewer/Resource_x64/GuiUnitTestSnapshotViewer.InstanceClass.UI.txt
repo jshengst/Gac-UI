@@ -1,0 +1,1050 @@
+﻿================================(1/4)================================
+module <constructor>gaclib_controls::UnitTestSnapshotViewerWindow;
+using presentation::controls::Gui*;
+using presentation::elements::Gui*Element;
+using presentation::compositions::Gui*Composition;
+using presentation::compositions::Gui*;
+using presentation::templates::Gui*;
+using system::*;
+using system::reflection::*;
+using presentation::*;
+using presentation::Gui*;
+using presentation::controls::*;
+using presentation::controls::list::*;
+using presentation::controls::tree::*;
+using presentation::elements::*;
+using presentation::elements::Gui*;
+using presentation::elements::text::*;
+using presentation::compositions::*;
+using presentation::templates::*;
+using presentation::theme::*;
+
+namespace gaclib_controls
+{
+    class UnitTestSnapshotViewerWindowConstructor
+    {
+        @cpp:Protected
+        var self : ::gaclib_controls::UnitTestSnapshotViewerWindow* = null of (::gaclib_controls::UnitTestSnapshotViewerWindow*);
+
+        @cpp:Protected
+        var ViewModel : ::gaclib_controls::IUnitTestSnapshotViewerViewModel^ = null of (::gaclib_controls::IUnitTestSnapshotViewerViewModel^);
+
+        @cpp:Protected
+        var <precompile>0 : ::presentation::compositions::GuiTableComposition* = null of (::presentation::compositions::GuiTableComposition*);
+
+        @cpp:Protected
+        var <precompile>1 : ::presentation::compositions::GuiColumnSplitterComposition* = null of (::presentation::compositions::GuiColumnSplitterComposition*);
+
+        @cpp:Protected
+        var <precompile>2 : ::presentation::compositions::GuiColumnSplitterComposition* = null of (::presentation::compositions::GuiColumnSplitterComposition*);
+
+        @cpp:Protected
+        var <precompile>3 : ::presentation::compositions::GuiCellComposition* = null of (::presentation::compositions::GuiCellComposition*);
+
+        @cpp:Protected
+        var <precompile>4 : ::presentation::compositions::GuiBoundsComposition* = null of (::presentation::compositions::GuiBoundsComposition*);
+
+        @cpp:Protected
+        var <precompile>5 : ::presentation::compositions::GuiCellComposition* = null of (::presentation::compositions::GuiCellComposition*);
+
+        @cpp:Protected
+        var <precompile>6 : ::presentation::controls::GuiTab* = null of (::presentation::controls::GuiTab*);
+
+        @cpp:Protected
+        var <precompile>7 : ::presentation::compositions::GuiBoundsComposition* = null of (::presentation::compositions::GuiBoundsComposition*);
+
+        @cpp:Protected
+        var <precompile>8 : ::presentation::controls::GuiTabPage* = null of (::presentation::controls::GuiTabPage*);
+
+        @cpp:Protected
+        var <precompile>9 : ::presentation::compositions::GuiBoundsComposition* = null of (::presentation::compositions::GuiBoundsComposition*);
+
+        @cpp:Protected
+        var <precompile>10 : ::presentation::compositions::GuiCellComposition* = null of (::presentation::compositions::GuiCellComposition*);
+
+        @cpp:Protected
+        var <precompile>11 : ::presentation::controls::GuiTab* = null of (::presentation::controls::GuiTab*);
+
+        @cpp:Protected
+        var <precompile>12 : ::presentation::compositions::GuiBoundsComposition* = null of (::presentation::compositions::GuiBoundsComposition*);
+
+        @cpp:Protected
+        var <precompile>13 : ::presentation::controls::GuiTabPage* = null of (::presentation::controls::GuiTabPage*);
+
+        @cpp:Protected
+        var <precompile>14 : ::presentation::compositions::GuiBoundsComposition* = null of (::presentation::compositions::GuiBoundsComposition*);
+
+        @cpp:Protected
+        var <precompile>15 : ::presentation::controls::GuiTabPage* = null of (::presentation::controls::GuiTabPage*);
+
+        @cpp:Protected
+        var <precompile>16 : ::presentation::controls::GuiMultilineTextBox* = null of (::presentation::controls::GuiMultilineTextBox*);
+
+        @cpp:Protected
+        var <precompile>17 : ::presentation::compositions::GuiBoundsComposition* = null of (::presentation::compositions::GuiBoundsComposition*);
+
+        @cpp:Protected
+        var <precompile>18 : ::presentation::controls::GuiTabPage* = null of (::presentation::controls::GuiTabPage*);
+
+        @cpp:Protected
+        var <precompile>19 : ::presentation::controls::GuiMultilineTextBox* = null of (::presentation::controls::GuiMultilineTextBox*);
+
+        @cpp:Protected
+        var <precompile>20 : ::presentation::compositions::GuiBoundsComposition* = null of (::presentation::compositions::GuiBoundsComposition*);
+
+        @cpp:Protected
+        var <precompile>21 : ::presentation::controls::GuiTabPage* = null of (::presentation::controls::GuiTabPage*);
+
+        @cpp:Protected
+        var <precompile>22 : ::presentation::controls::GuiMultilineTextBox* = null of (::presentation::controls::GuiMultilineTextBox*);
+
+        @cpp:Protected
+        var <precompile>23 : ::presentation::compositions::GuiBoundsComposition* = null of (::presentation::compositions::GuiBoundsComposition*);
+
+        @cpp:Protected
+        var treeViewFileNodes : ::presentation::controls::GuiBindableTreeView* = null of (::presentation::controls::GuiBindableTreeView*);
+
+        @cpp:Protected
+        var textListFrames : ::presentation::controls::GuiBindableTextList* = null of (::presentation::controls::GuiBindableTextList*);
+
+        @cpp:Protected
+        var scRendering : ::presentation::controls::GuiScrollContainer* = null of (::presentation::controls::GuiScrollContainer*);
+
+        @cpp:Protected
+        func <gaclib_controls-UnitTestSnapshotViewerWindow>Initialize(<this> : ::gaclib_controls::UnitTestSnapshotViewerWindow*) : (::system::Void)
+        {
+            (self = <this>);
+            (ViewModel = <this>.ViewModel);
+            {
+                (self.ClientSize = {x : 1920; y : 1080;} of (::presentation::Size));
+            }
+            (<precompile>0 = new (::presentation::compositions::GuiTableComposition*)());
+            {
+                (<precompile>0.CellPadding = 5 of (::system::Int64));
+            }
+            {
+                (<precompile>0.AlignmentToParent = {left : 0; top : 0; right : 0; bottom : 0;} of (::presentation::Margin));
+            }
+            {
+                (<precompile>0.MinSizeLimitation = LimitToElementAndChildren of (::presentation::compositions::GuiGraphicsComposition::MinSizeLimitation));
+            }
+            {
+                <precompile>0.SetRowsAndColumns(1, 4);
+                <precompile>0.SetRowOption(0, {composeType : Percentage; percentage : 1.0;} of (::presentation::compositions::GuiCellOption));
+                <precompile>0.SetColumnOption(0, {composeType : Absolute; absolute : 200;} of (::presentation::compositions::GuiCellOption));
+                <precompile>0.SetColumnOption(1, {composeType : Absolute; absolute : 100;} of (::presentation::compositions::GuiCellOption));
+                <precompile>0.SetColumnOption(2, {composeType : Absolute; absolute : 200;} of (::presentation::compositions::GuiCellOption));
+                <precompile>0.SetColumnOption(3, {composeType : Percentage; percentage : 1.0;} of (::presentation::compositions::GuiCellOption));
+            }
+            (<precompile>1 = new (::presentation::compositions::GuiColumnSplitterComposition*)());
+            {
+                (<precompile>1.ColumnsToTheLeft = 2 of (::system::Int64));
+            }
+            {
+                <precompile>0.AddChild(<precompile>1);
+            }
+            (<precompile>2 = new (::presentation::compositions::GuiColumnSplitterComposition*)());
+            {
+                (<precompile>2.ColumnsToTheLeft = 3 of (::system::Int64));
+            }
+            {
+                <precompile>0.AddChild(<precompile>2);
+            }
+            (<precompile>3 = new (::presentation::compositions::GuiCellComposition*)());
+            {
+                <precompile>3.SetSite(0, 0, 1, 2);
+            }
+            {
+                (treeViewFileNodes = new (::presentation::controls::GuiBindableTreeView*)(::presentation::theme::ThemeName::TreeView));
+                <this>.SetNamedObject("treeViewFileNodes", treeViewFileNodes);
+            }
+            {
+                (treeViewFileNodes.ChildrenProperty = func (<item> : ::system::Object) : (::system::Enumerable^)
+                {
+                    var item = (cast (IUnitTestSnapshotFileNode^) <item>);
+                    return item.Children;
+                });
+            }
+            {
+                (treeViewFileNodes.HorizontalAlwaysVisible = false);
+            }
+            {
+                (treeViewFileNodes.VerticalAlwaysVisible = false);
+            }
+            {
+                (treeViewFileNodes.TextProperty = func (<item> : ::system::Object) : (::system::String)
+                {
+                    var item = (cast (IUnitTestSnapshotFileNode^) <item>);
+                    return item.Name;
+                });
+            }
+            (<precompile>4 = treeViewFileNodes.BoundsComposition);
+            {
+                (<precompile>4.AlignmentToParent = {left : 0; top : 0; right : 0; bottom : 0;} of (::presentation::Margin));
+            }
+            {
+                <precompile>3.AddChild(treeViewFileNodes.BoundsComposition);
+            }
+            {
+                <precompile>0.AddChild(<precompile>3);
+            }
+            (<precompile>5 = new (::presentation::compositions::GuiCellComposition*)());
+            {
+                <precompile>5.SetSite(0, 2, 1, 1);
+            }
+            {
+                (<precompile>6 = new (::presentation::controls::GuiTab*)(::presentation::theme::ThemeName::Tab));
+            }
+            {
+                (<precompile>8 = new (::presentation::controls::GuiTabPage*)(::presentation::theme::ThemeName::CustomControl));
+            }
+            {
+                (<precompile>8.Text = "Frames");
+            }
+            {
+                (textListFrames = new (::presentation::controls::GuiBindableTextList*)(::presentation::theme::ThemeName::TextList));
+                <this>.SetNamedObject("textListFrames", textListFrames);
+            }
+            {
+                (textListFrames.HorizontalAlwaysVisible = false);
+            }
+            {
+                (textListFrames.VerticalAlwaysVisible = false);
+            }
+            {
+                (textListFrames.TextProperty = func (<item> : ::system::Object) : (::system::String)
+                {
+                    var item = (cast (IUnitTestSnapshotFrame^) <item>);
+                    return item.Name;
+                });
+            }
+            (<precompile>9 = textListFrames.BoundsComposition);
+            {
+                (<precompile>9.AlignmentToParent = {left : 0; top : 0; right : 0; bottom : 0;} of (::presentation::Margin));
+            }
+            {
+                <precompile>8.AddChild(textListFrames);
+            }
+            {
+                var <collection> = <precompile>6.Pages;
+                <collection>.Add(<precompile>8);
+            }
+            (<precompile>7 = <precompile>6.BoundsComposition);
+            {
+                (<precompile>7.AlignmentToParent = {left : 0; top : 0; right : 0; bottom : 0;} of (::presentation::Margin));
+            }
+            {
+                <precompile>5.AddChild(<precompile>6.BoundsComposition);
+            }
+            {
+                <precompile>0.AddChild(<precompile>5);
+            }
+            (<precompile>10 = new (::presentation::compositions::GuiCellComposition*)());
+            {
+                <precompile>10.SetSite(0, 3, 1, 1);
+            }
+            {
+                (<precompile>11 = new (::presentation::controls::GuiTab*)(::presentation::theme::ThemeName::Tab));
+            }
+            {
+                (<precompile>13 = new (::presentation::controls::GuiTabPage*)(::presentation::theme::ThemeName::CustomControl));
+            }
+            {
+                (<precompile>13.Text = "Rendering");
+            }
+            {
+                (scRendering = new (::presentation::controls::GuiScrollContainer*)(::presentation::theme::ThemeName::ScrollView));
+                <this>.SetNamedObject("scRendering", scRendering);
+            }
+            {
+                (scRendering.HorizontalAlwaysVisible = false);
+            }
+            {
+                (scRendering.VerticalAlwaysVisible = false);
+            }
+            (<precompile>14 = scRendering.BoundsComposition);
+            {
+                (<precompile>14.AlignmentToParent = {left : 5; top : 5; right : 5; bottom : 5;} of (::presentation::Margin));
+            }
+            {
+                <precompile>13.AddChild(scRendering);
+            }
+            {
+                var <collection> = <precompile>11.Pages;
+                <collection>.Add(<precompile>13);
+            }
+            {
+                (<precompile>15 = new (::presentation::controls::GuiTabPage*)(::presentation::theme::ThemeName::CustomControl));
+            }
+            {
+                (<precompile>15.Text = "DOM");
+            }
+            {
+                (<precompile>16 = new (::presentation::controls::GuiMultilineTextBox*)(::presentation::theme::ThemeName::MultilineTextBox));
+            }
+            {
+                (<precompile>16.HorizontalAlwaysVisible = false);
+            }
+            {
+                (<precompile>16.VerticalAlwaysVisible = false);
+            }
+            (<precompile>17 = <precompile>16.BoundsComposition);
+            {
+                (<precompile>17.AlignmentToParent = {left : 5; top : 5; right : 5; bottom : 5;} of (::presentation::Margin));
+            }
+            {
+                <precompile>15.AddChild(<precompile>16);
+            }
+            {
+                var <collection> = <precompile>11.Pages;
+                <collection>.Add(<precompile>15);
+            }
+            {
+                (<precompile>18 = new (::presentation::controls::GuiTabPage*)(::presentation::theme::ThemeName::CustomControl));
+            }
+            {
+                (<precompile>18.Text = "Commands");
+            }
+            {
+                (<precompile>19 = new (::presentation::controls::GuiMultilineTextBox*)(::presentation::theme::ThemeName::MultilineTextBox));
+            }
+            {
+                (<precompile>19.HorizontalAlwaysVisible = false);
+            }
+            {
+                (<precompile>19.VerticalAlwaysVisible = false);
+            }
+            (<precompile>20 = <precompile>19.BoundsComposition);
+            {
+                (<precompile>20.AlignmentToParent = {left : 5; top : 5; right : 5; bottom : 5;} of (::presentation::Margin));
+            }
+            {
+                <precompile>18.AddChild(<precompile>19);
+            }
+            {
+                var <collection> = <precompile>11.Pages;
+                <collection>.Add(<precompile>18);
+            }
+            {
+                (<precompile>21 = new (::presentation::controls::GuiTabPage*)(::presentation::theme::ThemeName::CustomControl));
+            }
+            {
+                (<precompile>21.Text = "Elements");
+            }
+            {
+                (<precompile>22 = new (::presentation::controls::GuiMultilineTextBox*)(::presentation::theme::ThemeName::MultilineTextBox));
+            }
+            {
+                (<precompile>22.HorizontalAlwaysVisible = false);
+            }
+            {
+                (<precompile>22.VerticalAlwaysVisible = false);
+            }
+            (<precompile>23 = <precompile>22.BoundsComposition);
+            {
+                (<precompile>23.AlignmentToParent = {left : 5; top : 5; right : 5; bottom : 5;} of (::presentation::Margin));
+            }
+            {
+                <precompile>21.AddChild(<precompile>22);
+            }
+            {
+                var <collection> = <precompile>11.Pages;
+                <collection>.Add(<precompile>21);
+            }
+            (<precompile>12 = <precompile>11.BoundsComposition);
+            {
+                (<precompile>12.AlignmentToParent = {left : 0; top : 0; right : 0; bottom : 0;} of (::presentation::Margin));
+            }
+            {
+                <precompile>10.AddChild(<precompile>11.BoundsComposition);
+            }
+            {
+                <precompile>0.AddChild(<precompile>10);
+            }
+            {
+                self.ContainerComposition.AddChild(<precompile>0);
+            }
+            {
+                (treeViewFileNodes.ItemSource = ViewModel.RootNode);
+            }
+            {
+                (treeViewFileNodes.ImageProperty = [self.GetImageFromType((cast (IUnitTestSnapshotFileNode^) $1).NodeType)]);
+            }
+            {
+                var <created-subscription> = new (::system::Subscription^)
+                {
+                    var <bind-cache>0 : ::presentation::controls::GuiBindableTreeView* = null of (::presentation::controls::GuiBindableTreeView*);
+
+                    var <bind-handler>0_0 : ::system::reflection::EventHandler^ = null of (::system::reflection::EventHandler^);
+
+                    var <bind-opened> : ::system::Boolean = false;
+
+                    var <bind-closed> : ::system::Boolean = false;
+
+                    func <bind-activator>() : (::system::Void)
+                    {
+                        var <bind-activator-result> = ((cast (IUnitTestSnapshotFileNode^) <bind-cache>0.SelectedItem).Frames ?? null) of (::system::Enumerable^);
+                        ValueChanged(<bind-activator-result>);
+                    }
+
+                    func <bind-callback>0_0(<bind-callback-argument>0 : ::presentation::compositions::GuiGraphicsComposition*, <bind-callback-argument>1 : ::presentation::compositions::GuiEventArgs*) : (::system::Void)
+                    {
+                        <bind-activator>();
+                    }
+
+                    override func Open() : (::system::Boolean)
+                    {
+                        if ((!<bind-opened>))
+                        {
+                            (<bind-opened> = true);
+                            (<bind-cache>0 = (treeViewFileNodes ?? null of (::presentation::controls::GuiBindableTreeView*)));
+                            (<bind-handler>0_0 = (attach(<bind-cache>0.SelectionChanged, <bind-callback>0_0) ?? null));
+                            return true;
+                        }
+                        return false;
+                    }
+
+                    override func Update() : (::system::Boolean)
+                    {
+                        if ((<bind-opened> and (!<bind-closed>)))
+                        {
+                            <bind-activator>();
+                            return true;
+                        }
+                        return false;
+                    }
+
+                    override func Close() : (::system::Boolean)
+                    {
+                        if ((!<bind-closed>))
+                        {
+                            (<bind-closed> = true);
+                            if (<bind-handler>0_0 is not null)
+                            {
+                                detach(<bind-cache>0.SelectionChanged, <bind-handler>0_0);
+                                (<bind-handler>0_0 = null);
+                            }
+                            (<bind-cache>0 = null of (::presentation::controls::GuiBindableTreeView*));
+                            (<bind-handler>0_0 = null of (::system::reflection::EventHandler^));
+                            return true;
+                        }
+                        return false;
+                    }
+                };
+                attach(<created-subscription>.ValueChanged, func (<value> : ::system::Object) : (::system::Void)
+                {
+                    var <old> = textListFrames.ItemSource;
+                    var <new> = (cast (::system::Enumerable^) <value>);
+                    if ((<old> == <new>))
+                    {
+                        return;
+                    }
+                    (textListFrames.ItemSource = <new>);
+                });
+                <this>.AddSubscription(<created-subscription>);
+            }
+            {
+                var <created-subscription> = new (::system::Subscription^)
+                {
+                    var <bind-cache>0 : ::presentation::controls::GuiBindableTextList* = null of (::presentation::controls::GuiBindableTextList*);
+
+                    var <bind-handler>0_0 : ::system::reflection::EventHandler^ = null of (::system::reflection::EventHandler^);
+
+                    var <bind-opened> : ::system::Boolean = false;
+
+                    var <bind-closed> : ::system::Boolean = false;
+
+                    func <bind-activator>() : (::system::Void)
+                    {
+                        var <bind-activator-result> = ((cast (IUnitTestSnapshotFrame^) <bind-cache>0.SelectedItem).DomAsJsonText ?? "") of (::system::String);
+                        ValueChanged(<bind-activator-result>);
+                    }
+
+                    func <bind-callback>0_0(<bind-callback-argument>0 : ::presentation::compositions::GuiGraphicsComposition*, <bind-callback-argument>1 : ::presentation::compositions::GuiEventArgs*) : (::system::Void)
+                    {
+                        <bind-activator>();
+                    }
+
+                    override func Open() : (::system::Boolean)
+                    {
+                        if ((!<bind-opened>))
+                        {
+                            (<bind-opened> = true);
+                            (<bind-cache>0 = (textListFrames ?? null of (::presentation::controls::GuiBindableTextList*)));
+                            (<bind-handler>0_0 = (attach(<bind-cache>0.SelectionChanged, <bind-callback>0_0) ?? null));
+                            return true;
+                        }
+                        return false;
+                    }
+
+                    override func Update() : (::system::Boolean)
+                    {
+                        if ((<bind-opened> and (!<bind-closed>)))
+                        {
+                            <bind-activator>();
+                            return true;
+                        }
+                        return false;
+                    }
+
+                    override func Close() : (::system::Boolean)
+                    {
+                        if ((!<bind-closed>))
+                        {
+                            (<bind-closed> = true);
+                            if (<bind-handler>0_0 is not null)
+                            {
+                                detach(<bind-cache>0.SelectionChanged, <bind-handler>0_0);
+                                (<bind-handler>0_0 = null);
+                            }
+                            (<bind-cache>0 = null of (::presentation::controls::GuiBindableTextList*));
+                            (<bind-handler>0_0 = null of (::system::reflection::EventHandler^));
+                            return true;
+                        }
+                        return false;
+                    }
+                };
+                attach(<created-subscription>.ValueChanged, func (<value> : ::system::Object) : (::system::Void)
+                {
+                    var <old> = <precompile>16.Text;
+                    var <new> = (cast (::system::String) <value>);
+                    if ((<old> == <new>))
+                    {
+                        return;
+                    }
+                    (<precompile>16.Text = <new>);
+                });
+                <this>.AddSubscription(<created-subscription>);
+            }
+            {
+                var <created-subscription> = new (::system::Subscription^)
+                {
+                    var <bind-cache>0 : ::presentation::controls::GuiBindableTextList* = null of (::presentation::controls::GuiBindableTextList*);
+
+                    var <bind-handler>0_0 : ::system::reflection::EventHandler^ = null of (::system::reflection::EventHandler^);
+
+                    var <bind-opened> : ::system::Boolean = false;
+
+                    var <bind-closed> : ::system::Boolean = false;
+
+                    func <bind-activator>() : (::system::Void)
+                    {
+                        var <bind-activator-result> = ((cast (IUnitTestSnapshotFrame^) <bind-cache>0.SelectedItem).CommandsAsJsonText ?? "") of (::system::String);
+                        ValueChanged(<bind-activator-result>);
+                    }
+
+                    func <bind-callback>0_0(<bind-callback-argument>0 : ::presentation::compositions::GuiGraphicsComposition*, <bind-callback-argument>1 : ::presentation::compositions::GuiEventArgs*) : (::system::Void)
+                    {
+                        <bind-activator>();
+                    }
+
+                    override func Open() : (::system::Boolean)
+                    {
+                        if ((!<bind-opened>))
+                        {
+                            (<bind-opened> = true);
+                            (<bind-cache>0 = (textListFrames ?? null of (::presentation::controls::GuiBindableTextList*)));
+                            (<bind-handler>0_0 = (attach(<bind-cache>0.SelectionChanged, <bind-callback>0_0) ?? null));
+                            return true;
+                        }
+                        return false;
+                    }
+
+                    override func Update() : (::system::Boolean)
+                    {
+                        if ((<bind-opened> and (!<bind-closed>)))
+                        {
+                            <bind-activator>();
+                            return true;
+                        }
+                        return false;
+                    }
+
+                    override func Close() : (::system::Boolean)
+                    {
+                        if ((!<bind-closed>))
+                        {
+                            (<bind-closed> = true);
+                            if (<bind-handler>0_0 is not null)
+                            {
+                                detach(<bind-cache>0.SelectionChanged, <bind-handler>0_0);
+                                (<bind-handler>0_0 = null);
+                            }
+                            (<bind-cache>0 = null of (::presentation::controls::GuiBindableTextList*));
+                            (<bind-handler>0_0 = null of (::system::reflection::EventHandler^));
+                            return true;
+                        }
+                        return false;
+                    }
+                };
+                attach(<created-subscription>.ValueChanged, func (<value> : ::system::Object) : (::system::Void)
+                {
+                    var <old> = <precompile>19.Text;
+                    var <new> = (cast (::system::String) <value>);
+                    if ((<old> == <new>))
+                    {
+                        return;
+                    }
+                    (<precompile>19.Text = <new>);
+                });
+                <this>.AddSubscription(<created-subscription>);
+            }
+            {
+                var <created-subscription> = new (::system::Subscription^)
+                {
+                    var <bind-cache>0 : ::presentation::controls::GuiBindableTextList* = null of (::presentation::controls::GuiBindableTextList*);
+
+                    var <bind-handler>0_0 : ::system::reflection::EventHandler^ = null of (::system::reflection::EventHandler^);
+
+                    var <bind-opened> : ::system::Boolean = false;
+
+                    var <bind-closed> : ::system::Boolean = false;
+
+                    func <bind-activator>() : (::system::Void)
+                    {
+                        var <bind-activator-result> = ((cast (IUnitTestSnapshotFrame^) <bind-cache>0.SelectedItem).ElementsAsJsonText ?? "") of (::system::String);
+                        ValueChanged(<bind-activator-result>);
+                    }
+
+                    func <bind-callback>0_0(<bind-callback-argument>0 : ::presentation::compositions::GuiGraphicsComposition*, <bind-callback-argument>1 : ::presentation::compositions::GuiEventArgs*) : (::system::Void)
+                    {
+                        <bind-activator>();
+                    }
+
+                    override func Open() : (::system::Boolean)
+                    {
+                        if ((!<bind-opened>))
+                        {
+                            (<bind-opened> = true);
+                            (<bind-cache>0 = (textListFrames ?? null of (::presentation::controls::GuiBindableTextList*)));
+                            (<bind-handler>0_0 = (attach(<bind-cache>0.SelectionChanged, <bind-callback>0_0) ?? null));
+                            return true;
+                        }
+                        return false;
+                    }
+
+                    override func Update() : (::system::Boolean)
+                    {
+                        if ((<bind-opened> and (!<bind-closed>)))
+                        {
+                            <bind-activator>();
+                            return true;
+                        }
+                        return false;
+                    }
+
+                    override func Close() : (::system::Boolean)
+                    {
+                        if ((!<bind-closed>))
+                        {
+                            (<bind-closed> = true);
+                            if (<bind-handler>0_0 is not null)
+                            {
+                                detach(<bind-cache>0.SelectionChanged, <bind-handler>0_0);
+                                (<bind-handler>0_0 = null);
+                            }
+                            (<bind-cache>0 = null of (::presentation::controls::GuiBindableTextList*));
+                            (<bind-handler>0_0 = null of (::system::reflection::EventHandler^));
+                            return true;
+                        }
+                        return false;
+                    }
+                };
+                attach(<created-subscription>.ValueChanged, func (<value> : ::system::Object) : (::system::Void)
+                {
+                    var <old> = <precompile>22.Text;
+                    var <new> = (cast (::system::String) <value>);
+                    if ((<old> == <new>))
+                    {
+                        return;
+                    }
+                    (<precompile>22.Text = <new>);
+                });
+                <this>.AddSubscription(<created-subscription>);
+            }
+            {
+                var <created-subscription> = new (::system::Subscription^)
+                {
+                    var <bind-cache>0 : ::gaclib_controls::UnitTestSnapshotViewerWindow* = null of (::gaclib_controls::UnitTestSnapshotViewerWindow*);
+
+                    var <bind-handler>0_0 : ::system::reflection::EventHandler^ = null of (::system::reflection::EventHandler^);
+
+                    var <bind-opened> : ::system::Boolean = false;
+
+                    var <bind-closed> : ::system::Boolean = false;
+
+                    func <bind-activator>() : (::system::Void)
+                    {
+                        var <bind-activator-result> = <bind-cache>0.Strings.WindowTitle();
+                        ValueChanged(<bind-activator-result>);
+                    }
+
+                    func <bind-callback>0_0() : (::system::Void)
+                    {
+                        <bind-activator>();
+                    }
+
+                    override func Open() : (::system::Boolean)
+                    {
+                        if ((!<bind-opened>))
+                        {
+                            (<bind-opened> = true);
+                            (<bind-cache>0 = (<this> ?? null of (::gaclib_controls::UnitTestSnapshotViewerWindow*)));
+                            (<bind-handler>0_0 = (attach(<bind-cache>0.StringsChanged, <bind-callback>0_0) ?? null));
+                            return true;
+                        }
+                        return false;
+                    }
+
+                    override func Update() : (::system::Boolean)
+                    {
+                        if ((<bind-opened> and (!<bind-closed>)))
+                        {
+                            <bind-activator>();
+                            return true;
+                        }
+                        return false;
+                    }
+
+                    override func Close() : (::system::Boolean)
+                    {
+                        if ((!<bind-closed>))
+                        {
+                            (<bind-closed> = true);
+                            if (<bind-handler>0_0 is not null)
+                            {
+                                detach(<bind-cache>0.StringsChanged, <bind-handler>0_0);
+                                (<bind-handler>0_0 = null);
+                            }
+                            (<bind-cache>0 = null of (::gaclib_controls::UnitTestSnapshotViewerWindow*));
+                            (<bind-handler>0_0 = null of (::system::reflection::EventHandler^));
+                            return true;
+                        }
+                        return false;
+                    }
+                };
+                attach(<created-subscription>.ValueChanged, func (<value> : ::system::Object) : (::system::Void)
+                {
+                    var <old> = self.Text;
+                    var <new> = (cast (::system::String) <value>);
+                    if ((<old> == <new>))
+                    {
+                        return;
+                    }
+                    (self.Text = <new>);
+                });
+                <this>.AddSubscription(<created-subscription>);
+            }
+            {
+                var <created-subscription> = new (::system::Subscription^)
+                {
+                    var <bind-cache>0 : ::presentation::controls::GuiApplication* = null of (::presentation::controls::GuiApplication*);
+
+                    var <bind-handler>0_0 : ::system::reflection::EventHandler^ = null of (::system::reflection::EventHandler^);
+
+                    var <bind-opened> : ::system::Boolean = false;
+
+                    var <bind-closed> : ::system::Boolean = false;
+
+                    func <bind-activator>() : (::system::Void)
+                    {
+                        var <bind-activator-result> = gaclib_controls::UnitTestSnapshotViewerStrings::Get(<bind-cache>0.Locale);
+                        ValueChanged(<bind-activator-result>);
+                    }
+
+                    func <bind-callback>0_0() : (::system::Void)
+                    {
+                        <bind-activator>();
+                    }
+
+                    override func Open() : (::system::Boolean)
+                    {
+                        if ((!<bind-opened>))
+                        {
+                            (<bind-opened> = true);
+                            (<bind-cache>0 = (presentation::controls::GuiApplication::GetApplication() ?? null of (::presentation::controls::GuiApplication*)));
+                            (<bind-handler>0_0 = (attach(<bind-cache>0.LocaleChanged, <bind-callback>0_0) ?? null));
+                            return true;
+                        }
+                        return false;
+                    }
+
+                    override func Update() : (::system::Boolean)
+                    {
+                        if ((<bind-opened> and (!<bind-closed>)))
+                        {
+                            <bind-activator>();
+                            return true;
+                        }
+                        return false;
+                    }
+
+                    override func Close() : (::system::Boolean)
+                    {
+                        if ((!<bind-closed>))
+                        {
+                            (<bind-closed> = true);
+                            if (<bind-handler>0_0 is not null)
+                            {
+                                detach(<bind-cache>0.LocaleChanged, <bind-handler>0_0);
+                                (<bind-handler>0_0 = null);
+                            }
+                            (<bind-cache>0 = null of (::presentation::controls::GuiApplication*));
+                            (<bind-handler>0_0 = null of (::system::reflection::EventHandler^));
+                            return true;
+                        }
+                        return false;
+                    }
+                };
+                attach(<created-subscription>.ValueChanged, func (<value> : ::system::Object) : (::system::Void)
+                {
+                    var <old> = self.Strings;
+                    var <new> = (cast (::gaclib_controls::IUnitTestSnapshotViewerStringsStrings^) <value>);
+                    if ((<old> == <new>))
+                    {
+                        return;
+                    }
+                    (self.Strings = <new>);
+                });
+                <this>.AddSubscription(<created-subscription>);
+            }
+        }
+
+        new ()
+        {
+        }
+    }
+}
+
+================================(2/4)================================
+module <instance>gaclib_controls::UnitTestSnapshotViewerWindow;
+using presentation::controls::Gui*;
+using presentation::elements::Gui*Element;
+using presentation::compositions::Gui*Composition;
+using presentation::compositions::Gui*;
+using presentation::templates::Gui*;
+using system::*;
+using system::reflection::*;
+using presentation::*;
+using presentation::Gui*;
+using presentation::controls::*;
+using presentation::controls::list::*;
+using presentation::controls::tree::*;
+using presentation::elements::*;
+using presentation::elements::Gui*;
+using presentation::elements::text::*;
+using presentation::compositions::*;
+using presentation::templates::*;
+using presentation::theme::*;
+
+namespace gaclib_controls
+{
+    @cpp:Friend(typeof(UnitTestSnapshotViewerWindowConstructor))
+    class UnitTestSnapshotViewerWindow : ::presentation::controls::GuiWindow, UnitTestSnapshotViewerWindowConstructor
+    {
+        @cpp:Private
+        var imageFolder : ImageData^ = null;
+
+        @cpp:Private
+        var imageFile : ImageData^ = null;
+
+        @cpp:Private
+        func GetImageFromType(nodeType : UnitTestSnapshotFileNodeType) : (ImageData^)
+        {
+            if (imageFolder is null)
+            {
+                (imageFolder = (cast (ImageData^) ResolveResource("import-res", "GuiFakeDialogServiceUI/Images/Folder", true)));
+            }
+            if (imageFile is null)
+            {
+                (imageFile = (cast (ImageData^) ResolveResource("import-res", "GuiFakeDialogServiceUI/Images/File", true)));
+            }
+            {
+                var <switch>0 : ::gaclib_controls::UnitTestSnapshotFileNodeType = nodeType;
+                if ((<switch>0 == File of (::gaclib_controls::UnitTestSnapshotFileNodeType)))
+                {
+                    return imageFile;
+                }
+                else if ((<switch>0 == Folder of (::gaclib_controls::UnitTestSnapshotFileNodeType)))
+                {
+                    return imageFolder;
+                }
+                else
+                {
+                    raise "Unknown value of UnitTestSnapshotFileNodeType";
+                }
+            }
+        }
+
+        @cpp:Private
+        var <prop>Strings : ::gaclib_controls::IUnitTestSnapshotViewerStringsStrings^ = ::gaclib_controls::UnitTestSnapshotViewerStrings::Get((cast (::system::Locale) "en-US"));
+
+        func GetStrings() : (::gaclib_controls::IUnitTestSnapshotViewerStringsStrings^)
+        {
+            return <prop>Strings;
+        }
+
+        func SetStrings(<value> : ::gaclib_controls::IUnitTestSnapshotViewerStringsStrings^) : (void)
+        {
+            if ((<prop>Strings != <value>))
+            {
+                (<prop>Strings = <value>);
+                StringsChanged();
+            }
+        }
+
+        event StringsChanged();
+
+        prop Strings : ::gaclib_controls::IUnitTestSnapshotViewerStringsStrings^{GetStrings, SetStrings : StringsChanged}
+
+        @cpp:Private
+        var <parameter>ViewModel : gaclib_controls::IUnitTestSnapshotViewerViewModel^ = null of (::gaclib_controls::IUnitTestSnapshotViewerViewModel^);
+
+        func GetViewModel() : (gaclib_controls::IUnitTestSnapshotViewerViewModel^)
+        {
+            return <parameter>ViewModel;
+        }
+
+        prop ViewModel : gaclib_controls::IUnitTestSnapshotViewerViewModel^{GetViewModel}
+
+        new* (<ctor-parameter>ViewModel : gaclib_controls::IUnitTestSnapshotViewerViewModel^)
+            :::presentation::controls::GuiWindow(::presentation::theme::ThemeName::Window)
+        {
+            (<parameter>ViewModel = <ctor-parameter>ViewModel);
+            var <resource> = ::presentation::IGuiResourceManager::GetResourceManager().GetResourceFromClassName("gaclib_controls::UnitTestSnapshotViewerWindow");
+            var <resolver> = new (::presentation::GuiResourcePathResolver^)(<resource>, <resource>.WorkingDirectory);
+            this.SetResourceResolver(<resolver>);
+            this.<gaclib_controls-UnitTestSnapshotViewerWindow>Initialize(this);
+        }
+
+        delete
+        {
+            FinalizeInstanceRecursively(this of (::presentation::controls::GuiControlHost*));
+        }
+    }
+}
+
+================================(3/4)================================
+module <localized-strings>gaclib_controls::UnitTestSnapshotViewerStrings;
+
+namespace gaclib_controls
+{
+    interface IUnitTestSnapshotViewerStringsStrings
+    {
+        func WindowTitle() : (::system::String);
+    }
+}
+
+namespace gaclib_controls
+{
+    var <ls>UnitTestSnapshotViewerStrings : IUnitTestSnapshotViewerStringsStrings^[::system::Locale] = {};
+}
+
+namespace gaclib_controls
+{
+    class UnitTestSnapshotViewerStrings
+    {
+        static func <ls_en-US>BuildStrings(<ls>locale : ::system::Locale) : (::gaclib_controls::IUnitTestSnapshotViewerStringsStrings^)
+        {
+            return new (::gaclib_controls::IUnitTestSnapshotViewerStringsStrings^)
+            {
+                override func WindowTitle() : (::system::String)
+                {
+                    return "Unit Test Snapshot Viewer";
+                }
+            };
+        }
+
+        static func Install(<ls>locale : ::system::Locale, <ls>impl : IUnitTestSnapshotViewerStringsStrings^) : (void)
+        {
+            if (<ls>UnitTestSnapshotViewerStrings.Keys.Contains(<ls>locale))
+            {
+                raise (("Localized strings \"gaclib_controls::UnitTestSnapshotViewerStrings\" has already registered for locale \"" & <ls>locale) & "\".");
+            }
+            <ls>UnitTestSnapshotViewerStrings.Set(<ls>locale, <ls>impl);
+        }
+
+        static func Get(<ls>locale : ::system::Locale) : (IUnitTestSnapshotViewerStringsStrings^)
+        {
+            if (<ls>UnitTestSnapshotViewerStrings.Keys.Contains(<ls>locale))
+            {
+                return <ls>UnitTestSnapshotViewerStrings[<ls>locale];
+            }
+            return <ls>UnitTestSnapshotViewerStrings[(cast (::system::Locale) "en-US")];
+        }
+
+        new ()
+        {
+        }
+    }
+}
+
+namespace gaclib_controls
+{
+    static
+    {
+        ::gaclib_controls::UnitTestSnapshotViewerStrings::Install((cast (::system::Locale) "en-US"), UnitTestSnapshotViewerStrings::<ls_en-US>BuildStrings((cast (::system::Locale) "en-US")));
+    }
+}
+
+================================(4/4)================================
+module viewmodel;
+using system::*;
+using presentation::*;
+
+namespace gaclib_controls
+{
+    enum UnitTestSnapshotFileNodeType
+    {
+        Folder = 0,
+        File = 1,
+    }
+
+    interface IUnitTestSnapshotFrame
+    {
+        func GetName() : (string);
+
+        prop Name : string{GetName}
+
+        func GetElementsAsJsonText() : (string);
+
+        prop ElementsAsJsonText : string{GetElementsAsJsonText}
+
+        func GetCommandsAsJsonText() : (string);
+
+        prop CommandsAsJsonText : string{GetCommandsAsJsonText}
+
+        func GetDomAsJsonText() : (string);
+
+        prop DomAsJsonText : string{GetDomAsJsonText}
+    }
+
+    interface IUnitTestSnapshotFileNode
+    {
+        func GetNodeType() : (UnitTestSnapshotFileNodeType);
+
+        prop NodeType : UnitTestSnapshotFileNodeType{GetNodeType}
+
+        func GetName() : (string);
+
+        prop Name : string{GetName}
+
+        func GetChildren() : (IUnitTestSnapshotFileNode^{});
+
+        prop Children : IUnitTestSnapshotFileNode^{}{GetChildren}
+
+        func GetFrames() : (IUnitTestSnapshotFrame^{});
+
+        prop Frames : IUnitTestSnapshotFrame^{}{GetFrames}
+
+        func Refresh() : (void);
+    }
+
+    interface IUnitTestSnapshotViewerViewModel
+    {
+        func GetRootNode() : (IUnitTestSnapshotFileNode^);
+
+        prop RootNode : IUnitTestSnapshotFileNode^{GetRootNode}
+    }
+}
+

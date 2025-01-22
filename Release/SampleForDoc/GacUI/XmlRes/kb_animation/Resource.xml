@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Resource>
+  <Folder name="GacGenConfig">
+    <Folder name="ResX86">
+      <Text name="Resource">..\..\UIRes\32bits\kb_animation.bin</Text>
+    </Folder>
+    <Folder name="ResX64">
+      <Text name="Resource">..\..\UIRes\64bits\kb_animation.bin</Text>
+    </Folder>
+  </Folder>
+  <Folder name="MainWindow">
+    <Script name="SharedScript">
+      <Workflow>
+        <![CDATA[
+          module sharedscript;
+
+          using system::*;
+          using presentation::*;
+
+          namespace sample
+          {
+            class AnimationState
+            {
+              prop Length : double    = 0                       {}
+              prop Text : Color       = cast Color "#FFFFFF"    {}
+              prop Border : Color     = cast Color "#00FF00"    {}
+              prop Background : Color = cast Color "#00000000"  {}
+
+              new(){}
+            }
+
+            class AnimationConfig
+            {
+              prop Normal: AnimationState^ = null {}
+              prop NormalSelected: AnimationState^ = null {}
+              prop Active: AnimationState^ = null {}
+              prop ActiveSelected: AnimationState^ = null {}
+              prop Pressed: AnimationState^ = null {}
+              prop PressedSelected: AnimationState^ = null {}
+
+              new(){}
+              func SetResourceResolver      (resolver: GuiResourcePathResolver^)  : void {}
+              func FinalizeGeneralInstance  (self: AnimationConfig*)              : void {}
+            }
+          }
+        ]]>
+      </Workflow>
+    </Script>
+
+    <Instance name="AnimationConfigResource">
+      <Instance ref.Class="sample::RadioButtonAnimationConfig" xmlns:sample="sample::*">
+        <sample:AnimationConfig>
+          <att.Normal>
+            <sample:AnimationState/>
+          </att.Normal>
+
+          <att.NormalSelected>
+            <sample:AnimationState Length="1" Text="#000000" Border="#00FF00" Background="#00FF00"/>
+          </att.NormalSelected>
+          <att.Active>
+
+            <sample:AnimationState Length="1" Text="#FFFFFF" Border="#FFFF00" Background="#00000000"/>
+          </att.Active>
+
+          <att.ActiveSelected>
+            <sample:AnimationState Length="1" Text="#000000" Border="#FFFF00" Background="#FFFF00"/>
+          </att.ActiveSelected>
+
+          <att.Pressed>
+            <sample:AnimationState Length="1" Text="#FFFFFF" Border="#00FF00" Background="#00000000"/>
+          </att.Pressed>
+
+          <att.PressedSelected>
+            <sample:AnimationState Length="1" Text="#000000" Border="#FFFF00" Background="#FFFF00"/>
+          </att.PressedSelected>
+        </sample:AnimationConfig>
+      </Instance>
+    </Instance>
+
+    <Animation name="RadioButtonTemplateAnimation">
+      <Gradient ref.Class="sample::RadioButtonTemplateAnimation" Type="sample::AnimationState">
+        <Interpolation><![CDATA[
+          func (x: double): double
+          {
+            if (x < 0.5) { return x * x * 2; } else { return 1 - (1 - x) * (1 - x) * 2; }
+          }
+        ]]></Interpolation>
+        <Targets>
+          <Target Name="Length"/>
+          <Target Name="Text"/>
+          <Target Name="Border"/>
+          <Target Name="Background"/>
+        </Targets>
+      </Gradient>
+    </Animation>
+
+    <Instance name="RadioButtonTemplateResource">
+      <Instance ref.Class="sample::RadioButtonTemplate">
+        <ref.Members><![CDATA[
+          var animationBuilder : RadioButtonTemplateAnimation^ = new RadioButtonTemplateAnimation^(new AnimationState^());
+          var animationConfig : RadioButtonAnimationConfig^ = cast (RadioButtonAnimationConfig^) new RadioButtonAnimationConfig*();
+          var lastAnimation : IGuiAnimation^ = null;
+
+          func OnStateChanged(): void
+          {
+            var newAnimation : IGuiAnimation^ = null;
+            if (self.Selected)
+            {
+              switch (self.State)
+              {
+                case Normal:
+                {
+                  newAnimation = animationBuilder.CreateAnimation(animationConfig.NormalSelected, cast UInt64 500);
+                }
+                case Active:
+                {
+                  newAnimation = animationBuilder.CreateAnimation(animationConfig.ActiveSelected, cast UInt64 500);
+                }
+                case Pressed:
+                {
+                  newAnimation = animationBuilder.CreateAnimation(animationConfig.PressedSelected, cast UInt64 500);
+                }
+              }
+            }
+            else
+            {
+              switch (self.State)
+              {
+                case Normal:
+                {
+                  newAnimation = animationBuilder.CreateAnimation(animationConfig.Normal, cast UInt64 500);
+                }
+                case Active:
+                {
+                  newAnimation = animationBuilder.CreateAnimation(animationConfig.Active, cast UInt64 500);
+                }
+                case Pressed:
+                {
+                  newAnimation = animationBuilder.CreateAnimation(animationConfig.Pressed, cast UInt64 500);
+                }
+              }
+            }
+            
+            KillAnimation(lastAnimation);
+            lastAnimation = newAnimation;
+            AddAnimation(lastAnimation);
+          }
+
+          func GetAlignment(): presentation::Margin
+          {
+            return {
+              left:0
+              top:0
+              bottom:0
+              right:(
+                cast int Math::Round(
+                  (1 - self.animationBuilder.Current.Length) * (self.boundary.CachedBounds.x2 - self.boundary.CachedBounds.x1 - 10)
+                )
+              )
+            };
+          }
+        ]]></ref.Members>
+        <SelectableButtonTemplate ref.Name="self" ContainerComposition-ref="container" MinSizeLimitation="LimitToElementAndChildren">
+          <Bounds ref.Name="boundary" AlignmentToParent="left:0 top:0 right:0 bottom:0">
+            <Bounds AlignmentToParent-bind="self.observe as _ (_.GetAlignment() on _.boundary.CachedBoundsChanged, _.animationBuilder.Current.LengthChanged)">
+              <SolidBorder Color-bind="self.animationBuilder.Current.Border" Shape="shapeType:RoundRect radiusX:5 radiusY:5"/>
+            </Bounds>
+            <Bounds AlignmentToParent-bind="self.observe as _ (_.GetAlignment() on _.boundary.CachedBoundsChanged, _.animationBuilder.Current.LengthChanged)">
+              <SolidBackground Color-bind="self.animationBuilder.Current.Background" Shape="shapeType:RoundRect radiusX:5 radiusY:5"/>
+            </Bounds>
+          </Bounds>
+
+          <Table AlignmentToParent="left:0 top:0 right:0 bottom:0" MinSizeLimitation="LimitToElementAndChildren">
+            <att.Rows>
+              <CellOption>composeType:Absolute absolute:10</CellOption>
+              <CellOption>composeType:Percentage percentage:0.5</CellOption>
+              <CellOption>composeType:MinSize</CellOption>
+              <CellOption>composeType:Percentage percentage:0.5</CellOption>
+              <CellOption>composeType:Absolute absolute:10</CellOption>
+            </att.Rows>
+            <att.Columns>
+              <CellOption>composeType:Absolute absolute:5</CellOption>
+              <CellOption>composeType:Percentage percentage:0.5</CellOption>
+              <CellOption>composeType:MinSize</CellOption>
+              <CellOption>composeType:Percentage percentage:0.5</CellOption>
+              <CellOption>composeType:Absolute absolute:5</CellOption>
+            </att.Columns>
+
+            <Cell Site="row:2 column:2">
+              <Bounds AlignmentToParent="left:0 top:0 right:0 bottom:0" MinSizeLimitation="LimitToElementAndChildren">
+              </Bounds>
+              <Bounds AlignmentToParent="left:1 top:1 right:1 bottom:1" MinSizeLimitation="LimitToElementAndChildren">
+                <SolidLabel Text-bind="self.Text" Font-bind="self.Font" Color-bind="self.animationBuilder.Current.Text"/>
+              </Bounds>
+              <Bounds ref.Name="container" AlignmentToParent="left:1 top:1 right:1 bottom:1" MinSizeLimitation="LimitToElementAndChildren"/>
+            </Cell>
+          </Table>
+
+          <ev.StateChanged-eval><![CDATA[
+            self.OnStateChanged();
+          ]]></ev.StateChanged-eval>
+          
+          <ev.SelectedChanged-eval><![CDATA[
+            self.OnStateChanged();
+          ]]></ev.SelectedChanged-eval>
+        </SelectableButtonTemplate>
+      </Instance>
+    </Instance>
+
+    <InstanceStyle name="SharedStyle">
+      <Styles>
+        <Style ref.Path="//Cell/RadioButton" GroupController-ref="groupDirection">
+          <att.ControlTemplate>sample::RadioButtonTemplate</att.ControlTemplate>
+          <att.BoundsComposition-set PreferredMinSize="x:160"/>
+        </Style>
+      </Styles>
+    </InstanceStyle>
+
+    <Instance name="MainWindowResource">
+      <Instance ref.Class="sample::MainWindow" ref.Styles="res://MainWindow/SharedStyle" xmlns:x="presentation::controls::GuiSelectableButton::*">
+        <Window Text="kb_animation" IconVisible="true" ClientSize="x:480 y:320">
+          <x:MutexGroupController ref.Name="groupDirection"/>
+          <att.ContainerComposition-set PreferredMinSize="x:480 y:320"/>
+          <Table CellPadding="10" BorderVisible="true" AlignmentToParent="left:0 top:0 right:0 bottom:0" MinSizeLimitation="LimitToElementAndChildren">
+            <att.Rows>
+              <CellOption>composeType:Percentage percentage:0.5</CellOption>
+              <CellOption>composeType:MinSize</CellOption>
+              <CellOption>composeType:MinSize</CellOption>
+              <CellOption>composeType:MinSize</CellOption>
+              <CellOption>composeType:Percentage percentage:0.5</CellOption>
+            </att.Rows>
+            <att.Columns>
+              <CellOption>composeType:Percentage percentage:0.5</CellOption>
+              <CellOption>composeType:MinSize</CellOption>
+              <CellOption>composeType:Percentage percentage:0.5</CellOption>
+            </att.Columns>
+
+            <Cell Site="row:1 column:1">
+              <RadioButton Text="Option A"/>
+            </Cell>
+            <Cell Site="row:2 column:1">
+              <RadioButton Text="Option B"/>
+            </Cell>
+            <Cell Site="row:3 column:1">
+              <RadioButton Text="Option C"/>
+            </Cell>
+          </Table>
+        </Window>
+      </Instance>
+    </Instance>
+  </Folder>
+</Resource>

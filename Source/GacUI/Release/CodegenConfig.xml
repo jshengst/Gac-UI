@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<codegen>
+  <folders>
+    <folder path="..\Source" />
+    <folder path="..\Import" />
+    <except pattern="\Resource.xml.log\" />
+  </folders>
+  <categories>
+    <category name="vlpp" pattern="\Import\Vlpp."/>
+    <category name="vlppos" pattern="\Import\VlppOS."/>
+    <category name="vlppregex" pattern="\Import\VlppRegex."/>
+    <category name="vlppreflection" pattern="\Import\VlppReflection."/>
+    <category name="vlppparser" pattern="\Import\VlppParser."/>
+    <category name="vlppparser2" pattern="\Import\VlppGlrParser."/>
+    <category name="vlppparser2compiler" pattern="\Import\VlppGlrParserCompiler."/>
+    <category name="wflibrary" pattern="\Import\VlppWorkflowLibrary."/>
+    <category name="wfruntime" pattern="\Import\VlppWorkflowRuntime."/>
+    <category name="wfcompiler" pattern="\Import\VlppWorkflowCompiler."/>
+    <category name="gacui" pattern="\Source\">
+      <except pattern="\PlatformProviders\Windows\" />
+      <except pattern="\UnitTestUtilities\" />
+      <except pattern="\Reflection\" />
+      <except pattern="\Compiler\" />
+      <except pattern="\Skins\" />
+      <except pattern="GuiFakeDialogServiceUIReflection" />
+    </category>
+    <category name="windows" pattern="\Source\PlatformProviders\Windows\"/>
+    <category name="unittest" pattern="\Source\UnitTestUtilities\">
+      <except pattern="SnapshotViewer"/>
+    </category>
+    <category name="unittest_ui" pattern="\Source\UnitTestUtilities\SnapshotViewer">
+      <except pattern="Reflection"/>
+    </category>
+    <category name="unittest_r" pattern="\Source\UnitTestUtilities\SnapshotViewer\Source\GuiUnitTestSnapshotViewerReflection"/>
+    <category name="reflection" pattern="\Source\Reflection\"/>
+    <category name="reflection" pattern="GuiFakeDialogServiceUIReflection"/>
+    <category name="compiler" pattern="\Source\Compiler\"/>
+    <category name="darkskin" pattern="\Skins\DarkSkin\Source\">
+      <except pattern="Reflection"/>
+    </category>
+    <category name="darkskin_r" pattern="\Skins\DarkSkin\Source\DarkSkinReflection"/>
+  </categories>
+  <output path=".">
+    <codepair category="vlpp" filename="Vlpp" generate="false"/>
+    <codepair category="vlppos" filename="VlppOS" generate="false"/>
+    <codepair category="vlppregex" filename="VlppRegex" generate="false"/>
+    <codepair category="vlppreflection" filename="VlppReflection" generate="false"/>
+    <codepair category="vlppparser" filename="VlppParser" generate="false"/>
+    <codepair category="vlppparser2" filename="VlppGlrParser" generate="false"/>
+    <codepair category="vlppparser2compiler" filename="VlppGlrParserCompiler" generate="false"/>
+    <codepair category="wflibrary" filename="VlppWorkflowLibrary" generate="false"/>
+    <codepair category="wfruntime" filename="VlppWorkflowRuntime" generate="false"/>
+    <codepair category="wfcompiler" filename="VlppWorkflowCompiler" generate="false"/>
+    <codepair category="gacui" filename="GacUI" generate="true"/>
+    <codepair category="windows" filename="GacUI.Windows" generate="true"/>
+    <codepair category="unittest" filename="GacUI.UnitTest" generate="true"/>
+    <codepair category="unittest_ui" filename="GacUI.UnitTest.UI" generate="true"/>
+    <codepair category="unittest_r" filename="GacUI.UnitTest.UIReflection" generate="true"/>
+    <codepair category="reflection" filename="GacUIReflection" generate="true"/>
+    <codepair category="compiler" filename="GacUICompiler" generate="true"/>
+    <codepair category="darkskin" filename="DarkSkin" generate="true"/>
+    <codepair category="darkskin_r" filename="DarkSkinReflection" generate="true"/>
+  </output>
+</codegen>

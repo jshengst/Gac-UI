@@ -1,0 +1,169 @@
+<Folder>
+  <Instance name="MessageBoxButtonTemplateResource">
+    <Instance ref.CodeBehind="false" ref.Class="gaclib_controls::MessageBoxButtonTemplate">
+      <ref.LocalizedStrings Name="Strings" Class="gaclib_controls::DialogStrings" Default="true"/>
+      <ref.Parameter Name="Action" Class="presentation::IMessageBoxDialogAction"/>
+      <ref.Members><![CDATA[
+        prop ButtonControl : GuiButton* = null {const}
+
+        func GetButtonText(button: INativeDialogService::MessageBoxButtonsOutput, strings: IDialogStringsStrings^) : string
+        {
+          switch (button)
+          {
+          case SelectOK:        { return strings.OK(); }
+          case SelectCancel:    { return strings.Cancel(); }
+          case SelectYes:       { return strings.Yes(); }
+          case SelectNo:        { return strings.No(); }
+          case SelectRetry:     { return strings.Retry(); }
+          case SelectAbort:     { return strings.Abort(); }
+          case SelectIgnore:    { return strings.Ignore(); }
+          case SelectTryAgain:  { return strings.TryAgain(); }
+          case SelectContinue:  { return strings.Continue(); }
+          default:              { return ""; }
+          }
+        }
+
+        func GetButtonAlt(button: INativeDialogService::MessageBoxButtonsOutput) : string
+        {
+          switch (button)
+          {
+          case SelectOK:        { return "O"; }
+          case SelectCancel:    { return "C"; }
+          case SelectYes:       { return "Y"; }
+          case SelectNo:        { return "N"; }
+          case SelectRetry:     { return "R"; }
+          case SelectAbort:     { return "A"; }
+          case SelectIgnore:    { return "I"; }
+          case SelectTryAgain:  { return "T"; }
+          case SelectContinue:  { return "K"; }
+          default:              { return ""; }
+          }
+        }
+      ]]></ref.Members>
+      <ref.Ctor><![CDATA[
+        {
+          self.SetButtonControl(self.buttonControl);
+        }
+      ]]></ref.Ctor>
+      <ControlTemplate ref.Name="self" MinSizeLimitation="LimitToElementAndChildren">
+        <Button ref.Name="buttonControl" Text-bind="self.GetButtonText(Action.Button, self.Strings)" Alt-eval="self.GetButtonAlt(Action.Button)">
+          <att.BoundsComposition-set AlignmentToParent="left:0 top:0 right:0 bottom:0" PreferredMinSize="x:80 y:24"/>
+          <ev.Clicked-eval><![CDATA[
+            {
+              Action.PerformAction();
+              self.RelatedControlHost.Close();
+            }
+          ]]></ev.Clicked-eval>
+        </Button>
+      </ControlTemplate>
+    </Instance>
+  </Instance>
+
+  <Instance name="MessageBoxWindowResource">
+    <Instance ref.CodeBehind="false" ref.Class="gaclib_controls::MessageBoxWindow">
+      <ref.Parameter Name="ViewModel" Class="presentation::IMessageBoxDialogViewModel"/>
+      <ref.Members><![CDATA[
+        func GetIcon(icon: INativeDialogService::MessageBoxIcons): INativeImage^
+        {
+          var iconUri = "Images/None";
+          switch (ViewModel.Icon)
+          {
+          case IconError:       { iconUri = "Images/Error";       }
+          case IconQuestion:    { iconUri = "Images/Question";    }
+          case IconWarning:     { iconUri = "Images/Warning";     }
+          case IconInformation: { iconUri = "Images/Information"; }
+          }
+          return (cast (GuiImageData^) self.ResolveResource("res", iconUri, true)).Image;
+        }
+      ]]></ref.Members>
+      <ref.Ctor> <![CDATA[
+        {
+          var defaultButton = ViewModel.Buttons.IndexOf(ViewModel.DefaultButton);
+          var buttonControl = (cast (MessageBoxButtonTemplate*) buttonStack.StackItems[defaultButton].Children[0]).ButtonControl;
+          buttonControl.SetFocused();
+        }
+      ]]></ref.Ctor>
+      <Window
+          ref.Name="self"
+          Text-eval="ViewModel.Title"
+          ClientSize="x:240 y:120"
+          ShowInTaskBar="false"
+          MaximizedBox="false"
+          MinimizedBox="false"
+          SizeBox="false"
+          IconVisible="false"
+          >
+        <Table AlignmentToParent="left:0 top:10 right:0 bottom:0" BorderVisible="false" CellPadding="10" MinSizeLimitation="LimitToElementAndChildren">
+          <att.Rows>
+            <_>composeType:MinSize</_>
+            <_>composeType:Percentage percentage:1.0</_>
+            <_>composeType:MinSize</_>
+          </att.Rows>
+          <att.Columns>
+            <_>composeType:MinSize</_>
+            <_>composeType:Percentage percentage:1.0</_>
+          </att.Columns>
+
+          <Cell Site="row:0 column:0">
+            <Table AlignmentToParent="left:0 top:0 right:0 bottom:0" BorderVisible="false" MinSizeLimitation="LimitToElementAndChildren">
+              <att.Rows>
+                <_>composeType:Percentage percentage:1.0</_>
+                <_>composeType:MinSize</_>
+                <_>composeType:Percentage percentage:1.0</_>
+              </att.Rows>
+              <att.Columns>
+                <_>composeType:MinSize</_>
+              </att.Columns>
+
+              <Cell Site="row:1 column:0">
+                <SolidBackground Color="#FFFFFF"/>
+                <Bounds PreferredMinSize="x:48 y:48" AlignmentToParent="left:0 top:0 right:0 bottom:0" MinSizeLimitation="LimitToElementAndChildren">
+                  <ImageFrame Stretch="true" Image-eval="self.GetIcon(ViewModel.Icon)"/>
+                </Bounds>
+              </Cell>
+            </Table>
+          </Cell>
+
+          <Cell Site="row:0 column:1">
+            <Table AlignmentToParent="left:0 top:0 right:0 bottom:0" BorderVisible="false" MinSizeLimitation="LimitToElementAndChildren">
+              <att.Rows>
+                <_>composeType:Percentage percentage:1.0</_>
+                <_>composeType:MinSize</_>
+                <_>composeType:Percentage percentage:1.0</_>
+              </att.Rows>
+              <att.Columns>
+                <_>composeType:MinSize</_>
+              </att.Columns>
+
+              <Cell Site="row:1 column:0">
+                <Label Text-eval="ViewModel.Text">
+                  <att.BoundsComposition-set AlignmentToParent="left:0 top:0 right:0 bottom:0"/>
+                </Label>
+              </Cell>
+            </Table>
+          </Cell>
+
+          <Cell Site="row:2 column:0 columnSpan:2">
+            <Table AlignmentToParent="left:0 top:0 right:0 bottom:0" BorderVisible="false" MinSizeLimitation="LimitToElementAndChildren">
+              <att.Rows>
+                <_>composeType:MinSize</_>
+              </att.Rows>
+              <att.Columns>
+                <_>composeType:Percentage percentage:1.0</_>
+                <_>composeType:MinSize</_>
+                <_>composeType:Percentage percentage:1.0</_>
+              </att.Columns>
+
+              <Cell Site="row:0 column:1">
+                <RepeatStack ref.Name="buttonStack" Direction="Horizontal" Padding="5" AlignmentToParent="left:0 top:0 right:0 bottom:0" MinSizeLimitation="LimitToElementAndChildren">
+                  <att.ItemTemplate>gaclib_controls::MessageBoxButtonTemplate</att.ItemTemplate>
+                  <att.ItemSource-eval>ViewModel.Buttons</att.ItemSource-eval>
+                </RepeatStack>
+              </Cell>
+            </Table>
+          </Cell>
+        </Table>
+      </Window>
+    </Instance>
+  </Instance>
+</Folder>

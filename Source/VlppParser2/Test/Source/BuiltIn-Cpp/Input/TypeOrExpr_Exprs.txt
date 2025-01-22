@@ -1,0 +1,162 @@
+(a)
+{}
+{a}
+{a, b}
+
+dynamic_cast<T*>(nullptr)
+static_cast<T*>(nullptr)
+const_cast<T*>(nullptr)
+reinterpret_cast<T*>(nullptr)
+safe_cast<T*>(nullptr)
+
+typeid(a+b)
+alignof(a+b)
+__alignof(a+b)
+__uuidof(T*)
+noexcept(a+b)
+
+new T
+new T[a]
+new T[a][b]
+new T()
+new T(a)
+new T(a, b)
+new T{}
+new T{a}
+new T{a, b}
+new (a, b)T
+new (a, b)T()
+new (a, b)T(a)
+new (a, b)T(a, b)
+new (a, b)T{}
+new (a, b)T{a}
+new (a, b)T{a, b}
+::new T
+::new T[a]
+::new T[a][b]
+::new T()
+::new T(a)
+::new T(a, b...)
+::new T{}
+::new T{a}
+::new T{a, b...}
+::new (a, b...)T
+::new (a, b...)T()
+::new (a, b...)T(a)
+::new (a, b...)T(a, b)
+::new (a, b...)T{}
+::new (a, b...)T{a}
+::new (a, b...)T{a, b}
+
+a++
+a--
+
+a{}
+const a{b}
+a volatile{b, c...}
+const a volatile{b+c}
+
+int{}
+const int{b}
+int volatile{b, c...}
+const int volatile{b+c}
+
+const T(a+b)
+T volatile(a+b)
+const T volatile(a+b)
+
+int(a+b)
+const int(a+b)
+int volatile(a+b)
+const int volatile(a+b)
+
+a++--[b][c]()(d)(e, f...)
+
+++a
+--a
+~a
+!a
+-a
++a
+&a
+*a
+++--~!-+&*a
+
+sizeof a
+sizeof... a
+sizeof(T*)
+sizeof...(T*)
+sizeof (int)*p
+sizeof... (int)*p
+sizeof a * b
+sizeof... a * b
+sizeof a(b, c)
+sizeof... a(b, c)
+
+delete a
+delete[] a
+::delete a
+::delete[] a
+
+(T*)a
+(T*)(a+b)
+
+a[b] + 1
+a[b][c] + 1
+a() + 1
+a(b) + 1
+a(b, c...) + 1
+
+a.b
+a.*(a+b)
+a->b
+a->*(a+b)
+
+a*b
+a/b
+a%b
+
+a+b
+a-b
+
+a<<b
+a>>b
+a<=>b
+a<b
+a>b
+a<=b
+a>=b
+
+a==b
+a!=b
+
+a&b
+
+a^b
+
+a|b
+
+a&&b
+
+a||b
+
+a?b:c
+a?b:c?d:e?f:g
+a=b
+a*=b
+a/=b
+a%=b
+a+=b
+a-=b
+a<<=b
+a>>=b
+a&=b
+a|=b
+a^=b
+
+throw
+throw a
+
+a,b
+a,b,c,d
+throw a, throw b

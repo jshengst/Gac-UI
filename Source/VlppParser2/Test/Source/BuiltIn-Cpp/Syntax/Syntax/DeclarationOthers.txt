@@ -1,0 +1,87 @@
+//////////////////////////////////////////////////////////////////
+// Static Assert Declaration
+//////////////////////////////////////////////////////////////////
+
+@public _StaticAssertDecl
+  ::= "static_assert" "(" _Expr_NoComma:expr ["," _Expr_NoComma:message] ")" as StaticAssertDeclaration
+  ;
+  
+//////////////////////////////////////////////////////////////////
+// Typedef Declaration
+//////////////////////////////////////////////////////////////////
+
+_TypedefCompatibleDecl
+  ::= !_MultiTypedefVarsDeclWithoutKeyword
+  ::= !_ClassDecl
+  ::= !_EnumDecl
+  ;
+
+@public _TypedefDecl
+  ::= "typedef" _TypedefCompatibleDecl:decl as TypedefDeclaration
+  ;
+  
+//////////////////////////////////////////////////////////////////
+// Extern Declaration
+//////////////////////////////////////////////////////////////////
+
+@public _ExternDeclRejectSemicolon
+  ::= "extern" [STRING] "{" {_DeclRejectSemicolon:decls} "}" as ExternDeclaration
+  ;
+  
+//////////////////////////////////////////////////////////////////
+// Namespace Declaration
+//////////////////////////////////////////////////////////////////
+
+_NsName
+  ::= ID:name as NamespaceName
+  ;
+
+@public _NsDecl
+  ::= "namespace" {_NsName:names ; "::"} "{" {_DeclRejectSemicolon:decls} "}" as NamespaceDeclaration
+  ;
+  
+//////////////////////////////////////////////////////////////////
+// Using Declaration
+//////////////////////////////////////////////////////////////////
+
+@public _UsingNsDecl
+  ::= "using" "namespace" _NsName:names {"::" _NsName:names} as UsingNamespaceDeclaration
+  ;
+
+@public _UsingValueDecl
+  ::= "using" ["typename":typenameKeyword] _QualifiedName:name as UsingValueDeclaration
+  ;
+
+@public _UsingTypeDecl
+  ::= "using" ID:name "=" _Type:type as UsingTypeDeclaration
+  ;
+  
+//////////////////////////////////////////////////////////////////
+// Friend Declaration
+//////////////////////////////////////////////////////////////////
+
+@public _FriendTypeDecl
+  ::= "friend" _QualifiedName:type as FriendTypeDeclaration
+  ;
+
+//////////////////////////////////////////////////////////////////
+// Enum Declaration
+//////////////////////////////////////////////////////////////////
+
+_EnumItem
+  ::= ID:name ["=" _Expr:expr] as EnumItem
+  ;
+
+_EnumBody
+  ::= "{" [_EnumItem:items {"," _EnumItem:items} [","]] "}" [_MultiVarsDeclVariablePartSecond:firstVarPart] as EnumBody
+  ;
+
+@public _EnumDecl
+  ::= "enum" [ID:name] [":" _Type:type] _EnumBody:body as EnumDeclaration {kind = Enum}
+  ::= "enum" "class" ID:name [":" _Type:type] _EnumBody:body as EnumDeclaration {kind = EnumClass}
+  ;
+
+@public _EnumForwardDecl
+  ::= "enum" ID:name [":" _Type:type] as EnumDeclaration {kind = Enum}
+  ::= "enum" "class" ID:name [":" _Type:type] as EnumDeclaration {kind = EnumClass}
+  ;

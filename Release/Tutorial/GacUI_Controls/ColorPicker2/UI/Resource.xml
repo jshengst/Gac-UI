@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Resource>
+  <Folder name="GacGenConfig">
+    <Folder name="Cpp">
+      <Text name="SourceFolder">Source</Text>
+      <Text name="Resource">..\..\UIRes\ColorPicker2.bin</Text>
+      <Text name="NormalInclude">GacUI.h</Text>
+      <Text name="ReflectionInclude">GacUIReflection.h</Text>
+      <Text name="Name">Demo</Text>
+    </Folder>
+  </Folder>
+  
+  <Script name="ViewModelResource">
+    <Workflow>
+      <![CDATA[
+        module viewmodel;
+        
+        using presentation::*;
+        
+        namespace demo
+        {
+          interface IColorItem
+          {
+            prop ItemName : string {const, not observe}
+            prop ItemColor : Color {const, not observe}
+            prop ViewModel : IViewModel^ {const, not observe}
+          }
+          
+          interface IViewModel
+          {
+            prop SelectedColor : Color {}
+            prop ColorItems : IColorItem^{} {const, not observe}
+          }
+        }
+      ]]>
+    </Workflow>
+  </Script>
+  
+  <Folder name="MainWindow">
+    <Instance name="MainWindowResource">
+      <Instance ref.CodeBehind="false" ref.Class="demo::MainWindow">
+        <ref.Parameter Name="ViewModel" Class="demo::IViewModel"/>
+        <Window Text="ColorPicker2" ClientSize="x:360 y:120">
+          <att.ViewModel-set>
+            <ev.SelectedColorChanged-eval><![CDATA[
+              {
+                comboColor.SubMenuOpening = false;
+              }
+            ]]></ev.SelectedColorChanged-eval>
+          </att.ViewModel-set>
+          <att.ContainerComposition-set PreferredMinSize="x:360 y:120"/>
+          <Table CellPadding="10" AlignmentToParent="left:0 top:0 right:0 bottom:0">
+            <att.Rows>
+              <CellOption>composeType:MinSize</CellOption>
+              <CellOption>composeType:MinSize</CellOption>
+              <CellOption>composeType:Percentage percentage:1.0</CellOption>
+            </att.Rows>
+            <att.Columns>
+              <CellOption>composeType:MinSize</CellOption>
+              <CellOption>composeType:Percentage percentage:1.0</CellOption>
+            </att.Columns>
+
+            <Cell Site="row:0 column:0">
+              <Label Text="ComboButton using Custom Dropdown Control:"/>
+            </Cell>
+            <Cell Site="row:1 column:0">
+              <ComboButton ref.Name="comboColor" Alt="K">
+                <att.BoundsComposition-set AlignmentToParent="left:5 top:5 right:5 bottom:5" PreferredMinSize="x:80 y:24"/>
+                <att.ContainerComposition-set>
+                  <Bounds AlignmentToParent="left:2 top:2 right:2 bottom:2">
+                    <SolidBackground Color-bind="ViewModel.SelectedColor"/>
+                  </Bounds>
+                </att.ContainerComposition-set>
+                <att.DropdownControl>
+                  <GroupBox Text="Choose a Color:">
+                    <SharedSizeRoot AlignmentToParent="left:0 top:0 right:0 bottom:0" MinSizeLimitation="LimitToElementAndChildren">
+                      <RepeatFlow RowPadding="2" ColumnPadding="2" AlignmentToParent="left:1 top:1 right:1 bottom:1" MinSizeLimitation="LimitToElementAndChildren">
+                        <att.ItemTemplate>demo::ColorBomboItemTemplate</att.ItemTemplate>
+                        <att.ItemSource-eval>ViewModel.ColorItems</att.ItemSource-eval>
+                      </RepeatFlow>
+                    </SharedSizeRoot>
+                  </GroupBox>
+                </att.DropdownControl>
+              </ComboButton>
+            </Cell>
+          </Table>
+        </Window>
+      </Instance>
+    </Instance>
+
+    <Instance name="ColorBomboItemTemplateResource">
+      <Instance ref.CodeBehind="false" ref.Class="demo::ColorBomboItemTemplate">
+        <ref.Parameter Name="ViewModel" Class="demo::IColorItem"/>
+        <ControlTemplate ref.Name="self" MinSizeLimitation="LimitToElementAndChildren">
+          <SharedSizeItem Group="ColorItem" SharedWidth="true" SharedHeight="false" AlignmentToParent="left:0 top:0 right:0 bottom:0" MinSizeLimitation="LimitToElementAndChildren">
+            <Button>
+              <att.BoundsComposition-set AlignmentToParent="left:0 top:0 right:0 bottom:0"/>
+              <Table AlignmentToParent="left:1 top:1 right:1 bottom:1" MinSizeLimitation="LimitToElementAndChildren">
+                <att.Rows>
+                  <CellOption>composeType:Percentage percentage:1.0</CellOption>
+                  <CellOption>composeType:Absolute absolute:16</CellOption>
+                  <CellOption>composeType:Percentage percentage:1.0</CellOption>
+                </att.Rows>
+                <att.Columns>
+                  <CellOption>composeType:Absolute absolute:16</CellOption>
+                  <CellOption>composeType:Absolute absolute:3</CellOption>
+                  <CellOption>composeType:Percentage percentage:1.0</CellOption>
+                </att.Columns>
+
+                <Cell Site="row:1 column:0">
+                  <SolidBackground Color-eval="ViewModel.ItemColor"/>
+                </Cell>
+
+                <Cell Site="row:0 column:2 rowSpan:3">
+                  <SolidLabel Text-eval="ViewModel.ItemName" Font-bind="self.Font" Color="#FFFFFF" VerticalAlignment="Center"/>
+                </Cell>
+              </Table>
+
+              <ev.Clicked-eval><![CDATA[
+                {
+                  ViewModel.ViewModel.SelectedColor = ViewModel.ItemColor;
+                }
+              ]]></ev.Clicked-eval>
+            </Button>
+          </SharedSizeItem>
+        </ControlTemplate>
+      </Instance>
+    </Instance>
+  </Folder>
+</Resource>

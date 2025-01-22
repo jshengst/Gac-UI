@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Workflow-ViewModel>
+  <![CDATA[
+    module EditorModel;
+    
+    using presentation::controls::Gui*;
+    
+    namespace vm
+    {
+      interface IMacroEnvironment
+      {
+        func GetParent() : IMacroEnvironment*;
+        prop Parent : IMacroEnvironment* {GetParent}
+        
+        func HasMacro(name : string, inherit : bool) : bool;
+        func GetMacroValue(name : string, inherit : bool) : string;
+      }
+      
+      interface ITextTemplate
+      {
+        func Generate(macroEnvironment : IMacroEnvironment^) : string;
+      }
+      
+      interface IEditorContentFactoryModel
+      {
+        func GetName() : string;
+        prop Name : string {GetName}
+        
+        func GetId() : string;
+        prop Id : string {GetId}
+        
+        func GetBaseContentFactory() : IEditorContentFactoryModel*;
+        prop BaseContentFactory : IEditorContentFactoryModel* {GetBaseContentFactory}
+        
+        func CreateContent(baseContent : IEditorContentModel^) : IEditorContentModel^;
+      }
+      
+      interface IEditorContentModel
+      {
+        func GetContentFactory() : IEditorContentFactoryModel^;
+        prop ContentFactory : IEditorContentFactoryModel^ {GetContentFactory}
+        
+        func GetBaseContent() : IEditorContentModel*;
+        prop BaseContent : IEditorContentModel* {GetBaseContent}
+        
+        func GetSubContent() : IEditorContentModel*;
+        prop SubContent : IEditorContentModel* {GetSubContent}
+        
+        func GetPersistedContent() : object;
+        event PersistedContentChanged();
+        prop PersistedContent : object {GetPersistedContent : PersistedContentChanged}
+        
+        func GetEditingContent() : object;
+        prop EditingContent : object {GetEditingContent}
+        
+        func GetCurrentEditor() : IEditorModel*;
+        event CurrentEditorChanged();
+        prop CurrentEditor : IEditorModel* {GetCurrentEditor : CurrentEditorChanged}
+        
+        func Persist(content : object) : void;
+        func BeginEdit(editor : IEditorModel*) : void;
+        func EndEdit() : void;
+      }
+      
+      interface IEditorFileContentModel : IEditorContentModel
+      {
+        func GetFileName() : string;
+        prop FileName : string {GetFileName}
+        
+        func LoadFile(fileName : string) : void;
+        func RenameFile(fileName : string) : void;
+      }
+      
+      interface IEditorFactoryModel
+      {
+        func GetName() : string;
+        prop Name : string {GetName}
+        
+        func GetId() : string;
+        prop Id : string {GetId}
+        
+        func GetRequiredContentFactory() : IEditorContentFactoryModel^;
+        prop RequiredContentFactory : IEditorContentFactoryModel^ {GetRequiredContentFactory}
+        
+        func GetEditingContentFactory() : IEditorContentFactoryModel^;
+        prop EditingContentFactory : IEditorContentFactoryModel^ {GetEditingContentFactory}
+        
+        func CreateEditor() : IEditorModel^;
+      }
+      
+      interface IEditorModel
+      {
+        func GetEditorFactory() : IEditorFactoryModel^;
+        prop EditorFactory : IEditorFactoryModel^ {GetEditorFactory}
+        
+        func GetEditorAction() : IOpenInEditorItemAction^;
+        prop EditorAction : IOpenInEditorItemAction^ {GetEditorAction}
+        
+        func GetEditorControl() : Control*;
+        prop EditorControl : Control* {GetEditorControl}
+        
+        func GetEditingContent() : object;
+        prop EditingContent : object {GetEditingContent}
+        
+        func Open(content : IEditorContentModel^) : void;
+        func Save() : void;
+        func Close() : void;
+      }
+    }
+  ]]>
+</Workflow-ViewModel>

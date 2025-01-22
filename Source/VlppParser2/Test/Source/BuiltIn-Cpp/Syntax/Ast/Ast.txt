@@ -1,0 +1,55 @@
+//////////////////////////////////////////////////////////////////
+// Base Types
+//////////////////////////////////////////////////////////////////
+
+@public @ambiguous class TypeOrExprOrOthers
+{
+}
+
+@public @ambiguous class Declaration : TypeOrExprOrOthers
+{
+    var keywords : DeclaratorKeyword[];
+}
+
+@public @ambiguous class TypeOrExpr : TypeOrExprOrOthers
+{
+}
+
+@public class ExprOnly : TypeOrExpr
+{
+}
+
+@public class TypeOnly : TypeOrExpr
+{
+}
+
+@public @ambiguous class Statement
+{
+}
+
+//////////////////////////////////////////////////////////////////
+// GenericHeader
+//////////////////////////////////////////////////////////////////
+
+class OrdinaryGenericParameter : TypeOrExprOrOthers
+{
+    var genericHeader : GenericHeader;
+    var typenameToken : token;
+    var variadic : token;
+    var id : Identifier;
+    var init : TypeOrExpr;
+}
+
+@public class GenericHeader
+{
+    var parameters : TypeOrExprOrOthers[];
+}
+
+//////////////////////////////////////////////////////////////////
+// File
+//////////////////////////////////////////////////////////////////
+
+@public class File
+{
+    var decls : Declaration[];
+}

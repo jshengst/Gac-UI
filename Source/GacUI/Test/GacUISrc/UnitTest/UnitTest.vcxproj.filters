@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Compositions">
+      <UniqueIdentifier>{1cd7ff9b-05e3-4674-a794-4f7bacf35b1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Remote">
+      <UniqueIdentifier>{46c53123-9b2f-47b2-8c68-68425b3d4587}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Remote\Shared">
+      <UniqueIdentifier>{5bf531dc-7dde-47f4-b9b7-d96e24c544e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Remote\GraphicsHost">
+      <UniqueIdentifier>{6efec4ed-c357-4304-b71a-585b327a8302}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Controls">
+      <UniqueIdentifier>{c392e1d3-f657-4d8f-b1a1-b2233efff208}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Remote\Rendering">
+      <UniqueIdentifier>{cdc94559-2132-4009-b95d-6df8409d17d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Controls\CoreApplication">
+      <UniqueIdentifier>{f0494749-4078-454d-a60d-e1950c92705f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\UnitTestResources">
+      <UniqueIdentifier>{88d787fb-7eb3-4d7b-bd55-d3c97207625f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Controls\Basic">
+      <UniqueIdentifier>{78a5b35a-0502-467a-8ffc-d2ac00693cb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Controls\List">
+      <UniqueIdentifier>{708470dd-8bff-4ed0-b29a-b8e9f141beaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Controls\Toolstrip">
+      <UniqueIdentifier>{1f9804f9-9bbc-45e7-9ad5-823ea731ab67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Controls\List\DataGrid">
+      <UniqueIdentifier>{302eaa78-f2db-40a0-9037-15eab1e0fa98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Controls\Toolstrip\Ribbon">
+      <UniqueIdentifier>{5647b310-c114-410a-8149-f2fc6bed0b37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Controls\Toolstrip\Combo">
+      <UniqueIdentifier>{71cf3aca-965d-49df-b421-eceec957e1d6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestResource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestReflectionTypeList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestHostedWindowManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestQueryParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestPtrDescriptableObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestCompositions_Bounds.cpp">
+      <Filter>Source Files\Compositions</Filter>
+    </ClCompile>
+    <ClCompile Include="TestCompositions_Stack.cpp">
+      <Filter>Source Files\Compositions</Filter>
+    </ClCompile>
+    <ClCompile Include="TestCompositions_Flow.cpp">
+      <Filter>Source Files\Compositions</Filter>
+    </ClCompile>
+    <ClCompile Include="TestCompositions_Table.cpp">
+      <Filter>Source Files\Compositions</Filter>
+    </ClCompile>
+    <ClCompile Include="TestCompositions_Responsive.cpp">
+      <Filter>Source Files\Compositions</Filter>
+    </ClCompile>
+    <ClCompile Include="TestCompositions_SharedSize.cpp">
+      <Filter>Source Files\Compositions</Filter>
+    </ClCompile>
+    <ClCompile Include="TestCompositions_Specialized.cpp">
+      <Filter>Source Files\Compositions</Filter>
+    </ClCompile>
+    <ClCompile Include="TestCompositions_AllNested.cpp">
+      <Filter>Source Files\Compositions</Filter>
+    </ClCompile>
+    <ClCompile Include="TestCompositions_VirtualRepeat.cpp">
+      <Filter>Source Files\Compositions</Filter>
+    </ClCompile>
+    <ClCompile Include="TestRemote_UnitTestFramework.cpp">
+      <Filter>Source Files\Remote</Filter>
+    </ClCompile>
+    <ClCompile Include="TestRemote_Startup.cpp">
+      <Filter>Source Files\Remote</Filter>
+    </ClCompile>
+    <ClCompile Include="TestRemote_EmptyWindow.cpp">
+      <Filter>Source Files\Remote</Filter>
+    </ClCompile>
+    <ClCompile Include="TestRemote_GraphicsHost_Startup.cpp">
+      <Filter>Source Files\Remote\GraphicsHost</Filter>
+    </ClCompile>
+    <ClCompile Include="TestRemote_GraphicsHost_Mouse.cpp">
+      <Filter>Source Files\Remote\GraphicsHost</Filter>
+    </ClCompile>
+    <ClCompile Include="TestRemote_GraphicsHost_Shared.cpp">
+      <Filter>Source Files\Remote\GraphicsHost</Filter>
+    </ClCompile>
+    <ClCompile Include="TestRemote_GraphicsHost_Key.cpp">
+      <Filter>Source Files\Remote\GraphicsHost</Filter>
+    </ClCompile>
+    <ClCompile Include="TestRemote_GraphicsHost_KeyTab.cpp">
+      <Filter>Source Files\Remote\GraphicsHost</Filter>
+    </ClCompile>
+    <ClCompile Include="TestRemote_GraphicsHost_KeyAlt.cpp">
+      <Filter>Source Files\Remote\GraphicsHost</Filter>
+    </ClCompile>
+    <ClCompile Include="TestRemote_GraphicsHost_KeyShortcut.cpp">
+      <Filter>Source Files\Remote\GraphicsHost</Filter>
+    </ClCompile>
+    <ClCompile Include="TestRemote_GraphicsHost_BasicElements.cpp">
+      <Filter>Source Files\Remote\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="TestRemote_GraphicsHost_SolidLabel.cpp">
+      <Filter>Source Files\Remote\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="TestRemote_GraphicsHost_HitTest.cpp">
+      <Filter>Source Files\Remote\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="TestRemote_GraphicsHost_ImageFrame.cpp">
+      <Filter>Source Files\Remote\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="TestControls_CoreApplication_GuiWindow.cpp">
+      <Filter>Source Files\Controls\CoreApplication</Filter>
+    </ClCompile>
+    <ClCompile Include="TestControls_CoreApplication_GuiLabel.cpp">
+      <Filter>Source Files\Controls\CoreApplication</Filter>
+    </ClCompile>
+    <ClCompile Include="TestControls_CoreApplication_GuiControl.cpp">
+      <Filter>Source Files\Controls\CoreApplication</Filter>
+    </ClCompile>
+    <ClCompile Include="TestControls_Basic_GuiButton.cpp">
+      <Filter>Source Files\Controls\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="TestControls_Basic_GuiTab.cpp">
+      <Filter>Source Files\Controls\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="TestControls_Basic_GuiScroll_ProgressBar.cpp">
+      <Filter>Source Files\Controls\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="TestControls_Basic_GuiScroll_Tracker.cpp">
+      <Filter>Source Files\Controls\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="TestControls_Basic_GuiScroll_Scroll.cpp">
+      <Filter>Source Files\Controls\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="TestControls_Basic_GuiScrollContainer.cpp">
+      <Filter>Source Files\Controls\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="TestControls_List_GuiListControl.cpp">
+      <Filter>Source Files\Controls\List</Filter>
+    </ClCompile>
+    <ClCompile Include="TestControls_List_GuiSelectableListControl.cpp">
+      <Filter>Source Files\Controls\List</Filter>
+    </ClCompile>
+    <ClCompile Include="TestControls_List_GuiListItemTemplate.cpp">
+      <Filter>Source Files\Controls\List</Filter>
+    </ClCompile>
+    <ClCompile Include="TestControls_List_GuiVirtualTextList.cpp">
+      <Filter>Source Files\Controls\List</Filter>
+    </ClCompile>
+    <ClCompile Include="TestControls_List_GuiVirtualTextList_Template.cpp">
+      <Filter>Source Files\Controls\List</Filter>
+    </ClCompile>
+    <ClCompile Include="TestControls_List_GuiListItemTemplate_Template.cpp">
+      <Filter>Source Files\Controls\List</Filter>
+    </ClCompile>
+    <ClCompile Include="TestControls_List_GuiSelectableListControl_Template.cpp">
+      <Filter>Source Files\Controls\List</Filter>
+    </ClCompile>
+    <ClCompile Include="TestControls_List_GuiListControl_Template.cpp">
+      <Filter>Source Files\Controls\List</Filter>
+    </ClCompile>
+    <ClCompile Include="TestControls_List_GuiVirtualListView_Template.cpp">
+      <Filter>Source Files\Controls\List</Filter>
+    </ClCompile>
+    <ClCompile Include="TestControls_List_GuiVirtualListView.cpp">
+      <Filter>Source Files\Controls\List</Filter>
+    </ClCompile>
+    <ClCompile Include="TestControls_List_GuiVirtualTreeView_Template.cpp">
+      <Filter>Source Files\Controls\List</Filter>
+    </ClCompile>
+    <ClCompile Include="TestControls_List_GuiVirtualTreeView.cpp">
+      <Filter>Source Files\Controls\List</Filter>
+    </ClCompile>
+    <ClCompile Include="TestControls_List_GuiVirtualTreeListControl.cpp">
+      <Filter>Source Files\Controls\List</Filter>
+    </ClCompile>
+    <ClCompile Include="TestControls_List_GuiVirtualTreeListControl_Template.cpp">
+      <Filter>Source Files\Controls\List</Filter>
+    </ClCompile>
+    <ClCompile Include="TestControls_Toolstrip_GuiToolstripMenuBar.cpp">
+      <Filter>Source Files\Controls\Toolstrip</Filter>
+    </ClCompile>
+    <ClCompile Include="TestControls_Toolstrip_GuiToolstripMenuBar_Cascade.cpp">
+      <Filter>Source Files\Controls\Toolstrip</Filter>
+    </ClCompile>
+    <ClCompile Include="TestControls_Toolstrip_GuiToolstripToolBar.cpp">
+      <Filter>Source Files\Controls\Toolstrip</Filter>
+    </ClCompile>
+    <ClCompile Include="TestControls_Toolstrip_GuiToolstripMenu.cpp">
+      <Filter>Source Files\Controls\Toolstrip</Filter>
+    </ClCompile>
+    <ClCompile Include="TestControls_Toolstrip_Combo_GuiComboBoxListControl.cpp">
+      <Filter>Source Files\Controls\Toolstrip\Combo</Filter>
+    </ClCompile>
+    <ClCompile Include="TestControls_Toolstrip_Combo_GuiComboBoxListControl_Template.cpp">
+      <Filter>Source Files\Controls\Toolstrip\Combo</Filter>
+    </ClCompile>
+    <ClCompile Include="TestControls_Toolstrip_Combo_GuiDatePicker.cpp">
+      <Filter>Source Files\Controls\Toolstrip\Combo</Filter>
+    </ClCompile>
+    <ClCompile Include="TestControls_Toolstrip_Combo_GuiDateComboBox.cpp">
+      <Filter>Source Files\Controls\Toolstrip\Combo</Filter>
+    </ClCompile>
+    <ClCompile Include="TestControls_List_DataGrid_Binding.cpp">
+      <Filter>Source Files\Controls\List\DataGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="TestControls_List_DataGrid_ColumnApi.cpp">
+      <Filter>Source Files\Controls\List\DataGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="TestControls_List_DataGrid_ColumnUI.cpp">
+      <Filter>Source Files\Controls\List\DataGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="TestControls_List_DataGrid_CellVisualizer.cpp">
+      <Filter>Source Files\Controls\List\DataGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="TestControls_List_DataGrid_CellEditor.cpp">
+      <Filter>Source Files\Controls\List\DataGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="TestControls_List_DataGrid_Properties.cpp">
+      <Filter>Source Files\Controls\List\DataGrid</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TestCompositions.h">
+      <Filter>Source Files\Compositions</Filter>
+    </ClInclude>
+    <ClInclude Include="TestRemote.h">
+      <Filter>Source Files\Remote\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="TestRemote_Shared_JsonProtocol.h">
+      <Filter>Source Files\Remote\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="TestRemote_Shared_LoggingWindowListener.h">
+      <Filter>Source Files\Remote\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="TestRemote_Shared_NoRenderingProtocol.h">
+      <Filter>Source Files\Remote\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="TestRemote_GraphicsHost_Shared.h">
+      <Filter>Source Files\Remote\GraphicsHost</Filter>
+    </ClInclude>
+    <ClInclude Include="TestRemote_Shared_RenderingProtocol.h">
+      <Filter>Source Files\Remote\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="TestControls.h">
+      <Filter>Source Files\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="TestControls_List.h">
+      <Filter>Source Files\Controls\List</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\Resources\UnitTestResources\cake.jpeg">
+      <Filter>Resource Files\UnitTestResources</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

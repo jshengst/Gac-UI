@@ -1,0 +1,19 @@
+<#
+CPP_TARGET=./Bin/UnitTest
+CPP_VCXPROJ=../UnitTest/UnitTest/UnitTest.vcxproj
+CPP_REMOVES=(
+    "../../Import/Vlpp.Windows.cpp"
+    "../../Source/FileSystem.Windows.cpp"
+    "../../Source/HttpUtility.Windows.cpp"
+    "../../Source/Locale.Windows.cpp"
+    "../../Source/Threading.Windows.cpp"
+    "../../Source/Encoding/CharFormat/CharFormat.Windows.cpp"
+    "../Source/TestLocale.cpp"
+    "../UnitTest/UnitTest/Main.cpp"
+    )
+CPP_ADDS=("Main.cpp")
+FOLDERS=("../Output")
+TARGETS=("${CPP_TARGET}")
+CPP_COMPILE_OPTIONS="-I ../../Import"
+#>
+<#@ include "${VCPROOT}/vl/vmake-cpp" #>

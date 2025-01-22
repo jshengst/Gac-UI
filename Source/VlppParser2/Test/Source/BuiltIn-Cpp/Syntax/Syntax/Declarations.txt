@@ -1,0 +1,38 @@
+//////////////////////////////////////////////////////////////////
+// Declarations
+//////////////////////////////////////////////////////////////////
+
+_DeclSharedWithoutSemicolonAcceptKeyword
+  ::= !_StaticAssertDecl
+  ::= !_TypedefDecl
+  ::= !_UsingNsDecl
+  ::= !_UsingValueDecl
+  ::= !_UsingTypeDecl
+  ::= !_EnumDecl
+  ::= !_ClassDecl
+  ;
+
+_DeclSharedWithoutSemicolonAcceptKeywordButFriend
+  ::= !_EnumForwardDecl
+  ::= !_ClassForwardDecl
+  ;
+
+_DeclSharedWithoutSemicolon
+  ::= {_DeclarationKeyword:keywords} !_DeclSharedWithoutSemicolonAcceptKeyword
+  ::= [_DeclarationKeywordWithoutFriend:keywords {_DeclarationKeyword:keywords}] !_DeclSharedWithoutSemicolonAcceptKeywordButFriend
+  ::= !_FriendTypeDecl
+  ;
+
+@public _DeclNeedSemicolon
+  ::= !_DeclSharedWithoutSemicolon
+  ::= !_MultiVarsOrFuncForwardDecl
+  ::= "template" _GenericHeader:genericHeader _DeclNeedSemicolon:decl as TemplateDeclaration
+  ;
+
+@public _DeclRejectSemicolon
+  ::= !_DeclSharedWithoutSemicolon ";"
+  ::= !_ExternDeclRejectSemicolon
+  ::= !_MultiVarsOrFuncDecl
+  ::= !_NsDecl
+  ::= "template" _GenericHeader:genericHeader _DeclRejectSemicolon:decl as TemplateDeclaration
+  ;

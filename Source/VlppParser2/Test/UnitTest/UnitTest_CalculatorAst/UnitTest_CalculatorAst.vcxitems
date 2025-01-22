@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{6d5c9391-1c38-4871-930e-3c7618e7febb}</ItemsProjectGuid>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\Calculator\Parser\CalculatorExprAst.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\Calculator\Parser\CalculatorExprAst_Builder.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\Calculator\Parser\CalculatorExprAst_Copy.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\Calculator\Parser\CalculatorExprAst_Empty.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\Calculator\Parser\CalculatorExprAst_Json.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\Calculator\Parser\CalculatorExprAst_Traverse.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Source\Calculator\Parser\Calculator_Assembler.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\Calculator\Parser\CalculatorExprAst.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\Calculator\Parser\CalculatorExprAst_Builder.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\Calculator\Parser\CalculatorExprAst_Copy.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\Calculator\Parser\CalculatorExprAst_Empty.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\Calculator\Parser\CalculatorExprAst_Json.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\Calculator\Parser\CalculatorExprAst_Traverse.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Source\Calculator\Parser\Calculator_Assembler.h" />
+  </ItemGroup>
+</Project>

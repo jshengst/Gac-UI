@@ -1,0 +1,21 @@
+_Int
+  ::= "int" as IntItem
+  ;
+
+_IntItem
+  ::= !prefix_merge(_Int)
+  ;
+
+_Item
+  ::= !_IntItem
+  ::= _IntItem "," as IntCommaItem
+  ::= _IntItem "." as IntDotItem
+  ::= _IntItem "?" as IntQuestionItem
+  ::= "class" as ClassItem
+  ::= "class" "?" as ClassQuestionItem
+  ::= _Item:item "?" as QuestionItem
+  ;
+
+@parser Module
+  ::= _Item:items {_Item:items} as File
+  ;

@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Import">
+      <UniqueIdentifier>{d0814cec-f110-4481-b9cc-56952b2c98cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Regex">
+      <UniqueIdentifier>{a0063a3f-fb90-4cc0-8369-26646e7eadf7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Regex\AST">
+      <UniqueIdentifier>{d6844e37-2605-47c7-8f5e-8b3285da5ca1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Regex\Automaton">
+      <UniqueIdentifier>{ff44cc58-53a4-4300-a9c1-94d91582eaee}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\TestRegex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Import\Vlpp.cpp">
+      <Filter>Import</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Import\VlppOS.cpp">
+      <Filter>Import</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TestParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TestAutomaton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TestPure.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TestRich.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TestLexer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TestWalker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TestColorizer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TestExtendProc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Regex\Regex.cpp">
+      <Filter>Regex</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Regex\RegexPure.cpp">
+      <Filter>Regex</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Regex\RegexRich.cpp">
+      <Filter>Regex</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Regex\AST\RegexExpression.cpp">
+      <Filter>Regex\AST</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Regex\AST\RegexParser.cpp">
+      <Filter>Regex\AST</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Regex\AST\RegexWriter.cpp">
+      <Filter>Regex\AST</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Regex\Automaton\RegexAutomaton.cpp">
+      <Filter>Regex\Automaton</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Regex\AST\RegexExpression_CanTreatAsPure.cpp">
+      <Filter>Regex\AST</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Regex\AST\RegexExpression_CharSet.cpp">
+      <Filter>Regex\AST</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Regex\AST\RegexExpression_GenerateEpsilonNfa.cpp">
+      <Filter>Regex\AST</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Regex\AST\RegexExpression_HasNoExtension.cpp">
+      <Filter>Regex\AST</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Regex\AST\RegexExpression_IsEqual.cpp">
+      <Filter>Regex\AST</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Import\Vlpp.Windows.cpp">
+      <Filter>Import</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Import\VlppOS.Linux.cpp">
+      <Filter>Import</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Import\VlppOS.Windows.cpp">
+      <Filter>Import</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Import\Vlpp.Linux.cpp">
+      <Filter>Import</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Import\Vlpp.h">
+      <Filter>Import</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Import\VlppOS.h">
+      <Filter>Import</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ColorizerCommon.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Regex\Regex.h">
+      <Filter>Regex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Regex\RegexPure.h">
+      <Filter>Regex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Regex\RegexRich.h">
+      <Filter>Regex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Regex\AST\RegexExpression.h">
+      <Filter>Regex\AST</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Regex\AST\RegexWriter.h">
+      <Filter>Regex\AST</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Regex\Automaton\RegexAutomaton.h">
+      <Filter>Regex\Automaton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Regex\Automaton\RegexData.h">
+      <Filter>Regex\Automaton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Regex\RegexCharReader.h">
+      <Filter>Regex</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

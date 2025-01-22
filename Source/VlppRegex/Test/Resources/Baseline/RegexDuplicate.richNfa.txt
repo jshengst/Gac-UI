@@ -1,0 +1,25 @@
+﻿[START]State<0>
+    To State<1> : ^
+State<1>
+    To State<2> : <Capture : sec >
+State<2>
+    To State<3> : <Char : 1[] - 1114111[􏿿]>
+State<3>
+    To State<4> : <Char : 1[] - 1114111[􏿿]>
+    To State<5> : <Nop>
+State<4>
+    To State<4> : <Char : 1[] - 1114111[􏿿]>
+    To State<5> : <Nop>
+State<5>
+    To State<6> : <End>
+State<6>
+    To State<7> : <Match : sec;-1 >
+State<7>
+    To State<8> : <Match : sec;-1 >
+    To State<9> : <Nop>
+State<8>
+    To State<8> : <Match : sec;-1 >
+    To State<9> : <Nop>
+State<9>
+    To State<10> : $
+[FINISH]State<10>

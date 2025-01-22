@@ -1,0 +1,11 @@
+OPEN_ROUND:/(
+CLOSE_ROUND:/)
+OPEN_ANGLE:/<
+CLOSE_ANGLE:/>
+COMMA:,
+ADD:/+
+SUB:-
+
+ID:[a-zA-Z_]/w*
+
+discard SPACE:/s+

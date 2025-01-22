@@ -1,0 +1,64 @@
+﻿[START]State<0>
+    To State<1> : <Char : 48[0] - 57[9]>
+State<1>
+    To State<2> : <Char : 48[0] - 57[9]>
+    To State<3> : <Nop>
+State<2>
+    To State<2> : <Char : 48[0] - 57[9]>
+    To State<3> : <Nop>
+State<3>
+    To State<4> : <Positive>
+State<4>
+    To State<5> : <Char : 48[0] - 57[9]>
+    To State<5> : <Char : 65[A] - 90[Z]>
+    To State<5> : <Char : 95[_] - 95[_]>
+    To State<5> : <Char : 97[a] - 98[b]>
+    To State<5> : <Char : 99[c] - 99[c]>
+    To State<5> : <Char : 100[d] - 103[g]>
+    To State<5> : <Char : 104[h] - 104[h]>
+    To State<5> : <Char : 105[i] - 117[u]>
+    To State<5> : <Char : 118[v] - 118[v]>
+    To State<5> : <Char : 119[w] - 121[y]>
+    To State<5> : <Char : 122[z] - 122[z]>
+State<5>
+    To State<6> : <Char : 48[0] - 57[9]>
+    To State<6> : <Char : 65[A] - 90[Z]>
+    To State<6> : <Char : 95[_] - 95[_]>
+    To State<6> : <Char : 97[a] - 98[b]>
+    To State<6> : <Char : 99[c] - 99[c]>
+    To State<6> : <Char : 100[d] - 103[g]>
+    To State<6> : <Char : 104[h] - 104[h]>
+    To State<6> : <Char : 105[i] - 117[u]>
+    To State<6> : <Char : 118[v] - 118[v]>
+    To State<6> : <Char : 119[w] - 121[y]>
+    To State<6> : <Char : 122[z] - 122[z]>
+    To State<7> : <Nop>
+State<6>
+    To State<6> : <Char : 48[0] - 57[9]>
+    To State<6> : <Char : 65[A] - 90[Z]>
+    To State<6> : <Char : 95[_] - 95[_]>
+    To State<6> : <Char : 97[a] - 98[b]>
+    To State<6> : <Char : 99[c] - 99[c]>
+    To State<6> : <Char : 100[d] - 103[g]>
+    To State<6> : <Char : 104[h] - 104[h]>
+    To State<6> : <Char : 105[i] - 117[u]>
+    To State<6> : <Char : 118[v] - 118[v]>
+    To State<6> : <Char : 119[w] - 121[y]>
+    To State<6> : <Char : 122[z] - 122[z]>
+    To State<7> : <Nop>
+State<7>
+    To State<8> : <End>
+State<8>
+    To State<9> : <Negative>
+    To State<10> : <NegativeFail>
+State<9>
+    To State<11> : <Char : 118[v] - 118[v]>
+[FINISH]State<10>
+State<11>
+    To State<12> : <Char : 99[c] - 99[c]>
+State<12>
+    To State<13> : <Char : 122[z] - 122[z]>
+State<13>
+    To State<14> : <Char : 104[h] - 104[h]>
+State<14>
+    To State<10> : <End>

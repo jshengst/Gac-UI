@@ -1,0 +1,7 @@
+enum class X
+{
+} x, *px = 0;
+
+enum
+{
+} const x, volatile *px = 0;

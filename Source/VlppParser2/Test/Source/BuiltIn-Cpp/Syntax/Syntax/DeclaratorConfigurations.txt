@@ -1,0 +1,87 @@
+//////////////////////////////////////////////////////////////////
+// Declarator Before
+//////////////////////////////////////////////////////////////////
+
+_DeclaratorBeforeInner
+  ::= (_DeclaratorAKFirst [_DeclaratorAKMember] | _DeclaratorAKMember) {_DeclaratorAKFollow [_DeclaratorAKMember]} as partial Declarator
+  ;
+
+//////////////////////////////////////////////////////////////////
+// Declarator After
+//////////////////////////////////////////////////////////////////
+
+_DeclaratorAfterInner
+  ::= _DeclaratorFunctionPart:funcPart | _DeclaratorArrayPart:arrayParts {_DeclaratorArrayPart:arrayParts} as partial Declarator
+  ;
+
+//////////////////////////////////////////////////////////////////
+// Inner Declarator
+//////////////////////////////////////////////////////////////////
+
+_InnerDeclaratorWithoutName
+  ::= {_DeclaratorAKCV} !_DeclaratorWithoutName
+  ;
+
+_InnerDeclaratorInnerOptionalName
+  ::= {_DeclaratorAKCV} !_DeclaratorOptionalName
+  ;
+
+@public _InnerDeclaratorInnerRequiredName
+  ::= {_DeclaratorAKCV} !_DeclaratorRequiredName
+  ;
+
+//////////////////////////////////////////////////////////////////
+// Nesting Declarator
+//////////////////////////////////////////////////////////////////
+
+_DeclaratorInnerWithoutName
+  ::= "(" _InnerDeclaratorWithoutName:innerDeclarator ")" as partial Declarator
+  ;
+
+_DeclaratorName
+  ::= _DeclaratorId:id as partial Declarator
+  ::= _DeclaratorId:id ":" _Expr:bitfield as partial Declarator
+  ::= _DeclaratorId:id _GenericArguments:arguments as partial Declarator
+  ;
+
+_DeclaratorInnerOptionalName
+  ::= "(" _InnerDeclaratorInnerOptionalName:innerDeclarator ")" as partial Declarator
+  ::=  _DeclaratorName as partial Declarator
+  ::=  "...":variadic [_DeclaratorName] as partial Declarator
+  ;
+
+_DeclaratorInnerRequiredName
+  ::= "(" _InnerDeclaratorInnerRequiredName:innerDeclarator ")" as partial Declarator
+  ::=  _DeclaratorName as partial Declarator
+  ::=  "...":variadic _DeclaratorName as partial Declarator
+  ;
+
+//////////////////////////////////////////////////////////////////
+// Declarator
+//////////////////////////////////////////////////////////////////
+
+@public _DeclaratorWithoutNameAndFuncVar
+  ::= _DeclaratorBeforeInner [_DeclaratorInnerWithoutName] as Declarator
+  ::= _DeclaratorInnerWithoutName as Declarator
+  ;
+
+@public _DeclaratorWithoutName
+  ::= _DeclaratorBeforeInner [_DeclaratorInnerWithoutName] [_DeclaratorAfterInner] as Declarator
+  ::= _DeclaratorInnerWithoutName [_DeclaratorAfterInner] as Declarator
+  ::= _DeclaratorAfterInner as Declarator
+  ;
+
+@public _DeclaratorOptionalName
+  ::= _DeclaratorBeforeInner [_DeclaratorInnerOptionalName] [_DeclaratorAfterInner] as Declarator
+  ::= _DeclaratorInnerOptionalName [_DeclaratorAfterInner] as Declarator
+  ::= _DeclaratorAfterInner as Declarator
+  ;
+
+@public _DeclaratorRequiredName
+  ::= _DeclaratorBeforeInner _DeclaratorInnerRequiredName [_DeclaratorAfterInner] as Declarator
+  ::= _DeclaratorInnerRequiredName [_DeclaratorAfterInner] as Declarator
+  ;
+
+@public _DeclaratorUntypedFuncWithoutKeyword
+  ::= [_DeclaratorAKCtorDtor] _DeclaratorUntypedFuncId:id _DeclaratorFunctionPart:funcPart as Declarator
+  ;

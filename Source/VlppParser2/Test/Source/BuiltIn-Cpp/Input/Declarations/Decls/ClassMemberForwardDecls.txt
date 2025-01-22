@@ -1,0 +1,38 @@
+namespace a::b
+{
+	class Something
+	{
+	public:
+		static const int a = 0;
+		static const int b;
+
+		Something();
+		Something(const Something&);
+		Something(Something&&);
+		explicit Something(int);
+		~Something();
+		explicit operator bool()const;
+		explicit operator bool();
+
+		void Do(...);
+		virtual void Do(int) = 0;
+		Something operator++(...);
+		Something operator++(int);
+	};
+}
+namespace a::b
+{
+	const int Something::b = 0;
+	Something::Something(){}
+	Something::Something(const Something&){}
+	Something::Something(Something&&){}
+	Something::Something(int){}
+	Something::~Something(){}
+	Something::operator bool()const{}
+	Something::operator bool(){}
+
+	void Something::Do(...){}
+	void Something::Do(int) {}
+	Something Something::operator++(...){}
+	Something Something::operator++(int){}
+}

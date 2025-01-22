@@ -1,0 +1,55 @@
+﻿[START]State<0>
+    To State<1> : <Capture : sec >
+State<1>
+    To State<2> : <Char : 48[0] - 57[9]>
+State<2>
+    To State<3> : <Char : 48[0] - 57[9]>
+    To State<4> : <Nop>
+State<3>
+    To State<3> : <Char : 48[0] - 57[9]>
+    To State<4> : <Nop>
+State<4>
+    To State<5> : <End>
+State<5>
+    To State<6> : <Char : 46[.] - 46[.]>
+State<6>
+    To State<7> : <Capture : sec >
+State<7>
+    To State<8> : <Char : 48[0] - 57[9]>
+State<8>
+    To State<9> : <Char : 48[0] - 57[9]>
+    To State<10> : <Nop>
+State<9>
+    To State<9> : <Char : 48[0] - 57[9]>
+    To State<10> : <Nop>
+State<10>
+    To State<11> : <End>
+State<11>
+    To State<12> : <Char : 46[.] - 46[.]>
+State<12>
+    To State<13> : <Capture : sec >
+State<13>
+    To State<14> : <Char : 48[0] - 57[9]>
+State<14>
+    To State<15> : <Char : 48[0] - 57[9]>
+    To State<16> : <Nop>
+State<15>
+    To State<15> : <Char : 48[0] - 57[9]>
+    To State<16> : <Nop>
+State<16>
+    To State<17> : <End>
+State<17>
+    To State<18> : <Char : 46[.] - 46[.]>
+State<18>
+    To State<19> : <Capture : sec >
+State<19>
+    To State<20> : <Char : 48[0] - 57[9]>
+State<20>
+    To State<21> : <Char : 48[0] - 57[9]>
+    To State<22> : <Nop>
+State<21>
+    To State<21> : <Char : 48[0] - 57[9]>
+    To State<22> : <Nop>
+State<22>
+    To State<23> : <End>
+[FINISH]State<23>
