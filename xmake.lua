@@ -11,7 +11,7 @@ else
     add_cxflags("/MTd", {public = true })
 end
 
-includes("xmgr/gacui.lua")
+includes("gacui.lua")
 
 target("HelloGacUI")
     set_languages("c++20")
@@ -20,9 +20,9 @@ target("HelloGacUI")
     add_deps("GacUICustom")
     add_rules("GacUI")
     set_values("GacUI.reflection_level", "none")
-    set_values("GacUI.with_source", true)
+    set_values("GacUI.with_source", true) -- 切换使用未合并源代码
 
-    add_files(path.join(os.projectdir(),"Tutorial","Lib","GacUI","WinMain.cpp"))
-    add_files(path.join(os.projectdir(),"Tutorial","GacUI_HelloWorlds","Cpp","Main.cpp"))
+    add_files(path.join(os.projectdir(),"Release","Tutorial","Lib","GacUI","WinMain.cpp"))
+    add_files(path.join(os.projectdir(),"Release","Tutorial","GacUI_HelloWorlds","Cpp","Main.cpp"))
 
 target_end()

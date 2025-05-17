@@ -35,7 +35,9 @@ GuiRemoteGraphicsImage
 		auto arguments = GenerateImageCreation();
 
 		vint idImageCreated = remote->remoteMessages.RequestImageCreated(arguments);
-		remote->remoteMessages.Submit();
+		bool disconnected = false;
+		remote->remoteMessages.Submit(disconnected);
+		if (disconnected) return;
 		auto imageMetadata = remote->remoteMessages.RetrieveImageCreated(idImageCreated);
 		UpdateFromImageMetadata(imageMetadata);
 	}
@@ -171,12 +173,17 @@ GuiRemoteGraphicsImageService
 	{
 	}
 
-	void GuiRemoteGraphicsImageService::OnControllerConnect()
+	void GuiRemoteGraphicsImageService::ResetImageMetadata()
 	{
 		for (auto image : images.Values())
 		{
 			image->status = GuiRemoteGraphicsImage::MetadataStatus::Uninitialized;
 		}
+	}
+
+	void GuiRemoteGraphicsImageService::OnControllerConnect()
+	{
+		ResetImageMetadata();
 	}
 
 	void GuiRemoteGraphicsImageService::OnControllerDisconnect()

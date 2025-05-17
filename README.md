@@ -1,12 +1,12 @@
-通过xmake构建GacUI。
+## 使用xmake构建GacUI
 
 ### 仓库结构
 
-#### Root：
+#### Root\Release：编译快速的发布版代码
 
 - [GacUI Release](https://github.com/vczh-libraries/Release)：GacUI发布仓库
 
-#### Root\Source：
+#### Root\Source：便于阅读的未合并代码
 
 - [GacUI](https://github.com/vczh-libraries/GacUI)：GUI
 - [Vlpp](https://github.com/vczh-libraries/Vlpp)：提供数据处理功能
@@ -19,22 +19,17 @@
 
 ### 构建
 
-编译GacUI release：
+编译GacUI Demo：
 
 ``` cmd
-xmake f --use_release_code=true
 xmake build HelloGacUI
 ```
 
-编译GacUI source：
+切换使用release代码：
+`set_values("GacUI.with_source", false)`
 
-``` cmd
-xmake f --use_release_code=false
-xmake build HelloGacUI
-```
+### 说明 & 许可
 
-### 说明
-
-本项目出于学习目的，搜集了由 [@vczh](https://github.com/vczh) 创建的 GacUI 项目的未合并源码。请注意，这些未合并代码的使用许可可能与发布在 [GacUI Release](https://github.com/vczh-libraries/Release) 仓库中的代码有所不同，最终解释权归 [@vczh](https://github.com/vczh)所有。
+本项目出于学习目的，搜集了由 [@vczh](https://github.com/vczh) 创建的 GacUI 项目的未合并源码。请注意，这些未合并代码的License可能与发布在 [GacUI Release](https://github.com/vczh-libraries/Release) 代码的许可有所不同，最终解释权归 [@vczh](https://github.com/vczh)所有。
 
 本仓库与 GacUI 项目无关，且不拥有任何权利。

@@ -337,4 +337,91 @@ TEST_FILE
 			resource
 			);
 	});
+
+	TEST_CATEGORY(L"Channels and Diffs")
+	{
+		const auto resource = LR"GacUISrc(
+<Resource>
+  <Instance name="MainWindowResource">
+    <Instance ref.Class="gacuisrc_unittest::MainWindow">
+      <Window ref.Name="self" Text="Hello, world!" ClientSize="x:320 y:240">
+        <Button ref.Name="buttonOK" Text="OK">
+          <att.BoundsComposition-set AlignmentToParent="left:5 top:5 right:-1 bottom:-1"/>
+          <ev.Clicked-eval><![CDATA[ {
+            Application::GetApplication().InvokeInMainThread(self, func():void{self.Hide();});
+          } ]]></ev.Clicked-eval>
+        </Button>
+      </Window>
+    </Instance>
+  </Instance>
+</Resource>
+)GacUISrc";
+
+		auto sharedProxy = [](UnitTestRemoteProtocol* protocol, IUnitTestContext*)
+		{
+			protocol->OnNextIdleFrame(L"Ready", [=]()
+			{
+				auto window = GetApplication()->GetMainWindow();
+				auto buttonOK = TryFindObjectByName<GuiButton>(window, L"buttonOK");
+				protocol->MouseMove(protocol->LocationOf(buttonOK));
+			});
+			protocol->OnNextIdleFrame(L"Hover", [=]()
+			{
+				protocol->_LDown();
+			});
+			protocol->OnNextIdleFrame(L"Press", [=]()
+			{
+				protocol->_LUp();
+			});
+		};
+
+		TEST_CASE(L"Sync Channel")
+		{
+			GacUIUnitTest_SetGuiMainProxy(sharedProxy);
+
+			UnitTestScreenConfig globalConfig;
+			globalConfig.FastInitialize(1024, 768);
+			globalConfig.useChannel = UnitTestRemoteChannel::Sync;
+
+			GacUIUnitTest_StartFast_WithResourceAsText<darkskin::Theme>(
+				WString::Unmanaged(L"UnitTestFramework/Channel/Sync"),
+				WString::Unmanaged(L"gacuisrc_unittest::MainWindow"),
+				resource,
+				globalConfig
+				);
+		});
+
+		TEST_CASE(L"DomDiff")
+		{
+			GacUIUnitTest_SetGuiMainProxy(sharedProxy);
+
+			UnitTestScreenConfig globalConfig;
+			globalConfig.FastInitialize(1024, 768);
+			globalConfig.useDomDiff = true;
+
+			GacUIUnitTest_StartFast_WithResourceAsText<darkskin::Theme>(
+				WString::Unmanaged(L"UnitTestFramework/Channel/DomDiff"),
+				WString::Unmanaged(L"gacuisrc_unittest::MainWindow"),
+				resource,
+				globalConfig
+				);
+		});
+
+		TEST_CASE(L"Everythiing")
+		{
+			GacUIUnitTest_SetGuiMainProxy(sharedProxy);
+
+			UnitTestScreenConfig globalConfig;
+			globalConfig.FastInitialize(1024, 768);
+			globalConfig.useDomDiff = true;
+			globalConfig.useChannel = UnitTestRemoteChannel::Sync;
+
+			GacUIUnitTest_StartFast_WithResourceAsText<darkskin::Theme>(
+				WString::Unmanaged(L"UnitTestFramework/Channel/Everything"),
+				WString::Unmanaged(L"gacuisrc_unittest::MainWindow"),
+				resource,
+				globalConfig
+				);
+		});
+	});
 }

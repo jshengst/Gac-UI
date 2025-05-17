@@ -4,6 +4,7 @@
 # 但保留指定的文件
 !Release/
 !Source/
+!*.lua
 # !Library/
 # !Demo/
 !README.md

@@ -200,7 +200,7 @@ GuiControlHost
 				calledDestroyed = true;
 				if (deleteWhenDestroyed)
 				{
-					GetApplication()->InvokeInMainThread(this, [=]()
+					GetApplication()->InvokeInMainThread(this, [=, this]()
 					{
 						DeleteThis();
 					});
@@ -597,9 +597,9 @@ GuiControlHost
 
 			void GuiControlHost::Hide()
 			{
-				if(host->GetNativeWindow())
+				if (auto window = host->GetNativeWindow())
 				{
-					host->GetNativeWindow()->Hide(false);
+					window->Hide(false);
 				}
 			}
 
@@ -607,16 +607,17 @@ GuiControlHost
 			{
 				if (auto window = host->GetNativeWindow())
 				{
-					auto mainWindow = GetCurrentController()->WindowService()->GetMainWindow();
-					if (mainWindow == window)
-					{
-						SetNativeWindow(nullptr);
-						GetCurrentController()->WindowService()->DestroyNativeWindow(window);
-					}
-					else
-					{
-						window->Hide(true);
-					}
+					window->Hide(true);
+					// auto mainWindow = GetCurrentController()->WindowService()->GetMainWindow();
+					// if (mainWindow == window)
+					// {
+					// 	SetNativeWindow(nullptr);
+					// 	GetCurrentController()->WindowService()->DestroyNativeWindow(window);
+					// }
+					// else
+					// {
+					// 	window->Hide(true);
+					// }
 				}
 			}
 
@@ -735,7 +736,7 @@ GuiWindow
 				}
 				else if (frameConfig == BoolOption::AlwaysFalse || templateConfig == BoolOption::AlwaysFalse)
 				{
-					variable = true;
+					variable = false;
 				}
 
 				return true;
@@ -1050,7 +1051,7 @@ GuiWindow
 
 				auto container = Ptr(new IGuiGraphicsEventHandler::Container);
 				auto disposeFlag = GetDisposedFlag();
-				container->handler = WindowReadyToClose.AttachLambda([=](GuiGraphicsComposition* sender, GuiEventArgs& arguments)
+				container->handler = WindowReadyToClose.AttachLambda([=, this](GuiGraphicsComposition* sender, GuiEventArgs& arguments)
 				{
 					callback();
 
@@ -1064,7 +1065,7 @@ GuiWindow
 						owner->showModalRecord = nullptr;
 					}
 
-					GetApplication()->InvokeInMainThread(this, [=]()
+					GetApplication()->InvokeInMainThread(this, [=, this]()
 					{
 						if (!disposeFlag->IsDisposed())
 						{
@@ -1079,7 +1080,7 @@ GuiWindow
 
 			void GuiWindow::ShowModalAndDelete(GuiWindow* owner, const Func<void()>& callback)
 			{
-				ShowModal(owner, [=]()
+				ShowModal(owner, [=, this]()
 				{
 					callback();
 					DeleteAfterProcessingAllEvents({});
@@ -1088,7 +1089,7 @@ GuiWindow
 
 			void GuiWindow::ShowModalAndDelete(GuiWindow* owner, const Func<void()>& callbackClosed, const Func<void()>& callbackDeleted)
 			{
-				ShowModal(owner, [=]()
+				ShowModal(owner, [=, this]()
 				{
 					callbackClosed();
 					DeleteAfterProcessingAllEvents(callbackDeleted);

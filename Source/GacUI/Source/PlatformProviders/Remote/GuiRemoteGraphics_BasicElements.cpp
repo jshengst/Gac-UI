@@ -41,6 +41,8 @@ GuiSolidBorderElementRenderer
 		{
 			id = newRenderTarget->AllocateNewElementId();
 			newRenderTarget->RegisterRenderer(this);
+			updated = true;
+			renderTargetChanged = true;
 		}
 	}
 
@@ -72,6 +74,7 @@ GuiSolidBorderElementRenderer
 	void RENDERER_CLASS_TYPE::ResetUpdated()
 	{
 		updated = false;
+		renderTargetChanged = false;
 	}
 
 	RENDERER_TEMPLATE_HEADER
@@ -362,12 +365,12 @@ GuiSolidLabelElementRenderer
 			elementFont = GetCurrentController()->ResourceService()->GetDefaultFont();
 		}
 
-		if (fullContent || lastFont != elementFont)
+		if (renderTargetChanged || fullContent || lastFont != elementFont)
 		{
 			arguments.font = elementFont;
 		}
 
-		if (fullContent || lastText != elementText)
+		if (renderTargetChanged || fullContent || lastText != elementText)
 		{
 			arguments.text = elementText;
 		}
@@ -380,7 +383,7 @@ GuiSolidLabelElementRenderer
 			TryFetchMinSizeFromCache();
 			if (!needFontHeight)
 			{
-				arguments.measuringRequest = {};
+				arguments.measuringRequest.Reset();
 			}
 		}
 
@@ -439,9 +442,9 @@ GuiImageFrameElementRenderer
 	{
 #define ERROR_MESSAGE_PREFIX L"vl::presentation::elements_remoteprotocol::GuiImageFrameElementRenderer::TryFetchMinSizeFromCache()#"
 		auto image = GetRemoteImage();
-		if (image)
+		if (!image || image->status != GuiRemoteGraphicsImage::MetadataStatus::Retrived)
 		{
-			CHECK_ERROR(image->status == GuiRemoteGraphicsImage::MetadataStatus::Retrived, ERROR_MESSAGE_PREFIX L"The expected metadata of an image does not exist.");
+			return;
 		}
 		UpdateMinSizeFromImage(image);
 		needUpdateSize = false;
@@ -454,13 +457,24 @@ GuiImageFrameElementRenderer
 		if (image)
 		{
 			needUpdateSize = true;
-			if (fullContent && image->status == GuiRemoteGraphicsImage::MetadataStatus::Retrived)
+			if (fullContent)
 			{
-				image->status = GuiRemoteGraphicsImage::MetadataStatus::Uninitialized;
+				if (fullContent && image->status == GuiRemoteGraphicsImage::MetadataStatus::Retrived)
+				{
+					image->status = GuiRemoteGraphicsImage::MetadataStatus::Uninitialized;
+				}
+			}
+			else
+			{
+				if (image->status == GuiRemoteGraphicsImage::MetadataStatus::Uninitialized)
+				{
+					image->EnsureMetadata();
+				}
 			}
 			if (image->status == GuiRemoteGraphicsImage::MetadataStatus::Retrived)
 			{
 				UpdateMinSizeFromImage(image);
+				renderTargetChanged = false;
 			}
 		}
 
@@ -495,7 +509,7 @@ GuiImageFrameElementRenderer
 			arguments.verticalAlignment = ElementVerticalAlignment::Center;
 		}
 
-		if (needUpdateSize && image)
+		if ((renderTargetChanged || needUpdateSize) && image)
 		{
 			arguments.imageCreation = image->GenerateImageCreation();
 		}
