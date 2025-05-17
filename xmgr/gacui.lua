@@ -2,7 +2,7 @@
 -- 指定代码路径
 local source_path = path.join(os.projectdir(),"Source")
 local import_Path = path.join(os.projectdir(),"Import")
-
+-- 定义tool代码路径
 local src_tools_paths = {
     gg = path.join(source_path,"GacUI","Tools","GacGen","GacGen"),
     cp = path.join(source_path,"VlppParser2","Tools","CodePack","CodePack"),
@@ -15,7 +15,7 @@ local import_tools_paths = {
     gp = path.join(os.projectdir(), "Tools", "Executables", "GlrParserGen"),
     cm = path.join(os.projectdir(), "Tools", "Executables", "CppMerge"),
 }
--- 定义包含路径的字典
+-- 定义gui路径
 local src_paths = {
     vl = path.join(source_path,"Vlpp","Release","IncludeOnly"),
     ui = path.join(source_path,"GacUI","Release","IncludeOnly"),
@@ -26,7 +26,7 @@ local src_paths = {
     v2 = path.join(source_path,"VlppParser2","Release","IncludeOnly"),
     vf = path.join(source_path,"VlppReflection","Release","IncludeOnly")
 }
--- 定义移除compiler的路径键
+-- 定义compiler路径
 local remove_src_compiler = {
     {path = src_paths["ui"], file = "GacUICompiler"},
     {path = src_paths["wf"], file = "VlppWorkflowCompiler"}
@@ -35,7 +35,7 @@ local remove_import_compiler = {
     {path = import_Path, file = "GacUICompiler"},
     {path = import_Path, file = "VlppWorkflowCompiler"}
 }
--- 定义移除reflection的路径键
+-- 定义reflection路径
 local remove_src_reflection = {
     {path = src_paths["ui"], file = "DarkSkinReflection"},
     {path = src_paths["ui"], file = "GacUICompiler"},
@@ -75,7 +75,7 @@ rule("GacUI")
                 raise("Directory does not exist: " .. path.join(os.projectdir(), "Source"))
             end
             for _, key in pairs(src_paths) do
-                target:add("includedirs", path, {public = true})
+                target:add("includedirs", path, {public = true})    -- 似乎写错了：target:add("includedirs", key, {public = true})
                 target:add("headerfiles", path.join(key, "**.h"))
                 target:add("files", path.join(key, "**.cpp"))
             end
