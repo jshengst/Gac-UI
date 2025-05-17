@@ -31,6 +31,13 @@ namespace vl::presentation::unittest
 		auto operator<=>(const WindowStyleConfig&) const = default;
 	};
 
+	enum class UnitTestRemoteChannel
+	{
+		None,
+		Sync,
+		Async,
+	};
+
 	struct UnitTestScreenConfig
 	{
 		using FontConfig = vl::presentation::remoteprotocol::FontConfig;
@@ -40,6 +47,8 @@ namespace vl::presentation::unittest
 		NativeMargin				customFramePadding;
 		FontConfig					fontConfig;
 		ScreenConfig				screenConfig;
+		bool						useDomDiff = false;
+		UnitTestRemoteChannel		useChannel = UnitTestRemoteChannel::None;
 
 		void						FastInitialize(vint width, vint height, vint taskBarHeight = 0);
 	};

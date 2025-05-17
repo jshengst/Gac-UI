@@ -79,7 +79,7 @@ IGuiRemoteProtocol
 	{
 	public:
 		virtual void			Initialize(IGuiRemoteProtocolEvents* events) = 0;
-		virtual void			Submit() = 0;
+		virtual void			Submit(bool& disconnected) = 0;
 		virtual void			ProcessRemoteEvents() = 0;
 	};
 
@@ -90,8 +90,11 @@ IGuiRemoteProtocol
 	};
 
 	template<typename TEvents>
+	class GuiRemoteProtocolCombinator;
+
+	template<typename TEvents>
 		requires(std::is_base_of_v<GuiRemoteEventCombinator, TEvents>)
-	class GuiRemoteProtocolCombinator : public Object, public virtual IGuiRemoteProtocol
+	class GuiRemoteProtocolCombinator<TEvents> : public Object, public virtual IGuiRemoteProtocol
 	{
 	protected:
 		IGuiRemoteProtocol*				targetProtocol = nullptr;
@@ -116,15 +119,98 @@ IGuiRemoteProtocol
 			targetProtocol->Initialize(&eventCombinator);
 		}
 
-		void Submit() override
+		void Submit(bool& disconnected) override
 		{
-			targetProtocol->Submit();
+			targetProtocol->Submit(disconnected);
 		}
 
 		void ProcessRemoteEvents() override
 		{
 			targetProtocol->ProcessRemoteEvents();
 		}
+	};
+
+	template<>
+	class GuiRemoteProtocolCombinator<void> : public Object, public virtual IGuiRemoteProtocol
+	{
+	protected:
+		IGuiRemoteProtocol*				targetProtocol = nullptr;
+		IGuiRemoteProtocolEvents*		events = nullptr;
+
+	public:
+		GuiRemoteProtocolCombinator(IGuiRemoteProtocol* _protocol)
+			: targetProtocol(_protocol)
+		{
+		}
+
+		// protocol
+
+		WString GetExecutablePath() override
+		{
+			return targetProtocol->GetExecutablePath();
+		}
+
+		void Initialize(IGuiRemoteProtocolEvents* _events) override
+		{
+			events = _events;
+			targetProtocol->Initialize(_events);
+		}
+
+		void Submit(bool& disconnected) override
+		{
+			targetProtocol->Submit(disconnected);
+		}
+
+		void ProcessRemoteEvents() override
+		{
+			targetProtocol->ProcessRemoteEvents();
+		}
+	};
+
+/***********************************************************************
+Passing through
+***********************************************************************/
+
+	class GuiRemoteEventCombinator_PassingThrough : public GuiRemoteEventCombinator
+	{
+	public:
+#define EVENT_NOREQ(NAME, REQUEST)					void On ## NAME() override { this->targetEvents->On ## NAME(); }
+#define EVENT_REQ(NAME, REQUEST)					void On ## NAME(const REQUEST& arguments) override { this->targetEvents->On ## NAME(arguments); }
+#define EVENT_HANDLER(NAME, REQUEST, REQTAG, ...)	EVENT_ ## REQTAG(NAME, REQUEST)
+		GACUI_REMOTEPROTOCOL_EVENTS(EVENT_HANDLER)
+#undef EVENT_HANDLER
+#undef EVENT_REQ
+#undef EVENT_NOREQ
+
+#define MESSAGE_NORES(NAME, RESPONSE)
+#define MESSAGE_RES(NAME, RESPONSE)										void Respond ## NAME(vint id, const RESPONSE& arguments) override { this->targetEvents->Respond ## NAME(id, arguments); }
+#define MESSAGE_HANDLER(NAME, REQUEST, RESPONSE, REQTAG, RESTAG, ...)	MESSAGE_ ## RESTAG(NAME, RESPONSE)
+			GACUI_REMOTEPROTOCOL_MESSAGES(MESSAGE_HANDLER)
+#undef MESSAGE_HANDLER
+#undef MESSAGE_RES
+#undef MESSAGE_NORES
+	};
+
+	template<typename TEvents>
+	class GuiRemoteProtocolCombinator_PassingThrough : public GuiRemoteProtocolCombinator<TEvents>
+	{
+	public:
+		GuiRemoteProtocolCombinator_PassingThrough(IGuiRemoteProtocol* _protocol)
+			: GuiRemoteProtocolCombinator<TEvents>(_protocol)
+		{
+		}
+
+#define MESSAGE_NOREQ_NORES(NAME, REQUEST, RESPONSE)					void Request ## NAME() override { this->targetProtocol->Request ## NAME(); }
+#define MESSAGE_NOREQ_RES(NAME, REQUEST, RESPONSE)						void Request ## NAME(vint id) override { this->targetProtocol->Request ## NAME(id); }
+#define MESSAGE_REQ_NORES(NAME, REQUEST, RESPONSE)						void Request ## NAME(const REQUEST& arguments) override { this->targetProtocol->Request ## NAME(arguments); }
+#define MESSAGE_REQ_RES(NAME, REQUEST, RESPONSE)						void Request ## NAME(vint id, const REQUEST& arguments) override { this->targetProtocol->Request ## NAME(id, arguments); }
+#define MESSAGE_HANDLER(NAME, REQUEST, RESPONSE, REQTAG, RESTAG, ...)	MESSAGE_ ## REQTAG ## _ ## RESTAG(NAME, REQUEST, RESPONSE)
+		GACUI_REMOTEPROTOCOL_MESSAGES(MESSAGE_HANDLER)
+#undef MESSAGE_HANDLER
+#undef MESSAGE_REQ_RES
+#undef MESSAGE_REQ_NORES
+#undef MESSAGE_NOREQ_RES
+#undef MESSAGE_NOREQ_NORES
 	};
 }
 

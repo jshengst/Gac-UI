@@ -15,21 +15,17 @@ UnitTestSnapshotFrame
 
 	class UnitTestSnapshotFrame : public Object, public virtual IUnitTestSnapshotFrame
 	{
+		friend const remoteprotocol::UnitTest_RenderingFrame& GetRenderingFrame(Ptr<IUnitTestSnapshotFrame> frame);
 	protected:
-		vint				index;
-		RenderingFrame		frame;
-		WString				elements;
-		WString				commands;
-		WString				dom;
-		JsonFormatting		formatting;
-
-		friend const remoteprotocol::RenderingFrame& GetRenderingFrame(Ptr<IUnitTestSnapshotFrame> frame)
-		{
-			return frame.Cast<UnitTestSnapshotFrame>()->frame;
-		}
+		vint						index;
+		UnitTest_RenderingFrame		frame;
+		WString						elements;
+		WString						commands;
+		WString						dom;
+		JsonFormatting				formatting;
 
 	public:
-		UnitTestSnapshotFrame(vint _index, RenderingFrame _frame)
+		UnitTestSnapshotFrame(vint _index, UnitTest_RenderingFrame _frame)
 			: index(_index)
 			, frame(_frame)
 		{
@@ -60,15 +56,6 @@ UnitTestSnapshotFrame
 			return elements;
 		}
 
-		WString GetCommandsAsJsonText() override
-		{
-			if (commands == L"")
-			{
-				commands = JsonToString(ConvertCustomTypeToJson(frame.commands), formatting);
-			}
-			return commands;
-		}
-
 		WString GetDomAsJsonText() override
 		{
 			if (dom == L"")
@@ -79,21 +66,22 @@ UnitTestSnapshotFrame
 		}
 	};
 
+	const remoteprotocol::UnitTest_RenderingFrame& GetRenderingFrame(Ptr<IUnitTestSnapshotFrame> frame)
+	{
+		return frame.Cast<UnitTestSnapshotFrame>()->frame;
+	}
+
 /***********************************************************************
 UnitTestSnapshotFileNode
 ***********************************************************************/
 
 	class UnitTestSnapshotFileNode : public Object, public virtual IUnitTestSnapshotFileNode
 	{
+		friend const remoteprotocol::UnitTest_RenderingTrace& GetRenderingTrace(Ptr<gaclib_controls::IUnitTestSnapshotFileNode> node);
 	protected:
 		File								file;
-		Ptr<RenderingTrace>					renderingTrace;
+		Ptr<UnitTest_RenderingTrace>		renderingTrace;
 		List<Ptr<UnitTestSnapshotFrame>>	frames;
-
-		friend const remoteprotocol::RenderingTrace& GetRenderingTrace(Ptr<gaclib_controls::IUnitTestSnapshotFileNode> node)
-		{
-			return *node.Cast<UnitTestSnapshotFileNode>()->renderingTrace.Obj();
-		}
 
 		void EnsureLoaded()
 		{
@@ -105,7 +93,7 @@ UnitTestSnapshotFileNode
 					glr::json::Parser parser;
 					jsonNode = JsonParse(jsonText, parser);
 				}
-				renderingTrace = Ptr(new RenderingTrace);
+				renderingTrace = Ptr(new UnitTest_RenderingTrace);
 				ConvertJsonToCustomType(jsonNode, *renderingTrace.Obj());
 
 				frames.Clear();
@@ -154,6 +142,11 @@ UnitTestSnapshotFileNode
 			CHECK_FAIL(L"Not Implemented!");
 		}
 	};
+
+	const remoteprotocol::UnitTest_RenderingTrace& GetRenderingTrace(Ptr<gaclib_controls::IUnitTestSnapshotFileNode> node)
+	{
+		return *node.Cast<UnitTestSnapshotFileNode>()->renderingTrace.Obj();
+	}
 
 /***********************************************************************
 UnitTestSnapshotFolderNode

@@ -1,204 +1,27 @@
 # TODO
 
-## Completed but not released (1.2.11.0)
-
-## Known Issues
-
-- Replace `LoadLibrary` with `GetModuleHandle` in `EnableCrossKernelCrashing`.
-- `GuiVirtualRepeatCompositionBase`.
-  - Eliminate double `ForceCalculateSizeImmediately()` calls in `TestCompositions_VirtualRepeat.cpp` (TODO) and related files.
-- FakeDialogService
-  - `FakeDialogServiceBase::ShowModalDialogAndDelete` place the window in the center of `owner` instead of the screen.
-  - Specify multiple extensions in one filter, exactly like Win32 API.
-  - Extensions not applied before checking file existance.
-- Expanding collapsing tree nodes cause the whole list to rebuild, which glitch during multiple passes of layout.
-  - Only affected items need to rebuild.
-- Bindable list control (optional)
-  - When a property referenced by `<att.XXXProperty>` is updated, the list item is not refreshed.
-    - Need to find a way to listen to the event.
-- For all list controls, adding item could cause flashing during rendering for about 1 flame.
-  - If this issue is solved, remove document in `Breaking changes from 1.0` and `List Controls`.
-- `controller(Unr|R)elatedPlugins` in `IGuiPlugin(Manager)?` lower dependency safety.
-  - Change `GUI_PLUGIN_NAME` to `GUI_PLUGIN_CONTROLLER_(UN)RELATED`.
-  - Remove the two parameters from `IGuiPlugin`, the macro above already specified it clear enough.
-  - Unrelated plugins are not allowed to depend on related plugins.
-
-## Known Issues (Unit Test)
-
-- Tests that assuming DarkSkin:
-  - `(H|V)(Tracker|Scroll)/Mouse`
-  - `ToolstripSplitButton`
-  - `GuiDatePicker/Mouse`
-- Tests that are OS awared:
-  - `GuiDatePicker`, `GuiDateComboBox`, inject unit test specific time and locale object. Otherwise Window and Linux will see different printed date in snapshots.
-- Same issue
-  - `(H|V)(Tracker|Scroll)/Mouse`
-    - when `Drag to Center` the handler should be highlighted, because the mouse is right above the handler.
-  - `GuiBindableDataGrid/ComboEditor`
-    - When a data grid cell editor is created under the mouse, the editor does not receive `MouseEvent` event.
-- `GuiScrollContainer`
-  - Only calling `Set(Horizontal|Vertical)AlwaysVisible(false)` doesn't make scrolls disappear. `SetVisible(false)` on scrolls are verified called.
-  - When the content is changed, configuration needs 2 idle frames to be correctly configured.
-- `GuiListItemTemplate/ArrangerAndAxis(WithScrolls)`
-  - items are not aligned to proper corner when scrolls are invisible.
-- Stop hard-coding coordinates:
-  - `GetListItemLocation`.
-  - `GuiToolstripMenuBar/Cascade/ClickSubMenu`'s `Hover on File/New` try to avoid specifying relative coordinate just because half of the menu item is covered.
-
-## Release (optional)
+## Ideas
 
 - GacUI Binary Resource (when new features are added)
   - Upgrade GacUI XML Resource to 1.3, force on all resources instead of only depended or depending resource.
   - Require binary pattern "[GXR-1.3]" at the beginning of the binary resource.
   - Resource compiler and loader will check the version and only accept 1.3.
+- Create another release folder, containing a new h/cpp grouping configuration.
+  - Group files into how vcxitems described in GacUISrc.
+  - Create each lib project for each grouped source files.
+  - Create each exe project to reference just enough/designed subset of libs.
+  - Verify if source dependencies are satisfied.
+- Remote protocol player for Windows (and port to others)
+  - GUI runs compiled XML resource in an separated process
+  - Single GUI mode
+  - Multiple GUI mode (with a simple window manager, and a test app for displaying instructions)
+  - Implemented in both C++ and TypeScript
 
-## Release Milestone (1.2.11.0)
-
-- GacUI
-  - Fix `Global Objects` in `GacUI.h`.
-  - Thinking about promote SyncDom data structures for unit test, and complete a diff algorithm.
-    - Unit test framework
-      - Generate `domId` for each dom node:
-        - root = 0
-        - element = (element.id << 2) + 1
-        - virtual = (element.id << 2) + 2
-        - hittest = (composition.id << 2) + 3
-          - the renderer maintaining an increasing id, when one is allocated it is cached in the composition
-      - Diff algorithm based on `domId`
-      - Mouse wheel trigger functions.
-    - Unit Test Snapshot Viewer
-      - Show dom nodes in a tree view in the right side of the rendering tab optionally.
-      - Select dom node and jump to other tabs with highlight.
-- Remote protocol redirection back to native rendering:
-  - In the test project, C++ side will expose the remote protocol via dll.
-  - Implement the remote protocol on a native `INativeController` instance.
-    - It could not be used on `GuiHostedController` or `GuiRemoteController`, which is not a native implementation.
-  - The experiment will only run a very simple UI that covers all implemented remote protocol so far.
-
-## Release Milestone (1.2.12.0)
-
-- More unit test
-  - Ribbon Controls
-  - `GuiControl` and servives
-  - `[TAB]`
-  - `ControlThemeName` property
-  - Multiple active `GuiWindow`, modal, order, `Enabled`
-  - `GuiTab` item manipulation and `[TAB]`
-  - `MouseWheel`
-    - Behavior on scrolls, trackers, scroll containers and list controls
-    - `GuiListControl` item events
-    - `GuiVirtualTreeListControl` node events
-  - A button calling a modal window
-- GacUI
-  - `<RawRendering/>` element.
-    - It will be mapped to `GDIElement` or `Direct2DElement` in different renderers.
-    - In remote protocol, it is an element with no extra properties.
-    - In HTML, it would open a `<div/>` and you can do whatever you want using JavaScript.
-- JavaScript rendering:
-  - Delete all `GacJS` code. This repo will be used to implement the HTML logic.
-  - A codegen for remote protocol and print TypeScript code.
-  - In the test project, C++ side will start a HTTP service on Windows.
-  - JavaScript side will separate the rendering and the protocol.
-  - Try DOM.
-  - Try Canvas.
-    - https://github.com/WICG/canvas-formatted-text/blob/main/README.md
-      - layout provider could not be done until this is implemented.
-  - Try EsBuild to replace WebPack.
-  - The experiment will only run a very simple UI that covers all implemented remote protocol so far.
-- Copy control unit tests, snapshots and snapshot viewer to `Release` repo.
-  - Build and run test.
-    - Explain this in decicated `README.md` and mention it in the root one.
-  - Verify vcxproj contains all files.
-  - Ensure build woriflow tutorials.
-  - Update Win11 menu tutorial in `Release` repo to use new virtual control
-
-## Release Milestone (1.2.13.0)
-
-- All control unit test (using DarkSkin)
-  - Tooltip.
-  - Dialogs.
-  - A mechanism to replace `vl::filesystem` implementation.
-  - Add window resizing constraint messages.
-  - Implement `ColorizedTextElement`
-    - Typing trigger functions in unit test framework.
-    - `GuiSinglelineTextBox`
-    - `GuiMultilineTextBox`
-    - `GuiBindableDataGrid` with predefined text box editor.
-    - Ribbon with predefined text box toolstrip component.
-  - Implement `DocumentElement`.
-    - Think about how to calculate size for document.
-    - `GuiDocumentViewer`
-    - `GuiDocumentLable`
-      - `<DocumentTextBox/>`
-  - Check all control key operation, ensure accessibility.
-    - Cannot scroll `GuiScrollView`, key operations needed and also need to be disabled for `GuiListControl` because it has already defined item selection keys.
-    - `Gui(Bindable)TextList` cannot check or uncheck items by key (enter and space).
-    - `GuiVirtualListView` cannot operate column headers by key.
-    - Active menus without `Alt` assighed (`TAB` and arrow keys?).
-    - `GuiDateComboBox` does not receive focus property, so that when open year/month combo by `ALT` or mouse, list item cannot be selected only by key.
-      - Add `Alt` and fix `Mouse` test cases after this is fixed.
-- Sample unit test project included in release.
-  - Reflection enabled
-    - Application and `LoadMainWindow` script in separated XML resource files.
-    - Application and `LoadMainWindow` script in separated compiled resource files.
-  - Reflection disabled
-    - Application in compiled C++ files.
-    - There is no `LoadMainWindow` in this case.
-- Document
-  - Unit test framework.
-  - Unit test framework in Vlpp.
-  - Remote Protocol.
-
-## Release Milestone (1.3.0.0)
-
-- Implement `ColorizedTextElement` and `DocumentElement` in all already implemented remote renderers.
-
-## Release Milestone (1.4.0.0)
-
-- SyncObj architecture that streams ViewModel object changes.
-  - See README.md in Workflow repo (**ViewModel Remoting C++ Codegen**).
-  - GacGen offers Metadata of interfaces
-  - Network protocols are not included as default implementation
-- New tutorials
-  - A GacUI D2D process connecting to a server process for streaming ViewModel
-    - ViewModel implements in C++ and C#
-- Document
-  - SyncObj.
-  - Fix `/doc/current/home.html`
-    - Introduction to hosted / remote
-  - Fix `/doc/current/gacui/home.html`
-    - Introduction to hosted / remote
-
-## Release Milestone (1.4.1.0)
-
-- A remote protocol implementation on existing `INativeController` implementation.
-  - Network protocols are not included as default implementation.
-  - Take care of `wchar_t` when server and client have different understanding to its size.
-- New tutorials.
-  - A GacUI SyncDom process connecting to a server process for streaming graphics.
-    - GDI+ implements in C#.
-    - GDI/D2D implements in C++.
-- Rewrite `GacBuild.ps1` and `GacClear.ps1` in C++, but still keep them just doing redirection for backward compatibility.
-- Get rid of `Deploy.bat` in `GacGen.ps1` and `GacGen.exe`.
-
-## Release Milestone (1.5.0.0)
-- `Variant` and `Union` with full support.
-  - Document.
-  - Document `vl::Overloading`.
-- Extensible CLI argument parser acception different OS convention, serialization and module dependencies.
-  - Structured error report.
-  - Extensible error message localization relying on GacUI XML Resource localization feature.
-  - Pre-made main function per OS, defining arguments for different renderers for the current OS, including remoting server with predefine protocols.
-- More optimistic SyncDom strategy to reduce messages.
-- Windows
-  - Ensure `INativeWindow::(Before|After)Closing()` is not called on non-main-window between the main window is closed and the application exits.
-- Enlarging window slower than shrinking.
-- https://github.com/vczh-libraries/Vlpp/issues/9
-
-## Release Milestone (future releases)
+## Probably
 
 - Strict check in different for-each loops.
 - A new non-XML instance format
+- Compact version of table's colummns and rows property so that they could also be written in attributes.
 - `<eval Eval="expression"/>` tags.
 - `<ez:Layout/>`
   - `xmlns:ez` by default:
@@ -211,6 +34,7 @@
     - accepting following tags as child:
       - `<ez:Top/>`, `<ez:Bottom/>`, `<ez:Left/>`, `<ez:Right/>`, `<ez:Fill Percentage="1">`: Will be implemented by stack or table
       - `<ez:Row RowSpan="1" ColumnSpan="1"/>`, `<ez:Column RowSpan="1" ColumnSpan="1"/>`: will be implemented by table
+      - Is it possible to make them attributes of children instead of tags?
     - properties of other `ez:` object
       - `Padding`, `-1` by default means inheriting the value from its parent, defining a new padding of its children
   - Any `ez:` layout could have multiple `ez:` layout or one control/Composition
@@ -286,16 +110,16 @@
 - Port GacUI to other platforms:
   - Unit Test (**Remote**)
   - Windows
-    - GDI (**Normal**, **Hosted**, Remote)
-    - Direct2d (**Normal**, **Hosted**, Remote)
+    - GDI (**Normal**, **Hosted**, **Remote**)
+    - Direct2d (**Normal**, **Hosted**, **Remote**)
     - UWP (Remote)
   - Linux
     - gGac repo: improve development process for release
   - macOS
     - iGac repo: improve development process for release
-  - Browser (Remote)
-    - HTTP for test purpose
-    - WebAssembly
+  - Browser
+    - HTTP for test purpose (Remote)
+    - WebAssembly (Remote)
   - CLI (optional, needs dedicated skin)
     - Command-line/Powershell in Windows (Remote)
     - Ncurses on Ubuntu (Remote)

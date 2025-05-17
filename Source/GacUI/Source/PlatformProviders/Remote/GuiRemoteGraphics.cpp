@@ -108,7 +108,9 @@ GuiRemoteGraphicsRenderTarget
 	{
 		CHECK_ERROR(hitTestResults.Count() == 0, L"vl::presentation::elements::GuiRemoteGraphicsRenderTarget::StartRenderingOnNativeWindow()#Internal error: hit test result stack is not cleared.");
 		vint idRendering = remote->remoteMessages.RequestRendererEndRendering();
-		remote->remoteMessages.Submit();
+		bool disconnected = false;
+		remote->remoteMessages.Submit(disconnected);
+		if (disconnected) return RenderTargetFailure::None;
 		auto measuring = remote->remoteMessages.RetrieveRendererEndRendering(idRendering);
 
 		bool minSizeChanged = false;
@@ -214,6 +216,13 @@ GuiRemoteGraphicsRenderTarget
 
 		if (arguments.hitTestResult || arguments.cursor)
 		{
+			// GetHitTestResultFromGenerator or GetCursorFromGenerator ensures generator must be a composition
+			auto composition = dynamic_cast<GuiGraphicsComposition*>(generator);
+			if (composition->remoteId == -1)
+			{
+				composition->remoteId = ++usedCompositionIds;
+			}
+			arguments.id = composition->remoteId;
 			arguments.bounds = clipper;
 			arguments.areaClippedBySelf = validArea;
 			remote->remoteMessages.RequestRendererBeginBoundary(arguments);

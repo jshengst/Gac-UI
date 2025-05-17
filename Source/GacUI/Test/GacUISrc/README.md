@@ -9,6 +9,8 @@
   - **CppTest_Reflection**: Compile and run generated C++ files.
   - **GacUI_Host**: Load the compiled binary file and run.
   - **Playground**: Compile and load XML with generated DarkSkin.
+  - **RemotingTest_Core**: GacUI running in remote protocol (`/Pipe`, `/Http`)
+  - **RemoteTest_Rendering_Win32**: Renderer connects to **RemotingTest_Core** using NamedPipe or Http (`/Pipe`, `/Http`)
 - **UnitTest**: Test cases for GacUI.
 - **UnitTestViewer**: Render snapshots generated in **UnitTest**.
 
@@ -21,13 +23,16 @@
 - **Core**: Minimum source code that opens and renders a window in the OS.
 - **CoreApplication** -> **Core**: Minimum source code that runs `GuiApplication`.
 - **GacUI** -> **CoreApplication**: All controls.
+- **Reflection** -> **GacUI**: All GacUI reflection definition.
+
 - **Utilities** -> **CoreApplication**: Utilities.
 - **Utilities_Controls** -> **Utilities** + **GacUI**: Utilities that brings UI.
+- **Utilities_Reflection** -> **Utilities_Controls** + **Reflection**: Utilities UI reflection definition.
+
 - **UnitTest** -> **Core**: Unit test framework
 - **UnitTest_Controls** -> **GacUI**: Unit test snapshot viewer.
-- **Reflection** -> **Utilities_Controls**: All reflection definition.
-- **Utilities_Reflection** -> **Utilities_Controls** + **Reflection**: Utilities UI reflection definition.
 - **UnitTest_Reflection** -> **UnitTest_Controls** + **Reflection**: Unit test snapshot viewer reflection definition.
+
 - **Compiler** -> **Reflection**: GacUI XML Compiler.
 - **Windows** -> **Utilities**: Windows platform provider.
 
@@ -36,4 +41,8 @@
 - Run **Metadata_Generate** in both Win32 and X64 to generate binary files.
 - Run **Metadata_Test** to update types.
 - Run **Metadata_UpdateProtocol** if protocol schema is changed.
-- Run **GacUI_Compiler** if Utilities_Controls, UnitTest_Controls, DarkSkin or FullControlTest is changed.
+- Run **GacUI_Compiler** if any of the following project is changed.
+  - Utilities_Controls
+  - UnitTest_Controls
+  - DarkSkin
+  - FullControlTest
