@@ -1,10 +1,14 @@
 
--- 指定代码路径，在不改变代码结构的情况下，仅修改这两个路径即可快速修改路径
+-- ====================Config Path====================
+
 local source_path = path.join(os.projectdir(),"Source")
 local release_path = path.join(os.projectdir(),"Release")
 
+
+-- ====================Code Path====================
+
 local import_Path = path.join(release_path,"Import")
--- 定义tool代码路径
+-- tool代码路径
 local src_tools_paths = {
     gg = path.join(source_path,"GacUI","Tools","GacGen","GacGen"),
     cp = path.join(source_path,"VlppParser2","Tools","CodePack","CodePack"),
@@ -17,7 +21,7 @@ local import_tools_paths = {
     gp = path.join(release_path, "Tools", "Executables", "GlrParserGen"),
     cm = path.join(release_path, "Tools", "Executables", "CppMerge"),
 }
--- 定义gui路径
+-- gui路径
 local src_paths = {
     vl = path.join(source_path,"Vlpp","Release","IncludeOnly"),
     ui = path.join(source_path,"GacUI","Release","IncludeOnly"),
@@ -28,7 +32,7 @@ local src_paths = {
     v2 = path.join(source_path,"VlppParser2","Release","IncludeOnly"),
     vf = path.join(source_path,"VlppReflection","Release","IncludeOnly")
 }
--- 定义compiler路径
+-- compiler路径
 local remove_src_compiler = {
     {path = src_paths["ui"], file = "GacUICompiler"},
     {path = src_paths["wf"], file = "VlppWorkflowCompiler"}
@@ -37,7 +41,7 @@ local remove_import_compiler = {
     {path = import_Path, file = "GacUICompiler"},
     {path = import_Path, file = "VlppWorkflowCompiler"}
 }
--- 定义reflection路径
+-- reflection路径
 local remove_src_reflection = {
     {path = src_paths["ui"], file = "DarkSkinReflection"},
     {path = src_paths["ui"], file = "GacUICompiler"},
@@ -56,6 +60,8 @@ local remove_import_reflection = {
 }
 
 
+-- ====================GacUI Rule====================
+
 rule("GacUI")
 
     on_load(function(target)
@@ -65,11 +71,11 @@ rule("GacUI")
         -- 启用source代码
         local with_source = target:values("GacUI.with_source")
         -- 启用单元测试
-        -- todo: 增加更多单元测试的配置参数
-        local with_unitest = target:values("GacUI.with_unitest")
+        local with_unitest = target:values("GacUI.with_unitest") -- todo: 增加更多单元测试的配置参数
 
         target:add("defines", "_UNICODE", "UNICODE")
         target:add("cxflags", "/utf-8")
+        target:set("langeuages", "cxx20", {public = true })
 
         -- 添加所有代码
         if with_source then
@@ -77,10 +83,12 @@ rule("GacUI")
                 raise("Directory does not exist: " .. source_path)
             end
             for _, key in pairs(src_paths) do
-                target:add("includedirs", path, {public = true})    -- 似乎写错了：target:add("includedirs", key, {public = true})
+                target:add("includedirs", key, {public = true})
                 target:add("headerfiles", path.join(key, "**.h"))
                 target:add("files", path.join(key, "**.cpp"))
             end
+            -- 用于修复WinMain.cpp的路径问题：Skins\DarkSkin\DarkSkin.h
+            target:add("includedirs", import_Path, {public = true })
         else
             if not os.isdir(path.join(release_path, "Import")) then
                 raise("Directory does not exist: " .. path.join(release_path, "Import"))
@@ -89,9 +97,6 @@ rule("GacUI")
             target:add("headerfiles", path.join(import_Path, "**.h"))
             target:add("files", path.join(import_Path, "**.cpp"))
         end
-
-        -- 用于修复WinMain.cpp的路径问题：Skins\DarkSkin\DarkSkin.h
-        target:add("includedirs", import_Path, {public = true })
 
         if reflection_level == nil then
             if with_source then
@@ -108,8 +113,7 @@ rule("GacUI")
         elseif reflection_level == "full" then
             -- do nothing，包含compiler代码
         else
-            -- todo: metaonly选项未测试
-            if reflection_level == "none" then
+            if reflection_level == "none" then -- todo: metaonly选项未测试
                 target:add("defines", "VCZH_DEBUG_NO_REFLECTION", {public = true })
             elseif reflection_level == "metaonly" then
                 target:add("defines", "VCZH_DEBUG_METAONLY_REFLECTION", {public = true })
@@ -139,8 +143,7 @@ rule("GacUI")
                 target:remove("files",path.join(import_Path,"VlppOS.Linux.cpp"))
             end
         elseif is_plat("linux") then
-            -- todo: 未测试
-            if with_source then
+            if with_source then -- todo: 未测试
                 target:remove("files",path.join(src_paths["vl"],"Vlpp.Windows.cpp"))
                 target:remove("files",path.join(src_paths["os"],"VlppOS.Windows.cpp"))
             else
@@ -162,6 +165,8 @@ rule("GacUI")
 
 rule_end()
 
+
+-- ====================GacUI Static Target====================
 
 target("GacUICustom")
     set_kind("phony")
@@ -204,51 +209,5 @@ target("GacUIComplete")
 
     add_rules("GacUI")
     set_values("GacUI.reflection_level", "full")
-
-target_end()
-
-
--- todo: 由于包含大量无用代码，tools组编译结果体积较大
-target("CppMerge")
-    set_languages("c++20")
-    set_kind("binary")
-    set_group("tools")
-    set_default(false)
-    add_deps("GacUIComplete")
-    add_files(path.join(import_tools_paths["cm"],"Main.cpp"))   -- source_path中没用WfMergeCpp.h
-
-target_end()
-
-
-target("GacGen")
-    set_languages("c++20")
-    set_kind("binary")
-    set_group("tools")
-    set_default(false)
-    add_deps("GacUIComplete")
-    add_defines("VCZH_DEBUG_METAONLY_REFLECTION")
-    add_files(path.join(src_tools_paths["gg"],"**.cpp"))
-
-target_end()
-
-
-target("GlrParserGen")
-    set_languages("c++20")
-    set_kind("binary")
-    set_group("tools")
-    set_default(false)
-    add_deps("GacUIComplete")
-    add_files(path.join(src_tools_paths["gp"],"**.cpp"))
-
-target_end()
-
-
-target("CodePack")
-    set_languages("c++20")
-    set_kind("binary")
-    set_group("tools")
-    set_default(false)
-    add_deps("GacUILite")
-    add_files(path.join(src_tools_paths["cp"],"**.cpp"))
 
 target_end()
