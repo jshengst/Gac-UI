@@ -42,6 +42,9 @@ namespace vl::presentation::remote_renderer
 				case RendererType::FocusRectangle:
 					element = Ptr(GuiFocusRectangleElement::Create());
 					break;
+				case RendererType::Raw:
+					// Do Nothing
+					break;
 				case RendererType::SolidBorder:
 					element = Ptr(GuiSolidBorderElement::Create());
 					break;
@@ -72,15 +75,18 @@ namespace vl::presentation::remote_renderer
 				default:;
 				}
 
-				element->GetRenderer()->SetRenderTarget(GetGuiGraphicsResourceManager()->GetRenderTarget(window));
+				if (element)
+				{
+					element->GetRenderer()->SetRenderTarget(GetGuiGraphicsResourceManager()->GetRenderTarget(window));
 
-				if (availableElements.Keys().Contains(rc.id))
-				{
-					availableElements.Set(rc.id, element);
-				}
-				else
-				{
-					availableElements.Add(rc.id, element);
+					if (availableElements.Keys().Contains(rc.id))
+					{
+						availableElements.Set(rc.id, element);
+					}
+					else
+					{
+						availableElements.Add(rc.id, element);
+					}
 				}
 			}
 		}

@@ -852,12 +852,12 @@ class darkskin::RibbonSmallDropdownButtonTemplateConstructor : system::Reference
     property __vwsn_precompile_11 : presentation::elements::GuiPolygonElement^;
     property __vwsn_precompile_2 : presentation::compositions::GuiBoundsComposition*;
     property __vwsn_precompile_3 : presentation::elements::GuiSolidBackgroundElement^;
-    property __vwsn_precompile_4 : presentation::compositions::GuiCellComposition*;
-    property __vwsn_precompile_5 : presentation::elements::GuiImageFrameElement^;
-    property __vwsn_precompile_6 : presentation::compositions::GuiCellComposition*;
-    property __vwsn_precompile_7 : presentation::elements::GuiSolidLabelElement^;
-    property __vwsn_precompile_8 : presentation::compositions::GuiTableComposition*;
-    property __vwsn_precompile_9 : presentation::elements::GuiSolidBackgroundElement^;
+    property __vwsn_precompile_4 : presentation::compositions::GuiBoundsComposition*;
+    property __vwsn_precompile_5 : presentation::compositions::GuiCellComposition*;
+    property __vwsn_precompile_6 : presentation::elements::GuiImageFrameElement^;
+    property __vwsn_precompile_7 : presentation::compositions::GuiCellComposition*;
+    property __vwsn_precompile_8 : presentation::elements::GuiSolidLabelElement^;
+    property __vwsn_precompile_9 : presentation::compositions::GuiTableComposition*;
     property container : presentation::compositions::GuiTableComposition*;
     property self : darkskin::RibbonSmallDropdownButtonTemplate*;
 
@@ -1248,9 +1248,9 @@ class darkskin::ToolstripDropdownButtonTemplateConstructor : system::ReferenceTy
     property __vwsn_precompile_1 : presentation::elements::GuiSolidBorderElement^;
     property __vwsn_precompile_2 : presentation::compositions::GuiBoundsComposition*;
     property __vwsn_precompile_3 : presentation::elements::GuiSolidBackgroundElement^;
-    property __vwsn_precompile_4 : presentation::elements::GuiImageFrameElement^;
-    property __vwsn_precompile_5 : presentation::compositions::GuiTableComposition*;
-    property __vwsn_precompile_6 : presentation::elements::GuiSolidBackgroundElement^;
+    property __vwsn_precompile_4 : presentation::compositions::GuiBoundsComposition*;
+    property __vwsn_precompile_5 : presentation::elements::GuiImageFrameElement^;
+    property __vwsn_precompile_6 : presentation::compositions::GuiTableComposition*;
     property __vwsn_precompile_7 : presentation::compositions::GuiCellComposition*;
     property __vwsn_precompile_8 : presentation::elements::GuiPolygonElement^;
     property container : presentation::compositions::GuiBoundsComposition*;
@@ -4323,6 +4323,7 @@ class presentation::controls::GuiBindableRibbonGalleryList : presentation::contr
     }
 
     property ItemTemplate : system::Function<presentation::templates::GuiListItemTemplate*, system::Object>^ { get:GetItemTemplate set:SetItemTemplate event:ItemTemplateChanged }
+    property ListControlInDropdown : presentation::controls::GuiSelectableListControl* { get:GetListControlInDropdown }
     property MaxCount : system::Int32 { get:GetMaxCount set:SetMaxCount }
     property MinCount : system::Int32 { get:GetMinCount set:SetMinCount }
     property SelectedIndex : system::Int32 { get:GetSelectedIndex event:SelectionChanged }
@@ -4333,6 +4334,7 @@ class presentation::controls::GuiBindableRibbonGalleryList : presentation::contr
     function ApplyItem(index : system::Int32) : system::Void;
     function GalleryPosToIndex(pos : presentation::controls::GalleryPos) : system::Int32;
     function GetItemTemplate() : system::Function<presentation::templates::GuiListItemTemplate*, system::Object>^;
+    function GetListControlInDropdown() : presentation::controls::GuiSelectableListControl*;
     function GetMaxCount() : system::Int32;
     function GetMinCount() : system::Int32;
     function GetSelectedIndex() : system::Int32;
@@ -6741,6 +6743,9 @@ class presentation::elements::GuiSolidLabelElement : presentation::elements::IGu
 interface presentation::elements::IGuiGraphicsElement : system::Interface {
     property OwnerComposition : presentation::compositions::GuiGraphicsComposition* { get:GetOwnerComposition }
 
+    @InvokeTemplate:::vl::reflection::description::GuiRawElement_Constructor($Arguments)
+    @ClosureTemplate:::vl::Func<$Func>(&::vl::reflection::description::GuiRawElement_Constructor)
+    static function CreateRawElement() : presentation::elements::IGuiGraphicsElement^;
     function GetOwnerComposition() : presentation::compositions::GuiGraphicsComposition*;
 
 }

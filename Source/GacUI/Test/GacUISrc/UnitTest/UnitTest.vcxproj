@@ -180,6 +180,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="TestApplication_Tab.cpp" />
+    <ClCompile Include="TestApplication_Theme.cpp" />
+    <ClCompile Include="TestApplication_Windows.cpp" />
     <ClCompile Include="TestCompositions_AllNested.cpp" />
     <ClCompile Include="TestCompositions_Bounds.cpp" />
     <ClCompile Include="TestCompositions_Flow.cpp" />
@@ -218,6 +221,10 @@
     <ClCompile Include="TestControls_List_GuiVirtualTreeListControl_Template.cpp" />
     <ClCompile Include="TestControls_List_GuiVirtualTreeView.cpp" />
     <ClCompile Include="TestControls_List_GuiVirtualTreeView_Template.cpp" />
+    <ClCompile Include="TestControls_Ribbon_Gallery.cpp" />
+    <ClCompile Include="TestControls_Ribbon_GuiRibbonButtons.cpp" />
+    <ClCompile Include="TestControls_Ribbon_GuiRibbonGroup.cpp" />
+    <ClCompile Include="TestControls_Ribbon_GuiRibbonTab.cpp" />
     <ClCompile Include="TestControls_Toolstrip_Combo_GuiComboBoxListControl.cpp" />
     <ClCompile Include="TestControls_Toolstrip_Combo_GuiComboBoxListControl_Template.cpp" />
     <ClCompile Include="TestControls_Toolstrip_Combo_GuiDatePicker.cpp" />
@@ -266,6 +273,7 @@
     <ClInclude Include="TestCompositions.h" />
     <ClInclude Include="TestControls.h" />
     <ClInclude Include="TestControls_List.h" />
+    <ClInclude Include="TestControls_Ribbon.h" />
     <ClInclude Include="TestRemote.h" />
     <ClInclude Include="TestRemote_GraphicsHost_Shared.h" />
     <ClInclude Include="TestRemote_Shared_JsonProtocol.h" />

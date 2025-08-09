@@ -34,6 +34,16 @@ namespace vl::presentation::elements_remoteprotocol
 		virtual void							NotifyMinSizeCacheInvalidated() = 0;
 	};
 
+	class GuiRemoteRawElement : public GuiElementBase<GuiRemoteRawElement>
+	{
+		friend class GuiElementBase<GuiRemoteRawElement>;
+		static constexpr const wchar_t* ElementTypeName = L"Raw";
+	protected:
+
+		GuiRemoteRawElement();
+	public:
+	};
+
 	template<typename TElement, typename TRenderer, remoteprotocol::RendererType _RendererType>
 	class GuiRemoteProtocolElementRenderer
 		: public GuiElementRendererBase<TElement, TRenderer, GuiRemoteGraphicsRenderTarget>
@@ -72,6 +82,18 @@ namespace vl::presentation::elements_remoteprotocol
 		friend class GuiElementRendererBase<GuiFocusRectangleElement, GuiFocusRectangleElementRenderer, GuiRemoteGraphicsRenderTarget>;
 	public:
 		GuiFocusRectangleElementRenderer();
+
+		bool							IsUpdated() override;
+		void							ResetUpdated() override;
+		void							SendUpdateElementMessages(bool fullContent) override;
+		void							OnElementStateChanged() override;
+	};
+
+	class GuiRawElementRenderer : public GuiRemoteProtocolElementRenderer<GuiRemoteRawElement, GuiRawElementRenderer, remoteprotocol::RendererType::Raw>
+	{
+		friend class GuiElementRendererBase<GuiRemoteRawElement, GuiRawElementRenderer, GuiRemoteGraphicsRenderTarget>;
+	public:
+		GuiRawElementRenderer();
 
 		bool							IsUpdated() override;
 		void							ResetUpdated() override;

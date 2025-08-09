@@ -25,8 +25,11 @@
   - `delete this;` eventually calls `SuspendThread` on the thread itself, making all following clean up code skipped.
   - Windows confirmed, Linux need to test.
 - TODO in `GuiRemoteWindow::OnControllerConnect`.
-- Remote Protocol
-  - `GuiRemoteGraphicsRenderTarget::fontHeights` could be moved to `GuiRemoteGraphicsResourceManager` as the measuring should not be different.
+
+## Remote Protocol
+- `GuiRemoteGraphicsRenderTarget::fontHeights` could be moved to `GuiRemoteGraphicsResourceManager` as the measuring should not be different.
+- `RemotingTest_Rendering_Win32`
+  - Clicking `Fatal Error` in `RemotingTest_Rendering_Win32 /Pipe` sometimes hang.
 
 ## Unit Test
 
@@ -34,18 +37,33 @@
   - `(H|V)(Tracker|Scroll)/Mouse`
   - `ToolstripSplitButton`
   - `GuiDatePicker/Mouse`
-- Tests that are OS awared:
-  - `GuiDatePicker`, `GuiDateComboBox`, inject unit test specific time and locale object. Otherwise Window and Linux will see different printed date in snapshots.
-- Same issue
+  - `GuiRibbonGallery` and `GuiBindableRibbonGalleryList` Up/Down/Dropdown button.
+  - `Application/Windows` window frame operation.
+- Stop hard-coding coordinates:
+  - `GetListItemLocation`.
+  - `GuiToolstripMenuBar/Cascade/ClickSubMenu`'s `Hover on File/New` try to avoid specifying relative coordinate just because half of the menu item is covered.
+- Compositions created or moved under the cursor, proper mouse events are not triggered.
   - `(H|V)(Tracker|Scroll)/Mouse`
     - when `Drag to Center` the handler should be highlighted, because the mouse is right above the handler.
   - `GuiBindableDataGrid/ComboEditor`
     - When a data grid cell editor is created under the mouse, the editor does not receive `MouseEvent` event.
+- `Application/FocusedAndHide`
+  - The hidden button does not lost focus.
 - `GuiScrollContainer`
   - Only calling `Set(Horizontal|Vertical)AlwaysVisible(false)` doesn't make scrolls disappear. `SetVisible(false)` on scrolls are verified called.
   - When the content is changed, configuration needs 2 idle frames to be correctly configured.
 - `GuiListItemTemplate/ArrangerAndAxis(WithScrolls)`
   - items are not aligned to proper corner when scrolls are invisible.
-- Stop hard-coding coordinates:
-  - `GetListItemLocation`.
-  - `GuiToolstripMenuBar/Cascade/ClickSubMenu`'s `Hover on File/New` try to avoid specifying relative coordinate just because half of the menu item is covered.
+- Features with no plan in unit test:
+  - `GuiControl`
+    - `QueryService` and `AddService`
+
+## Unprioritized
+
+- FakeDialogService
+  - message box disable `X` button if `Cancel` is not in the button list or `OK` is the only button.
+- GDI
+  - Big cursor of document empty line (GDI)
+  - In hosted mode, non-main window doesn't shrink when moving back to low DPI monitor.
+- Hosted
+  - When dragging left/top border if the main window, the window move if the size is smaller than the minimum size.

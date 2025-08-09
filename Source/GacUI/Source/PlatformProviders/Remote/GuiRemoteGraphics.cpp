@@ -378,6 +378,7 @@ GuiRemoteGraphicsResourceManager
 	void GuiRemoteGraphicsResourceManager::Initialize()
 	{
 		elements_remoteprotocol::GuiFocusRectangleElementRenderer::Register();
+		elements_remoteprotocol::GuiRawElementRenderer::Register();
 		elements_remoteprotocol::GuiSolidBorderElementRenderer::Register();
 		elements_remoteprotocol::Gui3DBorderElementRenderer::Register();
 		elements_remoteprotocol::Gui3DSplitterElementRenderer::Register();
@@ -423,5 +424,10 @@ GuiRemoteGraphicsResourceManager
 	IGuiGraphicsLayoutProvider* GuiRemoteGraphicsResourceManager::GetLayoutProvider()
 	{
 		CHECK_FAIL(L"Not Implemented!");
+	}
+
+	Ptr<IGuiGraphicsElement> GuiRemoteGraphicsResourceManager::CreateRawElement()
+	{
+		return Ptr(elements_remoteprotocol::GuiRemoteRawElement::Create());
 	}
 }

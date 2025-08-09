@@ -125,6 +125,11 @@ External Functions (Basic)
 				return GetCurrentController()->ResourceService()->GetSystemCursor(type);
 			}
 
+			Ptr<elements::IGuiGraphicsElement> GuiRawElement_Constructor()
+			{
+				return GetGuiGraphicsResourceManager()->CreateRawElement();
+			}
+
 /***********************************************************************
 External Functions (Elements)
 ***********************************************************************/
@@ -345,9 +350,7 @@ GuiApplication
 
 			void GuiApplication::RegisterPopupClosed(GuiPopup* popup)
 			{
-				if(openingPopups.Remove(popup))
-				{
-				}
+				openingPopups.Remove(popup);
 			}
 
 			void GuiApplication::TooltipMouseEnter(compositions::GuiGraphicsComposition* sender, compositions::GuiEventArgs& arguments)
@@ -623,18 +626,18 @@ GuiApplicationMain
 				}
 
 				GetCurrentController()->InputService()->StartTimer();
+				IAsyncScheduler::RegisterSchedulerForCurrentThread(Ptr(new UIThreadAsyncScheduler));
+				IAsyncScheduler::RegisterDefaultScheduler(Ptr(new OtherThreadAsyncScheduler));
+				GuiInitializeUtilities();
 				{
 					GuiApplication app;
 					application = &app;
-					IAsyncScheduler::RegisterSchedulerForCurrentThread(Ptr(new UIThreadAsyncScheduler));
-					IAsyncScheduler::RegisterDefaultScheduler(Ptr(new OtherThreadAsyncScheduler));
-					GuiInitializeUtilities();
 					GuiMain();
-					GuiFinalizeUtilities();
-					IAsyncScheduler::UnregisterDefaultScheduler();
-					IAsyncScheduler::UnregisterSchedulerForCurrentThread();
-					application = nullptr;
 				}
+				application = nullptr;
+				GuiFinalizeUtilities();
+				IAsyncScheduler::UnregisterDefaultScheduler();
+				IAsyncScheduler::UnregisterSchedulerForCurrentThread();
 				GetCurrentController()->InputService()->StopTimer();
 				theme::FinalizeTheme();
 				FinalizeGlobalStorage();
@@ -673,13 +676,11 @@ GuiApplicationMain
 				}
 
 				GetCurrentController()->InputService()->StartTimer();
-				{
-					IAsyncScheduler::RegisterSchedulerForCurrentThread(Ptr(new UIThreadAsyncScheduler));
-					IAsyncScheduler::RegisterDefaultScheduler(Ptr(new OtherThreadAsyncScheduler));
-					GuiMain();
-					IAsyncScheduler::UnregisterDefaultScheduler();
-					IAsyncScheduler::UnregisterSchedulerForCurrentThread();
-				}
+				IAsyncScheduler::RegisterSchedulerForCurrentThread(Ptr(new UIThreadAsyncScheduler));
+				IAsyncScheduler::RegisterDefaultScheduler(Ptr(new OtherThreadAsyncScheduler));
+				GuiMain();
+				IAsyncScheduler::UnregisterDefaultScheduler();
+				IAsyncScheduler::UnregisterSchedulerForCurrentThread();
 				GetCurrentController()->InputService()->StopTimer();
 				FinalizeGlobalStorage();
 
@@ -822,6 +823,18 @@ GuiControl
 					boundsComposition->AddChild(controlTemplateObject);
 					controlTemplateObject->GetContainerComposition()->AddChild(containerComposition);
 					AfterControlTemplateInstalled(initialize);
+				}
+			}
+
+			void GuiControl::FixingMissingControlTemplateCallback(templates::GuiControlTemplate* value)
+			{
+			}
+
+			void GuiControl::CallFixingMissingControlTemplateCallback()
+			{
+				if (controlTemplateObject)
+				{
+					FixingMissingControlTemplateCallback(controlTemplateObject);
 				}
 			}
 
@@ -2789,6 +2802,9 @@ GuiWindow
 
 			void GuiWindow::Opened()
 			{
+				// Workaround:
+				// Constructor calling SetNativeWindow skips AfterControlTemplateInstalled_ of all sub classes
+				CallFixingMissingControlTemplateCallback();
 				GuiControlHost::Opened();
 				if (auto ct = TypedControlTemplateObject(false))
 				{
@@ -6878,7 +6894,7 @@ GuiScrollView
 						{
 							vint position = scroll->GetPosition();
 							vint move = scroll->GetSmallMove();
-							position -= move * arguments.wheel / 60;
+							position = move * arguments.wheel / 60;
 							scroll->SetPosition(position);
 						}
 					}
@@ -25834,6 +25850,11 @@ GuiBindableRibbonGalleryList
 				}
 			}
 
+			GuiSelectableListControl* GuiBindableRibbonGalleryList::GetListControlInDropdown()
+			{
+				return itemList;
+			}
+
 			GuiToolstripMenu* GuiBindableRibbonGalleryList::GetSubMenu()
 			{
 				return subMenu;
@@ -37086,6 +37107,11 @@ GuiHostedGraphicsResourceManager
 			{
 				return nativeManager->GetLayoutProvider();
 			}
+
+			Ptr<IGuiGraphicsElement> GuiHostedGraphicsResourceManager::CreateRawElement()
+			{
+				return nativeManager->CreateRawElement();
+			}
 		}
 	}
 }
@@ -39306,6 +39332,7 @@ GuiRemoteGraphicsResourceManager
 	void GuiRemoteGraphicsResourceManager::Initialize()
 	{
 		elements_remoteprotocol::GuiFocusRectangleElementRenderer::Register();
+		elements_remoteprotocol::GuiRawElementRenderer::Register();
 		elements_remoteprotocol::GuiSolidBorderElementRenderer::Register();
 		elements_remoteprotocol::Gui3DBorderElementRenderer::Register();
 		elements_remoteprotocol::Gui3DSplitterElementRenderer::Register();
@@ -39352,6 +39379,11 @@ GuiRemoteGraphicsResourceManager
 	{
 		CHECK_FAIL(L"Not Implemented!");
 	}
+
+	Ptr<IGuiGraphicsElement> GuiRemoteGraphicsResourceManager::CreateRawElement()
+	{
+		return Ptr(elements_remoteprotocol::GuiRemoteRawElement::Create());
+	}
 }
 
 /***********************************************************************
@@ -39364,7 +39396,15 @@ namespace vl::presentation::elements_remoteprotocol
 	using namespace remoteprotocol;
 
 /***********************************************************************
-GuiSolidBorderElementRenderer
+GuiRemoteRawElement
+***********************************************************************/
+
+	GuiRemoteRawElement::GuiRemoteRawElement()
+	{
+	}
+
+/***********************************************************************
+GuiRemoteProtocolElementRenderer
 ***********************************************************************/
 
 #define RENDERER_TEMPLATE_HEADER	template<typename TElement, typename TRenderer, remoteprotocol::RendererType _RendererType>
@@ -39485,7 +39525,7 @@ GuiSolidBorderElementRenderer
 #undef RENDERER_TEMPLATE_HEADER
 
 /***********************************************************************
-GuiSolidBorderElementRenderer
+GuiFocusRectangleElementRenderer
 ***********************************************************************/
 
 	GuiFocusRectangleElementRenderer::GuiFocusRectangleElementRenderer()
@@ -39509,6 +39549,35 @@ GuiSolidBorderElementRenderer
 	}
 
 	void GuiFocusRectangleElementRenderer::SendUpdateElementMessages(bool fullContent)
+	{
+		// nothing to update
+	}
+
+/***********************************************************************
+GuiRawElementRenderer
+***********************************************************************/
+
+	GuiRawElementRenderer::GuiRawElementRenderer()
+	{
+	}
+	
+	bool GuiRawElementRenderer::IsUpdated()
+	{
+		// there is no properties for this element
+		return false;
+	}
+
+	void GuiRawElementRenderer::ResetUpdated()
+	{
+		// nothing to update
+	}
+
+	void GuiRawElementRenderer::OnElementStateChanged()
+	{
+		// nothing to update
+	}
+
+	void GuiRawElementRenderer::SendUpdateElementMessages(bool fullContent)
 	{
 		// nothing to update
 	}
@@ -40484,13 +40553,13 @@ namespace vl::presentation::remoteprotocol::channeling
 ChannelPackageSemantic
 ***********************************************************************/
 
-	void JsonChannelPack(ChannelPackageSemantic semantic, vint id, const WString& name, Ptr<glr::json::JsonNode> arguments, Ptr<glr::json::JsonObject>& package)
+	void JsonChannelPack(const ChannelPackageInfo& info, Ptr<glr::json::JsonNode> arguments, Ptr<glr::json::JsonObject>& package)
 	{
 		package = Ptr(new glr::json::JsonObject);
 
 		{
 			auto value = Ptr(new glr::json::JsonString);
-			switch (semantic)
+			switch (info.semantic)
 			{
 			case ChannelPackageSemantic::Message:
 				value->content.value = WString::Unmanaged(L"Message");
@@ -40514,10 +40583,10 @@ ChannelPackageSemantic
 			package->fields.Add(field);
 		}
 
-		if (id != -1)
+		if (info.id != -1)
 		{
 			auto value = Ptr(new glr::json::JsonNumber);
-			value->content.value = itow(id);
+			value->content.value = itow(info.id);
 
 			auto field = Ptr(new glr::json::JsonObjectField);
 			field->name.value = WString::Unmanaged(L"id");
@@ -40527,7 +40596,7 @@ ChannelPackageSemantic
 
 		{
 			auto value = Ptr(new glr::json::JsonString);
-			value->content.value = name;
+			value->content.value = info.name;
 
 			auto field = Ptr(new glr::json::JsonObjectField);
 			field->name.value = WString::Unmanaged(L"name");
@@ -40544,7 +40613,7 @@ ChannelPackageSemantic
 		}
 	}
 
-	void JsonChannelUnpack(Ptr<glr::json::JsonObject> package, ChannelPackageSemantic& semantic, vint& id, WString& name, Ptr<glr::json::JsonNode>& arguments)
+	void JsonChannelUnpack(Ptr<glr::json::JsonObject> package, ChannelPackageInfo& info, Ptr<glr::json::JsonNode>& arguments)
 	{
 #define ERROR_MESSAGE_PREFIX L"vl::presentation::remoteprotocol::channeling::JsonChannelPack(Ptr<JsonObject>, ProtocolSemantic&, vint&, WString&, Ptr<JsonNode>&)#"
 
@@ -40557,19 +40626,19 @@ ChannelPackageSemantic
 
 				if (value->content.value == L"Message")
 				{
-					semantic = ChannelPackageSemantic::Message;
+					info.semantic = ChannelPackageSemantic::Message;
 				}
 				else if (value->content.value == L"Request")
 				{
-					semantic = ChannelPackageSemantic::Request;
+					info.semantic = ChannelPackageSemantic::Request;
 				}
 				else if (value->content.value == L"Response")
 				{
-					semantic = ChannelPackageSemantic::Response;
+					info.semantic = ChannelPackageSemantic::Response;
 				}
 				else if (value->content.value == L"Event")
 				{
-					semantic = ChannelPackageSemantic::Event;
+					info.semantic = ChannelPackageSemantic::Event;
 				}
 			}
 			else if (field->name.value == L"id")
@@ -40577,14 +40646,14 @@ ChannelPackageSemantic
 				auto value = field->value.Cast<glr::json::JsonNumber>();
 				CHECK_ERROR(value, ERROR_MESSAGE_PREFIX L"The id field should be a number.");
 
-				id = wtoi(value->content.value);
+				info.id = wtoi(value->content.value);
 			}
 			else if (field->name.value == L"name")
 			{
 				auto value = field->value.Cast<glr::json::JsonString>();
 				CHECK_ERROR(value, ERROR_MESSAGE_PREFIX L"The name field should be a string.");
 
-				name = value->content.value;
+				info.name = value->content.value;
 			}
 			else if (field->name.value == L"arguments")
 			{
@@ -40594,10 +40663,10 @@ ChannelPackageSemantic
 #undef ERROR_MESSAGE_PREFIX
 	}
 
-	void ChannelPackageSemanticUnpack(Ptr<glr::json::JsonObject> package, ChannelPackageSemantic& semantic, vint& id, WString& name)
+	void ChannelPackageSemanticUnpack(Ptr<glr::json::JsonObject> package, ChannelPackageInfo& info)
 	{
 		Ptr<glr::json::JsonNode> arguments;
-		JsonChannelUnpack(package, semantic, id, name, arguments);
+		JsonChannelUnpack(package, info, arguments);
 	}
 
 /***********************************************************************
@@ -40644,15 +40713,14 @@ GuiRemoteProtocolFromJsonChannel
 	{
 #define ERROR_MESSAGE_PREFIX L"vl::presentation::remoteprotocol::channeling::GuiRemoteProtocolFromJsonChannel::OnReceive(const Ptr<JsonNode>&)#"
 
-		auto semantic = ChannelPackageSemantic::Unknown;
-		vint id = -1;
-		WString name;
+		ChannelPackageInfo info;
 		Ptr<glr::json::JsonNode> jsonArguments;
-		JsonChannelUnpack(package, semantic, id, name, jsonArguments);
+		JsonChannelUnpack(package, info, jsonArguments);
+		BeforeOnReceive(info);
 
-		if (semantic == ChannelPackageSemantic::Event)
+		if (info.semantic == ChannelPackageSemantic::Event)
 		{
-			vint index = onReceiveEventHandlers.Keys().IndexOf(name);
+			vint index = onReceiveEventHandlers.Keys().IndexOf(info.name);
 			if (index == -1)
 			{
 				CHECK_FAIL(ERROR_MESSAGE_PREFIX L"Unrecognized event name");
@@ -40662,16 +40730,16 @@ GuiRemoteProtocolFromJsonChannel
 				(this->*onReceiveEventHandlers.Values()[index])(jsonArguments);
 			}
 		}
-		else if (semantic == ChannelPackageSemantic::Response)
+		else if (info.semantic == ChannelPackageSemantic::Response)
 		{
-			vint index = onReceiveResponseHandlers.Keys().IndexOf(name);
+			vint index = onReceiveResponseHandlers.Keys().IndexOf(info.name);
 			if (index == -1)
 			{
 				CHECK_FAIL(ERROR_MESSAGE_PREFIX L"Unrecognized response name");
 			}
 			else
 			{
-				(this->*onReceiveResponseHandlers.Values()[index])(id, jsonArguments);
+				(this->*onReceiveResponseHandlers.Values()[index])(info.id, jsonArguments);
 			}
 		}
 		else
@@ -40686,7 +40754,9 @@ GuiRemoteProtocolFromJsonChannel
 	void GuiRemoteProtocolFromJsonChannel::Request ## NAME()\
 	{\
 		Ptr<glr::json::JsonObject> package;\
-		JsonChannelPack(ChannelPackageSemantic::Message, -1, WString::Unmanaged(L ## #NAME), {}, package);\
+		ChannelPackageInfo info{ChannelPackageSemantic::Message, -1, WString::Unmanaged(L ## #NAME)};\
+		JsonChannelPack(info, {}, package);\
+		BeforeWrite(info);\
 		channel->Write(package);\
 	}\
 
@@ -40694,7 +40764,9 @@ GuiRemoteProtocolFromJsonChannel
 	void GuiRemoteProtocolFromJsonChannel::Request ## NAME(vint id)\
 	{\
 		Ptr<glr::json::JsonObject> package;\
-		JsonChannelPack(ChannelPackageSemantic::Request, id, WString::Unmanaged(L ## #NAME), {}, package);\
+		ChannelPackageInfo info{ChannelPackageSemantic::Request, id, WString::Unmanaged(L ## #NAME)};\
+		JsonChannelPack(info, {}, package);\
+		BeforeWrite(info);\
 		channel->Write(package);\
 	}\
 
@@ -40702,7 +40774,9 @@ GuiRemoteProtocolFromJsonChannel
 	void GuiRemoteProtocolFromJsonChannel::Request ## NAME(const REQUEST& arguments)\
 	{\
 		Ptr<glr::json::JsonObject> package;\
-		JsonChannelPack(ChannelPackageSemantic::Message, -1, WString::Unmanaged(L ## #NAME), ConvertCustomTypeToJson(arguments), package);\
+		ChannelPackageInfo info{ChannelPackageSemantic::Message, -1, WString::Unmanaged(L ## #NAME)};\
+		JsonChannelPack(info, ConvertCustomTypeToJson(arguments), package);\
+		BeforeWrite(info);\
 		channel->Write(package);\
 	}\
 
@@ -40710,7 +40784,9 @@ GuiRemoteProtocolFromJsonChannel
 	void GuiRemoteProtocolFromJsonChannel::Request ## NAME(vint id, const REQUEST& arguments)\
 	{\
 		Ptr<glr::json::JsonObject> package;\
-		JsonChannelPack(ChannelPackageSemantic::Request, id, WString::Unmanaged(L ## #NAME), ConvertCustomTypeToJson(arguments), package);\
+		ChannelPackageInfo info{ChannelPackageSemantic::Request, id, WString::Unmanaged(L ## #NAME)};\
+		JsonChannelPack(info, ConvertCustomTypeToJson(arguments), package);\
+		BeforeWrite(info);\
 		channel->Write(package);\
 	}\
 
@@ -40764,7 +40840,7 @@ GuiRemoteProtocolFromJsonChannel
 
 	void GuiRemoteProtocolFromJsonChannel::ProcessRemoteEvents()
 	{
-		channel->ProcessRemoteEvents();
+	 channel->ProcessRemoteEvents();
 	}
 
 /***********************************************************************
@@ -40775,7 +40851,9 @@ GuiRemoteJsonChannelFromProtocol
 	void GuiRemoteJsonChannelFromProtocol::On ## NAME()\
 	{\
 		Ptr<glr::json::JsonObject> package;\
-		JsonChannelPack(ChannelPackageSemantic::Event, -1, WString::Unmanaged(L ## #NAME), {}, package);\
+		ChannelPackageInfo info{ChannelPackageSemantic::Event, -1, WString::Unmanaged(L ## #NAME)};\
+		JsonChannelPack(info, {}, package);\
+		BeforeOnReceive(info);\
 		receiver->OnReceive(package);\
 	}\
 
@@ -40783,7 +40861,9 @@ GuiRemoteJsonChannelFromProtocol
 	void GuiRemoteJsonChannelFromProtocol::On ## NAME(const REQUEST& arguments)\
 	{\
 		Ptr<glr::json::JsonObject> package;\
-		JsonChannelPack(ChannelPackageSemantic::Event, -1, WString::Unmanaged(L ## #NAME), ConvertCustomTypeToJson(arguments), package);\
+		ChannelPackageInfo info{ChannelPackageSemantic::Event, -1, WString::Unmanaged(L ## #NAME)};\
+		JsonChannelPack(info, ConvertCustomTypeToJson(arguments), package);\
+		BeforeOnReceive(info);\
 		receiver->OnReceive(package);\
 	}\
 
@@ -40798,7 +40878,9 @@ GuiRemoteJsonChannelFromProtocol
 	void GuiRemoteJsonChannelFromProtocol::Respond ## NAME(vint id, const RESPONSE& arguments)\
 	{\
 		Ptr<glr::json::JsonObject> package;\
-		JsonChannelPack(ChannelPackageSemantic::Response, id, WString::Unmanaged(L ## #NAME), ConvertCustomTypeToJson(arguments), package);\
+		ChannelPackageInfo info{ChannelPackageSemantic::Response, id, WString::Unmanaged(L ## #NAME)};\
+		JsonChannelPack(info, ConvertCustomTypeToJson(arguments), package);\
+		BeforeOnReceive(info);\
 		receiver->OnReceive(package);\
 	}\
 
@@ -40879,20 +40961,19 @@ GuiRemoteJsonChannelFromProtocol
 	{
 #define ERROR_MESSAGE_PREFIX L"vl::presentation::remoteprotocol::channeling::GuiRemoteJsonChannelFromProtocol::Write(const Ptr<JsonNode>&)#"
 
-		auto semantic = ChannelPackageSemantic::Unknown;
-		vint id = -1;
-		WString name;
+		ChannelPackageInfo info;
 		Ptr<glr::json::JsonNode> jsonArguments;
-		JsonChannelUnpack(package, semantic, id, name, jsonArguments);
+		JsonChannelUnpack(package, info, jsonArguments);
+		BeforeWrite(info);
 
-		vint index = writeHandlers.Keys().IndexOf(name);
+		vint index = writeHandlers.Keys().IndexOf(info.name);
 		if (index == -1)
 		{
 			CHECK_FAIL(ERROR_MESSAGE_PREFIX L"Unrecognized request name");
 		}
 		else
 		{
-			(this->*writeHandlers.Values()[index])(id, jsonArguments);
+			(this->*writeHandlers.Values()[index])(info.id, jsonArguments);
 		}
 
 #undef ERROR_MESSAGE_PREFIX
@@ -41663,9 +41744,9 @@ GuiRemoteWindow (events)
 
 	void GuiRemoteWindow::OnControllerConnect()
 	{
-		if (disconnected)
+		if (controllerDisconnected)
 		{
-			disconnected = false;
+			controllerDisconnected = false;
 		}
 
 		sizingConfigInvalidated = true;
@@ -41707,7 +41788,7 @@ GuiRemoteWindow (events)
 
 	void GuiRemoteWindow::OnControllerDisconnect()
 	{
-		disconnected = true;
+		controllerDisconnected = true;
 	}
 
 	void GuiRemoteWindow::OnControllerScreenUpdated(const remoteprotocol::ScreenConfig& arguments)
@@ -43014,6 +43095,7 @@ namespace vl::presentation::remoteprotocol
 		switch (value)
 		{
 		case ::vl::presentation::remoteprotocol::RendererType::FocusRectangle: node->content.value = WString::Unmanaged(L"FocusRectangle"); break;
+		case ::vl::presentation::remoteprotocol::RendererType::Raw: node->content.value = WString::Unmanaged(L"Raw"); break;
 		case ::vl::presentation::remoteprotocol::RendererType::SolidBorder: node->content.value = WString::Unmanaged(L"SolidBorder"); break;
 		case ::vl::presentation::remoteprotocol::RendererType::SinkBorder: node->content.value = WString::Unmanaged(L"SinkBorder"); break;
 		case ::vl::presentation::remoteprotocol::RendererType::SinkSplitter: node->content.value = WString::Unmanaged(L"SinkSplitter"); break;
@@ -43638,6 +43720,7 @@ namespace vl::presentation::remoteprotocol
 		auto jsonNode = node.Cast<glr::json::JsonString>();
 		CHECK_ERROR(jsonNode, ERROR_MESSAGE_PREFIX L"Json node does not match the expected type.");
 		if (jsonNode->content.value == L"FocusRectangle") value = ::vl::presentation::remoteprotocol::RendererType::FocusRectangle; else
+		if (jsonNode->content.value == L"Raw") value = ::vl::presentation::remoteprotocol::RendererType::Raw; else
 		if (jsonNode->content.value == L"SolidBorder") value = ::vl::presentation::remoteprotocol::RendererType::SolidBorder; else
 		if (jsonNode->content.value == L"SinkBorder") value = ::vl::presentation::remoteprotocol::RendererType::SinkBorder; else
 		if (jsonNode->content.value == L"SinkSplitter") value = ::vl::presentation::remoteprotocol::RendererType::SinkSplitter; else
@@ -44798,10 +44881,9 @@ namespace vl::presentation::remote_renderer
 		{
 			auto primary = GetCurrentController()->ScreenService()->GetScreen((vint)0);
 			NativeRect screenBounds = primary->GetBounds();
-			NativeRect windowBounds = arguments;
-			windowBounds.x1 = (screenBounds.Width() - windowBounds.Width()) / 2;
-			windowBounds.y1 = (screenBounds.Height() - windowBounds.Height()) / 2;
-			window->SetBounds(windowBounds);
+			auto x = (screenBounds.Width() - arguments.Width()) / 2;
+			auto y = (screenBounds.Height() - arguments.Height()) / 2;
+			window->SetBounds({ {x,y},arguments.GetSize() });
 
 			screen = primary;
 			windowSizingConfig = GetWindowSizingConfig();
@@ -44984,6 +45066,9 @@ namespace vl::presentation::remote_renderer
 				case RendererType::FocusRectangle:
 					element = Ptr(GuiFocusRectangleElement::Create());
 					break;
+				case RendererType::Raw:
+					// Do Nothing
+					break;
 				case RendererType::SolidBorder:
 					element = Ptr(GuiSolidBorderElement::Create());
 					break;
@@ -45014,15 +45099,18 @@ namespace vl::presentation::remote_renderer
 				default:;
 				}
 
-				element->GetRenderer()->SetRenderTarget(GetGuiGraphicsResourceManager()->GetRenderTarget(window));
+				if (element)
+				{
+					element->GetRenderer()->SetRenderTarget(GetGuiGraphicsResourceManager()->GetRenderTarget(window));
 
-				if (availableElements.Keys().Contains(rc.id))
-				{
-					availableElements.Set(rc.id, element);
-				}
-				else
-				{
-					availableElements.Add(rc.id, element);
+					if (availableElements.Keys().Contains(rc.id))
+					{
+						availableElements.Set(rc.id, element);
+					}
+					else
+					{
+						availableElements.Add(rc.id, element);
+					}
 				}
 			}
 		}

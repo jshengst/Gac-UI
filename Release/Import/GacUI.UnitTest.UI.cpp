@@ -96,6 +96,7 @@ Helper Functions
 			case INativeWindowListener::Title:
 				cursor = INativeCursor::SizeAll;
 				break;
+			default:;
 			}
 		}
 
@@ -113,6 +114,9 @@ Helper Functions
 					auto element = Ptr(GuiFocusRectangleElement::Create());
 					bounds->SetOwnedElement(element);
 				}
+				break;
+			case remoteprotocol::RendererType::Raw:
+				// Do Nothing
 				break;
 			case remoteprotocol::RendererType::SolidBorder:
 				{

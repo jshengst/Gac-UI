@@ -2924,6 +2924,7 @@ Type Declaration (Class)
 				CLASS_MEMBER_PROPERTY_EVENT_READONLY_FAST(SelectedIndex, SelectionChanged)
 				CLASS_MEMBER_PROPERTY_EVENT_READONLY_FAST(SelectedItem, SelectionChanged)
 				CLASS_MEMBER_PROPERTY_FAST(VisibleItemCount)
+				CLASS_MEMBER_PROPERTY_READONLY_FAST(ListControlInDropdown)
 
 				CLASS_MEMBER_METHOD(IndexToGalleryPos, { L"index" })
 				CLASS_MEMBER_METHOD(GalleryPosToIndex, { L"pos" })
@@ -3208,6 +3209,7 @@ Type Declaration (Extra)
 
 			BEGIN_INTERFACE_MEMBER_NOPROXY(IGuiGraphicsElement)
 				CLASS_MEMBER_PROPERTY_READONLY_FAST(OwnerComposition)
+				CLASS_MEMBER_STATIC_EXTERNALMETHOD(CreateRawElement, NO_PARAMETER, Ptr<IGuiGraphicsElement>(*)(), vl::reflection::description::GuiRawElement_Constructor)
 			END_INTERFACE_MEMBER(IGuiGraphicsElement)
 
 			BEGIN_CLASS_MEMBER(IGuiGraphicsParagraph)

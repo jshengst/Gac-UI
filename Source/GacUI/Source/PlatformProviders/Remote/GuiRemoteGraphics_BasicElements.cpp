@@ -7,7 +7,15 @@ namespace vl::presentation::elements_remoteprotocol
 	using namespace remoteprotocol;
 
 /***********************************************************************
-GuiSolidBorderElementRenderer
+GuiRemoteRawElement
+***********************************************************************/
+
+	GuiRemoteRawElement::GuiRemoteRawElement()
+	{
+	}
+
+/***********************************************************************
+GuiRemoteProtocolElementRenderer
 ***********************************************************************/
 
 #define RENDERER_TEMPLATE_HEADER	template<typename TElement, typename TRenderer, remoteprotocol::RendererType _RendererType>
@@ -128,7 +136,7 @@ GuiSolidBorderElementRenderer
 #undef RENDERER_TEMPLATE_HEADER
 
 /***********************************************************************
-GuiSolidBorderElementRenderer
+GuiFocusRectangleElementRenderer
 ***********************************************************************/
 
 	GuiFocusRectangleElementRenderer::GuiFocusRectangleElementRenderer()
@@ -152,6 +160,35 @@ GuiSolidBorderElementRenderer
 	}
 
 	void GuiFocusRectangleElementRenderer::SendUpdateElementMessages(bool fullContent)
+	{
+		// nothing to update
+	}
+
+/***********************************************************************
+GuiRawElementRenderer
+***********************************************************************/
+
+	GuiRawElementRenderer::GuiRawElementRenderer()
+	{
+	}
+	
+	bool GuiRawElementRenderer::IsUpdated()
+	{
+		// there is no properties for this element
+		return false;
+	}
+
+	void GuiRawElementRenderer::ResetUpdated()
+	{
+		// nothing to update
+	}
+
+	void GuiRawElementRenderer::OnElementStateChanged()
+	{
+		// nothing to update
+	}
+
+	void GuiRawElementRenderer::SendUpdateElementMessages(bool fullContent)
 	{
 		// nothing to update
 	}

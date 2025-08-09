@@ -7,6 +7,8 @@
 - Windows and Linux test output inconsistecy on
   - Token index different (but row and column are consistent) due to `\r\n` and `\n`.
 - Compiler complexity could be O(n2) which makes big single GacXML compilation slow.
+- Figure it out: https://github.com/vczh-libraries/Workflow/commit/01663cd6b75f018d7405151a66820743c2115898
+  - Only crash in Release x64
 
 ## Progressing
 
@@ -49,6 +51,14 @@
 
 - Attributes.
   - Add attributes to `VlppReflection` metadata.
+  - Make attributes `X` be `reflection_metadata::XAttribute` instead of hardcoding in the compiler constructor.
+    - Define and reflect all `Cpp*` attributes.
+    - `@Attribute` must be applied to the struct to make it recognizable (needs VlppReflection metadata support).
+    - In metadata only the short type name is kept as a string.
+    - It becomes a struct, arguments initialize all fields in order, no default value.
+    - Only allow limited primitive types as field types.
+      - C++ registered attributes will also be checked when applied.
+    - (optional) User defined attributes in Workflow.
   - Some "RPC" atttributes.
 - Dealing with predefined interfaces:
   - `IAsync`, implemented into the protocol.
