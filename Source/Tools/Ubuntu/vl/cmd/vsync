@@ -1,0 +1,98 @@
+#!/bin/bash
+
+function Help {
+    echo "Usage:"
+    echo "--fix"
+    echo "    Clone all missing repos."
+    echo "--sync"
+    echo "    Sync all repos."
+    echo "--master"
+    echo "    Switch all repos to the master branch."
+    echo "--1.0"
+    echo "    Switch all repos to the release-1.0 branch."
+}
+
+function GitClone {
+    git clone git@github.com:vczh-libraries/${1}.git
+}
+
+GITHUB_REPOS_VERSIONED=(Tools Vlpp VlppOS VlppRegex VlppReflection VlppParser VlppParser2 Workflow GacUI Release Document)
+GITHUB_REPOS=("${GITHUB_REPOS_VERSIONED[@]}" vczh-libraries.github.io WebsiteSource gGac)
+
+function Fix {
+    pushd ${VROOT} > /dev/null
+    if ! [ -a load.sh ]; then
+        echo "If you want to create a new enlistment, use --enlist."
+        exit 1
+    fi
+    for i in "${GITHUB_REPOS[@]}"; do
+        if ! [ -d "$i" ]; then
+            git clone git@github.com:vczh-libraries/$i.git
+        fi
+    done
+    popd > /dev/null
+}
+
+function Sync {
+    vgo u
+}
+
+function Master {
+    pushd ${VROOT} > /dev/null
+    if ! [ -a load.sh ]; then
+        echo "If you want to create a new enlistment, use --enlist."
+        exit 1
+    fi
+    for i in "${GITHUB_REPOS_VERSIONED[@]}"; do
+        if [ -d "$i" ]; then
+            echo "Switch repo $i to master ..."
+            pushd $i > /dev/null
+            git checkout master
+            popd > /dev/null
+        fi
+    done
+    popd > /dev/null
+}
+
+function ReleaseOne {
+    pushd ${VROOT} > /dev/null
+    if ! [ -a load.sh ]; then
+        echo "If you want to create a new enlistment, use --enlist."
+        exit 1
+    fi
+    for i in "${GITHUB_REPOS_VERSIONED[@]}"; do
+        if [ -d "$i" ]; then
+            echo "Switch repo $i to release-1.0 ..."
+            pushd $i > /dev/null
+            git checkout release-1.0
+            popd > /dev/null
+        fi
+    done
+    popd > /dev/null
+}
+
+case $1 in
+    --help)
+    Help
+    ;;
+
+    --fix)
+    Fix
+    ;;
+
+    --sync)
+    Sync
+    ;;
+
+    --master)
+    Master
+    ;;
+
+    --1.0)
+    ReleaseOne
+    ;;
+
+    *)
+    echo "Use --help for more information."
+    ;;
+esac
