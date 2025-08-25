@@ -9,7 +9,7 @@
 ### Root\Source
 
 - [GacUI](https://github.com/vczh-libraries/GacUI)：GUI
-- [Tools](https://github.com/vczh-libraries/Tools)：GacUI 构建工具
+- [Tools](https://github.com/vczh-libraries/Tools)：GacUI 配套的构建工具
 - [Vlpp](https://github.com/vczh-libraries/Vlpp)：提供数据处理功能
 - [VlppOS](https://github.com/vczh-libraries/VlppOS)：提供访问操作系统功能
 - [VlppParser](https://github.com/vczh-libraries/VlppParser)：GLR 解析器生成器
@@ -20,17 +20,9 @@
 
 ### 构建
 
-编译GacUI release：
+编译GacUI Demo：
 
 ``` cmd
-xmake f --use_release_code=true
-xmake build HelloGacUI
-```
-
-编译GacUI source：
-
-``` cmd
-xmake f --use_release_code=false
 xmake build HelloGacUI
 ```
 
