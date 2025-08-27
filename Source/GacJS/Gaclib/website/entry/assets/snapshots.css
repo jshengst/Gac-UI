@@ -1,0 +1,135 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    background-color: #f8f9fa;
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+.files-column {
+    width: 400px;
+    min-width: 200px;
+    max-width: 60vw;
+    border-right: 1px solid #dee2e6;
+    overflow-y: auto;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.files-column h3,
+.frames-column h3,
+.rendering-column h3 {
+    margin: 0 0 16px 0;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #495057;
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 8px;
+}
+
+.splitter {
+    width: 6px;
+    background-color: #dee2e6;
+    cursor: col-resize;
+    user-select: none;
+    transition: background-color 0.2s;
+}
+
+.splitter:hover {
+    background-color: #007bff;
+}
+
+.frames-column {
+    width: 200px;
+    min-width: 200px;
+    max-width: 60vw;
+    border-right: 1px solid #dee2e6;
+    overflow-y: auto;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.rendering-column {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.tree-item {
+    margin: 0;
+    padding: 2px 0;
+    cursor: pointer;
+    user-select: none;
+}
+
+.tree-folder {
+    font-weight: bold;
+    color: #333;
+}
+
+.tree-file {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.tree-file:hover {
+    text-decoration: underline;
+    background-color: #e9ecef;
+    padding: 2px 4px;
+    margin: -2px -4px;
+}
+
+.tree-file.selected {
+    color: #dc3545;
+    background-color: transparent;
+    border: 1px solid #dc3545;
+    padding: 2px 4px;
+    margin: -2px -4px;
+    text-decoration: none;
+}
+
+.tree-file.selected:hover {
+    color: #dc3545;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+.tree-indent {
+    display: inline-block;
+}
+
+/* Scrollbar styling */
+.files-column::-webkit-scrollbar,
+.frames-column::-webkit-scrollbar,
+.rendering-column::-webkit-scrollbar {
+    width: 8px;
+}
+
+.files-column::-webkit-scrollbar-track,
+.frames-column::-webkit-scrollbar-track,
+.rendering-column::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.files-column::-webkit-scrollbar-thumb,
+.frames-column::-webkit-scrollbar-thumb,
+.rendering-column::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+.files-column::-webkit-scrollbar-thumb:hover,
+.frames-column::-webkit-scrollbar-thumb:hover,
+.rendering-column::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
