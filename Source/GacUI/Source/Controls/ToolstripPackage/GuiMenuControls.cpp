@@ -283,7 +283,7 @@ GuiMenuButton
 				ct->SetShortcutText(shortcutText);
 				ct->SetSubMenuExisting(subMenu != nullptr);
 
-				hostClickedHandler = host->Clicked.AttachMethod(this, &GuiMenuButton::OnClicked);
+				hostClickedHandler = host->BeforeClicked.AttachMethod(this, &GuiMenuButton::OnBeforeClicked);
 				hostMouseEnterHandler = host->GetBoundsComposition()->GetEventReceiver()->mouseEnter.AttachMethod(this, &GuiMenuButton::OnMouseEnter);
 			}
 
@@ -341,14 +341,14 @@ GuiMenuButton
 
 			void GuiMenuButton::OnSubMenuWindowOpened(compositions::GuiGraphicsComposition* sender, compositions::GuiEventArgs& arguments)
 			{
-				SubMenuOpeningChanged.Execute(GetNotifyEventArguments());
 				TypedControlTemplateObject(true)->SetSubMenuOpening(true);
+				SubMenuOpeningChanged.Execute(GetNotifyEventArguments());
 			}
 
 			void GuiMenuButton::OnSubMenuWindowClosed(compositions::GuiGraphicsComposition* sender, compositions::GuiEventArgs& arguments)
 			{
-				SubMenuOpeningChanged.Execute(GetNotifyEventArguments());
 				TypedControlTemplateObject(true)->SetSubMenuOpening(false);
+				SubMenuOpeningChanged.Execute(GetNotifyEventArguments());
 			}
 
 			void GuiMenuButton::OnMouseEnter(compositions::GuiGraphicsComposition* sender, compositions::GuiEventArgs& arguments)
@@ -362,7 +362,7 @@ GuiMenuButton
 				}
 			}
 
-			void GuiMenuButton::OnClicked(compositions::GuiGraphicsComposition* sender, compositions::GuiEventArgs& arguments)
+			void GuiMenuButton::OnBeforeClicked(compositions::GuiGraphicsComposition* sender, compositions::GuiEventArgs& arguments)
 			{
 				if(GetVisuallyEnabled())
 				{

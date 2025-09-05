@@ -9,6 +9,118 @@ namespace vl::presentation::unittest
 	using namespace glr::json;
 	using namespace vl::presentation::remoteprotocol;
 
+	JsonFormatting GetJsonFormatting()
+	{
+		JsonFormatting formatting;
+		formatting.spaceAfterColon = true;
+		formatting.spaceAfterComma = true;
+		formatting.crlf = true;
+		formatting.compact = true;
+		return formatting;
+	}
+
+/***********************************************************************
+UnitTestSnapshotDomNode
+***********************************************************************/
+
+	class UnitTestSnapshotDomNode : public Object, public virtual IUnitTestSnapshotDomNode
+	{
+	protected:
+		UnitTest_RenderingTrace&			trace;
+		UnitTest_RenderingFrame&			frame;
+		Ptr<RenderingDom>					renderingDom;
+		WString								name;
+		WString								dom;
+		WString								element;
+		List<Ptr<UnitTestSnapshotDomNode>>	children;
+
+	public:
+		UnitTestSnapshotDomNode(UnitTest_RenderingTrace& _trace, UnitTest_RenderingFrame& _frame, Ptr<RenderingDom> _renderingDom)
+			: trace(_trace)
+			, frame(_frame)
+			, renderingDom(_renderingDom)
+		{
+			if (renderingDom->children)
+			{
+				for (auto child : *renderingDom->children.Obj())
+				{
+					children.Add(Ptr(new UnitTestSnapshotDomNode(trace, frame, child)));
+				}
+			}
+		}
+
+		WString GetName() override
+		{
+			WString idString, typeString, hittestString, boundsString;
+			{
+				idString = L"[" + itow(renderingDom->id) + L"] ";
+			}
+			if (renderingDom->content.element && trace.createdElements)
+			{
+				vint index = trace.createdElements->Keys().IndexOf(renderingDom->content.element.Value());
+				if (index != -1)
+				{
+					auto renderingType = trace.createdElements->Values()[index];
+					auto typeName = ConvertCustomTypeToJson(renderingType).Cast<JsonString>()->content.value;
+					typeString = L" {" + typeName + L"}";
+				}
+			}
+			if(renderingDom->content.hitTestResult)
+			{
+				auto hittest = renderingDom->content.hitTestResult.Value();
+				auto hittestName = ConvertCustomTypeToJson(hittest).Cast<JsonString>()->content.value;
+				typeString = L" <" + hittestName + L">";
+			}
+			{
+				auto bounds = renderingDom->content.bounds;
+				boundsString = L" (" + itow(bounds.x1) + L"," + itow(bounds.y1) + L") - (" + itow(bounds.Width()) + L"x" + itow(bounds.Height()) + L")";
+			}
+			return idString + typeString + hittestString + boundsString;
+		}
+
+		vint GetDomID() override
+		{
+			return renderingDom->id;
+		}
+
+		WString GetDomAsJsonText() override
+		{
+			if (dom == L"")
+			{
+				RenderingDom copy = *renderingDom.Obj();
+				copy.children = nullptr;
+				dom = JsonToString(ConvertCustomTypeToJson(copy), GetJsonFormatting());
+			}
+			return dom;
+		}
+
+		WString GetElementAsJsonText() override
+		{
+			if (element == L"")
+			{
+				element = L"null";
+				if (renderingDom->content.element && frame.elements)
+				{
+					vint index = frame.elements->Keys().IndexOf(renderingDom->content.element.Value());
+					if (index != -1)
+					{
+						auto elementVariant = frame.elements->Values()[index];
+						elementVariant.Apply([&](auto desc)
+						{
+							element = JsonToString(ConvertCustomTypeToJson(desc), GetJsonFormatting());
+						});
+					}
+				}
+			}
+			return element;
+		}
+
+		LazyList<Ptr<IUnitTestSnapshotDomNode>> GetChildren() override
+		{
+			return From(children).Cast<IUnitTestSnapshotDomNode>();
+		}
+	};
+
 /***********************************************************************
 UnitTestSnapshotFrame
 ***********************************************************************/
@@ -17,22 +129,20 @@ UnitTestSnapshotFrame
 	{
 		friend const remoteprotocol::UnitTest_RenderingFrame& GetRenderingFrame(Ptr<IUnitTestSnapshotFrame> frame);
 	protected:
-		vint						index;
-		UnitTest_RenderingFrame		frame;
-		WString						elements;
-		WString						commands;
-		WString						dom;
-		JsonFormatting				formatting;
+		vint							index;
+		UnitTest_RenderingTrace&		trace;
+		UnitTest_RenderingFrame			frame;
+		Ptr<UnitTestSnapshotDomNode>	domRoot;
+		WString							elements;
+		WString							commands;
+		WString							dom;
 
 	public:
-		UnitTestSnapshotFrame(vint _index, UnitTest_RenderingFrame _frame)
+		UnitTestSnapshotFrame(vint _index, UnitTest_RenderingTrace& _trace, UnitTest_RenderingFrame _frame)
 			: index(_index)
+			, trace(_trace)
 			, frame(_frame)
 		{
-			formatting.spaceAfterColon = true;
-			formatting.spaceAfterComma = true;
-			formatting.crlf = true;
-			formatting.compact = true;
 		}
 
 		WString GetName() override
@@ -51,7 +161,7 @@ UnitTestSnapshotFrame
 		{
 			if (elements == L"")
 			{
-				elements = JsonToString(ConvertCustomTypeToJson(frame.elements), formatting);
+				elements = JsonToString(ConvertCustomTypeToJson(frame.elements), GetJsonFormatting());
 			}
 			return elements;
 		}
@@ -60,9 +170,18 @@ UnitTestSnapshotFrame
 		{
 			if (dom == L"")
 			{
-				dom = JsonToString(ConvertCustomTypeToJson(frame.root), formatting);
+				dom = JsonToString(ConvertCustomTypeToJson(frame.root), GetJsonFormatting());
 			}
 			return dom;
+		}
+
+		Ptr<IUnitTestSnapshotDomNode> GetDom() override
+		{
+			if (!domRoot)
+			{
+				domRoot = Ptr(new UnitTestSnapshotDomNode(trace, frame, frame.root));
+			}
+			return domRoot;
 		}
 	};
 
@@ -101,7 +220,7 @@ UnitTestSnapshotFileNode
 				{
 					for (auto [frame, index] : indexed(*renderingTrace->frames.Obj()))
 					{
-						frames.Add(Ptr(new UnitTestSnapshotFrame(index, frame)));
+						frames.Add(Ptr(new UnitTestSnapshotFrame(index, *renderingTrace.Obj(), frame)));
 					}
 				}
 			}

@@ -161,6 +161,110 @@ namespace gacui_unittest_template
 				);
 		});
 
+		TEST_CASE(L"CheckItemsByKey")
+		{
+			auto assertChecked = [](auto ...checkedArgs)
+			{
+				if constexpr(sizeof...(checkedArgs) > 0)
+				{
+					vint checkeds[] = { checkedArgs... };
+					auto window = GetApplication()->GetMainWindow();
+					auto listControl = FindObjectByName<GuiVirtualTextList>(window, L"list");
+					auto textItemView = dynamic_cast<list::ITextItemView*>(listControl->GetItemProvider()->RequestView(WString::Unmanaged(list::ITextItemView::Identifier)));
+
+					for (vint i = 0; i < listControl->GetItemProvider()->Count(); i++)
+					{
+						bool expected = collections::From(checkeds).Any([=](vint a) { return a == i; });
+						TEST_ASSERT(textItemView->GetChecked(i) == expected);
+					}
+				}
+			};
+
+			GacUIUnitTest_SetGuiMainProxy([&](UnitTestRemoteProtocol* protocol, IUnitTestContext*)
+			{
+				protocol->OnNextIdleFrame(L"Ready", [&, protocol]()
+				{
+					auto window = GetApplication()->GetMainWindow();
+					auto listControl = FindObjectByName<GuiVirtualTextList>(window, L"list");
+					listControl->SetView(TextListView::Check);
+					listControl->SetFocused();
+					InitializeItems(window, 5);
+
+					assertChecked();
+					protocol->KeyPress(VKEY::KEY_SPACE);
+					assertChecked();
+				});
+				protocol->OnNextIdleFrame(L"5 Items", [&, protocol]()
+				{
+					auto window = GetApplication()->GetMainWindow();
+					auto listControl = FindObjectByName<GuiSelectableListControl>(window, L"list");
+					listControl->SetSelected(2, true);
+				});
+				protocol->OnNextIdleFrame(L"Selected 3rd", [&, protocol]()
+				{
+					protocol->KeyPress(VKEY::KEY_SPACE);
+					assertChecked(2);
+					protocol->KeyPress(VKEY::KEY_SPACE, true, false, false);
+					assertChecked(2);
+					protocol->KeyPress(VKEY::KEY_SPACE, false, true, false);
+					assertChecked(2);
+					protocol->KeyPress(VKEY::KEY_SPACE, false, false, true);
+					assertChecked(2);
+				});
+				protocol->OnNextIdleFrame(L"[SPACE] to Check", [&, protocol]()
+				{
+					protocol->KeyPress(VKEY::KEY_SPACE);
+					assertChecked();
+				});
+				protocol->OnNextIdleFrame(L"[SPACE] to Uncheck", [&, protocol]()
+				{
+					auto window = GetApplication()->GetMainWindow();
+					auto listControl = FindObjectByName<GuiSelectableListControl>(window, L"list");
+					listControl->SetMultiSelect(true);
+					listControl->SetSelected(1, true);
+					listControl->SetSelected(2, true);
+					listControl->SetSelected(4, true);
+				});
+				protocol->OnNextIdleFrame(L"Selected 2nd 3rd 5th", [&, protocol]()
+				{
+					protocol->KeyPress(VKEY::KEY_SPACE);
+					assertChecked(1, 2, 4);
+				});
+				protocol->OnNextIdleFrame(L"[SPACE] to Check", [&, protocol]()
+				{
+					protocol->KeyPress(VKEY::KEY_SPACE);
+					assertChecked();
+				});
+				protocol->OnNextIdleFrame(L"[SPACE] to Uncheck", [&, protocol]()
+				{
+					auto window = GetApplication()->GetMainWindow();
+					auto listControl = FindObjectByName<GuiVirtualTextList>(window, L"list");
+					auto textItemView = dynamic_cast<list::ITextItemView*>(listControl->GetItemProvider()->RequestView(WString::Unmanaged(list::ITextItemView::Identifier)));
+					textItemView->SetChecked(2, true);
+				});
+				protocol->OnNextIdleFrame(L"Check 3rd", [&, protocol]()
+				{
+					protocol->KeyPress(VKEY::KEY_SPACE);
+					assertChecked(1, 2, 4);
+				});
+				protocol->OnNextIdleFrame(L"[SPACE] to Check", [&, protocol]()
+				{
+					protocol->KeyPress(VKEY::KEY_SPACE);
+					assertChecked();
+				});
+				protocol->OnNextIdleFrame(L"[SPACE] to Uncheck", [&, protocol]()
+				{
+					auto window = GetApplication()->GetMainWindow();
+					window->Hide();
+				});
+			});
+			GacUIUnitTest_StartFast_WithResourceAsText<darkskin::Theme>(
+				WString::Unmanaged(L"Controls/List/") + pathFragment + WString::Unmanaged(L"/CheckItemsByKey"),
+				WString::Unmanaged(L"gacuisrc_unittest::MainWindow"),
+				resourceXml
+				);
+		});
+
 		GuiTextListItemTemplate_TestCases(
 			resourceXml,
 			pathFragment,

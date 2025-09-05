@@ -17,10 +17,20 @@ $scriptsToCopy = @(
 )
 
 # Files to track in the @Copilot solution folder
-$filesToTrack = $scriptsToCopy + @(
+$filesToIgnore = $scriptsToCopy + @(
     "Copilot_Execution.md"
     "Copilot_Planning.md"
     "Copilot_Task.md"
+)
+
+$filesToTrack = $filesToIgnore + @(
+    "Copilot_Scrum.md"
+    "Copilot_KB.md"
+)
+
+# Files to track in the @Copilot solution folder
+$extraFilesToIgnore = $filesToIgnore + @(
+    "enc_temp_folder" # for gpt-5
 )
 
 foreach ($script in $scriptsToCopy) {
@@ -39,26 +49,7 @@ $gitignorePath = ".\.gitignore"
 
 Write-Host "Updating .gitignore..."
 
-# Read existing .gitignore content if it exists
-$existingContent = @()
-if (Test-Path $gitignorePath) {
-    $existingContent = Get-Content $gitignorePath -ErrorAction SilentlyContinue
-    if ($existingContent -eq $null) {
-        $existingContent = @()
-    }
-}
-
-# Add new entries if they don't already exist
-$needsUpdate = $false
-foreach ($entry in $filesToTrack) {
-    if ($existingContent -notcontains $entry) {
-        $existingContent += $entry
-        $needsUpdate = $true
-    }
-}
-
-# Force update .gitignore
-$existingContent | Out-File -FilePath $gitignorePath -Encoding UTF8
+$extraFilesToIgnore | Out-File -FilePath $gitignorePath -Encoding UTF8
 
 # Update UnitTest.sln to include the @Copilot section
 $solutionPath = ".\$($slnFiles[0].Name)"

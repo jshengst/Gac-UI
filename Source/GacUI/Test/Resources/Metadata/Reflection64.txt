@@ -116,26 +116,26 @@ class darkskin::CustomFrameWindowTemplateConstructor : system::ReferenceType {
     property __vwsn_precompile_10 : presentation::compositions::GuiCellComposition*;
     property __vwsn_precompile_11 : presentation::compositions::GuiCellComposition*;
     property __vwsn_precompile_12 : presentation::controls::GuiButton*;
-    property __vwsn_precompile_13 : presentation::compositions::GuiGraphicsComposition*;
-    property __vwsn_precompile_14 : presentation::compositions::GuiBoundsComposition*;
-    property __vwsn_precompile_15 : presentation::elements::GuiPolygonElement^;
-    property __vwsn_precompile_16 : presentation::compositions::GuiBoundsComposition*;
+    property __vwsn_precompile_13 : presentation::compositions::GuiBoundsComposition*;
+    property __vwsn_precompile_14 : presentation::compositions::GuiGraphicsComposition*;
+    property __vwsn_precompile_15 : presentation::compositions::GuiBoundsComposition*;
+    property __vwsn_precompile_16 : presentation::elements::GuiPolygonElement^;
     property __vwsn_precompile_17 : presentation::compositions::GuiCellComposition*;
     property __vwsn_precompile_18 : presentation::controls::GuiButton*;
-    property __vwsn_precompile_19 : presentation::compositions::GuiGraphicsComposition*;
+    property __vwsn_precompile_19 : presentation::compositions::GuiBoundsComposition*;
     property __vwsn_precompile_2 : presentation::elements::GuiSolidBorderElement^;
-    property __vwsn_precompile_20 : presentation::compositions::GuiBoundsComposition*;
-    property __vwsn_precompile_21 : presentation::elements::GuiPolygonElement^;
-    property __vwsn_precompile_22 : presentation::compositions::GuiBoundsComposition*;
-    property __vwsn_precompile_23 : presentation::elements::GuiPolygonElement^;
-    property __vwsn_precompile_24 : presentation::compositions::GuiBoundsComposition*;
+    property __vwsn_precompile_20 : presentation::compositions::GuiGraphicsComposition*;
+    property __vwsn_precompile_21 : presentation::compositions::GuiBoundsComposition*;
+    property __vwsn_precompile_22 : presentation::elements::GuiPolygonElement^;
+    property __vwsn_precompile_23 : presentation::compositions::GuiBoundsComposition*;
+    property __vwsn_precompile_24 : presentation::elements::GuiPolygonElement^;
     property __vwsn_precompile_25 : presentation::compositions::GuiCellComposition*;
     property __vwsn_precompile_26 : presentation::controls::GuiButton*;
-    property __vwsn_precompile_27 : presentation::compositions::GuiGraphicsComposition*;
-    property __vwsn_precompile_28 : presentation::compositions::GuiBoundsComposition*;
-    property __vwsn_precompile_29 : presentation::elements::GuiPolygonElement^;
+    property __vwsn_precompile_27 : presentation::compositions::GuiBoundsComposition*;
+    property __vwsn_precompile_28 : presentation::compositions::GuiGraphicsComposition*;
+    property __vwsn_precompile_29 : presentation::compositions::GuiBoundsComposition*;
     property __vwsn_precompile_3 : presentation::compositions::GuiCellComposition*;
-    property __vwsn_precompile_30 : presentation::compositions::GuiBoundsComposition*;
+    property __vwsn_precompile_30 : presentation::elements::GuiPolygonElement^;
     property __vwsn_precompile_31 : presentation::compositions::GuiCellComposition*;
     property __vwsn_precompile_32 : presentation::compositions::GuiTableComposition*;
     property __vwsn_precompile_33 : presentation::compositions::GuiCellComposition*;
@@ -1988,6 +1988,25 @@ interface gaclib_controls::IDialogStringsStrings : system::Interface {
     constructor (proxy : system::InterfaceProxy^) : gaclib_controls::IDialogStringsStrings^;
 }
 
+@FullName:gaclib_controls::IUnitTestSnapshotDomNode
+interface gaclib_controls::IUnitTestSnapshotDomNode : system::Interface {
+    property Children : system::Enumerable<gaclib_controls::IUnitTestSnapshotDomNode^>^ { get:GetChildren }
+    property DomAsJsonText : system::String { get:GetDomAsJsonText }
+    property DomID : system::Int64 { get:GetDomID }
+    property ElementAsJsonText : system::String { get:GetElementAsJsonText }
+    property Name : system::String { get:GetName }
+
+    function GetChildren() : system::Enumerable<gaclib_controls::IUnitTestSnapshotDomNode^>^;
+    function GetDomAsJsonText() : system::String;
+    function GetDomID() : system::Int64;
+    function GetElementAsJsonText() : system::String;
+    function GetName() : system::String;
+
+    @InvokeTemplate:::vl::reflection::description::ValueInterfaceProxy<::gaclib_controls::IUnitTestSnapshotDomNode>::Create($Arguments)
+    @ClosureTemplate:::vl::Func<$Func>(&::vl::reflection::description::ValueInterfaceProxy<::gaclib_controls::IUnitTestSnapshotDomNode>::Create)
+    constructor (proxy : system::InterfaceProxy^) : gaclib_controls::IUnitTestSnapshotDomNode^;
+}
+
 @FullName:gaclib_controls::IUnitTestSnapshotFileNode
 interface gaclib_controls::IUnitTestSnapshotFileNode : system::Interface {
     property Children : system::Enumerable<gaclib_controls::IUnitTestSnapshotFileNode^>^ { get:GetChildren }
@@ -2008,10 +2027,12 @@ interface gaclib_controls::IUnitTestSnapshotFileNode : system::Interface {
 
 @FullName:gaclib_controls::IUnitTestSnapshotFrame
 interface gaclib_controls::IUnitTestSnapshotFrame : system::Interface {
+    property Dom : gaclib_controls::IUnitTestSnapshotDomNode^ { get:GetDom }
     property DomAsJsonText : system::String { get:GetDomAsJsonText }
     property ElementsAsJsonText : system::String { get:GetElementsAsJsonText }
     property Name : system::String { get:GetName }
 
+    function GetDom() : gaclib_controls::IUnitTestSnapshotDomNode^;
     function GetDomAsJsonText() : system::String;
     function GetElementsAsJsonText() : system::String;
     function GetName() : system::String;
@@ -2216,15 +2237,33 @@ class gaclib_controls::UnitTestSnapshotViewerWindowConstructor : system::Referen
     property __vwsn_precompile_11 : presentation::controls::GuiTab*;
     property __vwsn_precompile_12 : presentation::compositions::GuiBoundsComposition*;
     property __vwsn_precompile_13 : presentation::controls::GuiTabPage*;
-    property __vwsn_precompile_14 : presentation::compositions::GuiBoundsComposition*;
-    property __vwsn_precompile_15 : presentation::controls::GuiTabPage*;
-    property __vwsn_precompile_16 : presentation::controls::GuiMultilineTextBox*;
+    property __vwsn_precompile_14 : presentation::compositions::GuiTableComposition*;
+    property __vwsn_precompile_15 : presentation::compositions::GuiColumnSplitterComposition*;
+    property __vwsn_precompile_16 : presentation::compositions::GuiCellComposition*;
     property __vwsn_precompile_17 : presentation::compositions::GuiBoundsComposition*;
-    property __vwsn_precompile_18 : presentation::controls::GuiTabPage*;
-    property __vwsn_precompile_19 : presentation::controls::GuiMultilineTextBox*;
+    property __vwsn_precompile_18 : presentation::compositions::GuiCellComposition*;
+    property __vwsn_precompile_19 : presentation::compositions::GuiTableComposition*;
     property __vwsn_precompile_2 : presentation::compositions::GuiColumnSplitterComposition*;
-    property __vwsn_precompile_20 : presentation::compositions::GuiBoundsComposition*;
+    property __vwsn_precompile_20 : presentation::compositions::GuiRowSplitterComposition*;
+    property __vwsn_precompile_21 : presentation::compositions::GuiCellComposition*;
+    property __vwsn_precompile_22 : presentation::compositions::GuiBoundsComposition*;
+    property __vwsn_precompile_23 : presentation::compositions::GuiCellComposition*;
+    property __vwsn_precompile_24 : presentation::controls::GuiTab*;
+    property __vwsn_precompile_25 : presentation::compositions::GuiBoundsComposition*;
+    property __vwsn_precompile_26 : presentation::controls::GuiTabPage*;
+    property __vwsn_precompile_27 : presentation::controls::GuiMultilineTextBox*;
+    property __vwsn_precompile_28 : presentation::compositions::GuiBoundsComposition*;
+    property __vwsn_precompile_29 : presentation::controls::GuiTabPage*;
     property __vwsn_precompile_3 : presentation::compositions::GuiCellComposition*;
+    property __vwsn_precompile_30 : presentation::controls::GuiMultilineTextBox*;
+    property __vwsn_precompile_31 : presentation::compositions::GuiBoundsComposition*;
+    property __vwsn_precompile_32 : presentation::controls::GuiTabPage*;
+    property __vwsn_precompile_33 : presentation::controls::GuiMultilineTextBox*;
+    property __vwsn_precompile_34 : presentation::compositions::GuiBoundsComposition*;
+    property __vwsn_precompile_35 : presentation::controls::GuiTabPage*;
+    property __vwsn_precompile_36 : presentation::controls::GuiMultilineTextBox*;
+    property __vwsn_precompile_37 : presentation::compositions::GuiBoundsComposition*;
+    property __vwsn_precompile_38 : presentation::compositions::GuiBoundsComposition*;
     property __vwsn_precompile_4 : presentation::compositions::GuiBoundsComposition*;
     property __vwsn_precompile_5 : presentation::compositions::GuiCellComposition*;
     property __vwsn_precompile_6 : presentation::controls::GuiTab*;
@@ -2234,6 +2273,7 @@ class gaclib_controls::UnitTestSnapshotViewerWindowConstructor : system::Referen
     property scRendering : presentation::controls::GuiScrollContainer*;
     property self : gaclib_controls::UnitTestSnapshotViewerWindow*;
     property textListFrames : presentation::controls::GuiBindableTextList*;
+    property treeViewDom : presentation::controls::GuiBindableTreeView*;
     property treeViewFileNodes : presentation::controls::GuiBindableTreeView*;
 
     function __vwsn_gaclib_controls_UnitTestSnapshotViewerWindow_Initialize(__vwsn_this_ : gaclib_controls::UnitTestSnapshotViewerWindow*) : system::Void;
@@ -3023,6 +3063,7 @@ interface presentation::INativeWindow : system::Interface {
     function ShowMaximized() : system::Void;
     function ShowMinimized() : system::Void;
     function ShowRestored() : system::Void;
+    function SuggestMinClientSize(size : presentation::NativeSize) : system::Void;
 
 }
 
@@ -4421,6 +4462,8 @@ class presentation::controls::GuiBindableTreeView::ItemSourceNode : presentation
 }
 
 class presentation::controls::GuiButton : presentation::controls::GuiControl {
+    event AfterClicked : system::Function<system::Void, presentation::compositions::GuiGraphicsComposition*, presentation::compositions::GuiEventArgs*>^;
+    event BeforeClicked : system::Function<system::Void, presentation::compositions::GuiGraphicsComposition*, presentation::compositions::GuiEventArgs*>^;
     event Clicked : system::Function<system::Void, presentation::compositions::GuiGraphicsComposition*, presentation::compositions::GuiEventArgs*>^;
 
     property AutoFocus : system::Boolean { get:GetAutoFocus set:SetAutoFocus }
@@ -4463,7 +4506,7 @@ class presentation::controls::GuiColorDialog : presentation::controls::GuiDialog
 class presentation::controls::GuiComboBoxBase : presentation::controls::GuiMenuButton {
     function TypedControlTemplateObject(ensureExists : system::Boolean) : presentation::templates::GuiComboBoxTemplate*;
 
-    constructor (themeName : presentation::theme::ThemeName) : presentation::controls::GuiComboBoxBase*;
+    constructor (themeName : presentation::theme::ThemeName, _autoFocusDropdown : system::Boolean) : presentation::controls::GuiComboBoxBase*;
 }
 
 class presentation::controls::GuiComboBoxListControl : presentation::controls::GuiComboBoxBase {
@@ -4742,7 +4785,7 @@ class presentation::controls::GuiDocumentCommonInterface : system::ReferenceType
     property CaretEnd : presentation::TextPos { get:GetCaretEnd }
     property Document : presentation::DocumentModel^ { get:GetDocument set:SetDocument }
     property DocumentItems : system::ReadonlyDictionary<system::String, presentation::controls::GuiDocumentItem^>^ { get:GetDocumentItems }
-    property EditMode : presentation::controls::GuiDocumentCommonInterface::EditMode { get:GetEditMode set:SetEditMode }
+    property EditMode : presentation::controls::GuiDocumentEditMode { get:GetEditMode set:SetEditMode }
     property Modified : system::Boolean { get:GetModified event:ModifiedChanged }
     property SelectionModel : presentation::DocumentModel^ { get:GetSelectionModel set:SetSelectionModel event:SelectionChanged }
     property SelectionText : system::String { get:GetSelectionText set:SetSelectionText event:SelectionChanged }
@@ -4770,7 +4813,7 @@ class presentation::controls::GuiDocumentCommonInterface : system::ReferenceType
     function GetCaretEnd() : presentation::TextPos;
     function GetDocument() : presentation::DocumentModel^;
     function GetDocumentItems() : system::ReadonlyDictionary<system::String, presentation::controls::GuiDocumentItem^>^;
-    function GetEditMode() : presentation::controls::GuiDocumentCommonInterface::EditMode;
+    function GetEditMode() : presentation::controls::GuiDocumentEditMode;
     function GetModified() : system::Boolean;
     function GetSelectionModel() : presentation::DocumentModel^;
     function GetSelectionText() : system::String;
@@ -4785,7 +4828,7 @@ class presentation::controls::GuiDocumentCommonInterface : system::ReferenceType
     function SelectAll() : system::Void;
     function SetCaret(begin : presentation::TextPos, end : presentation::TextPos) : system::Void;
     function SetDocument(value : presentation::DocumentModel^) : system::Void;
-    function SetEditMode(value : presentation::controls::GuiDocumentCommonInterface::EditMode) : system::Void;
+    function SetEditMode(value : presentation::controls::GuiDocumentEditMode) : system::Void;
     function SetParagraphAlignment(begin : presentation::TextPos, end : presentation::TextPos, alignment : presentation::Alignment?) : system::Void;
     function SetParagraphAlignments(begin : presentation::TextPos, end : presentation::TextPos, alignments : system::ReadonlyList<presentation::Alignment?>^) : system::Void;
     function SetSelectionModel(value : presentation::DocumentModel^) : system::Void;
@@ -4798,7 +4841,18 @@ class presentation::controls::GuiDocumentCommonInterface : system::ReferenceType
 }
 
 @ValueType
-enum presentation::controls::GuiDocumentCommonInterface::EditMode {
+struct presentation::controls::GuiDocumentConfig {
+    property autoExpand : system::Boolean?;
+    property doubleLineBreaksBetweenParagraph : system::Boolean?;
+    property paragraphMode : presentation::controls::GuiDocumentParagraphMode?;
+    property paragraphPadding : system::Boolean?;
+    property pasteAsPlainText : system::Boolean?;
+    property spaceForFlattenedLineBreak : system::Boolean?;
+    property wrapLine : system::Boolean?;
+}
+
+@ValueType
+enum presentation::controls::GuiDocumentEditMode {
     Editable = 2,
     Selectable = 1,
     ViewOnly = 0,
@@ -4816,14 +4870,25 @@ class presentation::controls::GuiDocumentItem : system::ReferenceType {
 
 class presentation::controls::GuiDocumentLabel : presentation::controls::GuiControl, presentation::controls::GuiDocumentCommonInterface {
     function TypedControlTemplateObject(ensureExists : system::Boolean) : presentation::templates::GuiDocumentLabelTemplate*;
+    function TypedControlTemplateObject(ensureExists : system::Boolean) : presentation::templates::GuiDocumentLabelTemplate*;
 
     constructor (themeName : presentation::theme::ThemeName) : presentation::controls::GuiDocumentLabel*;
+    constructor (themeName : presentation::theme::ThemeName, config : presentation::controls::GuiDocumentConfig) : presentation::controls::GuiDocumentLabel*;
+}
+
+@ValueType
+enum presentation::controls::GuiDocumentParagraphMode {
+    Multiline = 1,
+    Paragraph = 2,
+    Singleline = 0,
 }
 
 class presentation::controls::GuiDocumentViewer : presentation::controls::GuiScrollContainer, presentation::controls::GuiDocumentCommonInterface {
     function TypedControlTemplateObject(ensureExists : system::Boolean) : presentation::templates::GuiDocumentViewerTemplate*;
+    function TypedControlTemplateObject(ensureExists : system::Boolean) : presentation::templates::GuiDocumentViewerTemplate*;
 
     constructor (themeName : presentation::theme::ThemeName) : presentation::controls::GuiDocumentViewer*;
+    constructor (themeName : presentation::theme::ThemeName, config : presentation::controls::GuiDocumentConfig) : presentation::controls::GuiDocumentViewer*;
 }
 
 class presentation::controls::GuiFileDialogBase : presentation::controls::GuiDialogBase {

@@ -20,6 +20,12 @@ GuiComboBoxBase
 			{
 			}
 
+			compositions::IGuiAltActionHost* GuiComboBoxBase::GetActivatingAltHost()
+			{
+				// When the combo box is opened by an Alt action, it will hot continue into the dropdown
+				return GuiSelectableButton::GetActivatingAltHost();
+			}
+
 			IGuiMenuService::Direction GuiComboBoxBase::GetSubMenuDirection()
 			{
 				return IGuiMenuService::Horizontal;
@@ -32,17 +38,54 @@ GuiComboBoxBase
 				SetPreferredMenuClientSize(size);
 			}
 
-			GuiComboBoxBase::GuiComboBoxBase(theme::ThemeName themeName)
+			void GuiComboBoxBase::OnKeyDown(compositions::GuiGraphicsComposition* sender, compositions::GuiKeyEventArgs& arguments)
+			{
+				if (arguments.code == VKEY::KEY_SPACE && !arguments.ctrl && !arguments.shift && !arguments.alt)
+				{
+					GetSubMenu()->Hide();
+					arguments.handled = true;
+				}
+			}
+
+			void GuiComboBoxBase::OnAfterSubMenuOpening(compositions::GuiGraphicsComposition* sender, compositions::GuiEventArgs& arguments)
+			{
+				if (autoFocusDropdown && GetSubMenu())
+				{
+					GetSubMenu()->SetFocused();
+				}
+			}
+
+			GuiComboBoxBase::GuiComboBoxBase(theme::ThemeName themeName, bool _autoFocusDropdown)
 				:GuiMenuButton(themeName)
+				, autoFocusDropdown(_autoFocusDropdown)
 			{
 				CreateSubMenu();
 				SetCascadeAction(false);
 
 				boundsComposition->CachedBoundsChanged.AttachMethod(this, &GuiComboBoxBase::OnCachedBoundsChanged);
+				boundsComposition->GetEventReceiver()->keyDown.AttachMethod(this, &GuiComboBoxBase::OnKeyDown);
+				
+				if (autoFocusDropdown)
+				{
+					AfterSubMenuOpening.AttachMethod(this, &GuiComboBoxBase::OnAfterSubMenuOpening);
+				}
 			}
 
 			GuiComboBoxBase::~GuiComboBoxBase()
 			{
+			} 
+
+			IDescriptable* GuiComboBoxBase::QueryService(const WString& identifier)
+			{
+				if (identifier == IGuiMenuService::Identifier)
+				{
+					// Stop cascading menu behavior if the combo box is put in another combo box dropdown
+					return nullptr;
+				}
+				else
+				{
+					return GuiMenuButton::QueryService(identifier);
+				}
 			}
 
 /***********************************************************************
@@ -50,7 +93,7 @@ GuiComboButton
 ***********************************************************************/
 
 			GuiComboButton::GuiComboButton(theme::ThemeName themeName, GuiControl* _dropdownControl)
-				:GuiComboBoxBase(themeName)
+				:GuiComboBoxBase(themeName, false)
 				, dropdownControl(_dropdownControl)
 			{
 				dropdownControl->GetBoundsComposition()->SetAlignmentToParent(Margin(0, 0, 0, 0));
@@ -205,8 +248,6 @@ GuiComboBoxListControl
 					{
 					case VKEY::KEY_RETURN:
 						DisplaySelectedContent(containedListControl->GetSelectedItemIndex());
-						arguments.handled = true;
-					case VKEY::KEY_ESCAPE:
 						GetSubMenu()->Hide();
 						arguments.handled = true;
 						break;
@@ -233,7 +274,7 @@ GuiComboBoxListControl
 			}
 
 			GuiComboBoxListControl::GuiComboBoxListControl(theme::ThemeName themeName, GuiSelectableListControl* _containedListControl)
-				:GuiComboBoxBase(themeName)
+				:GuiComboBoxBase(themeName, false)
 				, containedListControl(_containedListControl)
 			{
 				TextChanged.AttachMethod(this, &GuiComboBoxListControl::OnTextChanged);

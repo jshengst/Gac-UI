@@ -150,6 +150,11 @@ INativeWindow
 			/// </summary>
 			/// <returns>The client bounds in screen space.</returns>
 			virtual NativeRect			GetClientBoundsInScreen()=0;
+			/// <summary>
+			/// Suggest a minimum client size for the window. This is extra information for some platform provider. A native platform provide can just ignore it.
+			/// </summary>
+			/// <param name="size">The minimum client size.</param>
+			virtual void				SuggestMinClientSize(NativeSize size) = 0;
 			
 			/// <summary>
 			/// Get the title of the window. A title will be displayed as a name of this window.
@@ -1846,6 +1851,16 @@ Helper Functions
 		/// <param name="resourceService">The resource service to get cursors.</param>
 		/// <returns>Returns the cursor according to the hit test result. It could return nullptr when the cursor is not defined.</returns>
 		extern INativeCursor*				GetCursorFromHitTest(INativeWindowListener::HitTestResult hitTestResult, INativeResourceService* resourceService);
+
+		/// <summary>
+		/// General implementation of INativeWindowListener::Moving
+		/// </summary>
+		/// <param name="window">The native window.</param>
+		/// <param name="minWindowSize">The minimum window size.</param>
+		/// <param name="bounds">Pass this argument directly.</param>
+		/// <param name="fixSizeOnly">Pass this argument directly.</param>
+		/// <param name="draggingBorder">Pass this argument directly.</param>
+		extern void							NativeWindowListener_Moving(INativeWindow* window, NativeSize minWindowSize, NativeRect& bounds, bool fixSizeOnly, bool draggingBorder);
 
 		/// <summary>
 		/// A helper function calling multiple <see cref="INativeWindowListener::HitTest"/>.

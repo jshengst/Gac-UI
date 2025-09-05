@@ -2292,6 +2292,11 @@ INativeWindow
 			/// </summary>
 			/// <returns>The client bounds in screen space.</returns>
 			virtual NativeRect			GetClientBoundsInScreen()=0;
+			/// <summary>
+			/// Suggest a minimum client size for the window. This is extra information for some platform provider. A native platform provide can just ignore it.
+			/// </summary>
+			/// <param name="size">The minimum client size.</param>
+			virtual void				SuggestMinClientSize(NativeSize size) = 0;
 			
 			/// <summary>
 			/// Get the title of the window. A title will be displayed as a name of this window.
@@ -3988,6 +3993,16 @@ Helper Functions
 		/// <param name="resourceService">The resource service to get cursors.</param>
 		/// <returns>Returns the cursor according to the hit test result. It could return nullptr when the cursor is not defined.</returns>
 		extern INativeCursor*				GetCursorFromHitTest(INativeWindowListener::HitTestResult hitTestResult, INativeResourceService* resourceService);
+
+		/// <summary>
+		/// General implementation of INativeWindowListener::Moving
+		/// </summary>
+		/// <param name="window">The native window.</param>
+		/// <param name="minWindowSize">The minimum window size.</param>
+		/// <param name="bounds">Pass this argument directly.</param>
+		/// <param name="fixSizeOnly">Pass this argument directly.</param>
+		/// <param name="draggingBorder">Pass this argument directly.</param>
+		extern void							NativeWindowListener_Moving(INativeWindow* window, NativeSize minWindowSize, NativeRect& bounds, bool fixSizeOnly, bool draggingBorder);
 
 		/// <summary>
 		/// A helper function calling multiple <see cref="INativeWindowListener::HitTest"/>.
@@ -8496,6 +8511,7 @@ Proxy
 			virtual void			CheckAndSyncProperties() = 0;
 
 			virtual NativeRect		FixBounds(const NativeRect& bounds) = 0;
+			virtual void			SuggestMinClientSize(NativeSize size) = 0;
 			virtual void			UpdateBounds() = 0;
 			virtual void			UpdateTitle() = 0;
 			virtual void			UpdateIcon() = 0;
@@ -8539,6 +8555,7 @@ GuiHostedWindow
 			friend class GuiHostedController;
 		protected:
 			Ptr<IGuiHostedWindowProxy>		proxy;
+			NativeSize						suggestedMinClientSize;
 
 			void							BecomeMainWindow();
 			void							BecomeNonMainWindow();
@@ -8566,6 +8583,7 @@ GuiHostedWindow
 			NativeSize						GetClientSize() override;
 			void							SetClientSize(NativeSize size) override;
 			NativeRect						GetClientBoundsInScreen() override;
+			void							SuggestMinClientSize(NativeSize size) override;
 			WString							GetTitle() override;
 			void							SetTitle(const WString& title) override;
 			INativeCursor*					GetWindowCursor() override;
@@ -14184,8 +14202,12 @@ Buttons
 				GuiButton(theme::ThemeName themeName);
 				~GuiButton();
 
-				/// <summary>Mouse click event.</summary>
+				/// <summary>Mouse click event, but raised before Clicked. This event is for pre-UI effects.</summary>
+				compositions::GuiNotifyEvent			BeforeClicked;
+				/// <summary>Mouse click event. This event is for executing the actual task assigned with the button.</summary>
 				compositions::GuiNotifyEvent			Clicked;
+				/// <summary>Mouse click event, but raised after Clicked. This event is for post-UI effects.</summary>
+				compositions::GuiNotifyEvent			AfterClicked;
 
 				/// <summary>Test is the <see cref="Clicked"/> event raised when left mouse button up.</summary>
 				/// <returns>Returns true if this event is raised when left mouse button up</returns>
@@ -14255,7 +14277,7 @@ Buttons
 				bool									autoSelection = true;
 				bool									isSelected = false;
 
-				void									OnClicked(compositions::GuiGraphicsComposition* sender, compositions::GuiEventArgs& arguments);
+				void									OnAfterClicked(compositions::GuiGraphicsComposition* sender, compositions::GuiEventArgs& arguments);
 			public:
 				/// <summary>Create a control with a specified default theme.</summary>
 				/// <param name="themeName">The theme name for retriving a default control template.</param>
@@ -15506,6 +15528,7 @@ GuiVirtualTextList
 
 				void													OnStyleInstalled(vint itemIndex, ItemStyle* style, bool refreshPropertiesOnly)override;
 				void													OnItemTemplateChanged(compositions::GuiGraphicsComposition* sender, compositions::GuiEventArgs& arguments);
+				void													OnKeyDown(compositions::GuiGraphicsComposition* sender, compositions::GuiKeyEventArgs& arguments);
 			public:
 				/// <summary>Create a Text list control in virtual mode.</summary>
 				/// <param name="themeName">The theme name for retriving a default control template.</param>
@@ -18197,7 +18220,7 @@ MenuButton
 				void									OnSubMenuWindowOpened(compositions::GuiGraphicsComposition* sender, compositions::GuiEventArgs& arguments);
 				void									OnSubMenuWindowClosed(compositions::GuiGraphicsComposition* sender, compositions::GuiEventArgs& arguments);
 				void									OnMouseEnter(compositions::GuiGraphicsComposition* sender, compositions::GuiEventArgs& arguments);
-				void									OnClicked(compositions::GuiGraphicsComposition* sender, compositions::GuiEventArgs& arguments);
+				void									OnBeforeClicked(compositions::GuiGraphicsComposition* sender, compositions::GuiEventArgs& arguments);
 
 				virtual IGuiMenuService::Direction		GetSubMenuDirection();
 
@@ -18327,14 +18350,24 @@ ComboBox Base
 			{
 				GUI_SPECIFY_CONTROL_TEMPLATE_TYPE(ComboBoxTemplate, GuiMenuButton)
 			protected:
-				
+
+				compositions::IGuiAltActionHost*			GetActivatingAltHost()override;
 				IGuiMenuService::Direction					GetSubMenuDirection()override;
 				void										OnCachedBoundsChanged(compositions::GuiGraphicsComposition* sender, compositions::GuiEventArgs& arguments);
+				void										OnKeyDown(compositions::GuiGraphicsComposition* sender, compositions::GuiKeyEventArgs& arguments);
+				void										OnAfterSubMenuOpening(compositions::GuiGraphicsComposition* sender, compositions::GuiEventArgs& arguments);
+
+			private:
+				bool										autoFocusDropdown;
+				
 			public:
 				/// <summary>Create a control with a specified default theme.</summary>
 				/// <param name="themeName">The theme name for retriving a default control template.</param>
-				GuiComboBoxBase(theme::ThemeName themeName);
+				/// <param name="_autoFocusDropdown">Whether to automatically focus the dropdown when it opens.</param>
+				GuiComboBoxBase(theme::ThemeName themeName, bool _autoFocusDropdown);
 				~GuiComboBoxBase();
+
+				IDescriptable*								QueryService(const WString& identifier) override;
 			};
 
 /***********************************************************************
@@ -22667,6 +22700,7 @@ namespace vl::presentation::remoteprotocol
 	HANDLER(WindowNotifySetClientSize, ::vl::presentation::NativeSize, void, REQ, NORES, DROPREP)\
 	HANDLER(WindowNotifyActivate, void, void, NOREQ, NORES, DROPREP)\
 	HANDLER(WindowNotifyShow, ::vl::presentation::remoteprotocol::WindowShowing, void, REQ, NORES, DROPREP)\
+	HANDLER(WindowNotifyMinSize, ::vl::presentation::NativeSize, void, REQ, NORES, DROPREP)\
 	HANDLER(IOUpdateGlobalShortcutKey, ::vl::Ptr<::vl::collections::List<::vl::presentation::remoteprotocol::GlobalShortcutKey>>, void, REQ, NORES, NODROP)\
 	HANDLER(IORequireCapture, void, void, NOREQ, NORES, NODROP)\
 	HANDLER(IOReleaseCapture, void, void, NOREQ, NORES, NODROP)\
@@ -24755,6 +24789,7 @@ namespace vl::presentation::remote_renderer
 
 		bool									updatingBounds = false;
 		remoteprotocol::WindowSizingConfig		windowSizingConfig;
+		NativeSize								suggestedMinSize;
 
 		remoteprotocol::ScreenConfig			GetScreenConfig(INativeScreen* screen);
 		remoteprotocol::WindowSizingConfig		GetWindowSizingConfig();
@@ -24767,6 +24802,7 @@ namespace vl::presentation::remote_renderer
 		void									AfterClosing() override;
 		void									Closed() override;
 
+		void									Moving(NativeRect& bounds, bool fixSizeOnly, bool draggingBorder) override;
 		void									Moved() override;
 		void									DpiChanged(bool preparing) override;
 		void									RenderingAsActivated() override;
@@ -29700,6 +29736,7 @@ GuiRemoteWindow
 
 		bool												controllerDisconnected = false;
 		remoteprotocol::WindowSizingConfig					remoteWindowSizingConfig;
+		NativeSize											suggestedMinClientSize;
 		bool												sizingConfigInvalidated = false;
 		double												scalingX = 1;
 		double												scalingY = 1;
@@ -29760,6 +29797,7 @@ GuiRemoteWindow
 		NativeSize						GetClientSize() override;
 		void							SetClientSize(NativeSize size) override;
 		NativeRect						GetClientBoundsInScreen() override;
+		void							SuggestMinClientSize(NativeSize size) override;
 		WString							GetTitle() override;
 		void							SetTitle(const WString& title) override;
 		INativeCursor*					GetWindowCursor() override;

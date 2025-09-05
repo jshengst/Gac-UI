@@ -32,11 +32,21 @@
         File = 1,
       }
 
+      interface IUnitTestSnapshotDomNode
+      {
+        prop Name: string {const, not observe}
+        prop DomID: int {const, not observe}
+        prop DomAsJsonText: string {const, not observe}
+        prop ElementAsJsonText: string {const, not observe}
+        prop Children: IUnitTestSnapshotDomNode^{} {const, not observe}
+      }
+
       interface IUnitTestSnapshotFrame
       {
         prop Name: string {const, not observe}
         prop ElementsAsJsonText: string {const, not observe}
         prop DomAsJsonText: string {const, not observe}
+        prop Dom: IUnitTestSnapshotDomNode^ {const, not observe}
       }
 
       interface IUnitTestSnapshotFileNode
@@ -88,6 +98,7 @@
           Text-str="WindowTitle()"
           ClientSize="x:1920 y:1080"
           >
+          <att.BoundsComposition-set PreferredMinSize="x:800 y:600"/>
           <Table AlignmentToParent="left:0 top:0 right:0 bottom:0" CellPadding="5" MinSizeLimitation="LimitToElementAndChildren">
             <att.Rows>
               <_>composeType:Percentage percentage:1.0</_>
@@ -96,10 +107,11 @@
               <_>composeType:Absolute absolute:200</_>
               <_>composeType:Absolute absolute:100</_>
               <_>composeType:Absolute absolute:200</_>
+              <_>composeType:Absolute absolute:100</_>
               <_>composeType:Percentage percentage:1.0</_>
             </att.Columns>
             <ColumnSplitter ColumnsToTheLeft="2"/>
-            <ColumnSplitter ColumnsToTheLeft="3"/>
+            <ColumnSplitter ColumnsToTheLeft="4"/>
 
             <Cell Site="row:0 column:0 columnSpan:2">
               <BindableTreeView ref.Name="treeViewFileNodes" env.ItemType="IUnitTestSnapshotFileNode^" VerticalAlwaysVisible="false" HorizontalAlwaysVisible="false">
@@ -111,7 +123,7 @@
               </BindableTreeView>
             </Cell>
 
-            <Cell Site="row:0 column:2">
+            <Cell Site="row:0 column:2 columnSpan:2">
               <Tab>
                 <att.BoundsComposition-set AlignmentToParent="left:0 top:0 right:0 bottom:0"/>
                 <att.Pages>
@@ -126,23 +138,80 @@
               </Tab>
             </Cell>
 
-            <Cell Site="row:0 column:3">
+            <Cell Site="row:0 column:4">
               <Tab>
                 <att.BoundsComposition-set AlignmentToParent="left:0 top:0 right:0 bottom:0"/>
                 <att.Pages>
                   <TabPage Text="Rendering">
-                    <ScrollContainer ref.Name="scRendering" VerticalAlwaysVisible="false" HorizontalAlwaysVisible="false">
-                      <att.BoundsComposition-set AlignmentToParent="left:5 top:5 right:5 bottom:5"/>
-                    </ScrollContainer>
+                    <Table CellPadding="5" AlignmentToParent="left:0 top:0 right:0 bottom:0" MinSizeLimitation="LimitToElementAndChildren">
+                      <att.Rows>
+                        <_>composeType:Percentage percentage:1.0</_>
+                      </att.Rows>
+                      <att.Columns>
+                        <_>composeType:Percentage percentage:1.0</_>
+                        <_>composeType:Absolute absolute:200</_>
+                        <_>composeType:Absolute absolute:200</_>
+                      </att.Columns>
+                      <ColumnSplitter ColumnsToTheLeft="1"/>
+
+                      <Cell Site="row:0 column:0">
+                        <ScrollContainer ref.Name="scRendering" VerticalAlwaysVisible="false" HorizontalAlwaysVisible="false">
+                          <att.BoundsComposition-set AlignmentToParent="left:0 top:0 right:0 bottom:0"/>
+                        </ScrollContainer>
+                      </Cell>
+
+                      <Cell Site="row:0 column:1 columnSpan:2">
+                        <Table CellPadding="5" BorderVisible="false" AlignmentToParent="left:0 top:0 right:0 bottom:0" MinSizeLimitation="LimitToElementAndChildren">
+                          <att.Rows>
+                            <_>composeType:Percentage percentage:1.0</_>
+                            <_>composeType:Absolute absolute:200</_>
+                            <_>composeType:Absolute absolute:200</_>
+                          </att.Rows>
+                          <att.Columns>
+                            <_>composeType:Percentage percentage:1.0</_>
+                          </att.Columns>
+                          <RowSplitter RowsToTheTop="1"/>
+
+                          <Cell Site="row:0 column:0">
+                            <GuiBindableTreeView ref.Name="treeViewDom" env.ItemType="IUnitTestSnapshotDomNode^" HorizontalAlwaysVisible="false" VerticalAlwaysVisible="false">
+                              <att.BoundsComposition-set AlignmentToParent="left:0 top:0 right:0 bottom:0"/>
+                              <att.ItemSource-bind>(cast (IUnitTestSnapshotFrame^) textListFrames.SelectedItem).Dom ?? null</att.ItemSource-bind>
+                              <att.TextProperty>Name</att.TextProperty>
+                              <att.ChildrenProperty>Children</att.ChildrenProperty>
+                            </GuiBindableTreeView>
+                          </Cell>
+
+                          <Cell Site="row:1 column:0 rowSpan:2">
+                            <Tab>
+                              <att.BoundsComposition-set AlignmentToParent="left:0 top:0 right:0 bottom:0"/>
+                              <att.Pages>
+                                <TabPage Text="DOM Node">
+                                  <MultilineTextBox Readonly="true" VerticalAlwaysVisible="false" HorizontalAlwaysVisible="false">
+                                    <att.BoundsComposition-set AlignmentToParent="left:5 top:5 right:5 bottom:5"/>
+                                    <att.Text-bind>(cast (IUnitTestSnapshotDomNode^) treeViewDom.SelectedItem).DomAsJsonText ?? ''</att.Text-bind>
+                                  </MultilineTextBox>
+                                </TabPage>
+                                <TabPage Text="Element">
+                                  <MultilineTextBox Readonly="true" VerticalAlwaysVisible="false" HorizontalAlwaysVisible="false">
+                                    <att.BoundsComposition-set AlignmentToParent="left:5 top:5 right:5 bottom:5"/>
+                                    <att.Text-bind>(cast (IUnitTestSnapshotDomNode^) treeViewDom.SelectedItem).ElementAsJsonText ?? ''</att.Text-bind>
+                                  </MultilineTextBox>
+                                </TabPage>
+                              </att.Pages>
+                            </Tab>
+                          </Cell>
+                        </Table>
+                      </Cell>
+                    </Table>
                   </TabPage>
                   <TabPage Text="DOM">
-                    <MultilineTextBox VerticalAlwaysVisible="false" HorizontalAlwaysVisible="false">
+                    <MultilineTextBox Readonly="true" VerticalAlwaysVisible="false" HorizontalAlwaysVisible="false">
                       <att.BoundsComposition-set AlignmentToParent="left:5 top:5 right:5 bottom:5"/>
                       <att.Text-bind>(cast (IUnitTestSnapshotFrame^) textListFrames.SelectedItem).DomAsJsonText ?? ''</att.Text-bind>
                     </MultilineTextBox>
                   </TabPage>
                   <TabPage Text="Elements">
-                    <MultilineTextBox VerticalAlwaysVisible="false" HorizontalAlwaysVisible="false">
+                    <MultilineTextBox Readonly="true" VerticalAlwaysVisible="false" HorizontalAlwaysVisible="false">
                       <att.BoundsComposition-set AlignmentToParent="left:5 top:5 right:5 bottom:5"/>
                       <att.Text-bind>(cast (IUnitTestSnapshotFrame^) textListFrames.SelectedItem).ElementsAsJsonText ?? ''</att.Text-bind>
                     </MultilineTextBox>

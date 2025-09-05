@@ -627,6 +627,7 @@ IGuiRemoteProtocolMessages (Window)
 		void RequestWindowNotifySetIconVisible(const bool& arguments) override		{ styleConfig.iconVisible = arguments;		this->GetEvents()->OnWindowBoundsUpdated(sizingConfig); }
 		void RequestWindowNotifySetTitleBar(const bool& arguments) override			{ styleConfig.titleBar = arguments;			this->GetEvents()->OnWindowBoundsUpdated(sizingConfig); }
 		void RequestWindowNotifyActivate() override									{ styleConfig.activated = true; }
+		void RequestWindowNotifyMinSize(const NativeSize& arguments) override		{}
 	
 		void RequestWindowNotifyShow(const WindowShowing& arguments) override
 		{
@@ -1388,9 +1389,11 @@ UnitTestRemoteProtocol
 	protected:
 		bool								everRendered = false;
 		Ptr<UnitTestLoggedFrame>			candidateFrame;
+		vint								idlingCounter = 0;
 
 		bool LogRenderingResult()
 		{
+#define ERROR_MESSAGE_PREFIX L"vl::presentation::unittest::UnitTestRemoteProtocol_Logging<TProtocol>::ProcessRemoteEvents()#"
 			if (auto lastFrame = this->TryGetLastRenderingFrameAndReset())
 			{
 				candidateFrame = lastFrame;
@@ -1400,6 +1403,7 @@ UnitTestRemoteProtocol
 			{
 				if (candidateFrame)
 				{
+					idlingCounter = 0;
 					auto descs = Ptr(new collections::Dictionary<vint, ElementDescVariant>);
 					CopyFrom(*descs.Obj(), this->lastElementDescs);
 					this->loggedTrace.frames->Add({
@@ -1412,8 +1416,20 @@ UnitTestRemoteProtocol
 					candidateFrame = {};
 					return true;
 				}
+				else
+				{
+					idlingCounter++;
+					if (idlingCounter == 100)
+					{
+						CHECK_ERROR(
+							idlingCounter < 100,
+							ERROR_MESSAGE_PREFIX L"The last frame didn't trigger UI updating. The action registered by OnNextIdleFrame should always make any element or layout to change."
+							);
+					}
+				}
 			}
 			return false;
+#undef ERROR_MESSAGE_PREFIX
 		}
 
 	public:
@@ -1555,6 +1571,8 @@ IGuiRemoteProtocol
 
 	protected:
 
+		bool								frameExecuting = false;
+
 		void ProcessRemoteEvents() override
 		{
 #define ERROR_MESSAGE_PREFIX L"vl::presentation::unittest::UnitTestRemoteProtocol::ProcessRemoteEvents()#"
@@ -1563,6 +1581,7 @@ IGuiRemoteProtocol
 				if (LogRenderingResult())
 				{
 					auto [name, func] = processRemoteEvents[nextEventIndex];
+					CHECK_ERROR(!frameExecuting, ERROR_MESSAGE_PREFIX L"The action registered by OnNextIdleFrame should not call any blocking function, consider using InvokeInMainThread.");
 					vl::unittest::UnitTest::PrintMessage(L"Execute idle frame[" + (name ? name.Value() : itow(nextEventIndex)) + L"]", vl::unittest::UnitTest::MessageKind::Info);
 					CHECK_ERROR(lastFrameIndex != loggedTrace.frames->Count() - 1, ERROR_MESSAGE_PREFIX L"No rendering occured after the last idle frame.");
 					lastFrameIndex = loggedTrace.frames->Count() - 1;
@@ -1572,7 +1591,9 @@ IGuiRemoteProtocol
 						auto&& lastFrame = (*loggedTrace.frames.Obj())[loggedTrace.frames->Count() - 1];
 						lastFrame.frameName = name;
 					}
+					frameExecuting = true;
 					func();
+					frameExecuting = false;
 					nextEventIndex++;
 				}
 			}

@@ -103,6 +103,10 @@ GuiRemoteWindow (events)
 
 		if (remote->applicationRunning)
 		{
+			if (suggestedMinClientSize != NativeSize{ {0},{0} })
+			{
+				remoteMessages.RequestWindowNotifyMinSize(suggestedMinClientSize);
+			}
 			remoteMessages.RequestWindowNotifySetTitle(styleTitle);
 			remoteMessages.RequestWindowNotifySetEnabled(styleEnabled);
 			remoteMessages.RequestWindowNotifySetTopMost(styleTopMost);
@@ -295,6 +299,15 @@ GuiRemoteWindow (INativeWindow)
 		bounds.x2.value += remoteWindowSizingConfig.bounds.x1.value;
 		bounds.y2.value += remoteWindowSizingConfig.bounds.y1.value;
 		return bounds;
+	}
+
+	void GuiRemoteWindow::SuggestMinClientSize(NativeSize size)
+	{
+		if (suggestedMinClientSize != size)
+		{
+			suggestedMinClientSize = size;
+			remoteMessages.RequestWindowNotifyMinSize(suggestedMinClientSize);
+		}
 	}
 
 	WString GuiRemoteWindow::GetTitle()

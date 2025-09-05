@@ -467,6 +467,7 @@ Type Declaration
 				CLASS_MEMBER_PROPERTY_FAST(TitleBar)
 				CLASS_MEMBER_PROPERTY_FAST(TopMost)
 
+				CLASS_MEMBER_METHOD(SuggestMinClientSize, { L"size" })
 				CLASS_MEMBER_METHOD(EnableCustomFrameMode, NO_PARAMETER)
 				CLASS_MEMBER_METHOD(DisableCustomFrameMode, NO_PARAMETER)
 				CLASS_MEMBER_METHOD(IsCustomFrameModeEnabled, NO_PARAMETER)
@@ -2454,7 +2455,9 @@ Type Declaration (Class)
 				CLASS_MEMBER_BASE(GuiControl)
 				CONTROL_CONSTRUCTOR_CONTROLT_TEMPLATE(GuiButton)
 
+				CLASS_MEMBER_GUIEVENT(BeforeClicked)
 				CLASS_MEMBER_GUIEVENT(Clicked)
+				CLASS_MEMBER_GUIEVENT(AfterClicked)
 
 				CLASS_MEMBER_PROPERTY_FAST(ClickOnMouseUp)
 				CLASS_MEMBER_PROPERTY_FAST(AutoFocus)
@@ -2771,7 +2774,7 @@ Type Declaration (Class)
 
 			BEGIN_CLASS_MEMBER(GuiComboBoxBase)
 				CLASS_MEMBER_BASE(GuiMenuButton)
-				CONTROL_CONSTRUCTOR_CONTROLT_TEMPLATE(GuiComboBoxBase)
+				CONTROL_CONSTRUCTOR_CONTROLT_TEMPLATE_2(GuiComboBoxBase, bool, _autoFocusDropdown)
 			END_CLASS_MEMBER(GuiComboBoxBase)
 
 			BEGIN_CLASS_MEMBER(GuiComboButton)

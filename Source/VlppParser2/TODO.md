@@ -23,11 +23,14 @@
 - Windows and Linux test output inconsistency on
   - the order of ambiguous candidates.
   - `\r\n` or `\n` serialized into `<![CDATA[]]>`.
+  - We can force `\r\n` in unit test, normalizing all inputs.
 
 ## Features to Add
 
 - Extensible tokens, for example, recognize `R"[^\s(]\(` and invoke a callback function to determine the end of the string.
-  - Offer two options: using (rich regex | C++) to search for complete token.
+  - `RegexTokenizer`
+  - New syntax for tokenizers for such extensible tokens.
+  - We can try `/***/` with extensible tokens.
 - AST file groups.
   - An AST file only sees:
     - [x] Types defined in this file.

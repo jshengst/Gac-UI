@@ -12,6 +12,75 @@ namespace vl
 			using namespace compositions;
 
 /***********************************************************************
+GuiDocumentConfig
+***********************************************************************/
+
+			GuiDocumentConfig GuiDocumentConfig::GetDocumentLabelDefaultConfig()
+			{
+				GuiDocumentConfig config;
+				config.autoExpand = true;
+				config.pasteAsPlainText = false;
+				config.wrapLine = true;
+				config.paragraphMode = GuiDocumentParagraphMode::Paragraph;
+				config.paragraphPadding = true;
+				config.doubleLineBreaksBetweenParagraph = true;
+				config.spaceForFlattenedLineBreak = false;
+				return config;
+			}
+
+			GuiDocumentConfig GuiDocumentConfig::GetDocumentViewerDefaultConfig()
+			{
+				GuiDocumentConfig config;
+				config.autoExpand = false;
+				config.pasteAsPlainText = false;
+				config.wrapLine = true;
+				config.paragraphMode = GuiDocumentParagraphMode::Paragraph;
+				config.paragraphPadding = true;
+				config.doubleLineBreaksBetweenParagraph = true;
+				config.spaceForFlattenedLineBreak = false;
+				return config;
+			}
+
+			GuiDocumentConfig GuiDocumentConfig::GetSinglelineTextBoxDefaultConfig()
+			{
+				GuiDocumentConfig config;
+				config.autoExpand = false;
+				config.pasteAsPlainText = true;
+				config.wrapLine = false;
+				config.paragraphMode = GuiDocumentParagraphMode::Singleline;
+				config.paragraphPadding = false;
+				config.doubleLineBreaksBetweenParagraph = false;
+				config.spaceForFlattenedLineBreak = false;
+				return config;
+			}
+
+			GuiDocumentConfig GuiDocumentConfig::GetMultilineTextBoxDefaultConfig()
+			{
+				GuiDocumentConfig config;
+				config.autoExpand = false;
+				config.pasteAsPlainText = true;
+				config.wrapLine = false;
+				config.paragraphMode = GuiDocumentParagraphMode::Multiline;
+				config.paragraphPadding = false;
+				config.doubleLineBreaksBetweenParagraph = false;
+				config.spaceForFlattenedLineBreak = false;
+				return config;
+			}
+
+			GuiDocumentConfig GuiDocumentConfig::OverrideConfig(const GuiDocumentConfig& toOverride, const GuiDocumentConfig& newConfig)
+			{
+				GuiDocumentConfig result = toOverride;
+				if (newConfig.autoExpand) result.autoExpand = newConfig.autoExpand;
+				if (newConfig.pasteAsPlainText) result.pasteAsPlainText = newConfig.pasteAsPlainText;
+				if (newConfig.wrapLine) result.wrapLine = newConfig.wrapLine;
+				if (newConfig.paragraphMode) result.paragraphMode = newConfig.paragraphMode;
+				if (newConfig.paragraphPadding) result.paragraphPadding = newConfig.paragraphPadding;
+				if (newConfig.doubleLineBreaksBetweenParagraph) result.doubleLineBreaksBetweenParagraph = newConfig.doubleLineBreaksBetweenParagraph;
+				if (newConfig.spaceForFlattenedLineBreak) result.spaceForFlattenedLineBreak = newConfig.spaceForFlattenedLineBreak;
+				return result;
+			}
+
+/***********************************************************************
 GuiDocumentItem
 ***********************************************************************/
 
@@ -96,65 +165,65 @@ GuiDocumentCommonInterface
 
 			bool GuiDocumentCommonInterface::ProcessKey(VKEY code, bool shift, bool ctrl)
 			{
-				if(IGuiShortcutKeyItem* item=internalShortcutKeyManager->TryGetShortcut(ctrl, shift, false, code))
+				if (IGuiShortcutKeyItem* item = internalShortcutKeyManager->TryGetShortcut(ctrl, shift, false, code))
 				{
 					GuiEventArgs arguments(documentControl->GetBoundsComposition());
 					item->Executed.Execute(arguments);
 					return true;
 				}
 
-				TextPos currentCaret=documentElement->GetCaretEnd();
-				bool frontSide=documentElement->IsCaretEndPreferFrontSide();
-				TextPos begin=documentElement->GetCaretBegin();
-				TextPos end=documentElement->GetCaretEnd();
+				TextPos currentCaret = documentElement->GetCaretEnd();
+				bool frontSide = documentElement->IsCaretEndPreferFrontSide();
+				TextPos begin = documentElement->GetCaretBegin();
+				TextPos end = documentElement->GetCaretEnd();
 
-				switch(code)
+				switch (code)
 				{
 				case VKEY::KEY_UP:
 					{
-						TextPos newCaret=documentElement->CalculateCaret(currentCaret, IGuiGraphicsParagraph::CaretMoveUp, frontSide);
+						TextPos newCaret = documentElement->CalculateCaret(currentCaret, IGuiGraphicsParagraph::CaretMoveUp, frontSide);
 						Move(newCaret, shift, frontSide);
 					}
 					break;
 				case VKEY::KEY_DOWN:
 					{
-						TextPos newCaret=documentElement->CalculateCaret(currentCaret, IGuiGraphicsParagraph::CaretMoveDown, frontSide);
+						TextPos newCaret = documentElement->CalculateCaret(currentCaret, IGuiGraphicsParagraph::CaretMoveDown, frontSide);
 						Move(newCaret, shift, frontSide);
 					}
 					break;
 				case VKEY::KEY_LEFT:
 					{
-						TextPos newCaret=documentElement->CalculateCaret(currentCaret, IGuiGraphicsParagraph::CaretMoveLeft, frontSide);
+						TextPos newCaret = documentElement->CalculateCaret(currentCaret, IGuiGraphicsParagraph::CaretMoveLeft, frontSide);
 						Move(newCaret, shift, frontSide);
 					}
 					break;
 				case VKEY::KEY_RIGHT:
 					{
-						TextPos newCaret=documentElement->CalculateCaret(currentCaret, IGuiGraphicsParagraph::CaretMoveRight, frontSide);
+						TextPos newCaret = documentElement->CalculateCaret(currentCaret, IGuiGraphicsParagraph::CaretMoveRight, frontSide);
 						Move(newCaret, shift, frontSide);
 					}
 					break;
 				case VKEY::KEY_HOME:
 					{
-						TextPos newCaret=documentElement->CalculateCaret(currentCaret, IGuiGraphicsParagraph::CaretLineFirst, frontSide);
-						if(newCaret==currentCaret)
+						TextPos newCaret = documentElement->CalculateCaret(currentCaret, IGuiGraphicsParagraph::CaretLineFirst, frontSide);
+						if (newCaret == currentCaret)
 						{
-							newCaret=documentElement->CalculateCaret(currentCaret, IGuiGraphicsParagraph::CaretFirst, frontSide);
+							newCaret = documentElement->CalculateCaret(currentCaret, IGuiGraphicsParagraph::CaretFirst, frontSide);
 						}
 						Move(newCaret, shift, frontSide);
 					}
 					break;
 				case VKEY::KEY_END:
 					{
-						TextPos newCaret=documentElement->CalculateCaret(currentCaret, IGuiGraphicsParagraph::CaretLineLast, frontSide);
-						if(newCaret==currentCaret)
+						TextPos newCaret = documentElement->CalculateCaret(currentCaret, IGuiGraphicsParagraph::CaretLineLast, frontSide);
+						if (newCaret == currentCaret)
 						{
-							newCaret=documentElement->CalculateCaret(currentCaret, IGuiGraphicsParagraph::CaretLast, frontSide);
+							newCaret = documentElement->CalculateCaret(currentCaret, IGuiGraphicsParagraph::CaretLast, frontSide);
 						}
 						Move(newCaret, shift, frontSide);
 					}
-					break;
-				case VKEY::KEY_PRIOR:
+				break;
+					case VKEY::KEY_PRIOR:
 					{
 					}
 					break;
@@ -163,9 +232,9 @@ GuiDocumentCommonInterface
 					}
 					break;
 				case VKEY::KEY_BACK:
-					if(editMode==Editable)
+					if (editMode == GuiDocumentEditMode::Editable)
 					{
-						if(begin==end)
+						if (begin == end)
 						{
 							ProcessKey(VKEY::KEY_LEFT, true, false);
 						}
@@ -175,9 +244,9 @@ GuiDocumentCommonInterface
 					}
 					break;
 				case VKEY::KEY_DELETE:
-					if(editMode==Editable)
+					if (editMode == GuiDocumentEditMode::Editable)
 					{
-						if(begin==end)
+						if (begin == end)
 						{
 							ProcessKey(VKEY::KEY_RIGHT, true, false);
 						}
@@ -187,12 +256,12 @@ GuiDocumentCommonInterface
 					}
 					break;
 				case VKEY::KEY_RETURN:
-					if(editMode==Editable)
+					if (editMode == GuiDocumentEditMode::Editable)
 					{
-						if(ctrl)
+						if (ctrl)
 						{
 							Array<WString> text(1);
-							text[0]=L"\r\n";
+							text[0] = L"\r\n";
 							EditText(documentElement->GetCaretBegin(), documentElement->GetCaretEnd(), documentElement->IsCaretEndPreferFrontSide(), text);
 						}
 						else
@@ -402,9 +471,9 @@ GuiDocumentCommonInterface
 
 			void GuiDocumentCommonInterface::OnCaretNotify(compositions::GuiGraphicsComposition* sender, compositions::GuiEventArgs& arguments)
 			{
-				if(documentControl->GetVisuallyEnabled())
+				if (documentControl->GetVisuallyEnabled())
 				{
-					if(editMode!=ViewOnly)
+					if (editMode != GuiDocumentEditMode::ViewOnly)
 					{
 						documentElement->SetCaretVisible(!documentElement->GetCaretVisible());
 					}
@@ -413,9 +482,9 @@ GuiDocumentCommonInterface
 
 			void GuiDocumentCommonInterface::OnGotFocus(compositions::GuiGraphicsComposition* sender, compositions::GuiEventArgs& arguments)
 			{
-				if(documentControl->GetVisuallyEnabled())
+				if (documentControl->GetVisuallyEnabled())
 				{
-					if(editMode!=ViewOnly)
+					if (editMode != GuiDocumentEditMode::ViewOnly)
 					{
 						documentElement->SetCaretVisible(true);
 						UpdateCaretPoint();
@@ -433,13 +502,13 @@ GuiDocumentCommonInterface
 
 			void GuiDocumentCommonInterface::OnKeyDown(compositions::GuiGraphicsComposition* sender, compositions::GuiKeyEventArgs& arguments)
 			{
-				if(documentControl->GetVisuallyEnabled())
+				if (documentControl->GetVisuallyEnabled())
 				{
-					if(editMode!=ViewOnly)
+					if (editMode != GuiDocumentEditMode::ViewOnly)
 					{
-						if(ProcessKey(arguments.code, arguments.shift, arguments.ctrl))
+						if (ProcessKey(arguments.code, arguments.shift, arguments.ctrl))
 						{
-							arguments.handled=true;
+							arguments.handled = true;
 						}
 					}
 				}
@@ -449,7 +518,7 @@ GuiDocumentCommonInterface
 			{
 				if (documentControl->GetVisuallyEnabled())
 				{
-					if (editMode == Editable &&
+					if (editMode == GuiDocumentEditMode::Editable &&
 						arguments.code != (wchar_t)VKEY::KEY_ESCAPE &&
 						arguments.code != (wchar_t)VKEY::KEY_BACK &&
 						arguments.code != (wchar_t)VKEY::KEY_RETURN &&
@@ -498,7 +567,7 @@ GuiDocumentCommonInterface
 				{
 					switch(editMode)
 					{
-					case ViewOnly:
+					case GuiDocumentEditMode::ViewOnly:
 						{
 							auto package = documentElement->GetHyperlinkFromPoint({ x, y });
 							bool handCursor = false;
@@ -535,8 +604,8 @@ GuiDocumentCommonInterface
 							}
 						}
 						break;
-					case Selectable:
-					case Editable:
+					case GuiDocumentEditMode::Selectable:
+					case GuiDocumentEditMode::Editable:
 						if(dragging)
 						{
 							TextPos caret=documentElement->CalculateCaretFromPoint(Point(x, y));
@@ -558,11 +627,11 @@ GuiDocumentCommonInterface
 				{
 					switch(editMode)
 					{
-					case ViewOnly:
+					case GuiDocumentEditMode::ViewOnly:
 						SetActiveHyperlink(documentElement->GetHyperlinkFromPoint({ x, y }));
 						break;
-					case Selectable:
-					case Editable:
+					case GuiDocumentEditMode::Selectable:
+					case GuiDocumentEditMode::Editable:
 						{
 							documentControl->SetFocused();
 							TextPos caret=documentElement->CalculateCaretFromPoint(Point(x, y));
@@ -589,7 +658,7 @@ GuiDocumentCommonInterface
 					dragging=false;
 					switch(editMode)
 					{
-					case ViewOnly:
+					case GuiDocumentEditMode::ViewOnly:
 						{
 							auto package = documentElement->GetHyperlinkFromPoint({ x, y });
 							if(activeHyperlinks)
@@ -661,8 +730,18 @@ GuiDocumentCommonInterface
 
 			//================ basic
 
-			GuiDocumentCommonInterface::GuiDocumentCommonInterface()
+			GuiDocumentCommonInterface::GuiDocumentCommonInterface(const GuiDocumentConfig& _config)
+				: config(_config)
 			{
+#define ERROR_MESSAGE_PREFIX L"vl::presentation::controls::GuiDocumentCommonInterface::GuiDocumentCommonInterface(const GuiDocumentConfig&)#"
+				CHECK_ERROR(config.autoExpand, ERROR_MESSAGE_PREFIX L"GuiDocumentConfig::autoExpand should not be empty.");
+				CHECK_ERROR(config.pasteAsPlainText, ERROR_MESSAGE_PREFIX L"GuiDocumentConfig::pasteAsPlainText should not be empty.");
+				CHECK_ERROR(config.wrapLine, ERROR_MESSAGE_PREFIX L"GuiDocumentConfig::wrapLine should not be empty.");
+				CHECK_ERROR(config.paragraphMode, ERROR_MESSAGE_PREFIX L"GuiDocumentConfig::paragraphMode should not be empty.");
+				CHECK_ERROR(config.paragraphPadding, ERROR_MESSAGE_PREFIX L"GuiDocumentConfig::paragraphPadding should not be empty.");
+				CHECK_ERROR(config.doubleLineBreaksBetweenParagraph, ERROR_MESSAGE_PREFIX L"GuiDocumentConfig::doubleLineBreaksBetweenParagraph should not be empty.");
+				CHECK_ERROR(config.spaceForFlattenedLineBreak, ERROR_MESSAGE_PREFIX L"GuiDocumentConfig::spaceForFlattenedLineBreak should not be empty.");
+
 				undoRedoProcessor = Ptr(new GuiDocumentUndoRedoProcessor);
 
 				internalShortcutKeyManager = Ptr(new GuiShortcutKeyManager);
@@ -672,6 +751,7 @@ GuiDocumentCommonInterface
 				AddShortcutCommand(VKEY::KEY_X, Func<bool()>(this, &GuiDocumentCommonInterface::Cut));
 				AddShortcutCommand(VKEY::KEY_C, Func<bool()>(this, &GuiDocumentCommonInterface::Copy));
 				AddShortcutCommand(VKEY::KEY_V, Func<bool()>(this, &GuiDocumentCommonInterface::Paste));
+#undef ERROR_MESSAGE_PREFIX
 			}
 
 			GuiDocumentCommonInterface::~GuiDocumentCommonInterface()
@@ -949,26 +1029,26 @@ GuiDocumentCommonInterface
 				return activeHyperlinks ? activeHyperlinks->hyperlinks[0]->reference : L"";
 			}
 
-			GuiDocumentCommonInterface::EditMode GuiDocumentCommonInterface::GetEditMode()
+			GuiDocumentEditMode GuiDocumentCommonInterface::GetEditMode()
 			{
 				return editMode;
 			}
 
-			void GuiDocumentCommonInterface::SetEditMode(EditMode value)
+			void GuiDocumentCommonInterface::SetEditMode(GuiDocumentEditMode value)
 			{
-				if(activeHyperlinks)
+				if (activeHyperlinks)
 				{
 					SetActiveHyperlink(nullptr);
 				}
 
-				editMode=value;
-				if(editMode==ViewOnly)
+				editMode = value;
+				if (editMode == GuiDocumentEditMode::ViewOnly)
 				{
 					UpdateCursor(nullptr);
 				}
 				else
 				{
-					INativeCursor* cursor=GetCurrentController()->ResourceService()->GetSystemCursor(INativeCursor::IBeam);
+					INativeCursor* cursor = GetCurrentController()->ResourceService()->GetSystemCursor(INativeCursor::IBeam);
 					UpdateCursor(cursor);
 				}
 			}
@@ -1081,7 +1161,7 @@ GuiDocumentCommonInterface
 
 			bool GuiDocumentCommonInterface::CanCut()
 			{
-				return editMode==Editable && documentElement->GetCaretBegin()!=documentElement->GetCaretEnd();
+				return editMode == GuiDocumentEditMode::Editable && documentElement->GetCaretBegin() != documentElement->GetCaretEnd();
 			}
 
 			bool GuiDocumentCommonInterface::CanCopy()
@@ -1091,7 +1171,7 @@ GuiDocumentCommonInterface
 
 			bool GuiDocumentCommonInterface::CanPaste()
 			{
-				if (editMode == Editable)
+				if (editMode == GuiDocumentEditMode::Editable)
 				{
 					auto reader = GetCurrentController()->ClipboardService()->ReadClipboard();
 					return reader->ContainsText() || reader->ContainsDocument() || reader->ContainsImage();
@@ -1104,6 +1184,7 @@ GuiDocumentCommonInterface
 				if (!CanCut())return false;
 				auto writer = GetCurrentController()->ClipboardService()->WriteClipboard();
 				auto model = GetSelectionModel();
+				writer->SetText(model->GetText(true));
 				writer->SetDocument(model);
 				writer->Submit();
 				SetSelectionText(L"");
@@ -1115,6 +1196,7 @@ GuiDocumentCommonInterface
 				if (!CanCopy()) return false;
 				auto writer = GetCurrentController()->ClipboardService()->WriteClipboard();
 				auto model = GetSelectionModel();
+				writer->SetText(model->GetText(true));
 				writer->SetDocument(model);
 				writer->Submit();
 				return true;
@@ -1153,12 +1235,12 @@ GuiDocumentCommonInterface
 
 			bool GuiDocumentCommonInterface::CanUndo()
 			{
-				return editMode==Editable && undoRedoProcessor->CanUndo();
+				return editMode == GuiDocumentEditMode::Editable && undoRedoProcessor->CanUndo();
 			}
 
 			bool GuiDocumentCommonInterface::CanRedo()
 			{
-				return editMode==Editable && undoRedoProcessor->CanRedo();
+				return editMode == GuiDocumentEditMode::Editable && undoRedoProcessor->CanRedo();
 			}
 
 			void GuiDocumentCommonInterface::ClearUndoRedo()
@@ -1251,8 +1333,9 @@ GuiDocumentViewer
 				}
 			}
 
-			GuiDocumentViewer::GuiDocumentViewer(theme::ThemeName themeName)
-				:GuiScrollContainer(themeName)
+			GuiDocumentViewer::GuiDocumentViewer(theme::ThemeName themeName, const GuiDocumentConfig& _config)
+				: GuiScrollContainer(themeName)
+				, GuiDocumentCommonInterface(GuiDocumentConfig::OverrideConfig(GuiDocumentConfig::GetDocumentViewerDefaultConfig(), _config))
 			{
 				SetAcceptTabInput(true);
 				SetFocusableComposition(boundsComposition);
@@ -1303,8 +1386,9 @@ GuiDocumentLabel
 				OnFontChanged();
 			}
 
-			GuiDocumentLabel::GuiDocumentLabel(theme::ThemeName themeName)
-				:GuiControl(themeName)
+			GuiDocumentLabel::GuiDocumentLabel(theme::ThemeName themeName, const GuiDocumentConfig& _config)
+				: GuiControl(themeName)
+				, GuiDocumentCommonInterface(GuiDocumentConfig::OverrideConfig(GuiDocumentConfig::GetDocumentLabelDefaultConfig(), _config))
 			{
 				SetAcceptTabInput(true);
 				SetFocusableComposition(boundsComposition);

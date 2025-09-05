@@ -151,23 +151,21 @@ GuiHostedController::INativeWindowListener
 			if (mainWindow)
 			{
 				auto windowBounds = nativeWindow->GetBounds();
-				auto clientBounds = nativeWindow->GetClientBoundsInScreen();
-				auto w = clientBounds.Width().value - windowBounds.Width().value;
-				auto h = clientBounds.Height().value - windowBounds.Height().value;
-
 				NativeRect mainBounds;
-				mainBounds.x2 = bounds.Width().value - w;
-				mainBounds.y2 = bounds.Height().value - h;
+				mainBounds.x1 = bounds.x1 - windowBounds.x1;
+				mainBounds.y1 = bounds.y1 - windowBounds.y1;
+				mainBounds.x2 = bounds.x2 - windowBounds.x1;
+				mainBounds.y2 = bounds.y2 - windowBounds.y1;
 
 				for (auto listener : mainWindow->listeners)
 				{
 					listener->Moving(mainBounds, fixSizeOnly, draggingBorder);
 				}
 
-				bounds.x1.value += mainBounds.x1.value;
-				bounds.y1.value += mainBounds.y1.value;
-				bounds.x2.value = bounds.x1.value + mainBounds.Width().value + w;
-				bounds.y2.value = bounds.y1.value + mainBounds.Height().value + h;
+				bounds.x1 = mainBounds.x1 + windowBounds.x1;
+				bounds.y1 = mainBounds.y1 + windowBounds.y1;
+				bounds.x2 = mainBounds.x2 + windowBounds.x1;
+				bounds.y2 = mainBounds.y2 + windowBounds.y1;
 			}
 		}
 
@@ -1012,9 +1010,20 @@ GuiHostedController::INativeWindowService
 			}
 		}
 
+		namespace GuiHostedController_UnitTestHelper
+		{
+			static bool exceptionOccuredUnderUnitTestReleaseMode = false;
+
+			bool ExceptionOccuredUnderUnitTestReleaseMode()
+			{
+				return exceptionOccuredUnderUnitTestReleaseMode;
+			}
+		}
+
 		void GuiHostedController::Run(INativeWindow* window)
 		{
 #define ERROR_MESSAGE_PREFIX L"vl::presentation::GuiHostedController::Run(INativeWindow*)#"
+			GuiHostedController_UnitTestHelper::exceptionOccuredUnderUnitTestReleaseMode = false;
 			CHECK_ERROR(!mainWindow, ERROR_MESSAGE_PREFIX L"This function has been called.");
 			auto hostedWindow = dynamic_cast<GuiHostedWindow*>(window);
 			CHECK_ERROR(hostedWindow, ERROR_MESSAGE_PREFIX L"The window is not created by GuiHostedController.");
@@ -1022,32 +1031,68 @@ GuiHostedController::INativeWindowService
 
 			SettingHostedWindowsBeforeRunning();
 			wmManager->needRefresh = true;
-			try
+			if (unittest::UnitTest::GetFailureMode() == unittest::UnitTest::FailureMode::NotRunning)
 			{
 				nativeController->WindowService()->Run(nativeWindow);
 			}
-			catch (const Exception& e)
+			else
 			{
-				(void)e;
-				DestroyHostedWindowsAfterRunning();
-				throw;
-			}
-			catch (const Error& e)
-			{
-				(void)e;
-				DestroyHostedWindowsAfterRunning();
-				throw;
-			}
-			catch (const unittest::UnitTestAssertError& e)
-			{
-				(void)e;
-				DestroyHostedWindowsAfterRunning();
-				throw;
-			}
-			catch (...)
-			{
-				DestroyHostedWindowsAfterRunning();
-				throw;
+				try
+				{
+					nativeController->WindowService()->Run(nativeWindow);
+				}
+				catch (const Exception& e)
+				{
+					(void)e;
+					if (unittest::UnitTest::GetFailureMode() == unittest::UnitTest::FailureMode::Release)
+					{
+						GuiHostedController_UnitTestHelper::exceptionOccuredUnderUnitTestReleaseMode = true;
+						unittest::UnitTest::PrintMessage(e.Message(), unittest::UnitTest::MessageKind::Error);
+					}
+					else
+					{
+						DestroyHostedWindowsAfterRunning();
+						throw;
+					}
+				}
+				catch (const Error& e)
+				{
+					(void)e;
+					if (unittest::UnitTest::GetFailureMode() == unittest::UnitTest::FailureMode::Release)
+					{
+						GuiHostedController_UnitTestHelper::exceptionOccuredUnderUnitTestReleaseMode = true;
+						unittest::UnitTest::PrintMessage(e.Description(), unittest::UnitTest::MessageKind::Error);
+					}
+					else
+					{
+						DestroyHostedWindowsAfterRunning();
+						throw;
+					}
+				}
+				catch (const unittest::UnitTestAssertError& e)
+				{
+					(void)e;
+					if (unittest::UnitTest::GetFailureMode() == unittest::UnitTest::FailureMode::Release)
+					{
+						GuiHostedController_UnitTestHelper::exceptionOccuredUnderUnitTestReleaseMode = true;
+						unittest::UnitTest::PrintMessage(e.message, unittest::UnitTest::MessageKind::Error);
+					}
+					else
+					{
+						DestroyHostedWindowsAfterRunning();
+						throw;
+					}
+				}
+				catch (...)
+				{
+					if (unittest::UnitTest::GetFailureMode() != unittest::UnitTest::FailureMode::Release)
+					{
+						GuiHostedController_UnitTestHelper::exceptionOccuredUnderUnitTestReleaseMode = true;
+						unittest::UnitTest::PrintMessage(WString::Unmanaged(L"Runtime exception occurred!"), unittest::UnitTest::MessageKind::Error);
+						DestroyHostedWindowsAfterRunning();
+						throw;
+					}
+				}
 			}
 			CHECK_ERROR((nativeWindow == nullptr) == (mainWindow == nullptr), ERROR_MESSAGE_PREFIX L"Hosted windows should have been destroyed if the native windows is destroyed.");
 			DestroyHostedWindowsAfterRunning();

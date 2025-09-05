@@ -5,107 +5,63 @@ param(
 $files_vlpp = @(
     "general-instructions-role.md",
     "introduction\vlpp.md",
-    "general-instructions-1.md",
-    "unittest\vlpp.md",
-    "general-instructions-2.md",
-    "makefile\vlpp.md",
-    "general-instructions-3.md",
-    "unittest.md",
-    "guidance\vlpp.md"
+    "general-instructions.md",
+    "specific-linux\vlpp.md",
+    "unittest.md"
 )
 
 $files_vlppos = @(
     "general-instructions-role.md",
     "introduction\vlppos.md",
-    "general-instructions-1.md",
-    "unittest\vlppos.md",
-    "general-instructions-2.md",
-    "makefile\vlppos.md",
-    "general-instructions-3.md",
-    "unittest.md",
-    "guidance\vlpp.md",
-    "guidance\vlppos.md"
+    "general-instructions.md",
+    "specific-linux\vlppos.md",
+    "unittest.md"
 )
 
 $files_vlppregex = @(
     "general-instructions-role.md",
     "introduction\vlppregex.md",
-    "general-instructions-1.md",
-    "unittest\vlppregex.md",
-    "general-instructions-2.md",
-    "makefile\vlppregex.md",
-    "general-instructions-3.md",
-    "unittest.md",
-    "guidance\vlpp.md",
-    "guidance\vlppregex.md"
+    "general-instructions.md",
+    "specific-linux\vlppregex.md",
+    "unittest.md"
 )
 
 $files_vlppreflection = @(
     "general-instructions-role.md",
     "introduction\vlppreflection.md",
-    "general-instructions-1.md",
-    "unittest\vlppreflection.md",
-    "general-instructions-2.md",
-    "makefile\vlppreflection.md",
-    "general-instructions-3.md",
-    "unittest.md",
-    "guidance\vlpp.md",
-    "guidance\vlppos.md",
-    "guidance\vlppregex.md",
-    "guidance\vlppreflection.md"
+    "general-instructions.md",
+    "specific-linux\vlppreflection.md",
+    "unittest.md"
 )
 
 $files_vlppparser2 = @(
     "general-instructions-role.md",
     "introduction\vlppparser2.md",
-    "general-instructions-1.md",
-    "unittest\vlppparser2.md",
-    "general-instructions-2.md",
-    "makefile\vlppparser2.md",
-    "general-instructions-3.md",
-    "unittest.md",
-    "guidance\vlpp.md",
-    "guidance\vlppos.md",
-    "guidance\vlppregex.md",
-    "guidance\vlppreflection.md",
-    "guidance\vlppparser2.md"
+    "general-instructions.md",
+    "specific-linux\vlppparser2.md",
+    "unittest.md"
 )
 
 $files_workflow = @(
     "general-instructions-role.md",
     "introduction\workflow.md",
-    "general-instructions-1.md",
-    "unittest\workflow.md",
-    "general-instructions-2.md",
-    "makefile\workflow.md",
-    "general-instructions-3.md",
-    "unittest.md",
-    "guidance\vlpp.md",
-    "guidance\vlppos.md",
-    "guidance\vlppregex.md",
-    "guidance\vlppreflection.md",
-    "guidance\vlppparser2.md"
+    "general-instructions.md",
+    "specific-linux\workflow.md",
+    "unittest.md"
 )
 
 $files_gacui = @(
     "general-instructions-role.md",
     "introduction\gacui.md",
-    "general-instructions-1.md",
-    "unittest\gacui.md",
-    "general-instructions-2.md",
-    "makefile\gacui.md",
-    "general-instructions-3.md",
-    "guidance\vlpp.md",
-    "guidance\vlppos.md",
-    "guidance\vlppregex.md",
-    "guidance\vlppreflection.md",
-    "guidance\vlppparser2.md",
+    "general-instructions.md",
+    "specific-linux\gacui.md",
+    "unittest.md",
     "gacui\unittest.md",
     "gacui\xml.md",
     "gacui\workflow.md"
 )
 
-function GeneratePrompt([string]$name, [string[]]$files) {
+function GenerateGeneralPrompt([string]$name, [string[]]$files) {
     $output_path = "$PSScriptRoot\..\..\$name\.github\copilot-instructions.md"
     
     # First, check that all files exist
@@ -137,7 +93,9 @@ function GeneratePrompt([string]$name, [string[]]$files) {
     Set-Content -Path $output_path -Value $output_content
     
     Write-Host Updated: $output_path
-    
+}
+
+function GenerateProcessPrompt([string]$name) {
     # Handle prompts folder
     $prompts_folder = "$PSScriptRoot\..\..\$name\.github\prompts"
     
@@ -154,6 +112,45 @@ function GeneratePrompt([string]$name, [string[]]$files) {
     if (Test-Path "$PSScriptRoot\prompts") {
         Copy-Item $source_prompts -Destination $prompts_folder -Force
         Write-Host "Copied prompts to: $prompts_folder"
+        
+        # Get all copied .md files and append content to each
+        $copied_files = Get-ChildItem -Path $prompts_folder -Filter "*.md"
+        foreach ($file in $copied_files) {
+            $file_content = Get-Content $file.FullName -Raw
+            
+            # Append common content to all files
+            $common_general_path = "$PSScriptRoot\prompts\common\general-instructions.md"
+            $kb_path = "$PSScriptRoot\prompts\common\kb.md"
+            
+            if (Test-Path $common_general_path) {
+                $common_general_content = Get-Content $common_general_path -Raw
+                $file_content += "`r`n" + $common_general_content
+            }
+            
+            if (Test-Path $kb_path) {
+                $kb_content = Get-Content $kb_path -Raw
+                $file_content += "`r`n" + $kb_content
+            }
+            
+            # Special handling for 4-verifying.prompt.md
+            if (($file.Name -eq "4-verifying.prompt.md") -or ($file.Name -eq "code.prompt.md")) {
+                $verifying_path = "$PSScriptRoot\prompts\common\verifying.md"
+                $specific_windows_path = "$PSScriptRoot\specific-windows\$name.md"
+                
+                if (Test-Path $verifying_path) {
+                    $verifying_content = Get-Content $verifying_path -Raw
+                    $file_content += "`r`n" + $verifying_content
+                }
+                
+                if (Test-Path $specific_windows_path) {
+                    $specific_windows_content = Get-Content $specific_windows_path -Raw
+                    $file_content += "`r`n" + $specific_windows_content
+                }
+            }
+            
+            # Write the updated content back to the file
+            Set-Content -Path $file.FullName -Value $file_content
+        }
     }
 }
 
@@ -174,16 +171,19 @@ if ($Project -eq "") {
     foreach ($projectName in $projects.Keys | Sort-Object) {
         Write-Host "  $projectName"
     }
+    Write-Host "  CopyBack"
     exit 1
 }
 
 # Check if the specified project exists and execute
 if ($projects.ContainsKey($Project)) {
-    GeneratePrompt $Project $projects[$Project]
+    GenerateGeneralPrompt $Project $projects[$Project]
+    GenerateProcessPrompt $Project
 } else {
     Write-Host "Project '$Project' not found. Available projects:"
     foreach ($projectName in $projects.Keys | Sort-Object) {
         Write-Host "  $projectName"
     }
+    Write-Host "  CopyBack"
     exit 1
 }

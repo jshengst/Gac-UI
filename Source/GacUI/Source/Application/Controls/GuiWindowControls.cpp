@@ -117,8 +117,9 @@ GuiControlHost
 			{
 				if (!info.left && !info.middle && !info.right)
 				{
-					GuiControl* tooltipControl = GetTooltipOwner(tooltipLocation);
-					MoveIntoTooltipControl(tooltipControl, Point(host->GetNativeWindow()->Convert(NativePoint(info.x, info.y))));
+					auto location = Point(host->GetNativeWindow()->Convert(NativePoint(info.x, info.y)));
+					GuiControl* tooltipControl = GetTooltipOwner(location);
+					MoveIntoTooltipControl(tooltipControl, location);
 				}
 			}
 
@@ -1152,9 +1153,10 @@ GuiPopup
 
 			void GuiPopup::OnKeyDown(compositions::GuiGraphicsComposition* sender, compositions::GuiKeyEventArgs& arguments)
 			{
-				if (!arguments.handled)
+				if (arguments.code == VKEY::KEY_ESCAPE && !arguments.ctrl && !arguments.shift && !arguments.alt)
 				{
 					Hide();
+					arguments.handled = true;
 				}
 			}
 

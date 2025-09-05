@@ -25867,13 +25867,13 @@ Class (::darkskin::CustomFrameWindowTemplateConstructor)
 		, __vwsn_precompile_32(static_cast<::vl::presentation::compositions::GuiTableComposition*>(nullptr))
 		, __vwsn_precompile_33(static_cast<::vl::presentation::compositions::GuiCellComposition*>(nullptr))
 		, __vwsn_precompile_34(::vl::Ptr<::vl::presentation::elements::GuiImageFrameElement>())
-		, container(static_cast<::vl::presentation::compositions::GuiBoundsComposition*>(nullptr))
-		, frameTable(static_cast<::vl::presentation::compositions::GuiTableComposition*>(nullptr))
-		, contentTable(static_cast<::vl::presentation::compositions::GuiTableComposition*>(nullptr))
 		, __vwsn_precompile_35(static_cast<::vl::presentation::compositions::GuiCellComposition*>(nullptr))
 		, __vwsn_precompile_36(static_cast<::vl::presentation::compositions::GuiBoundsComposition*>(nullptr))
 		, __vwsn_precompile_37(::vl::Ptr<::vl::presentation::elements::GuiSolidLabelElement>())
 		, __vwsn_precompile_38(static_cast<::vl::presentation::compositions::GuiCellComposition*>(nullptr))
+		, container(static_cast<::vl::presentation::compositions::GuiBoundsComposition*>(nullptr))
+		, frameTable(static_cast<::vl::presentation::compositions::GuiTableComposition*>(nullptr))
+		, contentTable(static_cast<::vl::presentation::compositions::GuiTableComposition*>(nullptr))
 	{
 	}
 
@@ -27293,6 +27293,9 @@ Class (::darkskin::ListViewColumnHeaderTemplateConstructor)
 		{
 			(this->buttonArrow = new ::vl::presentation::controls::GuiSelectableButton(::vl::presentation::theme::ThemeName::CheckBox));
 			::vl::__vwsn::This(__vwsn_this_)->SetNamedObject(::vl::WString::Unmanaged(L"buttonArrow"), ::vl::__vwsn::Box(this->buttonArrow));
+		}
+		{
+			::vl::__vwsn::This(this->buttonArrow)->SetAutoSelection(false);
 		}
 		{
 			::vl::__vwsn::This(this->buttonArrow)->SetAutoFocus(false);
@@ -29683,6 +29686,9 @@ Class (::darkskin::RibbonLargeSplitButtonTemplateConstructor)
 			::vl::__vwsn::This(__vwsn_this_)->SetNamedObject(::vl::WString::Unmanaged(L"buttonArrow"), ::vl::__vwsn::Box(this->buttonArrow));
 		}
 		{
+			::vl::__vwsn::This(this->buttonArrow)->SetAutoSelection(false);
+		}
+		{
 			::vl::__vwsn::This(this->buttonArrow)->SetAutoFocus(false);
 		}
 		(this->__vwsn_precompile_9 = ::vl::__vwsn::This(this->buttonArrow)->GetBoundsComposition());
@@ -30443,6 +30449,9 @@ Class (::darkskin::RibbonSmallSplitButtonTemplateConstructor)
 		{
 			(this->buttonArrow = new ::vl::presentation::controls::GuiSelectableButton(::vl::presentation::theme::ThemeName::CheckBox));
 			::vl::__vwsn::This(__vwsn_this_)->SetNamedObject(::vl::WString::Unmanaged(L"buttonArrow"), ::vl::__vwsn::Box(this->buttonArrow));
+		}
+		{
+			::vl::__vwsn::This(this->buttonArrow)->SetAutoSelection(false);
 		}
 		{
 			::vl::__vwsn::This(this->buttonArrow)->SetAutoFocus(false);
@@ -32764,6 +32773,9 @@ Class (::darkskin::ToolstripSplitButtonTemplateConstructor)
 		{
 			(this->buttonArrow = new ::vl::presentation::controls::GuiSelectableButton(::vl::presentation::theme::ThemeName::CheckBox));
 			::vl::__vwsn::This(__vwsn_this_)->SetNamedObject(::vl::WString::Unmanaged(L"buttonArrow"), ::vl::__vwsn::Box(this->buttonArrow));
+		}
+		{
+			::vl::__vwsn::This(this->buttonArrow)->SetAutoSelection(false);
 		}
 		{
 			::vl::__vwsn::This(this->buttonArrow)->SetAutoFocus(false);
