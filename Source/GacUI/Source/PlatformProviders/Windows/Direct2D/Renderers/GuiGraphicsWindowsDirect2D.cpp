@@ -4,6 +4,7 @@
 #include "..\..\ServicesImpl\WindowsImageService.h"
 #include "..\..\WinNativeWindow.h"
 #include "..\..\..\Hosted\GuiHostedController.h"
+#include "..\..\..\..\GraphicsElement\GuiGraphicsDocumentRenderer.h"
 #include <math.h>
 
 namespace vl
@@ -190,64 +191,6 @@ CachedResourceAllocator
 					GetWindowsDirect2DObjectProvider()->GetDirectWriteFactory()->CreateEllipsisTrimmingSign(textFormat->textFormat.Obj(), &ellipseInlineObject);
 					textFormat->ellipseInlineObject = ellipseInlineObject;
 					return textFormat;
-				}
-			};
-
-			class CachedCharMeasurerAllocator : public GuiCachedResourceAllocatorBase<CachedCharMeasurerAllocator, FontProperties, Ptr<text::CharMeasurer>>
-			{
-			protected:
-				class Direct2DCharMeasurer : public text::CharMeasurer
-				{
-				protected:
-					ComPtr<IDWriteTextFormat>	font;
-					vint						size;
-
-					Size MeasureInternal(text::UnicodeCodePoint codePoint, IGuiGraphicsRenderTarget* renderTarget)
-					{
-						Size charSize(0, 0);
-						IDWriteTextLayout* textLayout = 0;
-
-						UINT32 count = text::UTF16SPFirst(codePoint.characters[0]) && text::UTF16SPSecond(codePoint.characters[1]) ? 2 : 1;
-						HRESULT hr = GetWindowsDirect2DObjectProvider()->GetDirectWriteFactory()->CreateTextLayout(
-							codePoint.characters,
-							count,
-							font.Obj(),
-							0,
-							0,
-							&textLayout);
-						CHECK_ERROR(SUCCEEDED(hr), L"You should check HRESULT to see why it failed.");
-
-						DWRITE_TEXT_METRICS metrics;
-						hr = textLayout->GetMetrics(&metrics);
-						if (!FAILED(hr))
-						{
-							charSize = Size((vint)ceil(metrics.widthIncludingTrailingWhitespace), (vint)ceil(metrics.height));
-						}
-						textLayout->Release();
-						return charSize;
-					}
-
-					vint MeasureWidthInternal(text::UnicodeCodePoint codePoint, IGuiGraphicsRenderTarget* renderTarget)
-					{
-						return MeasureInternal(codePoint, renderTarget).x;
-					}
-
-					vint GetRowHeightInternal(IGuiGraphicsRenderTarget* renderTarget)
-					{
-						return MeasureInternal({ L' ' }, renderTarget).y;
-					}
-				public:
-					Direct2DCharMeasurer(ComPtr<IDWriteTextFormat> _font, vint _size)
-						:text::CharMeasurer(_size)
-						,size(_size)
-						,font(_font)
-					{
-					}
-				};
-			public:
-				Ptr<text::CharMeasurer> CreateInternal(const FontProperties& value)
-				{
-					return Ptr(new Direct2DCharMeasurer(CachedTextFormatAllocator::CreateDirect2DFont(value), value.size));
 				}
 			};
 
@@ -602,7 +545,6 @@ WindowsGDIResourceManager
 				Ptr<WindowsDirect2DLayoutProvider>					layoutProvider;
 
 				CachedTextFormatAllocator							textFormats;
-				CachedCharMeasurerAllocator							charMeasurers;
 			public:
 				WindowsDirect2DResourceManager()
 				{
@@ -658,16 +600,6 @@ WindowsGDIResourceManager
 				void DestroyDirect2DTextFormat(const FontProperties& fontProperties)override
 				{
 					textFormats.Destroy(fontProperties);
-				}
-
-				Ptr<elements::text::CharMeasurer> CreateDirect2DCharMeasurer(const FontProperties& fontProperties)override
-				{
-					return charMeasurers.Create(fontProperties);
-				}
-
-				void DestroyDirect2DCharMeasurer(const FontProperties& fontProperties)override
-				{
-					charMeasurers.Destroy(fontProperties);
 				}
 			};
 		}
@@ -740,9 +672,8 @@ void RendererMainDirect2D(GuiHostedController* hostedController, bool raw)
 		elements_windows_d2d::GuiSolidLabelElementRenderer::Register();
 		elements_windows_d2d::GuiImageFrameElementRenderer::Register();
 		elements_windows_d2d::GuiPolygonElementRenderer::Register();
-		elements_windows_d2d::GuiColorizedTextElementRenderer::Register();
 		elements_windows_d2d::GuiDirect2DElementRenderer::Register();
-		elements::GuiDocumentElement::GuiDocumentElementRenderer::Register();
+		elements::GuiDocumentElementRenderer::Register();
 
 		if (hostedController) hostedController->Initialize();
 		if (raw)

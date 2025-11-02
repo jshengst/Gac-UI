@@ -1,11 +1,29 @@
 # Scrum
 
+- Checkout `Accessing Log Files and PowerShell Scripts` for context about mentioned `*.md` and `*.ps1` files.
+  - All `*.md` and `*.ps1` files should already be existing, you should not create any new files.
+
 ## Goal and Constraints
 
 - Your goal is to finish a design document in `Copilot_Scrum.md` to address a problem.
 - You are only allowed to update `Copilot_Scrum.md`.
 - You are not allowed to modify any other files.
-- Make sure only code references are in code blocks. Do not emit code blocks for markdown.
+
+## Copilot_Scrum.md Structure
+
+- `# !!!SCRUM!!!`: This file always begin with this title.
+- `# DESIGN REQUEST`: An exact copy of the problem description I gave you.
+- `# UPDATES`:
+  - `## UPDATE`: There could be multiple occurrences. Each one has an exact copy of the update description I gave you.
+- `# TASKS`:
+  - A bullet list of all tasks, each task is in the format of `- [ ] TASK No.X: The Task Title`.
+  - `## TASK No.X: The Task Title`: A task.
+    - A comprehensive description about the goal of this task.
+    - `### what to be done`: A clear definition of what needs to be changed or implemented.
+    - `### how to test it`: A clear definition of what needs to be tested in unit test.
+    - `### rationale`: Reasons about why you think it is necessary to have this task, why you think it is the best for the task to be in this order.
+- `# Impact to the Knowledge Base`:
+  - `## ProjectName`: What needs to be changed or added to the knowledge base in this project.
 
 ## Step 1. Identify the Problem
 
@@ -13,11 +31,11 @@
 - Find `# Problem` or `# Update` in the LATEST chat message. Ignore any `# Problem` or `# Update` in the chat history.
 - If there is a `# Problem` section: it means I am starting a fresh new request.
   - You should override `Copilot_Scrum.md` with only one title `# !!!SCRUM!!!`.
-  - After overriding, copy precisely my problem description in `# Problem` from the LATEST chat message under a `# DESIGN REQUEST`.
+  - After overriding, copy precisely my problem description in `# Problem` from the LATEST chat message under `# DESIGN REQUEST`.
 - If there is an `# Update` section: it means I am going to propose some change to `Copilot_Scrum.md`.
-  - You should continue to work out more details.
   - Copy precisely my problem description in `# Update` from the LATEST chat message to the `# DESIGN REQUEST` section, with a new sub-section `## UPDATE`.
   - Follow my update to change the design document.
+- If there is a `# Learn` section: it means I made important updates during the execution of the last task, you should apply them smart enough to future tasks. Find the `Optional Step for Learning` section for more instruction.
 - If there is nothing: it means you are accidentally stopped. Please continue your work.
 
 ## Step 2. Understand the Goal and Quality Requirement
@@ -25,31 +43,28 @@
 - Your goal is to help me break down the problem into small tasks, write it down to `Copilot_Scrum.md`.
 - Each task should be small enough to only represent a single idea or feature upgrade.
 - Each task should be big enough to deliver a complete piece of functionality, do not make a task that only add code that will not be executed.
-- The order of tasks is important. At the end of any task, the project should be able to compile and test.
-- The reason I would like you to solve the problem in this way instead of making an immediate plan of code improvement is that, it is complicated and should work across the whole project. As an experienced C++ developer for large scale systems, you need to:
+- The order of tasks is important. At the end of each task, the project should be able to compile and test.
+- During making the design document:
   - Take in consideration of the knowledge base, finding anything that would be helpful for the current problem.
   - Read through the code base carefully. The project is complicated, one small decision may have widely impact to the other part of the project.
   - Think thoroughly.
 
 ## Step 3. Finish the Document
 
-- Break the problem in to phrases and tasks.
-  - A phrase should begin with a title `## Phrase a: A short name`. The number `a` is for the phrase.
-    - Under a phrase there is a comprehensive description about the goal of this phrase. A phrase contains multiple tasks. 
-  - A task should begin with a title `### Task a-b: A short name`. The first number `a` is for the phrase, the second number `b` is for the task.
-    - Under a task there is a comprehensive description about the goal of this task. 
+- Break the problem in to tasks.
+- In each task, describe a task in a high level and comprehensive description.
   - A task must be at least updating some code, it must not be like learning or analysing or whatever just reading. Reading, thinking and planning is your immediate work to do.
-- When making each task, after a comprehensive description, there should also be:
-  - `what to be done`: A clear definition of what needs to be changed or implemented.
+- Following the description, there should also be:
+  - `### what to be done`: A clear definition of what needs to be changed or implemented.
     - Keep it high-level, you can mention what should be done to update a certain group of classes, but do not include any actual code change.
-  - `how to test it`: A clear definition of what needs to be tested in unit test.
+  - `### how to test it`: A clear definition of what needs to be tested in unit test.
     - The test plan is about writing unit test cases. Do not include end-to-end tests or manual tests.
     - Sometimes it is difficult to make relevant unit test, for example a change to the UI, you can skip the test plan but you need to provide a rationale for it.
-    - You do not need to design test cases or think about code coverage at this moment. Instead consider about how to ensure testability, how many existing components are affected so that they need to be tested, and figure out if existing test cases covered affected components.
-  - `rationale`:
+    - You do not need to design test cases or think about code coverage at this moment. Instead consider about how to ensure testability, how many existing components are affected so that they need to be tested, and figure out if existing test cases already covered affected components or not.
+  - `### rationale`:
     - Reasons about why you think it is necessary to have this task, why you think it is the best for the task to be in this order.
-    - Any support evidences from source code or knowledge base. If you can't find anything from the knowledge base, what do you think need to be added.
-- Make sure only code references are in code blocks. Do not emit code blocks for markdown.
+    - Any support evidences from source code or knowledge base. 
+      - If you can't find anything from the knowledge base, think about what can be added to the knowledge base, but you do not need to actually update the knowledge base at the moment.
 
 ## Step 4. Identify Changes to Knowledge Base
 
@@ -57,11 +72,44 @@
 - You must read through relevant topics in the knowledge base, including target file of hyperlinks.
 - Identify if anything in the knowledge base needs to change, as tasks could impact the knowledge base.
 - Identify if anything needs to be added to the knowledge base, as tasks could introduce new concepts.
-- Put them under the `## Impact to the Knowledge Base` section.
+- Put them under the `# Impact to the Knowledge Base` section.
 - I want the knowledge base to include only important information because:
   - Most of the information can be just easily obtained from the code.
   - Keep the knowledge base to only guidelines and design insights will have you find correct piece of code to read.
+- It is fine that you find nothing to change or add to the knowledge base.
 
 ## Step 5. Mark the Completion
 
 - Ensure there is a `# !!!FINISHED!!!` mark at the end of `Copilot_Scrum.md` to indicate the document reaches the end.
+
+## (Optional) Step 6. Learning (only when # Learn appears in the LATEST chat message)
+
+- Ignore this section if there is no `# Learn` in the LATEST chat message
+
+### Step 6.1
+
+- Identify the last completed task.
+
+### Step 6.2
+
+- Read through `Copilot_Execution.md`. There may be some fixing attempts, that were done by you.
+- Compare existing source code with `Copilot_Execution.md`, finding what is changed.
+  - During comparing, you need to take into consideration of the fixing attempts, as sometimes you didn't update the main content of the document.
+- Identify all differences between the document and the source code:
+  - If it is caused by any fixing attempts, ignore it.
+  - If it is caused by any `# UPDATE`, ignore it.
+  - If any fixing attempt was reverted:
+    - It may be canceled by a further fixing attemp, ignore it.
+    - Otherwise it was a user edit.
+  - Any other difference is a user edit.
+- If there is no `# !!!VERIFIED!!!` in `Copilot_Execution.md`, it means you failed to deliver the task, either the code did not compile or some test cases failed. My edit will also reflects the final solution to the task.
+- Carefully read through and analyse all user edits, understand my tastes and preferences about the source code.
+- Add your finding to `Copilot_Execution.md` at the very end with the topic `# Comparing to User Edit`.
+  - If every changes are ignored by the rule above, or if you can't find any user edit, just write `No user edit found`.
+
+### Step 6.3
+
+- There will be multiple `# UPDATES` or `# FIXING ATTEMPTS` or `# Comparing to User Edit` sections in `Copilot_Task.md`, `Copilot_Planning.md` and `Copilot_Execution.md`.
+- These 3 files recorded how you interpreted the last completed task, and how I wanted you to adjust  your understanding.
+- Find out what you can learn from the updates, about my philosophy and preferences.
+- Check all future tasks, apply what you have learned, and adjust your approach accordingly.

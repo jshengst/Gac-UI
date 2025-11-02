@@ -61,7 +61,7 @@ rule("GacUI")
 
     on_load(function(target)
 
-        -- 反射等级: 无反射(none)、类型反射(metaonly)、完全反射(full)
+        -- 反射等级: 静态反射(static)、类型反射(metaonly)、完全反射(full)
         -- 默认值nil与完全反射的区别仅为其不包含compiler代码，而完全反射包含
         local reflection_level = target:values("GacUI.reflection_level")
         -- 启用source代码
@@ -114,7 +114,7 @@ rule("GacUI")
             -- do nothing，即包含compiler代码
         else
             -- todo: metaonly选项未测试
-            if reflection_level == "none" then
+            if reflection_level == "static" then
                 target:add("defines", "VCZH_DEBUG_NO_REFLECTION", {public = true })
             elseif reflection_level == "metaonly" then
                 target:add("defines", "VCZH_DEBUG_METAONLY_REFLECTION", {public = true })
@@ -186,7 +186,7 @@ target("GacUILite")
     set_default(false)
 
     add_rules("GacUI")
-    set_values("GacUI.reflection_level", "none")
+    set_values("GacUI.reflection_level", "static")
 
 target_end()
 

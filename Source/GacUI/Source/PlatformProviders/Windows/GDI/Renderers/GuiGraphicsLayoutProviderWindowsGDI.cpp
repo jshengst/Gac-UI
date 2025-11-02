@@ -37,10 +37,10 @@ WindowsGDIParagraph
 
 				void PrepareUniscribeData()
 				{
-					if(paragraph->BuildUniscribeData(renderTarget->GetDC()))
+					if (paragraph->BuildUniscribeData(renderTarget->GetDC()))
 					{
-						vint width=paragraph->lastAvailableWidth==-1?65536:paragraph->lastAvailableWidth;
-						paragraph->Layout(width, paragraph->paragraphAlignment);
+						vint width = paragraph->lastAvailableWidth == -1 ? 65536 : paragraph->lastAvailableWidth;
+						paragraph->Layout(paragraph->lastWrapLine, width, paragraph->paragraphAlignment);
 					}
 				}
 
@@ -93,11 +93,16 @@ WindowsGDIParagraph
 
 				bool GetWrapLine()override
 				{
-					return true;
+					return paragraph->lastWrapLine;
 				}
 
 				void SetWrapLine(bool value)override
 				{
+					if (paragraph->lastWrapLine != value)
+					{
+						paragraph->BuildUniscribeData(renderTarget->GetDC());
+						paragraph->Layout(value, paragraph->lastAvailableWidth, paragraph->paragraphAlignment);
+					}
 				}
 
 				vint GetMaxWidth()override
@@ -107,8 +112,11 @@ WindowsGDIParagraph
 
 				void SetMaxWidth(vint value)override
 				{
-					paragraph->BuildUniscribeData(renderTarget->GetDC());
-					paragraph->Layout(value, paragraph->paragraphAlignment);
+					if (paragraph->lastAvailableWidth != value)
+					{
+						paragraph->BuildUniscribeData(renderTarget->GetDC());
+						paragraph->Layout(paragraph->lastWrapLine, value, paragraph->paragraphAlignment);
+					}
 				}
 
 				Alignment GetParagraphAlignment()override
@@ -118,8 +126,11 @@ WindowsGDIParagraph
 
 				void SetParagraphAlignment(Alignment value)override
 				{
-					paragraph->BuildUniscribeData(renderTarget->GetDC());
-					paragraph->Layout(paragraph->lastAvailableWidth, value);
+					if (paragraph->paragraphAlignment != value)
+					{
+						paragraph->BuildUniscribeData(renderTarget->GetDC());
+						paragraph->Layout(paragraph->lastWrapLine, paragraph->lastAvailableWidth, value);
+					}
 				}
 
 				bool SetFont(vint start, vint length, const WString& value)override
@@ -229,10 +240,12 @@ WindowsGDIParagraph
 					return false;
 				}
 
-				vint GetHeight()override
+				Size GetSize()override
 				{
 					PrepareUniscribeData();
-					return paragraph->bounds.Height();
+					return Size(
+						(paragraph->lastWrapLine ? 0 : paragraph->bounds.Width()),
+						paragraph->bounds.Height());
 				}
 
 				bool OpenCaret(vint _caret, Color _color, bool _frontSide)override
@@ -255,6 +268,32 @@ WindowsGDIParagraph
 					return true;
 				}
 
+				bool IsCaretBoundsFromTextRun(vint caret, bool caretFrontSide)
+				{
+					if (paragraph->lines.Count() == 1 && paragraph->lines[0]->scriptRuns.Count() == 0) return true;
+					if (!paragraph->IsValidCaret(caret)) return false;
+
+					vint frontLine = 0;
+					vint backLine = 0;
+					paragraph->GetLineIndexFromTextPos(caret, frontLine, backLine);
+					if (frontLine == -1 || backLine == -1) return false;
+
+					vint lineIndex = caretFrontSide ? frontLine : backLine;
+					lineIndex = lineIndex < 0 ? 0 : lineIndex > paragraph->lines.Count() - 1 ? paragraph->lines.Count() - 1 : lineIndex;
+					Ptr<UniscribeLine> line = paragraph->lines[caretFrontSide ? frontLine : backLine];
+
+					vint frontRun = -1;
+					vint backRun = -1;
+					paragraph->GetRunIndexFromTextPos(caret, lineIndex, frontRun, backRun);
+					if (frontRun == -1 || backRun == -1) return false;
+
+					vint runIndex = caretFrontSide ? frontRun : backRun;
+					runIndex = runIndex < 0 ? 0 : runIndex > line->scriptRuns.Count() - 1 ? line->scriptRuns.Count() - 1 : runIndex;
+					Ptr<UniscribeRun> run = line->scriptRuns[runIndex];
+
+					return run.Cast<UniscribeTextRun>();
+				}
+
 				void Render(Rect bounds)override
 				{
 					PrepareUniscribeData();
@@ -265,17 +304,17 @@ WindowsGDIParagraph
 					paragraph->Render(this, false);
 					paragraphDC = 0;
 
-					if(caret!=-1)
+					if (caret != -1)
 					{
-						Rect caretBounds=GetCaretBounds(caret, caretFrontSide);
-						vint x=caretBounds.x1+bounds.x1;
-						vint y1=caretBounds.y1+bounds.y1;
-						vint y2=y1+(vint)(caretBounds.Height()*1.5);
+						Rect caretBounds = GetCaretBounds(caret, caretFrontSide);
+						vint x = caretBounds.x1 + bounds.x1;
+						vint y1 = caretBounds.y1 + bounds.y1;
+						vint y2 = y1 + (vint)(caretBounds.Height() * (IsCaretBoundsFromTextRun(caret, caretFrontSide) ? 1.5 : 1));
 
-						WinDC* dc=renderTarget->GetDC();
+						WinDC* dc = renderTarget->GetDC();
 						dc->SetPen(caretPen);
-						dc->MoveTo(x-1, y1);
-						dc->LineTo(x-1, y2);
+						dc->MoveTo(x - 1, y1);
+						dc->LineTo(x - 1, y2);
 						dc->MoveTo(x, y1);
 						dc->LineTo(x, y2);
 					}

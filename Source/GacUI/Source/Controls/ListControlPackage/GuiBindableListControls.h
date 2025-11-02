@@ -12,6 +12,7 @@ Interfaces:
 #include "GuiTextListControls.h"
 #include "GuiListViewControls.h"
 #include "GuiTreeViewControls.h"
+#include "ItemProvider_Binding.h"
 
 namespace vl
 {
@@ -19,68 +20,6 @@ namespace vl
 	{
 		namespace controls
 		{
-			template<typename T>
-			struct DefaultValueOf
-			{
-				static T Get()
-				{
-					return reflection::description::TypedValueSerializerProvider<T>::GetDefaultValue();
-				}
-			};
-
-			template<typename T>
-			struct DefaultValueOf<Ptr<T>>
-			{
-				static Ptr<T> Get()
-				{
-					return nullptr;
-				}
-			};
-
-			template<>
-			struct DefaultValueOf<description::Value>
-			{
-				static description::Value Get()
-				{
-					return description::Value();
-				}
-			};
-
-			template<typename T>
-			T ReadProperty(const description::Value& thisObject, const ItemProperty<T>& propertyName)
-			{
-				if (!thisObject.IsNull() && propertyName)
-				{
-					return propertyName(thisObject);
-				}
-				else
-				{
-					return DefaultValueOf<T>::Get();
-				}
-			}
-
-			template<typename T>
-			T ReadProperty(const description::Value& thisObject, const WritableItemProperty<T>& propertyName)
-			{
-				auto defaultValue = DefaultValueOf<T>::Get();
-				if (!thisObject.IsNull() && propertyName)
-				{
-					return propertyName(thisObject, defaultValue, false);
-				}
-				else
-				{
-					return defaultValue;
-				}
-			}
-
-			template<typename T>
-			void WriteProperty(const description::Value& thisObject, const WritableItemProperty<T>& propertyName, const T& value)
-			{
-				if (!thisObject.IsNull() && propertyName)
-				{
-					propertyName(thisObject, value, true);
-				}
-			}
 
 /***********************************************************************
 GuiBindableTextList
@@ -89,46 +28,8 @@ GuiBindableTextList
 			/// <summary>A bindable Text list control.</summary>
 			class GuiBindableTextList : public GuiVirtualTextList, public Description<GuiBindableTextList>
 			{
-			public:
-				class ItemSource
-					: public list::ItemProviderBase
-					, protected list::ITextItemView
-					, public Description<ItemSource>
-				{
-				protected:
-					Ptr<EventHandler>								itemChangedEventHandler;
-					Ptr<description::IValueReadonlyList>			itemSource;
-
-				public:
-					ItemProperty<WString>							textProperty;
-					WritableItemProperty<bool>						checkedProperty;
-
-				public:
-					ItemSource();
-					~ItemSource();
-
-					Ptr<description::IValueEnumerable>				GetItemSource();
-					void											SetItemSource(Ptr<description::IValueEnumerable> _itemSource);
-
-					description::Value								Get(vint index);
-					void											UpdateBindingProperties();
-					bool											NotifyUpdate(vint start, vint count, bool itemReferenceUpdated);
-					
-					// ===================== GuiListControl::IItemProvider =====================
-
-					WString											GetTextValue(vint itemIndex)override;
-					description::Value								GetBindingValue(vint itemIndex)override;
-					vint											Count()override;
-					IDescriptable*									RequestView(const WString& identifier)override;
-					
-					// ===================== list::TextItemStyleProvider::ITextItemView =====================
-
-					bool											GetChecked(vint itemIndex)override;
-					void											SetChecked(vint itemIndex, bool value)override;
-				};
-
 			protected:
-				ItemSource*											itemSource;
+				TextItemBindableProvider*							itemSource = nullptr;
 
 			public:
 				/// <summary>Create a bindable Text list control.</summary>
@@ -176,80 +77,12 @@ GuiBindableTextList
 /***********************************************************************
 GuiBindableListView
 ***********************************************************************/
-			
+
 			/// <summary>A bindable List view control.</summary>
 			class GuiBindableListView : public GuiVirtualListView, public Description<GuiBindableListView>
 			{
-			public:
-				class ItemSource
-					: public list::ItemProviderBase
-					, protected virtual list::IListViewItemProvider
-					, public virtual list::IListViewItemView
-					, public virtual list::ListViewColumnItemArranger::IColumnItemView
-					, public Description<ItemSource>
-				{
-					typedef collections::List<list::ListViewColumnItemArranger::IColumnItemViewCallback*>		ColumnItemViewCallbackList;
-				protected:
-					list::ListViewDataColumns						dataColumns;
-					list::ListViewColumns							columns;
-					ColumnItemViewCallbackList						columnItemViewCallbacks;
-					Ptr<EventHandler>								itemChangedEventHandler;
-					Ptr<description::IValueReadonlyList>			itemSource;
-
-				public:
-					ItemProperty<Ptr<GuiImageData>>					largeImageProperty;
-					ItemProperty<Ptr<GuiImageData>>					smallImageProperty;
-
-				public:
-					ItemSource();
-					~ItemSource();
-
-					Ptr<description::IValueEnumerable>				GetItemSource();
-					void											SetItemSource(Ptr<description::IValueEnumerable> _itemSource);
-					
-					description::Value								Get(vint index);
-					void											UpdateBindingProperties();
-					bool											NotifyUpdate(vint start, vint count, bool itemReferenceUpdated);
-					list::ListViewDataColumns&						GetDataColumns();
-					list::ListViewColumns&							GetColumns();
-					
-					// ===================== list::IListViewItemProvider =====================
-
-					void											RebuildAllItems() override;
-					void											RefreshAllItems() override;
-					void											NotifyColumnRebuilt() override;
-					void											NotifyColumnChanged() override;
-					
-					// ===================== GuiListControl::IItemProvider =====================
-
-					WString											GetTextValue(vint itemIndex)override;
-					description::Value								GetBindingValue(vint itemIndex)override;
-					vint											Count()override;
-					IDescriptable*									RequestView(const WString& identifier)override;
-
-					// ===================== list::ListViewItemStyleProvider::IListViewItemView =====================
-
-					Ptr<GuiImageData>								GetSmallImage(vint itemIndex)override;
-					Ptr<GuiImageData>								GetLargeImage(vint itemIndex)override;
-					WString											GetText(vint itemIndex)override;
-					WString											GetSubItem(vint itemIndex, vint index)override;
-					vint											GetDataColumnCount()override;
-					vint											GetDataColumn(vint index)override;
-					vint											GetColumnCount()override;
-					WString											GetColumnText(vint index)override;
-
-					// ===================== list::ListViewColumnItemArranger::IColumnItemView =====================
-						
-					bool											AttachCallback(list::ListViewColumnItemArranger::IColumnItemViewCallback* value)override;
-					bool											DetachCallback(list::ListViewColumnItemArranger::IColumnItemViewCallback* value)override;
-					vint											GetColumnSize(vint index)override;
-					void											SetColumnSize(vint index, vint value)override;
-					GuiMenu*										GetDropdownPopup(vint index)override;
-					ColumnSortingState								GetSortingState(vint index)override;
-				};
-
 			protected:
-				ItemSource*											itemSource;
+				ListViewItemBindableProvider*						itemSource = nullptr;
 
 			public:
 				/// <summary>Create a bindable List view control.</summary>
@@ -309,87 +142,8 @@ GuiBindableTreeView
 			class GuiBindableTreeView : public GuiVirtualTreeView, public Description<GuiBindableTreeView>
 			{
 				using IValueEnumerable = reflection::description::IValueEnumerable;
-			public:
-				class ItemSource;
-
-				class ItemSourceNode
-					: public Object
-					, public virtual tree::INodeProvider
-				{
-					friend class ItemSource;
-					typedef collections::List<Ptr<ItemSourceNode>>	NodeList;
-				protected:
-					description::Value								itemSource;
-					ItemSource*										rootProvider;
-					ItemSourceNode*									parent;
-					tree::INodeProviderCallback*					callback;
-					bool											expanding = false;
-
-					Ptr<EventHandler>								itemChangedEventHandler;
-					Ptr<description::IValueReadonlyList>			childrenVirtualList;
-					NodeList										children;
-
-					Ptr<description::IValueReadonlyList>			PrepareValueList(const description::Value& inputItemSource);
-					void											PrepareChildren(Ptr<description::IValueReadonlyList> newValueList);
-					void											UnprepareChildren();
-					void											PrepareReverseMapping();
-					void											UnprepareReverseMapping();
-				public:
-					ItemSourceNode(const description::Value& _itemSource, ItemSourceNode* _parent);
-					ItemSourceNode(ItemSource* _rootProvider);
-					~ItemSourceNode();
-
-					description::Value								GetItemSource();
-					void											SetItemSource(const description::Value& _itemSource);
-
-					// ===================== tree::INodeProvider =====================
-
-					bool											GetExpanding()override;
-					void											SetExpanding(bool value)override;
-					vint											CalculateTotalVisibleNodes()override;
-					void											NotifyDataModified()override;
-
-					vint											GetChildCount()override;
-					Ptr<tree::INodeProvider>						GetParent()override;
-					Ptr<tree::INodeProvider>						GetChild(vint index)override;
-				};
-
-				class ItemSource
-					: public tree::NodeRootProviderBase
-					, public virtual tree::ITreeViewItemView
-					, public Description<ItemSource>
-				{
-					friend class ItemSourceNode;
-				public:
-					WritableItemProperty<description::Value>		reverseMappingProperty;
-					ItemProperty<WString>							textProperty;
-					ItemProperty<Ptr<GuiImageData>>					imageProperty;
-					ItemProperty<Ptr<IValueEnumerable>>				childrenProperty;
-					Ptr<ItemSourceNode>								rootNode;
-
-				public:
-					ItemSource();
-					~ItemSource();
-
-					description::Value								GetItemSource();
-					void											SetItemSource(const description::Value& _itemSource);
-
-					void											UpdateBindingProperties(bool updateChildrenProperty);
-
-					// ===================== tree::INodeRootProvider =====================
-
-					Ptr<tree::INodeProvider>						GetRootNode()override;
-					WString											GetTextValue(tree::INodeProvider* node)override;
-					description::Value								GetBindingValue(tree::INodeProvider* node)override;
-					IDescriptable*									RequestView(const WString& identifier)override;
-
-					// ===================== tree::ITreeViewItemView =====================
-
-					Ptr<GuiImageData>								GetNodeImage(tree::INodeProvider* node)override;
-				};
-
 			protected:
-				ItemSource*											itemSource;
+				TreeViewItemBindableRootProvider*					itemSource = nullptr;
 
 			public:
 				/// <summary>Create a bindable Tree view control.</summary>

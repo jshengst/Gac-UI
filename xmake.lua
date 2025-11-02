@@ -10,7 +10,7 @@ target("HelloGacUI")
 
     add_deps("GacUICustom")
     add_rules("GacUI")
-    -- set_values("GacUI.reflection_level", "none") -- 切换反射等级：uil（默认值）、none、metaonly、full
+    -- set_values("GacUI.reflection_level", "static") -- 切换反射等级：uil（默认值）、static（推荐）、metaonly、full
     set_values("GacUI.with_source", true) -- 切换使用未合并源代码
     set_values("GacUI.with_unitest", false ) -- 切换是否包含单元测试代码
 

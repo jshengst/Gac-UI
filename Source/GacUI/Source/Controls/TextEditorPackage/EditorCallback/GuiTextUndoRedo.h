@@ -9,7 +9,6 @@ Interfaces:
 #ifndef VCZH_PRESENTATION_CONTROLS_GUITEXTUNDOREDO
 #define VCZH_PRESENTATION_CONTROLS_GUITEXTUNDOREDO
 
-#include "GuiTextGeneralOperations.h"
 #include "../../../GraphicsElement/GuiGraphicsDocumentElement.h"
 
 namespace vl
@@ -18,7 +17,6 @@ namespace vl
 	{
 		namespace controls
 		{
-			class GuiTextBoxCommonInterface;
 
 /***********************************************************************
 Undo Redo
@@ -56,36 +54,6 @@ Undo Redo
 				void										NotifyModificationSaved();
 				bool										Undo();
 				bool										Redo();
-			};
-
-/***********************************************************************
-Undo Redo (Text)
-***********************************************************************/
-
-			class GuiTextBoxUndoRedoProcessor : public GuiGeneralUndoRedoProcessor, public ICommonTextEditCallback
-			{
-			protected:
-				class EditStep : public Object, public IEditStep
-				{
-				public:
-					GuiTextBoxUndoRedoProcessor*			processor;
-					TextEditNotifyStruct					arguments;
-					
-					void									Undo();
-					void									Redo();
-				};
-
-				compositions::GuiGraphicsComposition*		ownerComposition;
-			public:
-				GuiTextBoxUndoRedoProcessor();
-				~GuiTextBoxUndoRedoProcessor();
-
-				void										Attach(elements::GuiColorizedTextElement* element, SpinLock& elementModifyLock, compositions::GuiGraphicsComposition* _ownerComposition, vuint editVersion)override;
-				void										Detach()override;
-				void										TextEditPreview(TextEditPreviewStruct& arguments)override;
-				void										TextEditNotify(const TextEditNotifyStruct& arguments)override;
-				void										TextCaretChanged(const TextCaretChangedStruct& arguments)override;
-				void										TextEditFinished(vuint editVersion)override;
 			};
 
 /***********************************************************************

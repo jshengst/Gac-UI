@@ -238,6 +238,7 @@
     <ClCompile Include="TestControls_Toolstrip_GuiToolstripMenuBar.cpp" />
     <ClCompile Include="TestControls_Toolstrip_GuiToolstripMenuBar_Cascade.cpp" />
     <ClCompile Include="TestControls_Toolstrip_GuiToolstripToolBar.cpp" />
+    <ClCompile Include="TestDocumentConfig.cpp" />
     <ClCompile Include="TestHostedWindowManager.cpp" />
     <ClCompile Include="TestPtrDescriptableObject.cpp" />
     <ClCompile Include="TestQueryParser.cpp" />
@@ -259,6 +260,14 @@
     <ClCompile Include="TestRemote_UnitTestFramework.cpp" />
     <ClCompile Include="TestRemote_UnitTestFramework_Async.cpp" />
     <ClCompile Include="TestResource.cpp" />
+    <ClCompile Include="TestItemProviders_TextItemProvider.cpp" />
+    <ClCompile Include="TestItemProviders_TextItemBindableProvider.cpp" />
+    <ClCompile Include="TestItemProviders_ListViewItemProvider.cpp" />
+    <ClCompile Include="TestItemProviders_ListViewItemBindableProvider.cpp" />
+    <ClCompile Include="TestItemProviders_TreeViewItemRootProvider.cpp" />
+    <ClCompile Include="TestItemProviders_TreeViewItemBindableRootProvider.cpp" />
+    <ClCompile Include="TestItemProviders_NodeItemProvider.cpp" />
+    <ClCompile Include="TestItemProviders.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lib_GacUI_App_Reflection\Lib_GacUI_App_Reflection.vcxproj">
@@ -278,6 +287,7 @@
     <ClInclude Include="TestCompositions.h" />
     <ClInclude Include="TestControls.h" />
     <ClInclude Include="TestControls_List.h" />
+    <ClInclude Include="TestItemProviders.h" />
     <ClInclude Include="TestControls_Ribbon.h" />
     <ClInclude Include="TestRemote.h" />
     <ClInclude Include="TestRemote_GraphicsHost_Shared.h" />

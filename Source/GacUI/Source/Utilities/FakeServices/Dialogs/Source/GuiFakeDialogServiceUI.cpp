@@ -467,7 +467,7 @@ Closures
 	void __vwsnf35_GuiFakeDialogServiceUI_gaclib_controls_FilePickerControlConstructor___vwsn_gaclib_controls_FilePickerControl_Initialize_::operator()(::vl::presentation::compositions::GuiGraphicsComposition* sender, ::vl::presentation::compositions::GuiEventArgs* arguments) const
 	{
 		::vl::__vwsn::This(__vwsnthis_0->textBox)->SetText(::vl::__vwsn::This(__vwsnthis_0->ViewModel.Obj())->GetDisplayString(::vl::__vwsn::This(__vwsnthis_0->self)->GetSelectedFiles()));
-		::vl::__vwsn::This(__vwsnthis_0->textBox)->Select([&](){ ::vl::presentation::TextPos __vwsn_temp__; __vwsn_temp__.row = static_cast<::vl::vint>(0); __vwsn_temp__.column = static_cast<::vl::vint>(0); return __vwsn_temp__; }(), [&](){ ::vl::presentation::TextPos __vwsn_temp__; __vwsn_temp__.row = static_cast<::vl::vint>(0); __vwsn_temp__.column = static_cast<::vl::vint>(0); return __vwsn_temp__; }());
+		::vl::__vwsn::This(__vwsnthis_0->textBox)->SetCaret([&](){ ::vl::presentation::TextPos __vwsn_temp__; __vwsn_temp__.row = static_cast<::vl::vint>(0); __vwsn_temp__.column = static_cast<::vl::vint>(0); return __vwsn_temp__; }(), [&](){ ::vl::presentation::TextPos __vwsn_temp__; __vwsn_temp__.row = static_cast<::vl::vint>(0); __vwsn_temp__.column = static_cast<::vl::vint>(0); return __vwsn_temp__; }());
 	}
 
 	//-------------------------------------------------------------------
@@ -479,7 +479,7 @@ Closures
 
 	void __vwsnf36_GuiFakeDialogServiceUI_gaclib_controls_FilePickerControlConstructor___vwsn_gaclib_controls_FilePickerControl_Initialize_::operator()(::vl::presentation::compositions::GuiGraphicsComposition* sender, ::vl::presentation::compositions::GuiItemMouseEventArgs* arguments) const
 	{
-		auto file = ::vl::__vwsn::This(__vwsnthis_0->ViewModel.Obj())->GetFiles()[::vl::__vwsn::This(arguments)->itemIndex];
+		auto file = ::vl::__vwsn::UnboxWeak<::vl::Ptr<::vl::presentation::IFileDialogFile>>(::vl::__vwsn::This(::vl::__vwsn::This(__vwsnthis_0->dataGrid)->GetItemProvider())->GetBindingValue(::vl::__vwsn::This(arguments)->itemIndex));
 		auto selection = ::vl::__vwsn::This(__vwsnthis_0->ViewModel.Obj())->ParseDisplayString(::vl::__vwsn::This(__vwsnthis_0->ViewModel.Obj())->GetDisplayString(::vl::reflection::description::GetLazyList<::vl::Ptr<::vl::presentation::IFileDialogFile>>((::vl::__vwsn::CreateList().Add(file)).list)));
 		::vl::__vwsn::This(::vl::presentation::controls::GetApplication())->InvokeInMainThread(::vl::__vwsn::This(__vwsnthis_0->self)->GetRelatedControlHost(), vl::Func(::vl_workflow_global::__vwsnf37_GuiFakeDialogServiceUI_gaclib_controls_FilePickerControlConstructor___vwsn_gaclib_controls_FilePickerControl_Initialize__(selection, __vwsnthis_0)));
 	}
@@ -2541,7 +2541,7 @@ Closures
 					if ((__vwsn_co_state_ == static_cast<::vl::vint>(3)))
 					{
 						(__vwsn_co1_item = ::vl::__vwsn::Unbox<::vl::vint>(::vl::__vwsn::This(__vwsn_co3_for_enumerator_item.Obj())->GetCurrent()));
-						(__vwsn_co0_file = ::vl::Ptr<::vl::presentation::IFileDialogFile>(::vl::__vwsn::This(__vwsnthis_0->GetViewModel().Obj())->GetFiles()[__vwsn_co1_item]));
+						(__vwsn_co0_file = ::vl::__vwsn::UnboxWeak<::vl::Ptr<::vl::presentation::IFileDialogFile>>(::vl::__vwsn::This(::vl::__vwsn::This(__vwsnthis_0->dataGrid)->GetItemProvider())->GetBindingValue(__vwsn_co1_item)));
 						if (static_cast<bool>(__vwsn_co0_file))
 						{
 							this->SetStatus(::vl::reflection::description::CoroutineStatus::Waiting);
@@ -6959,7 +6959,7 @@ Class (::gaclib_controls::FontNameControlConstructor)
 			::vl::__vwsn::This(this->self)->AddChild(this->__vwsn_precompile_0);
 		}
 		{
-			::vl::__vwsn::This(this->textBox)->SetReadonly(::vl::__vwsn::This(this->ViewModel.Obj())->GetFontMustExist());
+			::vl::__vwsn::This(this->textBox)->SetEditMode((::vl::__vwsn::This(this->ViewModel.Obj())->GetFontMustExist() ? ::vl::presentation::controls::GuiDocumentEditMode::Selectable : ::vl::presentation::controls::GuiDocumentEditMode::Editable));
 		}
 		{
 			::vl::__vwsn::This(this->textList)->SetItemSource(::vl::Ptr<::vl::reflection::description::IValueEnumerable>(::vl::__vwsn::UnboxCollection<::vl::reflection::description::IValueReadonlyList>(::vl::__vwsn::This(this->ViewModel.Obj())->GetFontList())));
@@ -7055,7 +7055,7 @@ Class (::gaclib_controls::FontNameControl)
 	void FontNameControl::InitValue(const ::vl::WString& value)
 	{
 		::vl::__vwsn::This(this->textBox)->SetText(value);
-		::vl::__vwsn::This(this->textBox)->Select([&](){ ::vl::presentation::TextPos __vwsn_temp__; __vwsn_temp__.row = static_cast<::vl::vint>(0); __vwsn_temp__.column = static_cast<::vl::vint>(0); return __vwsn_temp__; }(), [&](){ ::vl::presentation::TextPos __vwsn_temp__; __vwsn_temp__.row = static_cast<::vl::vint>(0); __vwsn_temp__.column = static_cast<::vl::vint>(0); return __vwsn_temp__; }());
+		::vl::__vwsn::This(this->textBox)->SetCaret([&](){ ::vl::presentation::TextPos __vwsn_temp__; __vwsn_temp__.row = static_cast<::vl::vint>(0); __vwsn_temp__.column = static_cast<::vl::vint>(0); return __vwsn_temp__; }(), [&](){ ::vl::presentation::TextPos __vwsn_temp__; __vwsn_temp__.row = static_cast<::vl::vint>(0); __vwsn_temp__.column = static_cast<::vl::vint>(0); return __vwsn_temp__; }());
 		this->UpdateSelectedIndex();
 	}
 
@@ -7285,7 +7285,7 @@ Class (::gaclib_controls::FontSizeControl)
 	void FontSizeControl::InitValue(::vl::vint value)
 	{
 		::vl::__vwsn::This(this->textBox)->SetText(::vl::__vwsn::ToString(value));
-		::vl::__vwsn::This(this->textBox)->Select([&](){ ::vl::presentation::TextPos __vwsn_temp__; __vwsn_temp__.row = static_cast<::vl::vint>(0); __vwsn_temp__.column = static_cast<::vl::vint>(0); return __vwsn_temp__; }(), [&](){ ::vl::presentation::TextPos __vwsn_temp__; __vwsn_temp__.row = static_cast<::vl::vint>(0); __vwsn_temp__.column = static_cast<::vl::vint>(0); return __vwsn_temp__; }());
+		::vl::__vwsn::This(this->textBox)->SetCaret([&](){ ::vl::presentation::TextPos __vwsn_temp__; __vwsn_temp__.row = static_cast<::vl::vint>(0); __vwsn_temp__.column = static_cast<::vl::vint>(0); return __vwsn_temp__; }(), [&](){ ::vl::presentation::TextPos __vwsn_temp__; __vwsn_temp__.row = static_cast<::vl::vint>(0); __vwsn_temp__.column = static_cast<::vl::vint>(0); return __vwsn_temp__; }());
 		this->UpdateSelectedIndex();
 	}
 

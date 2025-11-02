@@ -114,10 +114,10 @@ GuiRemoteEvents (messages)
 GuiRemoteEvents (events)
 ***********************************************************************/
 
-	void GuiRemoteEvents::OnControllerConnect()
+	void GuiRemoteEvents::OnControllerConnect(const remoteprotocol::ControllerGlobalConfig& arguments)
 	{
 		remote->remoteMessages.RequestControllerConnectionEstablished();
-		remote->OnControllerConnect();
+		remote->OnControllerConnect(arguments);
 		bool disconnected = false;
 		remote->remoteMessages.Submit(disconnected);
 		// there is no result from this request, assuming succeeded
@@ -251,5 +251,10 @@ GuiRemoteEvents (events)
 	void GuiRemoteEvents::OnIOChar(const NativeWindowCharInfo& arguments)
 	{
 		for (auto l : remote->remoteWindow.listeners) l->Char(arguments);
+	}
+
+	void GuiRemoteEvents::OnDocumentParagraph_RenderInlineObject(const remoteprotocol::RenderInlineObjectRequest& arguments)
+	{
+		remote->resourceManager->OnDocumentParagraph_RenderInlineObject(arguments);
 	}
 }

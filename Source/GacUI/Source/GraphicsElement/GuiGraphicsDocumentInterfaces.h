@@ -10,6 +10,7 @@ Interfaces:
 #define VCZH_PRESENTATION_ELEMENTS_GUIGRAPHICSDOCUMENTINTERFACES
 
 #include "GuiGraphicsElementInterfaces.h"
+#include "../Resources/GuiDocument.h"
 
 namespace vl
 {
@@ -19,7 +20,7 @@ namespace vl
 		{
 
 /***********************************************************************
-Layout Engine
+IGuiGraphicsParagraph
 ***********************************************************************/
 
 			class IGuiGraphicsParagraph;
@@ -163,9 +164,9 @@ Layout Engine
 				/// <returns>Returns true if this operation succeeded.</returns>
 				virtual bool								ResetInlineObject(vint start, vint length)=0;
 
-				/// <summary>Get the layouted height of the text. The result depends on rich styled text and the two important properties that can be set using <see cref="SetWrapLine"/> and <see cref="SetMaxWidth"/>.</summary>
-				/// <returns>The layouted height.</returns>
-				virtual vint								GetHeight()=0;
+				/// <summary>Get the layouted size of the text. The result depends on rich styled text and the two important properties that can be set using <see cref="SetWrapLine"/> and <see cref="SetMaxWidth"/>.</summary>
+				/// <returns>The layouted size.</returns>
+				virtual Size								GetSize()=0;
 				/// <summary>Make the caret visible so that it will be rendered in the paragraph.</summary>
 				/// <returns>Returns true if this operation succeeded.</returns>
 				/// <param name="caret">The caret.</param>
@@ -215,6 +216,10 @@ Layout Engine
 				virtual bool								IsValidTextPos(vint textPos)=0;
 			};
 
+/***********************************************************************
+IGuiGraphicsLayoutProvider
+***********************************************************************/
+
 			/// <summary>Paragraph callback</summary>
 			class IGuiGraphicsParagraphCallback : public IDescriptable, public Description<IGuiGraphicsParagraphCallback>
 			{
@@ -236,6 +241,24 @@ Layout Engine
 				/// <param name="callback">A callback to receive necessary information when the paragraph is being rendered.</param>
 				/// <returns>The created paragraph object.</returns>
 				virtual Ptr<IGuiGraphicsParagraph>			CreateParagraph(const WString& text, IGuiGraphicsRenderTarget* renderTarget, IGuiGraphicsParagraphCallback* callback)=0;
+			};
+
+/***********************************************************************
+IGuiDocumentElementRenderer
+***********************************************************************/
+
+			class IGuiDocumentElementRenderer : public virtual IGuiGraphicsRenderer
+			{
+			public:
+				virtual void									NotifyParagraphPaddingUpdated(bool value) = 0;
+				virtual void									NotifyParagraphUpdated(vint index, vint oldCount, vint newCount, bool updatedText) = 0;
+				virtual Ptr<DocumentHyperlinkRun::Package>		GetHyperlinkFromPoint(Point point) = 0;
+				virtual void									OpenCaret(TextPos caret, Color color, bool frontSide) = 0;
+				virtual void									CloseCaret(TextPos caret) = 0;
+				virtual void									SetSelection(TextPos begin, TextPos end) = 0;
+				virtual TextPos									CalculateCaret(TextPos comparingCaret, IGuiGraphicsParagraph::CaretRelativePosition position, bool& preferFrontSide) = 0;
+				virtual TextPos									CalculateCaretFromPoint(Point point) = 0;
+				virtual Rect									GetCaretBounds(TextPos caret, bool frontSide) = 0;
 			};
 		}
 	}

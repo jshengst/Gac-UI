@@ -1,5 +1,7 @@
 #include "GuiRemoteController.h"
 #include "GuiRemoteGraphics_BasicElements.h"
+#include "GuiRemoteGraphics_Document.h"
+#include "../../GraphicsElement/GuiGraphicsDocumentRenderer.h"
 #include "../Hosted/GuiHostedController.h"
 #include "../../Application/GraphicsHost/GuiGraphicsHost.h"
 
@@ -363,6 +365,14 @@ GuiRemoteGraphicsRenderTarget
 GuiRemoteGraphicsResourceManager
 ***********************************************************************/
 
+	Ptr<IGuiGraphicsParagraph> GuiRemoteGraphicsResourceManager::CreateParagraph(const WString& text, IGuiGraphicsRenderTarget* _renderTarget, IGuiGraphicsParagraphCallback* callback)
+	{
+#define ERROR_MESSAGE_PREFIX L"vl::presentation::elements::GuiRemoteGraphicsResourceManager::CreateParagraph(const WString&, IGuiGraphicsRenderTarget*, IGuiGraphicsParagraphCallback*)#"
+		CHECK_ERROR(&renderTarget == _renderTarget, ERROR_MESSAGE_PREFIX L"Unexpected render target object.");
+		return Ptr(new GuiRemoteGraphicsParagraph(text, remote, this, &renderTarget, callback));
+#undef ERROR_MESSAGE_PREFIX
+	}
+
 	GuiRemoteGraphicsResourceManager::GuiRemoteGraphicsResourceManager(GuiRemoteController* _remote, GuiHostedController* _hostedController)
 		: remote(_remote)
 		, renderTarget(_remote, _hostedController)
@@ -388,8 +398,7 @@ GuiRemoteGraphicsResourceManager
 		elements_remoteprotocol::GuiSolidLabelElementRenderer::Register();
 		elements_remoteprotocol::GuiImageFrameElementRenderer::Register();
 		elements_remoteprotocol::GuiPolygonElementRenderer::Register();
-		elements_remoteprotocol::GuiColorizedTextElementRenderer::Register();
-		elements::GuiDocumentElement::GuiDocumentElementRenderer::Register();
+		elements::GuiDocumentElementRenderer::Register();
 	}
 
 	void GuiRemoteGraphicsResourceManager::Finalize()
@@ -405,6 +414,11 @@ GuiRemoteGraphicsResourceManager
 	void GuiRemoteGraphicsResourceManager::OnControllerDisconnect()
 	{
 		renderTarget.OnControllerDisconnect();
+	}
+
+	void GuiRemoteGraphicsResourceManager::OnDocumentParagraph_RenderInlineObject(const remoteprotocol::RenderInlineObjectRequest& arguments)
+	{
+		CHECK_FAIL(L"Not Implemented!");
 	}
 
 	IGuiGraphicsRenderTarget* GuiRemoteGraphicsResourceManager::GetRenderTarget(INativeWindow* window)
@@ -423,7 +437,7 @@ GuiRemoteGraphicsResourceManager
 
 	IGuiGraphicsLayoutProvider* GuiRemoteGraphicsResourceManager::GetLayoutProvider()
 	{
-		CHECK_FAIL(L"Not Implemented!");
+		return this;
 	}
 
 	Ptr<IGuiGraphicsElement> GuiRemoteGraphicsResourceManager::CreateRawElement()

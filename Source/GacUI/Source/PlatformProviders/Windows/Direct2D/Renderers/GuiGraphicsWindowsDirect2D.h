@@ -9,7 +9,7 @@ Interfaces:
 #ifndef VCZH_PRESENTATION_ELEMENTS_GUIGRAPHICSWINDOWSDIRECT2D
 #define VCZH_PRESENTATION_ELEMENTS_GUIGRAPHICSWINDOWSDIRECT2D
 
-#include "..\..\..\..\GraphicsElement\GuiGraphicsTextElement.h"
+#include "..\..\..\..\GraphicsElement\GuiGraphicsElement.h"
 #include "..\..\..\..\GraphicsElement\GuiGraphicsDocumentElement.h"
 #include "..\..\..\..\Application\GraphicsCompositions\GuiGraphicsEventReceiver.h"
 #include <d2d1_1.h>
@@ -113,8 +113,6 @@ Functionality
 			public:
 				virtual Direct2DTextFormatPackage*			CreateDirect2DTextFormat(const FontProperties& fontProperties)=0;
 				virtual void								DestroyDirect2DTextFormat(const FontProperties& fontProperties)=0;
-				virtual Ptr<elements::text::CharMeasurer>	CreateDirect2DCharMeasurer(const FontProperties& fontProperties)=0;
-				virtual void								DestroyDirect2DCharMeasurer(const FontProperties& fontProperties)=0;
 			};
 
 			extern IWindowsDirect2DResourceManager*			GetWindowsDirect2DResourceManager();

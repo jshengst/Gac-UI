@@ -213,9 +213,6 @@ Type List (Elements)
 			F(presentation::elements::ElementShape)\
 			F(presentation::elements::Gui3DSplitterElement::Direction)\
 			F(presentation::elements::GuiGradientBackgroundElement::Direction)\
-			F(presentation::elements::text::TextLines)\
-			F(presentation::elements::text::ColorItem)\
-			F(presentation::elements::text::ColorEntry)\
 
 #define GUIREFLECTIONELEMENT_CLASS_TYPELIST(F)\
 			F(presentation::elements::GuiFocusRectangleElement)\
@@ -228,7 +225,6 @@ Type List (Elements)
 			F(presentation::elements::GuiSolidLabelElement)\
 			F(presentation::elements::GuiImageFrameElement)\
 			F(presentation::elements::GuiPolygonElement)\
-			F(presentation::elements::GuiColorizedTextElement)\
 			F(presentation::elements::GuiDocumentElement)\
 
 #define GUIREFLECTIONELEMENT_TYPELIST(F)\
@@ -390,9 +386,9 @@ Type List (Controls)
 			F(presentation::controls::list::TextItemProvider)\
 			F(presentation::controls::TextListView)\
 			F(presentation::controls::list::IListViewItemView)\
+			F(presentation::controls::list::IColumnItemViewCallback)\
+			F(presentation::controls::list::IColumnItemView)\
 			F(presentation::controls::list::ListViewColumnItemArranger)\
-			F(presentation::controls::list::ListViewColumnItemArranger::IColumnItemViewCallback)\
-			F(presentation::controls::list::ListViewColumnItemArranger::IColumnItemView)\
 			F(presentation::controls::list::ListViewItem)\
 			F(presentation::controls::list::ListViewColumn)\
 			F(presentation::controls::ListViewView)\
@@ -416,10 +412,11 @@ Type List (Controls)
 			F(presentation::controls::GalleryPos)\
 			F(presentation::controls::list::GalleryGroup)\
 			F(presentation::controls::list::GroupedDataSource)\
+			F(presentation::controls::GuiDocumentEditMode)\
+			F(presentation::controls::GuiDocumentParagraphMode)\
+			F(presentation::controls::GuiDocumentConfig)\
 			F(presentation::controls::GuiDocumentItem)\
 			F(presentation::controls::GuiDocumentCommonInterface)\
-			F(presentation::controls::GuiDocumentCommonInterface::EditMode)\
-			F(presentation::controls::GuiTextBoxCommonInterface)\
 			F(presentation::controls::list::IDataGridContext)\
 			F(presentation::controls::list::IDataVisualizerFactory)\
 			F(presentation::controls::list::IDataVisualizer)\
@@ -443,10 +440,10 @@ Type List (Controls)
 			F(presentation::controls::list::DataReverseSorter)\
 			F(presentation::controls::list::DataColumn)\
 			F(presentation::controls::list::DataProvider)\
-			F(presentation::controls::GuiBindableTextList::ItemSource)\
-			F(presentation::controls::GuiBindableListView::ItemSource)\
-			F(presentation::controls::GuiBindableTreeView::ItemSourceNode)\
-			F(presentation::controls::GuiBindableTreeView::ItemSource)\
+			F(presentation::controls::TextItemBindableProvider)\
+			F(presentation::controls::ListViewItemBindableProvider)\
+			F(presentation::controls::TreeViewItemBindableNode)\
+			F(presentation::controls::TreeViewItemBindableRootProvider)\
 
 #define GUIREFLECTIONCONTROLS_CLASS_TYPELIST(F)\
 			F(presentation::controls::GuiControl)\
@@ -970,14 +967,14 @@ Interface Proxy (Controls)
 				}
 			END_INTERFACE_PROXY(presentation::controls::list::IListViewItemView)
 
-			BEGIN_INTERFACE_PROXY_NOPARENT_SHAREDPTR(presentation::controls::list::ListViewColumnItemArranger::IColumnItemView)
+			BEGIN_INTERFACE_PROXY_NOPARENT_SHAREDPTR(presentation::controls::list::IColumnItemView)
 
-				bool AttachCallback(presentation::controls::list::ListViewColumnItemArranger::IColumnItemViewCallback* value)override
+				bool AttachCallback(presentation::controls::list::IColumnItemViewCallback* value)override
 				{
 					INVOKEGET_INTERFACE_PROXY(AttachCallback, value);
 				}
 
-				bool DetachCallback(presentation::controls::list::ListViewColumnItemArranger::IColumnItemViewCallback* value)override
+				bool DetachCallback(presentation::controls::list::IColumnItemViewCallback* value)override
 				{
 					INVOKEGET_INTERFACE_PROXY(DetachCallback, value);
 				}
@@ -1001,7 +998,7 @@ Interface Proxy (Controls)
 				{
 					INVOKEGET_INTERFACE_PROXY(GetSortingState, index);
 				}
-			END_INTERFACE_PROXY(presentation::controls::list::ListViewColumnItemArranger::IColumnItemView)
+			END_INTERFACE_PROXY(presentation::controls::list::IColumnItemView)
 
 			BEGIN_INTERFACE_PROXY_NOPARENT_SHAREDPTR(presentation::controls::tree::INodeProvider)
 

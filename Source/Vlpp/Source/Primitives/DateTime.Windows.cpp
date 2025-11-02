@@ -18,7 +18,7 @@ namespace vl
 DateTime
 ***********************************************************************/
 
-	class WindowsDateTimeImpl : public Object, public virtual IDateTimeImpl
+	class WindowsDateTimeImpl : public feature_injection::FeatureImpl<IDateTimeImpl>
 	{
 	public:
 
@@ -140,10 +140,9 @@ DateTime
 		}
 	};
 
-	WindowsDateTimeImpl osDateTimeImpl;
-
 	IDateTimeImpl* GetOSDateTimeImpl()
 	{
+		static WindowsDateTimeImpl osDateTimeImpl;
 		return &osDateTimeImpl;
 	}
 }

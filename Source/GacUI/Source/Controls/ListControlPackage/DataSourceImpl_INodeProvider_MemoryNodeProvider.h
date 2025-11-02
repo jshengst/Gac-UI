@@ -36,7 +36,6 @@ MemoryNodeProvider
 
 			void						OnBeforeChildModified(vint start, vint count, vint newCount);
 			void						OnAfterChildModified(vint start, vint count, vint newCount);
-			bool						QueryInsert(vint index, Ptr<MemoryNodeProvider> const& child)override;
 			bool						QueryRemove(vint index, Ptr<MemoryNodeProvider> const& child)override;
 			void						BeforeInsert(vint index, Ptr<MemoryNodeProvider> const& child)override;
 			void						BeforeRemove(vint index, Ptr<MemoryNodeProvider> const& child)override;
@@ -131,6 +130,16 @@ MemoryNodeRootProvider
 		/// <returns>The corresponding <see cref="MemoryNodeProvider"/> object.</returns>
 		/// <param name="node">The node to get the memory node.</param>
 		MemoryNodeProvider*				GetMemoryNode(INodeProvider* node);
+	};
+}
+
+namespace vl::collections::randomaccess_internal
+{
+	template<>
+	struct RandomAccessable<presentation::controls::tree::MemoryNodeProvider>
+	{
+		static const bool							CanRead = true;
+		static const bool							CanResize = false;
 	};
 }
 

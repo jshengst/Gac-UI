@@ -87,7 +87,7 @@ Locale Helper Functions
 WindowsLocaleImpl
 ***********************************************************************/
 
-	class WindowsLocaleImpl : public Object, public ILocaleImpl
+	class WindowsLocaleImpl : public feature_injection::FeatureImpl<ILocaleImpl>
 	{
 	public:
 		Locale Invariant() const override
@@ -274,10 +274,9 @@ WindowsLocaleImpl
 		}
 	};
 
-	WindowsLocaleImpl windowsLocaleImpl;
-
 	ILocaleImpl* GetOSLocaleImpl()
 	{
+		static WindowsLocaleImpl windowsLocaleImpl;
 		return &windowsLocaleImpl;
 	}
 

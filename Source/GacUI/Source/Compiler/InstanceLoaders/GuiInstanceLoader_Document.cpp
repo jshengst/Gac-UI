@@ -199,7 +199,7 @@ GuiDocumentInstanceLoaderBase
 					{
 						return GuiInstancePropertyInfo::CollectionWithParent(TypeInfoRetriver<Ptr<GuiDocumentItem>>::CreateTypeInfo());
 					}
-					else if(propertyInfo.propertyName == _Behavior)
+					else if(propertyInfo.propertyName == _Behavior && this->CanCreate(propertyInfo.typeInfo))
 					{
 						auto info = GuiInstancePropertyInfo::Assign(TypeInfoRetriver<GuiDocumentConfig>::CreateTypeInfo());
 						info->usage = GuiInstancePropertyInfo::ConstructorArgument;
@@ -282,6 +282,11 @@ Initialization
 				manager->SetLoader(Ptr(new GuiDocumentItemInstanceLoader));
 				manager->SetLoader(Ptr(new GuiDocumentViewerInstanceLoader));
 				manager->SetLoader(Ptr(new GuiDocumentLabelInstanceLoader));
+				manager->CreateVirtualType(GlobalStringKey::Get(description::TypeInfo<GuiDocumentLabel>::content.typeName),
+					Ptr(new GuiDocumentInstanceLoaderBase<GuiTemplateControlInstanceLoader<GuiDocumentLabel>>(
+						L"presentation::controls::GuiDocumentTextBox",
+						theme::ThemeName::DocumentTextBox
+					)));
 			}
 		}
 	}

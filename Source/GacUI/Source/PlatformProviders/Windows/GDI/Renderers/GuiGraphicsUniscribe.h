@@ -169,13 +169,9 @@ UniscribeRun
 				virtual vint					SumWidth(vint charStart, vint charLength)=0;
 				virtual vint					SumHeight()=0;
 				virtual vint					SumTextHeight()=0;
-				virtual void					SearchForLineBreak(vint tempStart, vint maxWidth, bool firstRun, vint& charLength, vint& charAdvances)=0;
+				virtual void					SearchForLineBreak(vint tempStart, bool wrapLine, vint maxWidth, bool firstRun, vint& charLength, vint& charAdvances)=0;
 				virtual void					Render(IRendererCallback* callback, vint fragmentBoundsIndex, vint offsetX, vint offsetY, bool renderBackground)=0;
 			};
-
-/***********************************************************************
-UniscribeTextRun
-***********************************************************************/
 
 			class UniscribeTextRun : public UniscribeRun
 			{
@@ -197,13 +193,9 @@ UniscribeTextRun
 				vint							SumWidth(vint charStart, vint charLength)override;
 				vint							SumHeight()override;
 				vint							SumTextHeight()override;
-				void							SearchForLineBreak(vint tempStart, vint maxWidth, bool firstRun, vint& charLength, vint& charAdvances)override;
+				void							SearchForLineBreak(vint tempStart, bool wrapLine, vint maxWidth, bool firstRun, vint& charLength, vint& charAdvances)override;
 				void							Render(IRendererCallback* callback, vint fragmentBoundsIndex, vint offsetX, vint offsetY, bool renderBackground)override;
 			};
-
-/***********************************************************************
-UniscribeElementRun
-***********************************************************************/
 
 			class UniscribeEmbeddedObjectRun : public UniscribeRun
 			{
@@ -218,7 +210,7 @@ UniscribeElementRun
 				vint							SumWidth(vint charStart, vint charLength)override;
 				vint							SumHeight()override;
 				vint							SumTextHeight()override;
-				void							SearchForLineBreak(vint tempStart, vint maxWidth, bool firstRun, vint& charLength, vint& charAdvances)override;
+				void							SearchForLineBreak(vint tempStart, bool wrapLine, vint maxWidth, bool firstRun, vint& charLength, vint& charAdvances)override;
 				void							Render(IRendererCallback* callback, vint fragmentBoundsIndex, vint offsetX, vint offsetY, bool renderBackground)override;
 			};
 
@@ -245,6 +237,21 @@ UniscribeVirtualLine
 
 /***********************************************************************
 UniscribeLine
+
+Styles and embedded objects cut the whole line into multiple UniscribeFragment
+Uniscribe cut the whole line into multiple UniscribeItem
+Both of them making multiple UniscribeRun
+Any UniscribeTextRun will not cross multiple UniscribeFragment or UniscribeItem
+Any UniscribeEmbeddedObjectRun will be exactly one UniscribeFragment
+
+During layout given wrapLine/availableWidth/alignment
+Multiple UniscribeVirtualLine will be created
+One UniscribeTextRun may cross multiple UniscribeVirtualLine when a long word is broken into lines
+UniscribeEmbeddedObjectRun will not cross multiple UniscribeVirtualLine
+
+In UniscribeTextRun, wchar_t and glyph are in multiple-to-multiple relationship
+After generating glyphs, which are things to render, layout is performed on glyphs
+UniscribeEmbeddedObjectRun will be treated as a single glyph
 ***********************************************************************/
 
 			class UniscribeLine : public Object
@@ -265,7 +272,7 @@ UniscribeLine
 
 				void							ClearUniscribeData();
 				bool							BuildUniscribeData(WinDC* dc);
-				void							Layout(vint availableWidth, Alignment alignment, vint top, vint& totalHeight);
+				void							Layout(bool wrapLine, vint availableWidth, Alignment alignment, vint top, vint& totalHeight);
 				void							Render(UniscribeRun::IRendererCallback* callback, vint offsetX, vint offsetY, bool renderBackground);
 			};
 
@@ -284,6 +291,7 @@ UniscribeParagraph
 				//***************************** Uniscribe Data
 				List<Ptr<UniscribeLine>>		lines;
 				//***************************** Layout Data
+				bool							lastWrapLine;
 				vint							lastAvailableWidth;
 				Rect							bounds;
 
@@ -292,7 +300,7 @@ UniscribeParagraph
 
 				void							ClearUniscribeData();
 				bool							BuildUniscribeData(WinDC* dc);
-				void							Layout(vint availableWidth, Alignment alignment);
+				void							Layout(bool wrapLine, vint availableWidth, Alignment alignment);
 				void							Render(UniscribeRun::IRendererCallback* callback, bool renderBackground);
 
 				void							SearchFragment(vint start, vint length, vint& fs, vint& ss, vint& fe, vint& se);
@@ -310,6 +318,7 @@ UniscribeParagraph
 				void							GetLineIndexFromTextPos(vint textPos, vint& frontLine, vint& backLine);
 				void							GetVirtualLineIndexFromTextPos(vint textPos, vint lineIndex, vint& frontLine, vint& backLine);
 				void							GetItemIndexFromTextPos(vint textPos, vint lineIndex, vint& frontItem, vint& backItem);
+				void							GetRunIndexFromTextPos(vint textPos, vint lineIndex, vint& frontRun, vint& backRun);
 				Rect							GetCaretBoundsWithLine(vint caret, vint lineIndex, vint virtualLineIndex, bool frontSide);
 				vint							GetCaretFromXWithTextRunBounds(vint x, vint lineIndex, vint runIndex, vint runBoundsIndex);
 				vint							GetCaretFromXWithLine(vint x, vint lineIndex, vint virtualLineIndex);

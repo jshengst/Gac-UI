@@ -178,6 +178,7 @@
     <ClInclude Include="..\..\..\Source\Collections\PartialOrdering.h" />
     <ClInclude Include="..\..\..\Source\Console.h" />
     <ClInclude Include="..\..\..\Source\Exception.h" />
+    <ClInclude Include="..\..\..\Source\FeatureInjection.h" />
     <ClInclude Include="..\..\..\Source\GlobalStorage.h" />
     <ClInclude Include="..\..\..\Source\Primitives\DateTime.h" />
     <ClInclude Include="..\..\..\Source\Primitives\Event.h" />

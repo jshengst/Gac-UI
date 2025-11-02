@@ -528,11 +528,11 @@ WindowsDirect2DParagraph (Formatting)
 
 				void SetWrapLine(bool value)override
 				{
-					if(wrapLine!=value)
+					if (wrapLine != value)
 					{
-						wrapLine=value;
-						textLayout->SetWordWrapping(value?DWRITE_WORD_WRAPPING_WRAP:DWRITE_WORD_WRAPPING_NO_WRAP);
-						formatDataAvailable=false;
+						wrapLine = value;
+						textLayout->SetWordWrapping(value ? DWRITE_WORD_WRAPPING_WRAP : DWRITE_WORD_WRAPPING_NO_WRAP);
+						formatDataAvailable = false;
 					}
 				}
 
@@ -543,11 +543,11 @@ WindowsDirect2DParagraph (Formatting)
 
 				void SetMaxWidth(vint value)override
 				{
-					if(maxWidth!=value)
+					if (maxWidth != value)
 					{
-						maxWidth=value;
-						textLayout->SetMaxWidth(value==-1?65536:(FLOAT)value);
-						formatDataAvailable=false;
+						maxWidth = value;
+						textLayout->SetMaxWidth(value == -1 ? 65536 : (FLOAT)value);
+						formatDataAvailable = false;
 					}
 				}
 
@@ -568,18 +568,21 @@ WindowsDirect2DParagraph (Formatting)
 
 				void SetParagraphAlignment(Alignment value)override
 				{
-					formatDataAvailable=false;
-					switch(value)
+					if (GetParagraphAlignment() != value)
 					{
-					case Alignment::Left:
-						textLayout->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_LEADING);
-						break;
-					case Alignment::Center:
-						textLayout->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
-						break;
-					case Alignment::Right:
-						textLayout->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_TRAILING);
-						break;
+						formatDataAvailable = false;
+						switch (value)
+						{
+						case Alignment::Left:
+							textLayout->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_LEADING);
+							break;
+						case Alignment::Center:
+							textLayout->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
+							break;
+						case Alignment::Right:
+							textLayout->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_TRAILING);
+							break;
+						}
 					}
 				}
 
@@ -717,11 +720,13 @@ WindowsDirect2DParagraph (Formatting)
 					return false;
 				}
 
-				vint GetHeight()override
+				Size GetSize()override
 				{
 					DWRITE_TEXT_METRICS metrics;
 					textLayout->GetMetrics(&metrics);
-					return (vint)ceil(metrics.height);
+					return Size(
+						(wrapLine ? 0 : (vint)ceil(metrics.widthIncludingTrailingWhitespace)),
+						(vint)ceil(metrics.height));
 				}
 
 /***********************************************************************
@@ -1131,7 +1136,7 @@ WindowsDirect2DParagraph (Caret)
 				{
 					PrepareFormatData();
 					if(!IsValidCaret(caret)) return Rect();
-					if(paragraphText.Length()==0) return Rect(Point(0, 0), Size(0, GetHeight()));
+					if(paragraphText.Length()==0) return Rect(Point(0, 0), Size(0, GetSize().y));
 
 					vint frontLineIndex=-1;
 					vint backLineIndex=-1;

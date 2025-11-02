@@ -10,7 +10,7 @@ Interfaces:
 #define VCZH_PRESENTATION_CONTROLS_GUIDATAGRIDCONTROLS
 
 #include "GuiDataGridInterfaces.h"
-#include "GuiListViewItemTemplates.h"
+#include "GuiListViewControls.h"
 
 namespace vl
 {
@@ -81,7 +81,7 @@ GuiVirtualDataGrid
 				friend class list::DefaultDataGridItemTemplate;
 			protected:
 				list::IListViewItemView*								listViewItemView = nullptr;
-				list::ListViewColumnItemArranger::IColumnItemView*		columnItemView = nullptr;
+				list::IColumnItemView*									columnItemView = nullptr;
 				list::IDataGridView*									dataGridView = nullptr;
 				Ptr<list::IDataVisualizerFactory>						defaultMainColumnVisualizerFactory;
 				Ptr<list::IDataVisualizerFactory>						defaultSubColumnVisualizerFactory;

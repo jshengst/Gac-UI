@@ -42,11 +42,6 @@ MemoryNodeProvider::NodeCollection
 		}
 	}
 
-	bool MemoryNodeProvider::NodeCollection::QueryInsert(vint index, Ptr<MemoryNodeProvider> const& child)
-	{
-		return child->parent == 0;
-	}
-
 	bool MemoryNodeProvider::NodeCollection::QueryRemove(vint index, Ptr<MemoryNodeProvider> const& child)
 	{
 		return child->parent == ownerProvider;
@@ -54,6 +49,15 @@ MemoryNodeProvider::NodeCollection
 
 	void MemoryNodeProvider::NodeCollection::BeforeInsert(vint index, Ptr<MemoryNodeProvider> const& child)
 	{
+		// Check if this node is already in a provider
+		if (child->parent)
+		{
+			throw ArgumentException(
+				L"The MemoryNodeProvider is already belong to a parent node.",
+				L"vl::presentation::controls::tree::MemoryNodeProvider::NodeCollection::BeforeInsert",
+				L"child"
+			);
+		}
 		OnBeforeChildModified(index, 0, 1);
 		child->parent = ownerProvider;
 	}
@@ -98,7 +102,7 @@ MemoryNodeProvider
 	void MemoryNodeProvider::OnChildTotalVisibleNodesChanged(vint offset)
 	{
 		totalVisibleNodeCount+=offset;
-		if(parent)
+		if(parent && parent->GetExpanding())
 		{
 			parent->OnChildTotalVisibleNodesChanged(offset);
 		}
@@ -193,14 +197,8 @@ MemoryNodeProvider
 
 	Ptr<INodeProvider> MemoryNodeProvider::GetChild(vint index)
 	{
-		if (0 <= index && index < childCount)
-		{
-			return children[index];
-		}
-		else
-		{
-			return nullptr;
-		}
+		CHECK_ERROR(index >= 0 && index < childCount, L"MemoryNodeProvider::GetChild(vint)#Argument index not in range.");
+		return children[index];
 	}
 
 /***********************************************************************

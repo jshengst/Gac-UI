@@ -58,6 +58,9 @@
     <Filter Include="Source Files\Controls\Application">
       <UniqueIdentifier>{33233d69-b50c-4706-a1bd-d42b921c8ab1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\ItemProviders">
+      <UniqueIdentifier>{7784d18a-9d4d-41ca-8bc8-d174d9f3361f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -67,6 +70,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TestReflectionTypeList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestDocumentConfig.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TestHostedWindowManager.cpp">
@@ -300,6 +306,30 @@
     <ClCompile Include="TestApplication_Dialog_Message.cpp">
       <Filter>Source Files\Controls\Application</Filter>
     </ClCompile>
+    <ClCompile Include="TestItemProviders_TextItemProvider.cpp">
+      <Filter>Source Files\ItemProviders</Filter>
+    </ClCompile>
+    <ClCompile Include="TestItemProviders_TextItemBindableProvider.cpp">
+      <Filter>Source Files\ItemProviders</Filter>
+    </ClCompile>
+    <ClCompile Include="TestItemProviders_ListViewItemProvider.cpp">
+      <Filter>Source Files\ItemProviders</Filter>
+    </ClCompile>
+    <ClCompile Include="TestItemProviders_ListViewItemBindableProvider.cpp">
+      <Filter>Source Files\ItemProviders</Filter>
+    </ClCompile>
+    <ClCompile Include="TestItemProviders_TreeViewItemRootProvider.cpp">
+      <Filter>Source Files\ItemProviders</Filter>
+    </ClCompile>
+    <ClCompile Include="TestItemProviders_TreeViewItemBindableRootProvider.cpp">
+      <Filter>Source Files\ItemProviders</Filter>
+    </ClCompile>
+    <ClCompile Include="TestItemProviders_NodeItemProvider.cpp">
+      <Filter>Source Files\ItemProviders</Filter>
+    </ClCompile>
+    <ClCompile Include="TestItemProviders.cpp">
+      <Filter>Source Files\ItemProviders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TestCompositions.h">
@@ -331,6 +361,9 @@
     </ClInclude>
     <ClInclude Include="TestControls_Ribbon.h">
       <Filter>Source Files\Controls\Ribbon</Filter>
+    </ClInclude>
+    <ClInclude Include="TestItemProviders.h">
+      <Filter>Source Files\ItemProviders</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

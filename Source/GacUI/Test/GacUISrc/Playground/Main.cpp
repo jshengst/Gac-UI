@@ -12,6 +12,64 @@ using namespace vl::stream;
 using namespace vl::filesystem;
 using namespace vl::reflection::description;
 
+class Playground : public Object, public Description<Playground>
+{
+public:
+	WString LoadBigJson()
+	{
+		auto exePath = FilePath(GetApplication()->GetExecutablePath()).GetFolder();
+#ifdef VCZH_64
+		auto jsonPath = exePath / L"../../Playground/Resources/BigJson.json";
+#else
+		auto jsonPath = exePath / L"../Playground/Resources/BigJson.json";
+#endif
+		return File(jsonPath).ReadAllTextByBom();
+	}
+};
+
+namespace vl::reflection::description
+{
+#define PLAYGROUND_TYPE_LIST(F)	\
+	F(Playground)\
+
+	PLAYGROUND_TYPE_LIST(DECL_TYPE_INFO)
+	PLAYGROUND_TYPE_LIST(IMPL_CPP_TYPE_INFO)
+
+#define _ ,
+	BEGIN_CLASS_MEMBER(Playground)
+		CLASS_MEMBER_CONSTRUCTOR(Ptr<Playground>(), NO_PARAMETER)
+		CLASS_MEMBER_METHOD(LoadBigJson, NO_PARAMETER)
+	END_CLASS_MEMBER(Playground)
+
+#undef _
+
+	class PlaygroundTypeLoader : public Object, public ITypeLoader
+	{
+	public:
+		void Load(ITypeManager* manager)
+		{
+			PLAYGROUND_TYPE_LIST(ADD_TYPE_INFO)
+		}
+
+		void Unload(ITypeManager* manager)
+		{
+		}
+	};
+
+	bool LoadPlaygroundTypes()
+	{
+		if (auto manager = GetGlobalTypeManager())
+		{
+			return manager->AddTypeLoader(Ptr(new PlaygroundTypeLoader));
+		}
+		return false;
+	}
+}
+
+namespace vl::presentation::description
+{
+}
+
 int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int CmdShow)
 {
 	int result = SetupWindowsDirect2DRenderer();
@@ -19,54 +77,6 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	_CrtDumpMemoryLeaks();
 #endif
 	return result;
-}
-
-void AttachDumpCompositionMenu(GuiWindow* window)
-{
-	auto menu = new GuiToolstripMenu(theme::ThemeName::Menu, window);
-	window->AddControlHostComponent(menu);
-	{
-		auto menuItem = new GuiToolstripButton(theme::ThemeName::MenuItemButton);
-		menuItem->SetText(L"Dump Composition to " + FilePath(L"TestXml.xml").GetFullPath());
-		menu->GetToolstripItems().Add(menuItem);
-
-		window->GetBoundsComposition()->GetEventReceiver()->rightButtonUp.AttachLambda([=](auto, auto arguments)
-		{
-			menu->ShowPopup(window, Point(arguments.x, arguments.y));
-		});
-
-		menuItem->Clicked.AttachLambda([=](auto, auto)
-		{
-			FileStream fileStream(L"TestXml.xml", FileStream::WriteOnly);
-			BomEncoder encoder(BomEncoder::Utf8);
-			EncoderStream encoderStream(fileStream, encoder);
-			StreamWriter writer(encoderStream);
-
-			GuiGraphicsComposition* composition = window->GetBoundsComposition();
-			while (composition->GetParent())
-			{
-				composition = composition->GetParent();
-			}
-
-			DumpComposition(composition, writer);
-			GetCurrentController()->DialogService()->ShowMessageBox(window->GetNativeWindow(), L"Finished!", L"Dump Composition");
-		});
-	}
-	{
-		auto menuItem = new GuiToolstripButton(theme::ThemeName::MenuItemButton);
-		menuItem->SetText(L"Open New Window");
-		menu->GetToolstripItems().Add(menuItem);
-
-		menuItem->Clicked.AttachLambda([=](auto, auto)
-		{
-			auto newWindow = new GuiWindow(theme::ThemeName::Window);
-			newWindow->SetText(L"New Window");
-			newWindow->SetClientSize(Size(640, 480));
-			newWindow->ForceCalculateSizeImmediately();
-			newWindow->MoveToScreenCenter();
-			newWindow->ShowModalAndDelete(window, []() {});
-		});
-	}
 }
 
 void OpenMainWindow()
@@ -81,7 +91,6 @@ void OpenMainWindow()
 	}
 	{
 		auto window = UnboxValue<GuiWindow*>(Value::Create(L"demo::TestWindow"));
-		//AttachDumpCompositionMenu(window);
 		window->ForceCalculateSizeImmediately();
 		window->MoveToScreenCenter();
 		GetApplication()->Run(window);
@@ -131,9 +140,10 @@ void GuiMain()
 {
 	TestWindowsKeyName();
 	LoadDarkSkinTypes();
+	LoadPlaygroundTypes();
 
 	List<WString> names;
-	names.Add(L"ResourceDocument");
+	names.Add(L"ResourceBigJson");
 
 	Group<WString, WString> deps;
 

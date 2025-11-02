@@ -1,14 +1,11 @@
 # Update Knowledge Base
 
-- Your goal is to update the knowledge base.
-- If there is an `# Update` section in the LATEST chat message, it means you must update the knowledge base according to the work you have implemented in the document.
-  - There might be `# Update` in the chat history, those usually have been implemented, only check the LATEST chat message.
-  - I have not designed what to do, so please print a `# NOT IMPLEMENTED!` and stop immediately.
-- If there is no title in the section, it means you must update the knowledge base according to the LATEST chat message.
+- Only checkout the LATEST chat message, ignore all chat history. It has the request about what to do about the knowledge base.
+- Your goal is to update the knowledge base according to the request.
 
 ## Implement the Knowledge Base
 
-- Find out the `Accessing Knowledge Base` section. Understand the organization of the knowledge base.
+- Find out the `Accessing the Knowledge Base` section. Understand the organization of the knowledge base.
 - Read the `Index.md` of the knowledge base first.
 - There could be multiple places as the request might include multiple objectives. For each objective:
   - Find out which project does it belong to.

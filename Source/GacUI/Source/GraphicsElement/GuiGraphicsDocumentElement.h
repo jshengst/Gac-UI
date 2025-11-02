@@ -17,14 +17,29 @@ namespace vl
 	{
 		namespace elements
 		{
+/***********************************************************************
+IGuiDocumentElementCallback
+***********************************************************************/
 
-			namespace visitors
+			/// <summary>Callback interface for this element.</summary>
+			class IGuiDocumentElementCallback : public virtual IDescriptable, public Description<IGuiDocumentElementCallback>
 			{
-				class SetPropertiesVisitor;
-			}
+			public:
+				/// <summary>Called when the rendering is started.</summary>
+				virtual void							OnStartRender() = 0;
+
+				/// <summary>Called when the rendering is finished.</summary>
+				virtual void							OnFinishRender() = 0;
+
+				/// <summary>Called when an embedded object is being rendered.</summary>
+				/// <returns>Returns the new size of the rendered embedded object.</returns>
+				/// <param name="name">The name of the embedded object</param>
+				/// <param name="location">The location of the embedded object, relative to the left-top corner of this element.</param>
+				virtual Size							OnRenderEmbeddedObject(const WString& name, const Rect& location) = 0;
+			};
 
 /***********************************************************************
-Rich Content Document (element)
+GuiDocumentElement
 ***********************************************************************/
 
 			/// <summary>Defines a rich text document element for rendering complex styled document.</summary>
@@ -32,121 +47,30 @@ Rich Content Document (element)
 			{
 				friend class GuiElementBase<GuiDocumentElement>;
 				static constexpr const wchar_t* ElementTypeName = L"RichDocument";
-			public:
-				/// <summary>Callback interface for this element.</summary>
-				class ICallback : public virtual IDescriptable, public Description<ICallback>
-				{
-				public:
-					/// <summary>Called when the rendering is started.</summary>
-					virtual void							OnStartRender() = 0;
-
-					/// <summary>Called when the rendering is finished.</summary>
-					virtual void							OnFinishRender() = 0;
-
-					/// <summary>Called when an embedded object is being rendered.</summary>
-					/// <returns>Returns the new size of the rendered embedded object.</returns>
-					/// <param name="name">The name of the embedded object</param>
-					/// <param name="location">The location of the embedded object, relative to the left-top corner of this element.</param>
-					virtual Size							OnRenderEmbeddedObject(const WString& name, const Rect& location) = 0;
-				};
-
-				class GuiDocumentElementRenderer : public GuiElementRendererBase<GuiDocumentElement, GuiDocumentElementRenderer, IGuiGraphicsRenderTarget>, private IGuiGraphicsParagraphCallback
-				{
-					friend class visitors::SetPropertiesVisitor;
-					friend class GuiElementRendererBase<GuiDocumentElement, GuiDocumentElementRenderer, IGuiGraphicsRenderTarget>;
-				protected:
-					struct EmbeddedObject
-					{
-						WString								name;
-						Size								size;
-						vint								start;
-						bool								resized = false;
-					};
-
-					typedef collections::Dictionary<vint, Ptr<EmbeddedObject>>		IdEmbeddedObjectMap;
-					typedef collections::Dictionary<WString, vint>					NameIdMap;
-					typedef collections::List<vint>									FreeIdList;
-
-					struct ParagraphCache
-					{
-						WString								fullText;
-						Ptr<IGuiGraphicsParagraph>			graphicsParagraph;
-						IdEmbeddedObjectMap					embeddedObjects;
-						vint								selectionBegin;
-						vint								selectionEnd;
-
-						ParagraphCache()
-							:selectionBegin(-1)
-							,selectionEnd(-1)
-						{
-						}
-					};
-
-					typedef collections::Array<Ptr<ParagraphCache>>		ParagraphCacheArray;
-					typedef collections::Array<vint>					ParagraphHeightArray;
-
-				private:
-
-					Size									OnRenderInlineObject(vint callbackId, Rect location)override;
-				protected:
-					vint									paragraphDistance;
-					vint									lastMaxWidth;
-					vint									cachedTotalHeight;
-					IGuiGraphicsLayoutProvider*				layoutProvider;
-					ParagraphCacheArray						paragraphCaches;
-					ParagraphHeightArray					paragraphHeights;
-
-					TextPos									lastCaret;
-					Color									lastCaretColor;
-					bool									lastCaretFrontSide;
-
-					NameIdMap								nameCallbackIdMap;
-					FreeIdList								freeCallbackIds;
-					vint									usedCallbackIds = 0;
-
-					vint									renderingParagraph = -1;
-					Point									renderingParagraphOffset;
-
-					void									InitializeInternal();
-					void									FinalizeInternal();
-					void									RenderTargetChangedInternal(IGuiGraphicsRenderTarget* oldRenderTarget, IGuiGraphicsRenderTarget* newRenderTarget);
-					Ptr<ParagraphCache>						EnsureAndGetCache(vint paragraphIndex, bool createParagraph);
-					bool									GetParagraphIndexFromPoint(Point point, vint& top, vint& index);
-				public:
-					GuiDocumentElementRenderer();
-
-					void									Render(Rect bounds)override;
-					void									OnElementStateChanged()override;
-					void									NotifyParagraphUpdated(vint index, vint oldCount, vint newCount, bool updatedText);
-					Ptr<DocumentHyperlinkRun::Package>		GetHyperlinkFromPoint(Point point);
-
-					void									OpenCaret(TextPos caret, Color color, bool frontSide);
-					void									CloseCaret(TextPos caret);
-					void									SetSelection(TextPos begin, TextPos end);
-					TextPos									CalculateCaret(TextPos comparingCaret, IGuiGraphicsParagraph::CaretRelativePosition position, bool& preferFrontSide);
-					TextPos									CalculateCaretFromPoint(Point point);
-					Rect									GetCaretBounds(TextPos caret, bool frontSide);
-				};
-
 			protected:
 				Ptr<DocumentModel>							document;
-				ICallback*									callback = nullptr;
+				wchar_t										passwordChar;
+				bool										paragraphRecycle = false;
+				IGuiDocumentElementCallback*				callback = nullptr;
+				bool										paragraphPadding = true;
+				bool										wrapLine = true;
 				TextPos										caretBegin;
 				TextPos										caretEnd;
 				bool										caretVisible;
 				bool										caretFrontSide;
 				Color										caretColor;
 
+				Ptr<IGuiDocumentElementRenderer>			GetElementRenderer();
 				void										UpdateCaret();
 
 				GuiDocumentElement();
 			public:
 				/// <summary>Get the callback.</summary>
 				/// <returns>The callback.</returns>
-				ICallback*									GetCallback();
+				IGuiDocumentElementCallback*				GetCallback();
 				/// <summary>Set the callback.</summary>
 				/// <param name="value">The callback.</param>
-				void										SetCallback(ICallback* value);
+				void										SetCallback(IGuiDocumentElementCallback* value);
 				
 				/// <summary>Get the document.</summary>
 				/// <returns>The document.</returns>
@@ -154,6 +78,31 @@ Rich Content Document (element)
 				/// <summary>Set the document. When a document is set to this element, modifying the document without invoking <see cref="NotifyParagraphUpdated"/> will lead to undefined behavior.</summary>
 				/// <param name="value">The document.</param>
 				void										SetDocument(Ptr<DocumentModel> value);
+				/// <summary>Get whether paddings are inserted between paragraphs.</summary>
+				/// <returns>Returns true if paddings are inserted between paragraphs.</returns>
+				bool										GetParagraphPadding();
+				/// <summary>Set whether paddings are inserted between paragraphs</summary>
+				/// <param name="value">Set to true so that paddings are inserted between paragraphs.</param>
+				void										SetParagraphPadding(bool value);
+				/// <summary>Get line wrapping.</summary>
+				/// <returns>Return true if there is automatic line wrapping.</returns>
+				bool										GetWrapLine();
+				/// <summary>Set line wrapping.</summary>
+				/// <param name="value">Set to true so that there is automatic line wrapping.</param>
+				void										SetWrapLine(bool value);
+				/// <summary>Get the password char. A password char is a character that replaces every characters in the document while rendering.</summary>
+				/// <returns>Returns the passwrd char. 0 means no password char.</returns>
+				wchar_t										GetPasswordChar();
+				/// <summary>Set the password char.</summary>
+				/// <param name="value">Set to 0 to remove the password char.</param>
+				void										SetPasswordChar(wchar_t value);
+				/// <summary>Get whether rendering resources are proactively released to lower memory consumption.</summary>
+				/// <returns>Returns true if paragraph rendering resources are recycled.</returns>
+				bool										GetParagraphRecycle();
+				/// <summary>Set whether rendering resources are proactively released to lower memory consumption.</summary>
+				/// <param name="value">Set to true to enable recycling of paragraph rendering resources.</param>
+				void										SetParagraphRecycle(bool value);
+
 				/// <summary>
 				/// Get the begin position of the selection area.
 				/// </summary>
@@ -271,6 +220,10 @@ Rich Content Document (element)
 				/// <param name="begin">The begin position of the range.</param>
 				/// <param name="end">The end position of the range.</param>
 				void										ClearStyle(TextPos begin, TextPos end);
+				/// <summary>Clear all styles and remove non-text contents in a specified range.</summary>
+				/// <param name="begin">The begin position of the range.</param>
+				/// <param name="end">The end position of the range.</param>
+				void										ConvertToPlainText(TextPos begin, TextPos end);
 				/// <summary>Summarize the text style in a specified range.</summary>
 				/// <returns>The text style summary.</returns>
 				/// <param name="begin">The begin position of the range.</param>

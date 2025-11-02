@@ -13,6 +13,7 @@ namespace vl
 {
 	ILocaleImpl* GetOSLocaleImpl()
 	{
-		return GetDefaultLocaleImpl();
+		static EnUsLocaleImpl linuxLocaleImpl;
+		return &linuxLocaleImpl;
 	}
 }
